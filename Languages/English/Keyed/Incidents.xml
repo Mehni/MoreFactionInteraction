@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <!-- Ransom demand -->
+    <MFI_ExtortionDemandTitle>extortion demand at {0}</MFI_ExtortionDemandTitle>
+    <MFI_ExtortionDemand>{0}, {1} of {2}, contacts you on the Comms Console. Based on your proximity to their {3} {4}, HE says you are encroaching on their terrain.\n\nHECAP says HE is willing to overlook this transgression for a modest fee of {5} silver. HECAP adds that failure to pay will be met with aggression.</MFI_ExtortionDemand>
+
+</LanguageData>

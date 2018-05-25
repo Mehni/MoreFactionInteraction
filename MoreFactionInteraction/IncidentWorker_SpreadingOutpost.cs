@@ -12,14 +12,16 @@ namespace MoreFactionInteraction
 {
     public class IncidentWorker_SpreadingOutpost : IncidentWorker
     {
+        private Faction faction;
+
         protected override bool CanFireNowSub(IIncidentTarget target)
         {
-            return base.CanFireNowSub(target) && this.TryFindFaction(out Faction faction) && TileFinder.TryFindNewSiteTile(out int tile, 8, 30, false, true, -1);
+            return base.CanFireNowSub(target) && this.TryFindFaction(out faction) && TileFinder.TryFindNewSiteTile(out int tile, 8, 30, false, true, -1);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!this.TryFindFaction(out Faction faction)) return false;
+            if (!this.TryFindFaction(out faction)) return false;
 
             int pirateTile = RandomNearbyHostileSettlement(parms.target.Tile).Tile;
 
