@@ -20,6 +20,7 @@ namespace MoreFactionInteraction
             base.WorldComponentUpdate();
             if (Find.TickManager.TicksGame % 100 == 0)
             {
+                //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
                 IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
                                           where site.Faction.HostileTo(Faction.OfPlayer) && !site.Faction.def.appreciative && !site.Faction.def.hidden && !site.Faction.defeated
                                           && site.KnownDanger && site.parts.Contains<SitePartDef>(SitePartDefOf.Outpost) && !site.GetComponent<TimeoutComp>().Active

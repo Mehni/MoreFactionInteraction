@@ -48,6 +48,7 @@ namespace MoreFactionInteraction
                         incidentParms.target = this.map;
                         if (outpost) incidentParms.points *= 0.7f;
                         IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+                        Find.LetterStack.RemoveLetter(this);
                     },
                     resolveTree = true
                 };

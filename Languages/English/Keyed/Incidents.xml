@@ -3,6 +3,10 @@
 
     <!-- Ransom demand -->
     <MFI_ExtortionDemandTitle>extortion demand at {0}</MFI_ExtortionDemandTitle>
-    <MFI_ExtortionDemand>{0}, {1} of {2}, contacts you on the Comms Console. Based on your proximity to their {3} {4}, HE says you are encroaching on their terrain.\n\nHECAP says HE is willing to overlook this transgression for a modest fee of {5} silver. HECAP adds that failure to pay will be met with aggression.</MFI_ExtortionDemand>
+    <MFI_ExtortionDemand>{0}, {1} of {2}, contacts you on the Comms Console. Based on your proximity to their {3} {4}, HE feels you are encroaching on their terrain.\n\nHECAP says HE is willing to overlook this transgression for a modest fee of {5} silver. HECAP adds that failure to pay will be met with aggression, but HE is gracefully willing to give you a day to pay.</MFI_ExtortionDemand>
+    
+    <!-- Reverse Trade Request -->
+    <MFI_ReverseTradeRequest>{0}, {1} of {2}, has sent us a message. Their nearby settlement {3} had an incident with a pyromaniac and are now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.</MFI_ReverseTradeRequest>
+    <MFI_ReverseTradeRequestTitle>trading opportunity at {0}</MFI_ReverseTradeRequestTitle>
 
 </LanguageData>

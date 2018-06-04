@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -49,13 +51,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChoiceLetter_ExtortionDemand.cs" />
-    <Compile Include="IncidentWorker_Extortion.cs" />
-    <Compile Include="IncidentWorker_SpreadingOutpost.cs" />
+    <Compile Include="More Traders\ChoiceLetter_ReverseTradeRequest.cs" />
+    <Compile Include="More Traders\FactionInteractionTimeSeperator.cs" />
+    <Compile Include="More Traders\HarmonyPatches.cs" />
+    <Compile Include="More Traders\IncidentWorker_ReverseTradeRequest.cs" />
+    <Compile Include="More Traders\MapComponent_GoodWillTraders.cs" />
+    <Compile Include="More Traders\StockGenerator_BuyCategory.cs" />
+    <Compile Include="Spreading Pirates\ChoiceLetter_ExtortionDemand.cs" />
+    <Compile Include="Spreading Pirates\IncidentWorker_Extortion.cs" />
+    <Compile Include="Spreading Pirates\IncidentWorker_SpreadingOutpost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="SettingsHelper.cs" />
-    <Compile Include="WorldComponent_OutpostGrower.cs" />
+    <Compile Include="Spreading Pirates\Settings.cs" />
+    <Compile Include="Spreading Pirates\SettingsHelper.cs" />
+    <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

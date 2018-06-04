@@ -23,9 +23,9 @@ namespace MoreFactionInteraction
         {
             if (!this.TryFindFaction(out faction)) return false;
 
-            int pirateTile = RandomNearbyHostileSettlement(parms.target.Tile).Tile;
+            int pirateTile = RandomNearbyHostileSettlement(parms.target.Tile)?.Tile ?? -1;
 
-            if (!TileFinder.TryFindNewSiteTile(out int tile, 5, 8, false, true, pirateTile)) return false;
+            if (!TileFinder.TryFindNewSiteTile(out int tile, 2, 8, false, true, pirateTile)) return false;
             Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, SitePartDefOf.Outpost, faction);
             site.Tile = tile;
             Find.WorldObjects.Add(site);
@@ -38,10 +38,11 @@ namespace MoreFactionInteraction
             return true;
         }
 
-        private static Settlement RandomNearbyHostileSettlement(int originTile)
+        private Settlement RandomNearbyHostileSettlement(int originTile)
         {
             return (from settlement in Find.WorldObjects.Settlements
-                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f && Find.WorldReachability.CanReach(originTile, settlement.Tile)
+                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
+                    && Find.WorldReachability.CanReach(originTile, settlement.Tile) && settlement.Faction == this.faction
                     select settlement).RandomElementWithFallback(null);
         }
 

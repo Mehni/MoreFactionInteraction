@@ -32,7 +32,6 @@
     </targetTypes>
 		<workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
 		<letterLabel>Pirate fee demand</letterLabel>
-		<letterText>{0}, {1} of {2}, has sent us a message.\n\nBandits based in a nearby base have set up another base of operations.</letterText>
 		<letterDef>ExtortionDemand</letterDef>
 		<baseChance>1.3</baseChance>
 		<earliestDay>1</earliestDay>
@@ -44,5 +43,27 @@
 			</points>
 		</chanceFactorByPopulationCurve>
 	</IncidentDef>
+
+		<IncidentDef>
+		<defName>ReverseTradeRequest</defName>
+		<label>trade request</label>
+		<category>Misc</category>
+    <targetTypes>
+      <li>MapPlayerHome</li>
+    </targetTypes>
+		<workerClass>MoreFactionInteraction.IncidentWorker_ReverseTradeRequest</workerClass>
+		<letterLabel>trade request</letterLabel>
+		<letterDef>ReverseTradeRequest</letterDef>
+		<baseChance>1.3</baseChance>
+		<earliestDay>1</earliestDay>
+		<minRefireDays>15</minRefireDays>
+		<chanceFactorByPopulationCurve>
+			<points>
+				<li>(2,0)</li>
+				<li>(7,1)</li>
+			</points>
+		</chanceFactorByPopulationCurve>
+	</IncidentDef>
+
 
 </Defs>
