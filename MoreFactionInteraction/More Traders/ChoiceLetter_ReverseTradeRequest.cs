@@ -27,7 +27,6 @@ namespace MoreFactionInteraction
                         incidentParms.faction = this.faction;
                         TraderKindDef traderKind = new TraderKindDef
                         {
-                            defName = "DynamicallyGeneratedTrader",
                             stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList()
                         };
 
@@ -48,9 +47,7 @@ namespace MoreFactionInteraction
                         //TODO: set 600 to a decent estimate between settlement and colony
                         Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + 600, incidentParms);
 
-                        // set next faction interaction tick
-                        map.GetComponent<MapComponent_GoodWillTrader>().NextFactionInteraction[this.faction] = 
-                                Find.TickManager.TicksGame + (int)FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(this.faction.GoodwillWith(Faction.OfPlayer));
+
 
                         TradeUtility.LaunchSilver(this.map, this.fee);
                         Find.LetterStack.RemoveLetter(this);

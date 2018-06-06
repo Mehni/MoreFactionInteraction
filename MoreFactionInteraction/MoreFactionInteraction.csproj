@@ -56,6 +56,7 @@
     <Compile Include="More Traders\HarmonyPatches.cs" />
     <Compile Include="More Traders\IncidentWorker_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\MapComponent_GoodWillTraders.cs" />
+    <Compile Include="More Traders\MFI_DefOf.cs" />
     <Compile Include="More Traders\StockGenerator_BuyCategory.cs" />
     <Compile Include="Spreading Pirates\ChoiceLetter_ExtortionDemand.cs" />
     <Compile Include="Spreading Pirates\IncidentWorker_Extortion.cs" />

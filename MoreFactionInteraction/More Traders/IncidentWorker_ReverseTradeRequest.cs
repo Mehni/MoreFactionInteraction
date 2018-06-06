@@ -30,13 +30,14 @@ namespace MoreFactionInteraction
 
                 Map map = (Map)parms.target;
                 int feeRequest = Math.Max(Rand.Range(150, 300), (int)parms.points);
+                string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
                 ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_ReverseTradeRequest".Translate(new object[]
                 {
                     settlement.Faction.leader.LabelShort,
                     settlement.Faction.def.leaderTitle,
                     settlement.Faction.Name,
                     settlement.Label,
-                    thingCategoryDef.label,
+                    categorylabel,
                     feeRequest,
                 }).AdjustedFor(settlement.Faction.leader), this.def.letterDef);
                 choiceLetter_ReverseTradingRequest.title = "MFI_ReverseTradeRequestTitle".Translate(new object[]
