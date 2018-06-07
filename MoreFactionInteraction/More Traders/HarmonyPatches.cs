@@ -24,7 +24,70 @@ namespace MoreFactionInteraction
 
             harmony.Patch(AccessTools.Method(typeof(CompQuality), nameof(CompQuality.PostPostGeneratedForTrader)),
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(CompQuality_TradeQualityIncreasePreFix)), null);
+
+            harmony.Patch(AccessTools.Method(typeof(ItemCollectionGenerator), nameof(ItemCollectionGenerator.Generate), new Type[] { typeof(ItemCollectionGeneratorParams) }), null,
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(TraderStocker_OverStockerPostFix)), null);
         }
+
+        private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ItemCollectionGeneratorParams parms)
+        {
+            if (parms.traderDef != null)
+            {
+                Map map = null;
+
+                //much elegant. Such wow ;-;
+                if (parms.tile.HasValue && parms.tile != -1 && Current.Game.FindMap(parms.tile.Value) != null && Current.Game.FindMap(parms.tile.Value).IsPlayerHome)
+                    map = Current.Game.FindMap(parms.tile.Value);
+
+                else if (Find.AnyPlayerHomeMap != null)
+                    map = Find.AnyPlayerHomeMap; 
+
+                else if (Find.VisibleMap != null)
+                    map = Find.VisibleMap;
+
+
+                if (parms.traderDef.orbital || parms.traderDef.defName.Contains("Base_") && map != null)
+                {
+                    float silverCount = __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount;
+                    silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(map.PlayerWealthForStoryteller);
+                    __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount = (int)silverCount;
+                    return;
+                }
+                if (map != null && parms.traderFaction != null)
+                {
+                    __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount += (int)(parms.traderFaction.GoodwillWith(Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
+                    return;
+                }
+            }
+        }
+
+        private static readonly SimpleCurve WealthSilverIncreaseDeterminationCurve = new SimpleCurve
+        {
+            {
+                new CurvePoint(0, 0.8f),
+                true
+            },
+            {
+                new CurvePoint(10000, 1),
+                true
+            },
+            {
+                new CurvePoint(75000, 2),
+                true
+            },
+            {
+                new CurvePoint(300000, 4),
+                true
+            },
+            {
+                new CurvePoint(1000000, 6f),
+                true
+            },
+            {
+                new CurvePoint(2000000, 7f),
+                true
+            },
+        };
 
         #region TradeQualityImprovements
         private static bool CompQuality_TradeQualityIncreasePreFix(CompQuality __instance, ref TraderKindDef trader, ref int forTile, ref Faction forFaction)
@@ -132,7 +195,7 @@ namespace MoreFactionInteraction
         /// </summary>
         private static void IncidentFired_TradeCounter_Postfix(ref FiringIncident qi)
         {
-            if(qi.parms.target is Map map && qi.def == IncidentDefOf.TraderCaravanArrival)
+            if (qi.parms.target is Map map && qi.def == IncidentDefOf.TraderCaravanArrival)
             {
                 map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[qi.parms.faction] += 1;
             }
@@ -154,6 +217,5 @@ namespace MoreFactionInteraction
             }
             else __result = priceType;
         }
-
     }
 }

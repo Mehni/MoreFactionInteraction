@@ -1,0 +1,21 @@
+EVENTS:
+- Hunter's Lodge
+- Help out harvesting
+- Nearby caravan needs medic
+- Military aid
+
+SETTINGS:
+- Trade frequency influencer
+- Option for cheat settings if god mode on (increase trade quality even further, scale higher) ?
+
+BUG FIXES AND REFINEMENT:
+- Scale arrival time to letter trade request by distance, best estimate
+- Save TraderKind (outside of Pawn_Tradertracker or patch it or w/e)
+- Faction null relation
+
+TODO:
+
+- Balance maxValuePerUnit
+- Look into maxTechLevelBuy
+- remove from incidentQueue
+- Trade requests dynamic based on requester

@@ -103,7 +103,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        public static IncidentDef IncidentDef()
+        private static IncidentDef IncidentDef()
         {
             switch (Rand.RangeInclusive(0,4))
             {
@@ -112,7 +112,6 @@ namespace MoreFactionInteraction
                 case 2: return IncidentDefOf.CaravanRequest;
                 case 3:
                 case 4: return IncidentDefOf.TraderCaravanArrival;
-
 
                 default: return IncidentDefOf.TraderCaravanArrival;
             }

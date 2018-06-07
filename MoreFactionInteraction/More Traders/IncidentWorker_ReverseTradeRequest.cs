@@ -28,10 +28,11 @@ namespace MoreFactionInteraction
                 else if (Rand.Range(0, 100) > 66 && Rand.Range(0, 100) < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;
                 else thingCategoryDef = ThingCategoryDefOf.Medicine;
 
+                string letterToSend = DetermineLetterToSend(thingCategoryDef);
                 Map map = (Map)parms.target;
                 int feeRequest = Math.Max(Rand.Range(150, 300), (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_ReverseTradeRequest".Translate(new object[]
+                ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(this.def.letterLabel, letterToSend.Translate(new object[]
                 {
                     settlement.Faction.leader.LabelShort,
                     settlement.Faction.def.leaderTitle,
@@ -55,6 +56,29 @@ namespace MoreFactionInteraction
                 return true;
             }
             return false;
+        }
+
+        private static string DetermineLetterToSend(ThingCategoryDef thingCategoryDef)
+        {
+
+            if (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) return "MFI_ReverseTradeRequest_Blight";
+
+            switch (Rand.RangeInclusive(0, 4))
+            {
+                case 0:
+                    return "MFI_ReverseTradeRequest_Pyro";                
+                case 1:
+                    return "MFI_ReverseTradeRequest_Mechs";
+                case 2:
+                    return "MFI_ReverseTradeRequest_Caravan";
+                case 3:
+                    return "MFI_ReverseTradeRequest_Pirates";
+                case 4:
+                    return "MFI_ReverseTradeRequest_Hardship";
+
+                default:
+                    return "MFI_ReverseTradeRequest_Pyro";
+            }
         }
     }
 }

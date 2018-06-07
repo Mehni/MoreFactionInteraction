@@ -12,6 +12,8 @@ namespace MoreFactionInteraction
     public class MoreFactionInteraction_Settings : ModSettings
     {
         public static int ticksToUpgrade = 3 * GenDate.DaysPerQuadrum * GenDate.TicksPerDay;
+        public static float timeModifierBetweenFactionInteraction = 1f;
+        public static float traderWealthOffsetFromTimesTraded = 1f;
 
         public void DoWindowContents(Rect rect)
         {
@@ -19,8 +21,11 @@ namespace MoreFactionInteraction
             options.Begin(rect);
             options.Gap();
             options.SliderLabeled("MFI.ticksToUpgrade".Translate(), ref ticksToUpgrade, ticksToUpgrade.ToStringTicksToPeriodVagueMax(), 0, GenDate.TicksPerYear);
+            options.GapLine();
+            options.SliderLabeled("MFI_timeModifierBetweenFactionInteraction".Translate(), ref timeModifierBetweenFactionInteraction, timeModifierBetweenFactionInteraction.ToStringByStyle(ToStringStyle.FloatOne), 0.5f, 3f);
+            options.Gap();
+            options.SliderLabeled("MFI_traderWealthOffsetFromTimesTraded".Translate(), ref traderWealthOffsetFromTimesTraded, traderWealthOffsetFromTimesTraded.ToStringByStyle(ToStringStyle.FloatOne), 0.5f, 3f);
             options.End();
-
             Mod.GetSettings<MoreFactionInteraction_Settings>().Write();
         }
 

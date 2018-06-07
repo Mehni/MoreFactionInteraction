@@ -11,7 +11,7 @@ namespace MoreFactionInteraction
     {
         public Map map;
         public Faction faction;
-        public bool outpost;
+        public bool outpost = false;
         public int fee;
 
         protected override IEnumerable<DiaOption> Choices

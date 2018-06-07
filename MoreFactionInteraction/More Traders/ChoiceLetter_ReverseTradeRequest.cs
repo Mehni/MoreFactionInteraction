@@ -25,12 +25,8 @@ namespace MoreFactionInteraction
                     {
                         //create a blank trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
                         incidentParms.faction = this.faction;
-                        TraderKindDef traderKind = new TraderKindDef
-                        {
-                            stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList()
-                        };
-
-                        //TODO: Either in here or in a harmony patch: increase trader silver count based on goodwill.
+                        TraderKindDef traderKind = MFI_DefOf.EmptyTrader;
+                        traderKind.stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList();
                         traderKind.stockGenerators.First().countRange.max += fee;
                         traderKind.stockGenerators.First().countRange.min += fee;
 
@@ -41,13 +37,11 @@ namespace MoreFactionInteraction
                         
                         traderKind.stockGenerators.Add(stockgen);
                         traderKind.label = stockgen.thingCategoryDef.label + " "+ "MFI_Trader".Translate();
-
+                        
                         incidentParms.traderKind = traderKind;
 
                         //TODO: set 600 to a decent estimate between settlement and colony
                         Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + 600, incidentParms);
-
-
 
                         TradeUtility.LaunchSilver(this.map, this.fee);
                         Find.LetterStack.RemoveLetter(this);

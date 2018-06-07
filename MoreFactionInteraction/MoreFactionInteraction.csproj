@@ -56,15 +56,16 @@
     <Compile Include="More Traders\HarmonyPatches.cs" />
     <Compile Include="More Traders\IncidentWorker_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\MapComponent_GoodWillTraders.cs" />
-    <Compile Include="More Traders\MFI_DefOf.cs" />
+    <Compile Include="General\MFI_DefOf.cs" />
     <Compile Include="More Traders\StockGenerator_BuyCategory.cs" />
     <Compile Include="Spreading Pirates\ChoiceLetter_ExtortionDemand.cs" />
     <Compile Include="Spreading Pirates\IncidentWorker_Extortion.cs" />
     <Compile Include="Spreading Pirates\IncidentWorker_SpreadingOutpost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spreading Pirates\Settings.cs" />
-    <Compile Include="Spreading Pirates\SettingsHelper.cs" />
+    <Compile Include="General\Settings.cs" />
+    <Compile Include="General\SettingsHelper.cs" />
     <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
+    <Compile Include="World Incidents\IncidentWorker_HuntersLodge.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

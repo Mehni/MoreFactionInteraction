@@ -16,29 +16,45 @@ namespace MoreFactionInteraction
         private Faction faction;
         private WorldObject worldObject;
 
-
         public override float AdjustedChance
         {
             get
             {
-                //TODO: increase chance based on # of outposts/faction bases in the vicinity. The catch: we don't know the tile yet.
-                return this.def.baseChance * 1;
+                float modifier = NearbyHostileEncampments().Count() / 10;
+                return this.def.baseChance * 1 + modifier;
             }
         }
 
         private static bool RandomNearbyHostileWorldObject(int originTile, out WorldObject encampment, out Faction faction)
         {
-            encampment = (from worldObject in Find.WorldObjects.AllWorldObjects
-                          where (worldObject is Settlement || worldObject is Site)
-                          && worldObject.Faction.HostileTo(Faction.OfPlayer)
-                          && Find.WorldGrid.ApproxDistanceInTiles(originTile, worldObject.Tile) < 15f
-                          && Find.WorldReachability.CanReach(originTile, worldObject.Tile)
-                          select worldObject).RandomElementWithFallback(null);
+            encampment = NearbyHostileEncampments(originTile).RandomElementWithFallback(null);
 
             faction = encampment?.Faction;
             if (faction != null) return true;
 
             return false;
+        }
+
+        //(from worldObject in Find.WorldObjects.AllWorldObjects
+        //where(worldObject is Settlement || worldObject is Site)
+        //                  && worldObject.Faction.HostileTo(Faction.OfPlayer)
+        //                  && Find.WorldGrid.ApproxDistanceInTiles(originTile, worldObject.Tile) < 15f
+        //                  && Find.WorldReachability.CanReach(originTile, worldObject.Tile)
+        //                  select worldObject)
+
+        private static IEnumerable<WorldObject> NearbyHostileEncampments(int forTile = -1)
+        {
+        	if (Find.AnyPlayerHomeMap != null)
+                forTile = Find.AnyPlayerHomeMap.Tile;
+            else if (Find.VisibleMap != null)
+                forTile = Find.VisibleMap.Tile;
+
+            return from worldObject in Find.WorldObjects.AllWorldObjects
+                                    where (worldObject is Settlement || worldObject is Site)
+                                    && worldObject.Faction.HostileTo(Faction.OfPlayer)
+                                    && Find.WorldGrid.ApproxDistanceInTiles(forTile, worldObject.Tile) < 15f
+                                    && (Find.WorldReachability.CanReach(forTile, worldObject.Tile) || forTile == -1)
+                                    select worldObject;
         }
 
         protected override bool CanFireNowSub(IIncidentTarget target)
@@ -54,7 +70,7 @@ namespace MoreFactionInteraction
             if (RandomNearbyHostileWorldObject(map.Tile, out worldObject, out faction))
             {
                 //technically the math.max is nonsense since this incident uses Misc category, and points don't get calculated for that. Left in for future expansion.
-                int extorsionDemand = Math.Max(Rand.Range(150, 300), (int)parms.points);
+                int extorsionDemand = Math.Max(Rand.Range(150, 300), (int)parms.points) * NearbyHostileEncampments(map.Tile).Count();
 
                 ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_ExtortionDemand".Translate(new object[]
                 {

@@ -12,15 +12,15 @@ namespace MoreFactionInteraction
         public static readonly SimpleCurve TimeBetweenInteraction = new SimpleCurve
         {
             {
-                new CurvePoint(0, GenDate.TicksPerDay * 15),
+                new CurvePoint(0, GenDate.TicksPerDay * (15 * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction)),
                 true
             },
             {
-                new CurvePoint(50, GenDate.TicksPerDay * 8),
+                new CurvePoint(50, GenDate.TicksPerDay * (8 * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction)),
                 true
             },
             {
-                new CurvePoint(100, GenDate.TicksPerDay * 4),
+                new CurvePoint(100, GenDate.TicksPerDay * (4 * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction)),
                 true
             }
         };
