@@ -23,10 +23,7 @@ namespace MoreFactionInteraction
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
                 ThingCategoryDef thingCategoryDef;
-                if (Rand.Range(0, 100) < 33) thingCategoryDef = ThingCategoryDefOf.Apparel;
-                else if (Rand.Range(0, 100) > 33 && Rand.Range(0, 100) < 66) thingCategoryDef = ThingCategoryDefOf.PlantFoodRaw;
-                else if (Rand.Range(0, 100) > 66 && Rand.Range(0, 100) < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;
-                else thingCategoryDef = ThingCategoryDefOf.Medicine;
+                thingCategoryDef = DetermineThingCategoryDef();
 
                 string letterToSend = DetermineLetterToSend(thingCategoryDef);
                 Map map = (Map)parms.target;
@@ -52,10 +49,24 @@ namespace MoreFactionInteraction
                 choiceLetter_ReverseTradingRequest.faction = settlement.Faction;
                 choiceLetter_ReverseTradingRequest.fee = feeRequest;
                 choiceLetter_ReverseTradingRequest.StartTimeout(TimeoutTicks);
+                choiceLetter_ReverseTradingRequest.tile = settlement.Tile;
                 Find.LetterStack.ReceiveLetter(choiceLetter_ReverseTradingRequest);
                 return true;
             }
             return false;
+        }
+
+        private static ThingCategoryDef DetermineThingCategoryDef()
+        {
+            ThingCategoryDef thingCategoryDef;
+
+            int rand = Rand.RangeInclusive(0, 100);
+            Log.Message(rand.ToString());
+            if (rand < 33) thingCategoryDef = ThingCategoryDefOf.Apparel;
+            else if (rand > 33 && rand < 66) thingCategoryDef = ThingCategoryDefOf.PlantFoodRaw;
+            else if (rand > 66 && rand < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;
+            else thingCategoryDef = ThingCategoryDefOf.Medicine;
+            return thingCategoryDef;
         }
 
         private static string DetermineLetterToSend(ThingCategoryDef thingCategoryDef)

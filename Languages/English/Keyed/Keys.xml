@@ -5,6 +5,7 @@
     <LetterLabelBanditOutpostUpgraded>Bandit outpost upgraded</LetterLabelBanditOutpostUpgraded>
     <LetterBanditOutpostUpgraded>Pirates from {0} have upgraded a nearby outpost of theirs to a base!\n\nThey'll sent out occasional raiding parties to test your defences, and to settle new outposts that may become bases.</LetterBanditOutpostUpgraded>
     <MFI_DesperateTrader>Desperate trader</MFI_DesperateTrader>
+    <MFI_TraderSent>{0} thanks you. Their trade carravan will arrive in about {1}.</MFI_TraderSent>
     <MFI_Trader>trader</MFI_Trader>
 
 </LanguageData>

@@ -14,7 +14,6 @@ namespace MoreFactionInteraction
         //empty constructor
         public MapComponent_GoodWillTrader(Map map) : base(map)
         {
-            if (TimesTraded.Count > NextFactionInteraction.Count) { }
         }
 
         //private IncidentQueue incidentQueue;
@@ -29,12 +28,14 @@ namespace MoreFactionInteraction
             get
             {
                 //intermingled :D
+                Log.Message("TT 1");
                 foreach (Faction faction in NextFactionInteraction.Keys)
                 {
+                    Log.Message("TT 2: "+ faction.Name);
                     if (!timesTraded.Keys.Contains(faction)) timesTraded.Add(faction, 0);
                 }
                 //trust betrayed, reset count.
-                timesTraded.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayer));
+                timesTraded.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
                 return timesTraded;
             }
         }
@@ -47,9 +48,10 @@ namespace MoreFactionInteraction
                 if (this.nextFactionInteraction.Count == 0)
                 {
                     IEnumerable<Faction> friendlyFactions = from faction in Find.FactionManager.AllFactionsVisible
-                                                     where !faction.HostileTo(Faction.OfPlayer) && !faction.IsPlayer
-                                                     select faction;
+                                                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(faction)
+                                                        select faction;
 
+                    Log.Message(Faction.OfPlayer.RelationWith(friendlyFactions.First()).ToString());
                     foreach (Faction faction in friendlyFactions)
                     {
                         nextFactionInteraction.Add(faction, Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 8));
@@ -57,16 +59,16 @@ namespace MoreFactionInteraction
                 }
                 //if a faction became hostile, remove
                 //TODO: remove priorly scheduled incidents involving said faction
-                nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayer));
+                //nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
-                     where !faction.HostileTo(Faction.OfPlayer) && !faction.IsPlayer && !nextFactionInteraction.ContainsKey(faction)
-                     select faction).Any())
+                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !faction.HostileTo(Faction.OfPlayerSilentFail) && !nextFactionInteraction.ContainsKey(faction)
+                        select faction).Any())
                 {
                     nextFactionInteraction.Add(
                         key: (from faction in Find.FactionManager.AllFactionsVisible
-                              where !faction.HostileTo(Faction.OfPlayer) && !faction.IsPlayer && !nextFactionInteraction.ContainsKey(faction)
+                              where !faction.HostileTo(Faction.OfPlayerSilentFail) && !faction.IsPlayer && !nextFactionInteraction.ContainsKey(faction)
                               select faction).First(),
                         value: Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 4));
                 }
@@ -119,15 +121,16 @@ namespace MoreFactionInteraction
 
 
         //working lists for ExposeData.
-        List<Faction> factionsListforInteraction;
-        List<Faction> factionsListforTimesTraded;
-        List<int> intListForInteraction;
-        List<int> intListforTimesTraded;
+        List<Faction> factionsListforInteraction = new List<Faction>();
+        List<Faction> factionsListforTimesTraded = new List<Faction>();
+        List<int> intListForInteraction = new List<int>();
+        List<int> intListforTimesTraded = new List<int>();
 
         public override void ExposeData()
         {
-            Scribe_Collections.Look<Faction, int>(ref this.nextFactionInteraction, "MFI_nextFactionInteraction", LookMode.Reference, LookMode.Value, ref factionsListforInteraction, ref intListForInteraction);
-            Scribe_Collections.Look<Faction, int>(ref this.timesTraded, "MFI_timesTraded", LookMode.Reference, LookMode.Value, ref factionsListforTimesTraded, ref intListforTimesTraded);
+            base.ExposeData();
+            Scribe_Collections.Look<Faction, int>(ref nextFactionInteraction, "MFI_nextFactionInteraction", LookMode.Reference, LookMode.Value, ref factionsListforInteraction, ref intListForInteraction);
+            Scribe_Collections.Look<Faction, int>(ref timesTraded, "MFI_timesTraded", LookMode.Reference, LookMode.Value, ref factionsListforTimesTraded, ref intListforTimesTraded);
         }
     }
 }

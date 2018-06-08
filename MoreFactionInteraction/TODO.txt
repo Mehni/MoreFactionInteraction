@@ -9,11 +9,10 @@ SETTINGS:
 - Option for cheat settings if god mode on (increase trade quality even further, scale higher) ?
 
 BUG FIXES AND REFINEMENT:
-- Scale arrival time to letter trade request by distance, best estimate
-- Save TraderKind (outside of Pawn_Tradertracker or patch it or w/e)
-- Faction null relation
 
 TODO:
+
+- Increase Orbital Traders based on Wealth/TicksGame.
 
 - Balance maxValuePerUnit
 - Look into maxTechLevelBuy

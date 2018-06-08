@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace MoreFactionInteraction
@@ -14,40 +15,40 @@ namespace MoreFactionInteraction
         public int fee = 100;
         public Map map;
         public Faction faction;
+        public int tile;
 
         protected override IEnumerable<DiaOption> Choices
         {
             get
             {
+                int traveltime = CalcuteTravelTimeForTrader(this.tile);
                 DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
                 {
                     action = () =>
                     {
-                        //create a blank trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
+                        //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
+                        //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
                         incidentParms.faction = this.faction;
-                        TraderKindDef traderKind = MFI_DefOf.EmptyTrader;
-                        traderKind.stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList();
-                        traderKind.stockGenerators.First().countRange.max += fee;
-                        traderKind.stockGenerators.First().countRange.min += fee;
+                        TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
+                        //traderKind.stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList();
+                        traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
+                        traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.min += fee;
 
-                        StockGenerator_BuyCategory stockgen = new StockGenerator_BuyCategory
-                        {
-                            thingCategoryDef = this.thingCategoryDef
-                        };
-                        
-                        traderKind.stockGenerators.Add(stockgen);
-                        traderKind.label = stockgen.thingCategoryDef.label + " "+ "MFI_Trader".Translate();
-                        
+                        traderKind.label = this.thingCategoryDef.label + " "+ "MFI_Trader".Translate();
                         incidentParms.traderKind = traderKind;
 
-                        //TODO: set 600 to a decent estimate between settlement and colony
-                        Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + 600, incidentParms);
-
+                        Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + traveltime, incidentParms);
                         TradeUtility.LaunchSilver(this.map, this.fee);
-                        Find.LetterStack.RemoveLetter(this);
                     },
-                    resolveTree = true
                 };
+                DiaNode diaNode = new DiaNode("MFI_TraderSent".Translate(new object[]
+                {
+                    faction.leader.NameStringShort,
+                    traveltime.ToStringTicksToPeriod(false)
+                }).CapitalizeFirst());
+                diaNode.options.Add(base.OK);
+                accept.link = diaNode;
+
                 if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
                 {
                     accept.Disable("NeedSilverLaunchable".Translate(new object[]
@@ -70,11 +71,17 @@ namespace MoreFactionInteraction
             }
         }
 
+        private int CalcuteTravelTimeForTrader(int originTile)
+        {
+            int travelTime = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(originTile, this.map.Tile, null);
+            return Math.Min(travelTime, GenDate.TicksPerDay * 4);
+        }
+
         public override bool StillValid
         {
             get
             {
-                return base.StillValid && Find.Maps.Contains(this.map);
+                return base.StillValid && Find.Maps.Contains(this.map) && !this.faction.HostileTo(Faction.OfPlayer);
             }
         }
 
@@ -85,7 +92,8 @@ namespace MoreFactionInteraction
             Scribe_Deep.Look<IncidentParms>(ref this.incidentParms, "MFI_incidentParms", new object[0]);
             Scribe_References.Look<Map>(ref this.map, "MFI_map", false);
             Scribe_References.Look<Faction>(ref this.faction, "MFI_faction", false);
-            Scribe_Values.Look<int>(ref this.fee, "MFI_fee", 0, false);
+            Scribe_Values.Look<int>(ref this.fee, "MFI_fee");
+            Scribe_Values.Look<int>(ref this.tile, "MFI_tile");
         }
     }
 }

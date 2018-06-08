@@ -17,7 +17,8 @@ namespace MoreFactionInteraction
         private const float NoSitePartChance = 0.3f;
         private const int MinDistance = 2;
         private const int MaxDistance = 15;
-        private static readonly string DownedRefugeeQuestThreatTag = "DownedRefugeeQuestThreat";
+        //This is the thingy that tells the symbolresolver thingy what may lurk at a site. Turrets/Ambush/Sleeping mechs, etc.
+        private static readonly string QuestThreatTag = "DownedRefugeeQuestThreat";
         private static readonly IntRange TimeoutDaysRange = new IntRange(5, 10);
 
 
@@ -33,7 +34,7 @@ namespace MoreFactionInteraction
             {
                 return false;
             }
-            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.HuntersLodge, (!Rand.Chance(NoSitePartChance)) ? DownedRefugeeQuestThreatTag : null, null, true, null);
+            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.HuntersLodge, (!Rand.Chance(NoSitePartChance)) ? QuestThreatTag : null, null, true, null);
             if (site == null)
             {
                 return false;

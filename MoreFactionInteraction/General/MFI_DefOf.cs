@@ -11,6 +11,5 @@ namespace MoreFactionInteraction
     {
         public static IncidentDef ReverseTradeRequest;
         public static SiteCoreDef HuntersLodge;
-        public static TraderKindDef EmptyTrader;
     }
 }
