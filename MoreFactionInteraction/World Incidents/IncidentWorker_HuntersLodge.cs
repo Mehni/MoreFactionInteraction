@@ -10,22 +10,22 @@ using Verse;
 using Verse.AI;
 using Verse.AI.Group;
 
-namespace MoreFactionInteraction
+namespace MoreFactionInteraction.World_Incidents
 {
     public class IncidentWorker_HuntersLodge : IncidentWorker
     {
         private const float NoSitePartChance = 0.3f;
         private const int MinDistance = 2;
         private const int MaxDistance = 15;
-        //This is the thingy that tells the symbolresolver thingy what may lurk at a site. Turrets/Ambush/Sleeping mechs, etc.
-        private static readonly string QuestThreatTag = "DownedRefugeeQuestThreat";
-        private static readonly IntRange TimeoutDaysRange = new IntRange(5, 10);
-
+        ////This is the thingy that tells the symbolresolver thingy what may lurk at a site. Turrets/Ambush/Sleeping mechs, etc.
+        //private static readonly string QuestThreatTag = "DownedRefugeeQuestThreat";
+        private static readonly IntRange TimeoutDaysRange = new IntRange(15, 25);
+        private Faction faction;
 
 
         protected override bool CanFireNowSub(IIncidentTarget target)
         {
-            return base.CanFireNowSub(target) && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.HuntersLodge, null, out Faction faction, true, null);
+            return base.CanFireNowSub(target) && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.HuntersLodge, null, out faction, true, null);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -34,22 +34,33 @@ namespace MoreFactionInteraction
             {
                 return false;
             }
-            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.HuntersLodge, (!Rand.Chance(NoSitePartChance)) ? QuestThreatTag : null, null, true, null);
+            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.HuntersLodge, singleSitePartTag: null, faction, false, null);
             if (site == null)
             {
                 return false;
             }
             site.Tile = tile;
-            Pawn pawn = DownedRefugeeQuestUtility.GenerateRefugee(tile);
-            site.GetComponent<DownedRefugeeComp>().pawn.TryAdd(pawn, true);
+            if (!TryFindAnimalKind(tile, out PawnKindDef pawnKindDef))
+            {
+                return false;
+            }
+
             int randomInRange = IncidentWorker_HuntersLodge.TimeoutDaysRange.RandomInRange;
             site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
-            Find.WorldObjects.Add(site);
-            string text = string.Format(this.def.letterText.AdjustedFor(pawn), pawn.Label, randomInRange).CapitalizeFirst();
-
+            site.GetComponent<MigratoryHerdComp>().pawnKindDef = pawnKindDef;
+            site.GetComponent<MigratoryHerdComp>().parmesan = parms;
+            Find.WorldObjects.Add(site);            
+            string text = string.Format(this.def.letterText, pawnKindDef.label, randomInRange).CapitalizeFirst();
 
             Find.LetterStack.ReceiveLetter(this.def.letterLabel, text, this.def.letterDef, site, null);
             return true;
+        }
+
+        private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
+        {
+            return (from k in DefDatabase<PawnKindDef>.AllDefs
+                    where k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile, k.race)
+                    select k).TryRandomElementByWeight((PawnKindDef x) => x.RaceProps.wildness, out animalKind);
         }
 
         private bool TryFindTile(out int tile)

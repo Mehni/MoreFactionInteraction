@@ -6,6 +6,7 @@ using RimWorld;
 using Verse;
 using Harmony;
 using UnityEngine;
+using RimWorld.Planet;
 
 namespace MoreFactionInteraction
 {
@@ -16,6 +17,7 @@ namespace MoreFactionInteraction
         {
             HarmonyInstance harmony = HarmonyInstance.Create("Mehni.RimWorld.MFI.main");
 
+            #region MoreTraders
             harmony.Patch(AccessTools.Method(typeof(TraderKindDef), nameof(TraderKindDef.PriceTypeFor)), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(PriceTypeSetter_PostFix)), null);
 
@@ -27,8 +29,15 @@ namespace MoreFactionInteraction
 
             harmony.Patch(AccessTools.Method(typeof(ItemCollectionGenerator), nameof(ItemCollectionGenerator.Generate), new Type[] { typeof(ItemCollectionGeneratorParams) }), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(TraderStocker_OverStockerPostFix)), null);
+            #endregion
+
+            #region WorldIncidents
+            harmony.Patch(AccessTools.Method(typeof(Settlement), nameof(Settlement.GetCaravanGizmos)), null,
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(Settlement_CaravanGizmos_Postfix)), null);
+            #endregion
         }
 
+        #region MoreTraders
         private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ItemCollectionGeneratorParams parms)
         {
             if (parms.traderDef != null)
@@ -217,5 +226,53 @@ namespace MoreFactionInteraction
             }
             else __result = priceType;
         }
+        #endregion
+
+        #region WorldIncidents
+        private static void Settlement_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
+        {
+        
+            Texture2D SetPlantToGrowTex = ContentFinder<Texture2D>.Get("UI/Commands/SetPlantToGrow", true);
+            Caravan localCaravan = caravan;
+
+            Command_Action command_Action = new Command_Action
+            {
+                defaultLabel = "CommandHelpOutHarvesting".Translate(),
+                defaultDesc = "CommandHelpOutHarvesting".Translate(),
+                icon = SetPlantToGrowTex,
+                action = delegate
+                {
+                    World_Incidents.SettlementBumperCropComponent bumperCrop2 = __instance?.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                    if (bumperCrop2 != null)
+                    {
+                        if (!bumperCrop2.ActiveRequest)
+                        {
+                            Log.Error("Attempted to fulfill an unavailable request");
+                            return;
+                        }
+                        if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
+                        {
+                            Messages.Message("MessagePeaceTalksNoDiplomat".Translate(), localCaravan, MessageTypeDefOf.NegativeEvent);
+                            return;
+                        }
+                        Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandFulfillBumperCropHarvestConfirm".Translate(),
+                        delegate
+                        {
+                            bumperCrop2.NotifyCaravanArrived(localCaravan);
+                            //TODO: Make caravan stop.
+                            bumperCrop2.Disable();
+                        }, false, null));
+                    }
+                }
+            };
+
+            World_Incidents.SettlementBumperCropComponent bumperCrop = __instance?.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+            if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
+            {
+                command_Action.Disable("MessagePeaceTalksNoDiplomat".Translate());
+            }
+            __result = __result.Add(command_Action);
+        }
+        #endregion
     }
 }

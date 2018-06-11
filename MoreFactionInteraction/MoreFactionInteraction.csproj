@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="More Traders\ChoiceLetter_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\FactionInteractionTimeSeperator.cs" />
-    <Compile Include="More Traders\HarmonyPatches.cs" />
+    <Compile Include="General\HarmonyPatches.cs" />
     <Compile Include="More Traders\IncidentWorker_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\MapComponent_GoodWillTraders.cs" />
     <Compile Include="General\MFI_DefOf.cs" />
@@ -65,7 +65,11 @@
     <Compile Include="General\Settings.cs" />
     <Compile Include="General\SettingsHelper.cs" />
     <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
+    <Compile Include="World Incidents\IncidentWorker_BumperCrop.cs" />
     <Compile Include="World Incidents\IncidentWorker_HuntersLodge.cs" />
+    <Compile Include="World Incidents\MigratoryHerdComp.cs" />
+    <Compile Include="World Incidents\SettlementBumperCropComponent.cs" />
+    <Compile Include="World Incidents\WorldObjectCompProperties_BumperCrop.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

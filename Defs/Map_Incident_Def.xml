@@ -65,5 +65,24 @@
 		</chanceFactorByPopulationCurve>
 	</IncidentDef>
 
+	<IncidentDef>
+    <defName>BumperCropRequest</defName>
+    <label>harvesting request</label>
+		<category>Misc</category>
+    <targetTypes>
+      <li>MapPlayerHome</li>
+    </targetTypes>
+    <workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_BumperCrop</workerClass>
+    <baseChance>1</baseChance>
+		<minPopulation>4</minPopulation>
+		<earliestDay>15</earliestDay>
+		<chanceFactorByPopulationCurve>
+			<points>
+				<li>(2,0)</li>
+				<li>(7,1)</li>
+			</points>
+		</chanceFactorByPopulationCurve>
+  </IncidentDef>
+
 
 </Defs>

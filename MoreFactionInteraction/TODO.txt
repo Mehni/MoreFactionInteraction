@@ -4,6 +4,9 @@ EVENTS:
 - Nearby caravan needs medic
 - Military aid
 
+- Hive like mech-hive
+- trigger turrets puzzle ( a la reddit challenge plan )
+
 SETTINGS:
 - Trade frequency influencer
 - Option for cheat settings if god mode on (increase trade quality even further, scale higher) ?
@@ -18,3 +21,7 @@ TODO:
 - Look into maxTechLevelBuy
 - remove from incidentQueue
 - Trade requests dynamic based on requester
+
+Special world maps:
+- Ancient cities. Spawned just like faction bases, but preferably in remote/barren locations. No soil, just concrete or stone floor. Destroyed cities, rock rubble, etc.
+- Send pawn to faction as inter-marriage for faction goodwill
