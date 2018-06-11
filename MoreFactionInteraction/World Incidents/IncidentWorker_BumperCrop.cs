@@ -33,18 +33,12 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Log.Message("1");
             Settlement settlement = IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(parms.target.Tile);
             if (settlement == null)
             {
                 return false;
             }
             SettlementBumperCropComponent component = settlement.GetComponent<SettlementBumperCropComponent>();
-
-            Log.Message("settlement: " + settlement);
-            Log.Message("comp: " + component);
-            Log.Message("parms: " + parms);
-            Log.Message("map: " + (Map)parms.target);
 
             if (!this.TryGenerateBumperCrop(component, (Map)parms.target))
             {
@@ -74,8 +68,11 @@ namespace MoreFactionInteraction.World_Incidents
 
         private ThingDef RandomRawFood()
         {
+            //a long list of things to excluse stuff like milk and kibble. In retrospect, it may have been easier to get all plants and get their harvestables.
             if (!(from x in ItemCollectionGeneratorUtility.allGeneratableItems
-                  where x.IsNutritionGivingIngestible && !x.IsCorpse && x.ingestible.HumanEdible && !x.IsMeat && !x.IsDrug && !x.HasComp(typeof(CompHatcher)) && x.BaseMarketValue <3 && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
+                  where x.IsNutritionGivingIngestible && !x.IsCorpse && x.ingestible.HumanEdible && !x.IsMeat 
+                    && !x.IsDrug && !x.HasComp(typeof(CompHatcher)) && !x.HasComp(typeof(CompIngredients)) 
+                    && x.BaseMarketValue <3 && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
                   select x).TryRandomElement(out ThingDef thingDef))
             {
                 return null;

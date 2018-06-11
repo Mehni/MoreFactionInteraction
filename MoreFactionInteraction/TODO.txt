@@ -1,6 +1,6 @@
 EVENTS:
 - Hunter's Lodge
-- Help out harvesting
+
 - Nearby caravan needs medic
 - Military aid
 
@@ -12,6 +12,7 @@ SETTINGS:
 - Option for cheat settings if god mode on (increase trade quality even further, scale higher) ?
 
 BUG FIXES AND REFINEMENT:
+- Help out harvesting (letters, balance and fluff)
 
 TODO:
 

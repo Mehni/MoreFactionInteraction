@@ -34,6 +34,9 @@ namespace MoreFactionInteraction
             #region WorldIncidents
             harmony.Patch(AccessTools.Method(typeof(Settlement), nameof(Settlement.GetCaravanGizmos)), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(Settlement_CaravanGizmos_Postfix)), null);
+
+            harmony.Patch(AccessTools.Method(typeof(WorldReachabilityUtility), nameof(WorldReachabilityUtility.CanReach)), null,
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(WorldReachUtility_PostFix)), null);
             #endregion
         }
 
@@ -231,47 +234,64 @@ namespace MoreFactionInteraction
         #region WorldIncidents
         private static void Settlement_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
         {
-        
-            Texture2D SetPlantToGrowTex = ContentFinder<Texture2D>.Get("UI/Commands/SetPlantToGrow", true);
-            Caravan localCaravan = caravan;
-
-            Command_Action command_Action = new Command_Action
+            if (__instance.GetComponent<World_Incidents.SettlementBumperCropComponent>() != null && 
+                __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>().ActiveRequest)
             {
-                defaultLabel = "CommandHelpOutHarvesting".Translate(),
-                defaultDesc = "CommandHelpOutHarvesting".Translate(),
-                icon = SetPlantToGrowTex,
-                action = delegate
+                Texture2D SetPlantToGrowTex = ContentFinder<Texture2D>.Get("UI/Commands/SetPlantToGrow", true);
+                Caravan localCaravan = caravan;
+
+                Command_Action command_Action = new Command_Action
                 {
-                    World_Incidents.SettlementBumperCropComponent bumperCrop2 = __instance?.GetComponent<World_Incidents.SettlementBumperCropComponent>();
-                    if (bumperCrop2 != null)
+                    defaultLabel = "CommandHelpOutHarvesting".Translate(),
+                    defaultDesc = "CommandHelpOutHarvesting".Translate(),
+                    icon = SetPlantToGrowTex,
+                    action = delegate
                     {
-                        if (!bumperCrop2.ActiveRequest)
+                        World_Incidents.SettlementBumperCropComponent bumperCrop2 = __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                        if (bumperCrop2 != null)
                         {
-                            Log.Error("Attempted to fulfill an unavailable request");
-                            return;
+                            if (!bumperCrop2.ActiveRequest)
+                            {
+                                Log.Error("Attempted to fulfill an unavailable request");
+                                return;
+                            }
+                            if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
+                            {
+                                Messages.Message("MessagePeaceTalksNoDiplomat".Translate(), localCaravan, MessageTypeDefOf.NegativeEvent);
+                                return;
+                            }
+                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandFulfillBumperCropHarvestConfirm".Translate(),
+                            delegate
+                            {
+                                bumperCrop2.NotifyCaravanArrived(localCaravan);
+                                //TODO: Make caravan stop.
+                                bumperCrop2.Disable();
+                            }, false, null));
                         }
-                        if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
-                        {
-                            Messages.Message("MessagePeaceTalksNoDiplomat".Translate(), localCaravan, MessageTypeDefOf.NegativeEvent);
-                            return;
-                        }
-                        Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandFulfillBumperCropHarvestConfirm".Translate(),
-                        delegate
-                        {
-                            bumperCrop2.NotifyCaravanArrived(localCaravan);
-                            //TODO: Make caravan stop.
-                            bumperCrop2.Disable();
-                        }, false, null));
                     }
-                }
-            };
+                };
 
-            World_Incidents.SettlementBumperCropComponent bumperCrop = __instance?.GetComponent<World_Incidents.SettlementBumperCropComponent>();
-            if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
-            {
-                command_Action.Disable("MessagePeaceTalksNoDiplomat".Translate());
+                World_Incidents.SettlementBumperCropComponent bumperCrop = __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
+                {
+                    command_Action.Disable("MessagePeaceTalksNoDiplomat".Translate());
+                }
+                __result = __result.Add(command_Action);
             }
-            __result = __result.Add(command_Action);
+        }
+
+        private static void WorldReachUtility_PostFix(ref bool __result, ref Caravan c)
+        {
+            Settlement settlement = CaravanVisitUtility.SettlementVisitedNow(c);
+            if (settlement != null)
+            {
+                Log.Message(settlement.ToString());
+                World_Incidents.SettlementBumperCropComponent bumperCropComponent = settlement.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                if (bumperCropComponent != null)
+                {
+                    __result = bumperCropComponent.CaravanCanMove;
+                }
+            }
         }
         #endregion
     }

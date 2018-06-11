@@ -15,6 +15,9 @@ namespace MoreFactionInteraction.World_Incidents
         public ThingDef bumperCrop;
         public int requestCount;
         public int expiration = -1;
+        private const int basereward = 20;
+        private int workLeft = GenDate.TicksPerDay;
+        private bool caravanIsWorking;
 
         private static readonly FloatRange FactionRelationOffset = new FloatRange(5f, 12f);
 
@@ -34,6 +37,29 @@ namespace MoreFactionInteraction.World_Incidents
             }
         };
 
+        public bool CaravanCanMove
+        {
+            get
+            {
+                return !caravanIsWorking;
+            }
+        }
+
+
+        //I can and should move this out of a tick and into a getter.
+        public override void CompTick()
+        {
+            if (caravanIsWorking)
+            {
+                workLeft--;
+            }
+            if (workLeft <= 0)
+            {
+                Reset();
+                caravanIsWorking = false;
+            }
+        }
+
         public bool ActiveRequest
         {
             get
@@ -44,7 +70,6 @@ namespace MoreFactionInteraction.World_Incidents
 
         public SettlementBumperCropComponent()
         {
-            //this.rewards = new ThingOwner<Thing>(this, true, LookMode.Deep);
         }
 
         public override string CompInspectStringExtra()
@@ -68,18 +93,22 @@ namespace MoreFactionInteraction.World_Incidents
 
         public void NotifyCaravanArrived(Caravan caravan)
         {
+            caravanIsWorking = true;
             List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan);
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(allMembersCapableOfGrowing);
             float badOutcomeWeightFactor = BadOutcomeFactorAtHarvestingPower.Evaluate(totalYieldPowerForCaravan);
             float num = 1f / badOutcomeWeightFactor;
 
-            float totalreward = totalYieldPowerForCaravan;
+            //TODO: Calculate a good amount
+
+            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count;
 
             Thing reward = ThingMaker.MakeThing(bumperCrop);
             reward.stackCount = Mathf.RoundToInt(totalreward);
             
             CaravanInventoryUtility.GiveThing(caravan, reward);
 
+            //todo: postpone rewards until work is done
             Outcome_Triumph(caravan);
 
             allMembersCapableOfGrowing.ForEach(pawn=> pawn.skills.Learn(SkillDefOf.Growing, 6000f, true));
@@ -89,9 +118,6 @@ namespace MoreFactionInteraction.World_Incidents
         {
             float randomInRange = FactionRelationOffset.RandomInRange;
             parent.Faction.AffectGoodwillWith(Faction.OfPlayer, randomInRange);
-
-
-
 
             Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_Triumph".Translate(), this.GetLetterText("Harvest_Triumph".Translate(new object[]
             {
@@ -103,11 +129,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         private float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
         {           
-            float statValue = caravanMembersCapableOfGrowing.Select(x => x.GetStatValue(StatDefOf.PlantHarvestYield, true)).Sum();
-
-            Log.Message(statValue.ToString());
-
-            return statValue;
+            return caravanMembersCapableOfGrowing.Select(x => x.GetStatValue(StatDefOf.PlantHarvestYield, true)).Sum();
         }
 
         private string GetLetterText(string baseText, Caravan caravan)
@@ -129,6 +151,11 @@ namespace MoreFactionInteraction.World_Incidents
         {
             return caravan.PawnsListForReading.Where(pawn => !pawn.Dead && !pawn.Downed && !pawn.InMentalState && caravan.IsOwner(pawn) && pawn.health.capacities.CanBeAwake
                && !StatDefOf.PlantHarvestYield.Worker.IsDisabledFor(pawn)).ToList();
+        }
+
+        private void Reset()
+        {
+            this.workLeft = GenDate.TicksPerDay;
         }
     }
 }
