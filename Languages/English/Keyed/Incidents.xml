@@ -12,8 +12,11 @@
     <MFI_ReverseTradeRequest_Pirates>{0}, {1} of {2}, has sent us a message. Their nearby settlement {3} was recently ravaged by pirates and are now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.</MFI_ReverseTradeRequest_Pirates>
     <MFI_ReverseTradeRequest_Hardship>An anonymous broker contacts you on the Comms Console. He has been in contact with {2} and has managed to strike a deal for {4}. He has managed to negotiate for a trader to pay extra for any items of this category, but he requests {5} silver as a brokerage fee before he'll send the caravan.</MFI_ReverseTradeRequest_Hardship>
     <MFI_ReverseTradeRequest_Blight>{0} sends us a message on behalf of the nearby settlement of {3}. Their crops have been struck by blight and they might not survive the winter without extra supplies of {4}. They are willing to pay extra for any items of this category, but without immediate food or money they will starve. They need at least {5} silver to tide them.</MFI_ReverseTradeRequest_Blight>
-    
     <MFI_ReverseTradeRequestTitle>trading opportunity at {0}</MFI_ReverseTradeRequestTitle>
 
+    <MFI_LetterLabel_HarvestRequest>Help wanted</MFI_LetterLabel_HarvestRequest>
+    <MFI_LetterHarvestRequest>A nearby settlement, {0}, contacts you with a special request. Their fields have yielded far more than originally expected, and they could really use your help with the harvest.\n\nThis request expires after: {1}\n\nIf you want to help them, send a caravan with capable growers. You can review this offer by selecting {0} on the world map.</MFI_LetterHarvestRequest>
+    <MFI_CommandFulfillBumperCropHarvestConfirm>Offer your help in harvesting? {0} will spend some time here.</MFI_CommandFulfillBumperCropHarvestConfirm>
+    <MFI_MessageBumperCropNoGrower>No conscious, capable grower.</MFI_MessageBumperCropNoGrower>
 
 </LanguageData>

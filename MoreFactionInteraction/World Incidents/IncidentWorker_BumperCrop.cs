@@ -44,10 +44,9 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 return false;
             }
-            Find.LetterStack.ReceiveLetter("LetterLabelCaravanRequest".Translate(), "LetterCaravanRequest".Translate(new object[]
+            Find.LetterStack.ReceiveLetter("MFI_LetterLabel_HarvestRequest".Translate(), "MFI_LetterHarvestRequest".Translate(new object[]
             {
                 settlement.Label,
-                ThingDefOf.RawPotatoes.label,
                 (component.expiration - Find.TickManager.TicksGame).ToStringTicksToDays("F0")
             }), LetterDefOf.PositiveEvent, settlement, null);
             return true;

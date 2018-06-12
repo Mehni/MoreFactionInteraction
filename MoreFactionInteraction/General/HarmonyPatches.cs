@@ -257,14 +257,13 @@ namespace MoreFactionInteraction
                             }
                             if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
                             {
-                                Messages.Message("MessagePeaceTalksNoDiplomat".Translate(), localCaravan, MessageTypeDefOf.NegativeEvent);
+                                Messages.Message("MFI_MessageBumperCropNoGrower".Translate(), localCaravan, MessageTypeDefOf.NegativeEvent);
                                 return;
                             }
-                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandFulfillBumperCropHarvestConfirm".Translate(),
+                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("MFI_CommandFulfillBumperCropHarvestConfirm".Translate(new object[] {localCaravan.LabelCap}),
                             delegate
                             {
                                 bumperCrop2.NotifyCaravanArrived(localCaravan);
-                                //TODO: Make caravan stop.
                                 bumperCrop2.Disable();
                             }, false, null));
                         }
@@ -274,7 +273,7 @@ namespace MoreFactionInteraction
                 World_Incidents.SettlementBumperCropComponent bumperCrop = __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>();
                 if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
                 {
-                    command_Action.Disable("MessagePeaceTalksNoDiplomat".Translate());
+                    command_Action.Disable("MFI_MessageBumperCropNoGrower".Translate());
                 }
                 __result = __result.Add(command_Action);
             }
@@ -290,6 +289,7 @@ namespace MoreFactionInteraction
                 if (bumperCropComponent != null)
                 {
                     __result = bumperCropComponent.CaravanCanMove;
+                    Log.Message(__result.ToString());
                 }
             }
         }

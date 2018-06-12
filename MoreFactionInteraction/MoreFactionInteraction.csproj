@@ -65,6 +65,7 @@
     <Compile Include="General\Settings.cs" />
     <Compile Include="General\SettingsHelper.cs" />
     <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
+    <Compile Include="World Incidents\CaravanComp.cs" />
     <Compile Include="World Incidents\IncidentWorker_BumperCrop.cs" />
     <Compile Include="World Incidents\IncidentWorker_HuntersLodge.cs" />
     <Compile Include="World Incidents\MigratoryHerdComp.cs" />

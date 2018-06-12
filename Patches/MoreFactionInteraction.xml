@@ -9,4 +9,15 @@
             </value>
     </Operation>
 
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
+            <value>
+                <comps>
+                    <li>
+                        <compClass>MoreFactionInteraction.World_Incidents.CaravanComp</compClass>
+                    </li>
+                </comps>
+            </value>
+    </Operation>
+
 </Patch>
