@@ -8,4 +8,6 @@
     <MFI_TraderSent>{0} thanks you. Their trade carravan will arrive in about {1}.</MFI_TraderSent>
     <MFI_Trader>trader</MFI_Trader>
 
+    <MFI_CaravanWorking>Caravan is working.</MFI_CaravanWorking>
+
 </LanguageData>

@@ -27,13 +27,13 @@ namespace MoreFactionInteraction.World_Incidents
         protected override bool CanFireNowSub(IIncidentTarget target)
         {
             Map map = (Map)target;
-            return base.CanFireNowSub(target) && IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(map.Tile) != null 
-                && VirtualPlantsUtility.EnvironmentAllowsEatingVirtualPlantsNowAt(IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(map.Tile).Tile);
+            return base.CanFireNowSub(target) && IncidentWorker_BumperCrop.RandomNearbyGrowerSettlement(map.Tile) !=null
+                && VirtualPlantsUtility.EnvironmentAllowsEatingVirtualPlantsNowAt(IncidentWorker_BumperCrop.RandomNearbyGrowerSettlement(map.Tile).Tile);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Settlement settlement = IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(parms.target.Tile);
+            Settlement settlement = IncidentWorker_BumperCrop.RandomNearbyGrowerSettlement(parms.target.Tile);
             if (settlement == null)
             {
                 return false;
@@ -51,7 +51,6 @@ namespace MoreFactionInteraction.World_Incidents
             }), LetterDefOf.PositiveEvent, settlement, null);
             return true;
         }
-
 
         private bool TryGenerateBumperCrop(SettlementBumperCropComponent target, Map map)
         {
@@ -77,6 +76,16 @@ namespace MoreFactionInteraction.World_Incidents
                 return null;
             }
             return thingDef;
+        }
+
+
+        public static Settlement RandomNearbyGrowerSettlement(int originTile)
+        {
+            return (from settlement in Find.WorldObjects.Settlements
+                    where settlement.Visitable && settlement.GetComponent<CaravanRequestComp>() != null && !settlement.GetComponent<CaravanRequestComp>().ActiveRequest 
+                    && !settlement.GetComponent<SettlementBumperCropComponent>().ActiveRequest && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
+                    && Find.WorldReachability.CanReach(originTile, settlement.Tile)
+                    select settlement).RandomElementWithFallback(null);
         }
 
         private int RandomOfferDuration(int tileIdFrom, int tileIdTo)

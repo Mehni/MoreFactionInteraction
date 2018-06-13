@@ -14,40 +14,30 @@ namespace MoreFactionInteraction.World_Incidents
     {
         //attentive readers may find similarities between this and the Peacetalks quest. 
         public ThingDef bumperCrop;
-        public int requestCount;
+
         public int expiration = -1;
         private const int basereward = 20;
         public int workLeft;
         private bool workStarted;
         private const int workAmount = GenDate.TicksPerDay;
 
-        //private bool caravanIsWorking;
+        private static readonly FloatRange FactionRelationOffset = new FloatRange(3f, 8f);
 
-        private static readonly FloatRange FactionRelationOffset = new FloatRange(5f, 12f);
-
-        private static readonly SimpleCurve BadOutcomeFactorAtHarvestingPower = new SimpleCurve
-        {
-            {
-                new CurvePoint(0f, 4f),
-                true
-            },
-            {
-                new CurvePoint(1f, 1f),
-                true
-            },
-            {
-                new CurvePoint(1.5f, 0.4f),
-                true
-            }
-        };
-
-        public bool CaravanCanMove
-        {
-            get
-            {
-                return !CaravanIsWorking;
-            }
-        }
+        //private static readonly SimpleCurve BadOutcomeFactorAtHarvestingPower = new SimpleCurve
+        //{
+        //    {
+        //        new CurvePoint(0f, 4f),
+        //        true
+        //    },
+        //    {
+        //        new CurvePoint(1f, 1f),
+        //        true
+        //    },
+        //    {
+        //        new CurvePoint(1.5f, 0.4f),
+        //        true
+        //    }
+        //};
 
         public bool CaravanIsWorking
         {
@@ -56,20 +46,6 @@ namespace MoreFactionInteraction.World_Incidents
                 return workStarted && Find.TickManager.TicksGame < workLeft;
             }
         }
-
-        //I can and should move this out of a tick and into a getter.
-        //public override void CompTick()
-        //{
-        //    if (caravanIsWorking)
-        //    {
-        //        workLeft--;
-        //    }
-        //    if (workLeft <= 0)
-        //    {
-        //        Reset();
-        //        caravanIsWorking = false;
-        //    }
-        //}
 
         public bool ActiveRequest
         {
@@ -87,10 +63,8 @@ namespace MoreFactionInteraction.World_Incidents
         {
             if (this.ActiveRequest)
             {
-                return "CaravanRequestInfo".Translate(new object[]
+                return "MFI_HarvestRequestInfo".Translate(new object[]
                 {
-                    GenLabel.ThingLabel(this.bumperCrop, null, this.requestCount).CapitalizeFirst(),
-                    this.bumperCrop,
                     (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays("F1")
                 });
             }
@@ -107,10 +81,14 @@ namespace MoreFactionInteraction.World_Incidents
             workStarted = true;
             workLeft = Find.TickManager.TicksGame + workAmount;
             caravan.GetComponent<CaravanComp>().workWillBeDoneAtTick = workLeft;
+            caravan.GetComponent<CaravanComp>().caravanIsWorking = true;
+            Disable();
         }
 
         public void DoOutcome(Caravan caravan)
         {
+            workStarted = false;
+            caravan.GetComponent<CaravanComp>().caravanIsWorking = false;
             Outcome_Triumph(caravan);
         }
 
@@ -121,23 +99,21 @@ namespace MoreFactionInteraction.World_Incidents
 
             List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan);
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(allMembersCapableOfGrowing);
-            float badOutcomeWeightFactor = BadOutcomeFactorAtHarvestingPower.Evaluate(totalYieldPowerForCaravan);
-            float num = 1f / badOutcomeWeightFactor;
 
             //TODO: Calculate a good amount
 
-            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * allMembersCapableOfGrowing.Sum(pawn => pawn.skills.GetSkill(SkillDefOf.Growing).Level);
+            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(1, (float)allMembersCapableOfGrowing.Average(pawn => pawn.skills.GetSkill(SkillDefOf.Growing).Level));
 
             Thing reward = ThingMaker.MakeThing(bumperCrop);
             reward.stackCount = Mathf.RoundToInt(totalreward);
-
             CaravanInventoryUtility.GiveThing(caravan, reward);
 
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_Triumph".Translate(), this.GetLetterText("Harvest_Triumph".Translate(new object[]
+            Find.LetterStack.ReceiveLetter("MFI_LetterLabelHarvest_Triumph".Translate(), this.GetLetterText("MFI_Harvest_Triumph".Translate(new object[]
             {
+                parent.Faction.def.pawnsPlural,
                 parent.Faction.Name,
                 Mathf.RoundToInt(randomInRange),
-                bumperCrop.label
+                reward.LabelCap
             }), caravan), LetterDefOf.PositiveEvent, caravan, null);
 
             allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Growing, 6000f, true));
@@ -150,17 +126,17 @@ namespace MoreFactionInteraction.World_Incidents
 
         private string GetLetterText(string baseText, Caravan caravan)
         {
-            string text = baseText;
-            Pawn pawn = BestCaravanPawnUtility.FindBestDiplomat(caravan);
-            if (pawn != null)
+            StringBuilder text = new StringBuilder();
+            text.Append(baseText + "\n");
+            foreach (Pawn pawn in AllCaravanMembersCapableOfGrowing(caravan))
             {
-                text = text + "\n\n" + "PeaceTalksSocialXPGain".Translate(new object[]
+                text.Append("\n" + "MFI_BumperCropXPGain".Translate(new object[]
                 {
                     pawn.LabelShort,
                     6000f
-                });
+                }));
             }
-            return text;
+            return text.ToString();
         }
 
         private static List<Pawn> AllCaravanMembersCapableOfGrowing(Caravan caravan)

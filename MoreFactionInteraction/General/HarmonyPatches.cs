@@ -242,8 +242,8 @@ namespace MoreFactionInteraction
 
                 Command_Action command_Action = new Command_Action
                 {
-                    defaultLabel = "CommandHelpOutHarvesting".Translate(),
-                    defaultDesc = "CommandHelpOutHarvesting".Translate(),
+                    defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
+                    defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
                     icon = SetPlantToGrowTex,
                     action = delegate
                     {
@@ -264,7 +264,6 @@ namespace MoreFactionInteraction
                             delegate
                             {
                                 bumperCrop2.NotifyCaravanArrived(localCaravan);
-                                bumperCrop2.Disable();
                             }, false, null));
                         }
                     }
@@ -284,12 +283,10 @@ namespace MoreFactionInteraction
             Settlement settlement = CaravanVisitUtility.SettlementVisitedNow(c);
             if (settlement != null)
             {
-                Log.Message(settlement.ToString());
                 World_Incidents.SettlementBumperCropComponent bumperCropComponent = settlement.GetComponent<World_Incidents.SettlementBumperCropComponent>();
                 if (bumperCropComponent != null)
                 {
-                    __result = bumperCropComponent.CaravanCanMove;
-                    Log.Message(__result.ToString());
+                    __result = !bumperCropComponent.CaravanIsWorking;
                 }
             }
         }

@@ -18,5 +18,10 @@
     <MFI_LetterHarvestRequest>A nearby settlement, {0}, contacts you with a special request. Their fields have yielded far more than originally expected, and they could really use your help with the harvest.\n\nThis request expires after: {1}\n\nIf you want to help them, send a caravan with capable growers. You can review this offer by selecting {0} on the world map.</MFI_LetterHarvestRequest>
     <MFI_CommandFulfillBumperCropHarvestConfirm>Offer your help in harvesting? {0} will spend some time here.</MFI_CommandFulfillBumperCropHarvestConfirm>
     <MFI_MessageBumperCropNoGrower>No conscious, capable grower.</MFI_MessageBumperCropNoGrower>
+    <MFI_HarvestRequestInfo>Requesting help with harvesting. ({0} left)</MFI_HarvestRequestInfo>
+    <MFI_CommandHelpOutHarvesting>Help harvest</MFI_CommandHelpOutHarvesting>
+    <MFI_Harvest_Triumph>The harvest was an overwhelming success. While harvesting, your colonists chatted and came closer with the {0} of {1}.\n\nRelations with {1} have improved by {2}.\n\nAs your caravan departed, {0} offered you a parting gift: {3}.</MFI_Harvest_Triumph>
+    <MFI_LetterLabelHarvest_Triumph>Bumper crop harvested</MFI_LetterLabelHarvest_Triumph>
+    <MFI_BumperCropXPGain>Your grower {0} has gained {1} growing experience.</MFI_BumperCropXPGain>
 
 </LanguageData>
