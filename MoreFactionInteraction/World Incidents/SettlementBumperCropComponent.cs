@@ -20,8 +20,8 @@ namespace MoreFactionInteraction.World_Incidents
         public int workLeft;
         private bool workStarted;
         private const int workAmount = GenDate.TicksPerDay;
-
-        private static readonly FloatRange FactionRelationOffset = new FloatRange(3f, 8f);
+        private const float expGain = 6000f;
+        private static readonly IntRange FactionRelationOffset = new IntRange(3, 8);
 
         //private static readonly SimpleCurve BadOutcomeFactorAtHarvestingPower = new SimpleCurve
         //{
@@ -94,14 +94,13 @@ namespace MoreFactionInteraction.World_Incidents
 
         private void Outcome_Triumph(Caravan caravan)
         {
-            float randomInRange = FactionRelationOffset.RandomInRange;
-            parent.Faction.AffectGoodwillWith(Faction.OfPlayer, randomInRange);
+            int randomInRange = FactionRelationOffset.RandomInRange;
+            parent.Faction.TryAffectGoodwillWith(Faction.OfPlayer, randomInRange);
 
             List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan);
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(allMembersCapableOfGrowing);
 
             //TODO: Calculate a good amount
-
             float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(1, (float)allMembersCapableOfGrowing.Average(pawn => pawn.skills.GetSkill(SkillDefOf.Growing).Level));
 
             Thing reward = ThingMaker.MakeThing(bumperCrop);
@@ -116,7 +115,7 @@ namespace MoreFactionInteraction.World_Incidents
                 reward.LabelCap
             }), caravan), LetterDefOf.PositiveEvent, caravan, null);
 
-            allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Growing, 6000f, true));
+            allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Growing, expGain, true));
         }
 
         private float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
@@ -133,7 +132,7 @@ namespace MoreFactionInteraction.World_Incidents
                 text.Append("\n" + "MFI_BumperCropXPGain".Translate(new object[]
                 {
                     pawn.LabelShort,
-                    6000f
+                    expGain
                 }));
             }
             return text.ToString();

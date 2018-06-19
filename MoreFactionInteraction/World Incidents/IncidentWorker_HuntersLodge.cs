@@ -17,15 +17,13 @@ namespace MoreFactionInteraction.World_Incidents
         private const float NoSitePartChance = 0.3f;
         private const int MinDistance = 2;
         private const int MaxDistance = 15;
-        ////This is the thingy that tells the symbolresolver thingy what may lurk at a site. Turrets/Ambush/Sleeping mechs, etc.
-        //private static readonly string QuestThreatTag = "DownedRefugeeQuestThreat";
+
         private static readonly IntRange TimeoutDaysRange = new IntRange(15, 25);
         private Faction faction;
 
-
-        protected override bool CanFireNowSub(IIncidentTarget target)
+        protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(target) && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.HuntersLodge, null, out faction, true, null);
+            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.HuntersLodge, null, out faction, true, null);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -47,9 +45,11 @@ namespace MoreFactionInteraction.World_Incidents
 
             int randomInRange = IncidentWorker_HuntersLodge.TimeoutDaysRange.RandomInRange;
             site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
+            site.SetFaction(faction);
             site.GetComponent<MigratoryHerdComp>().pawnKindDef = pawnKindDef;
             site.GetComponent<MigratoryHerdComp>().parmesan = parms;
-            Find.WorldObjects.Add(site);            
+
+            Find.WorldObjects.Add(site);
             string text = string.Format(this.def.letterText, pawnKindDef.label, randomInRange).CapitalizeFirst();
 
             Find.LetterStack.ReceiveLetter(this.def.letterLabel, text, this.def.letterDef, site, null);
@@ -68,5 +68,4 @@ namespace MoreFactionInteraction.World_Incidents
             return TileFinder.TryFindNewSiteTile(out tile, MinDistance, MaxDistance, true, false);
         }
     }
-    
 }

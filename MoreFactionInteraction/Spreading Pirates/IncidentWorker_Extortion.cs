@@ -35,19 +35,12 @@ namespace MoreFactionInteraction
             return false;
         }
 
-        //(from worldObject in Find.WorldObjects.AllWorldObjects
-        //where(worldObject is Settlement || worldObject is Site)
-        //                  && worldObject.Faction.HostileTo(Faction.OfPlayer)
-        //                  && Find.WorldGrid.ApproxDistanceInTiles(originTile, worldObject.Tile) < 15f
-        //                  && Find.WorldReachability.CanReach(originTile, worldObject.Tile)
-        //                  select worldObject)
-
         private static IEnumerable<WorldObject> NearbyHostileEncampments(int forTile = -1)
         {
         	if (Find.AnyPlayerHomeMap != null)
                 forTile = Find.AnyPlayerHomeMap.Tile;
-            else if (Find.VisibleMap != null)
-                forTile = Find.VisibleMap.Tile;
+            else if (Find.CurrentMap != null)
+                forTile = Find.CurrentMap.Tile;
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
                                     where (worldObject is Settlement || worldObject is Site)
@@ -57,10 +50,10 @@ namespace MoreFactionInteraction
                                     select worldObject;
         }
 
-        protected override bool CanFireNowSub(IIncidentTarget target)
+        protected override bool CanFireNowSub(IncidentParms parms)
         {
-            Map map = (Map)target;
-            return CommsConsoleUtility.PlayerHasPoweredCommsConsole(map) && base.CanFireNowSub(target) && RandomNearbyHostileWorldObject(target.Tile, out worldObject, out faction);
+            Map map = (Map)parms.target;
+            return CommsConsoleUtility.PlayerHasPoweredCommsConsole(map) && base.CanFireNowSub(parms) && RandomNearbyHostileWorldObject(parms.target.Tile, out worldObject, out faction);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

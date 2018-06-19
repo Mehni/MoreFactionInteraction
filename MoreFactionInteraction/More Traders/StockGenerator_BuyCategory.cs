@@ -23,7 +23,7 @@ namespace MoreFactionInteraction
             //TODO: Look into maxTechLevelBuy. From what I can tell, nothing uses it.
             //TODO: Balance maxValuePerUnit. 1k is nonsense since traders generally don't have much more than that, but then again I also want some limit. Currently ignores stuff, so golden helmets ahoy.
             return this.thingCategoryDef.DescendantThingDefs.Contains(thingDef) 
-                && thingDef.tradeability != Tradeability.Never 
+                && thingDef.tradeability != Tradeability.None 
                 && thingDef.BaseMarketValue / thingDef.VolumePerUnit < this.maxValuePerUnit;
 		}
 	}

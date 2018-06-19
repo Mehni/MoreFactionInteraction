@@ -17,7 +17,7 @@ namespace MoreFactionInteraction
         public Faction faction;
         public int tile;
 
-        protected override IEnumerable<DiaOption> Choices
+        public override IEnumerable<DiaOption> Choices
         {
             get
             {
@@ -30,12 +30,13 @@ namespace MoreFactionInteraction
                         //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
                         incidentParms.faction = this.faction;
                         TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
-                        //traderKind.stockGenerators = faction.def.caravanTraderKinds.RandomElement().stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).ToList();
+                        
                         traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
                         traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.min += fee;
 
                         traderKind.label = this.thingCategoryDef.label + " "+ "MFI_Trader".Translate();
                         incidentParms.traderKind = traderKind;
+                        incidentParms.forced = true;
 
                         Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + traveltime, incidentParms);
                         TradeUtility.LaunchSilver(this.map, this.fee);
@@ -43,8 +44,8 @@ namespace MoreFactionInteraction
                 };
                 DiaNode diaNode = new DiaNode("MFI_TraderSent".Translate(new object[]
                 {
-                    faction.leader.NameStringShort,
-                    traveltime.ToStringTicksToPeriod(false)
+                    faction.leader.LabelShort,
+                    traveltime.ToStringTicksToPeriodVague(false, true)
                 }).CapitalizeFirst());
                 diaNode.options.Add(base.OK);
                 accept.link = diaNode;
@@ -77,11 +78,11 @@ namespace MoreFactionInteraction
             return Math.Min(travelTime, GenDate.TicksPerDay * 4);
         }
 
-        public override bool StillValid
+        public override bool CanShowInLetterStack
         {
             get
             {
-                return base.StillValid && Find.Maps.Contains(this.map) && !this.faction.HostileTo(Faction.OfPlayer);
+                return base.CanShowInLetterStack && Find.Maps.Contains(this.map) && !this.faction.HostileTo(Faction.OfPlayer);
             }
         }
 

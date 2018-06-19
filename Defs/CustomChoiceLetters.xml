@@ -11,4 +11,9 @@
   	<letterClass>MoreFactionInteraction.ChoiceLetter_ReverseTradeRequest</letterClass>
   </LetterDef>
 
+  <LetterDef ParentName="CustomChoiceLetterBase">
+  	<defName>DiplomaticWedding</defName>
+  	<letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticWedding</letterClass>
+  </LetterDef>
+
 </Defs>

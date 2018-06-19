@@ -14,7 +14,7 @@ namespace MoreFactionInteraction
         public bool outpost = false;
         public int fee;
 
-        protected override IEnumerable<DiaOption> Choices
+        public override IEnumerable<DiaOption> Choices
         {
             get
             {
@@ -40,11 +40,11 @@ namespace MoreFactionInteraction
                 {
                     action = () =>
                     {
-                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(Find.Storyteller.def, IncidentCategory.ThreatBig, map);
+                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
                         incidentParms.forced = true;
                         incidentParms.faction = this.faction;
                         incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
-                        incidentParms.raidArrivalMode = PawnsArriveMode.EdgeWalkIn;
+                        incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                         incidentParms.target = this.map;
                         if (outpost) incidentParms.points *= 0.7f;
                         IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
@@ -57,11 +57,11 @@ namespace MoreFactionInteraction
             }
         }
 
-        public override bool StillValid
+        public override bool CanShowInLetterStack
         {
             get
             {
-                return base.StillValid && Find.Maps.Contains(this.map);
+                return base.CanShowInLetterStack && Find.Maps.Contains(this.map);
             }
         }
 

@@ -27,7 +27,7 @@ namespace MoreFactionInteraction
             harmony.Patch(AccessTools.Method(typeof(CompQuality), nameof(CompQuality.PostPostGeneratedForTrader)),
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(CompQuality_TradeQualityIncreasePreFix)), null);
 
-            harmony.Patch(AccessTools.Method(typeof(ItemCollectionGenerator), nameof(ItemCollectionGenerator.Generate), new Type[] { typeof(ItemCollectionGeneratorParams) }), null,
+            harmony.Patch(AccessTools.Method(typeof(ThingSetMaker), nameof(ThingSetMaker.Generate), new Type[] { typeof(ThingSetMakerParams) }), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(TraderStocker_OverStockerPostFix)), null);
             #endregion
 
@@ -41,7 +41,7 @@ namespace MoreFactionInteraction
         }
 
         #region MoreTraders
-        private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ItemCollectionGeneratorParams parms)
+        private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ThingSetMakerParams parms)
         {
             if (parms.traderDef != null)
             {
@@ -54,8 +54,8 @@ namespace MoreFactionInteraction
                 else if (Find.AnyPlayerHomeMap != null)
                     map = Find.AnyPlayerHomeMap; 
 
-                else if (Find.VisibleMap != null)
-                    map = Find.VisibleMap;
+                else if (Find.CurrentMap != null)
+                    map = Find.CurrentMap;
 
 
                 if (parms.traderDef.orbital || parms.traderDef.defName.Contains("Base_") && map != null)
@@ -104,7 +104,7 @@ namespace MoreFactionInteraction
         #region TradeQualityImprovements
         private static bool CompQuality_TradeQualityIncreasePreFix(CompQuality __instance, ref TraderKindDef trader, ref int forTile, ref Faction forFaction)
         {
-            //forTile is assigned in RimWorld.ItemCollectionGenerator_TraderStock.Generate. It's either a best-effort map, or -1.
+            //forTile is assigned in RimWorld.ThingSetMaker_TraderStock.Generate. It's either a best-effort map, or -1.
             Map map = null;
             if (forTile != -1) map = Current.Game.FindMap(forTile);
             __instance.SetQuality(FactionAndGoodWillDependantQuality(forFaction, map, trader), ArtGenerationContext.Outsider);
@@ -126,8 +126,8 @@ namespace MoreFactionInteraction
                 {
                     return QualityCategory.Normal;
                 }
-                float num = Rand.Gaussian(3.5f + qualityIncreaseFactorFromPlayerGoodWill, 1.13f + qualityIncreaseFromTimesTradedWithFaction);
-                num = Mathf.Clamp(num, 0f, (float)QualityUtility.AllQualityCategories.Count - 0.5f);
+                float num = Rand.Gaussian(2.5f + qualityIncreaseFactorFromPlayerGoodWill, 0.84f + qualityIncreaseFromTimesTradedWithFaction);
+                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
                 return (QualityCategory)((int)num);
             }
             if ((trader.orbital || trader.defName.Contains("_Base")) && map != null)
@@ -137,10 +137,10 @@ namespace MoreFactionInteraction
                     return QualityCategory.Normal;
                 }
                 float num = Rand.Gaussian(WealthQualityDeterminationCurve.Evaluate(map.wealthWatcher.WealthTotal), WealthQualitySpreadDeterminationCurve.Evaluate(map.wealthWatcher.WealthTotal));
-                num = Mathf.Clamp(num, 0f, (float)QualityUtility.AllQualityCategories.Count - 0.5f);
+                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
                 return (QualityCategory)((int)num);
             }
-            return QualityUtility.RandomTraderItemQuality();
+            return QualityUtility.GenerateQualityTraderItem();
         }
 
         #region SimpleCurves
@@ -151,23 +151,23 @@ namespace MoreFactionInteraction
                 true
             },
             {
-                new CurvePoint(10000, 2),
+                new CurvePoint(10000, 1.5f),
                 true
             },
             {
-                new CurvePoint(75000, 3),
+                new CurvePoint(75000, 2.5f),
                 true
             },
             {
-                new CurvePoint(300000, 4),
+                new CurvePoint(300000, 3),
                 true
             },
             {
-                new CurvePoint(1000000, 5.5f),
+                new CurvePoint(1000000, 3.8f),
                 true
             },
             {
-                new CurvePoint(2000000, 6.3f),
+                new CurvePoint(2000000, 4.3f),
                 true
             },
         };
@@ -179,23 +179,23 @@ namespace MoreFactionInteraction
                 true
             },
             {
-                new CurvePoint(10000, 4),
+                new CurvePoint(10000, 4), //5.5
                 true
             },
             {
-                new CurvePoint(75000, 3.5f),
+                new CurvePoint(75000, 2.5f), //5
                 true
             },
             {
-                new CurvePoint(300000, 2.5f),
+                new CurvePoint(300000, 2.1f), //5.1
                 true
             },
             {
-                new CurvePoint(1000000, 1.5f),
+                new CurvePoint(1000000, 1.5f), //5.3
                 true
             },
             {
-                new CurvePoint(2000000, 1.2f),
+                new CurvePoint(2000000, 1.2f), //5.5
                 true
             },
         };
@@ -234,8 +234,7 @@ namespace MoreFactionInteraction
         #region WorldIncidents
         private static void Settlement_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
         {
-            if (__instance.GetComponent<World_Incidents.SettlementBumperCropComponent>() != null && 
-                __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>().ActiveRequest)
+            if (__instance.GetComponent<World_Incidents.SettlementBumperCropComponent>()?.ActiveRequest ?? false)
             {
                 Texture2D SetPlantToGrowTex = ContentFinder<Texture2D>.Get("UI/Commands/SetPlantToGrow", true);
                 Caravan localCaravan = caravan;

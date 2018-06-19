@@ -1,0 +1,20 @@
+The ~10 or so WorldObjects are instantiated by RimWorld.Planet.WorldObjectMaker.MakeWorldObject(WorldObjectDef def),
+it takes the worldObjectClass from the def.
+
+Everything except Sites is pretty straight-forward. 
+
+TryFindSiteParams_SingleSite (SiteCoreDef, sitepartCandidates => out SitePartDef, out Faction <= [factionToUse])
+
+- Sites themselves are blank slates. They can be populated by different things: Comps, SiteCoreDefs and SitePartDefs.
+
+SiteCoreDef doesn't do much, but it's attached to a GenStepDef by the magic of <linkWithSite>SiteCoreDefName</linkWithSite>.
+This adds the general layout and buildings to a blank slate.
+
+Comps are comps. Nothing new. Mostly for meta
+
+SitePartDefs are assigned by string. SiteParts have tags in a string form, and if the faction and tech level match the incident, 
+that sitepart is a contender to be selected. 
+
+GenStep pushes Symbols based on rules to the stack. idunno what happens when multiple of the same get pushed to the same stack.
+
+There seems to be a difference between Site/Map owner and SitePart owner, or can potentially be.

@@ -3,6 +3,7 @@
 
   <TraderKindDef>
     <defName>MFI_EmptyTrader_Apparel</defName>
+    <commonality>0</commonality>
     <stockGenerators>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
@@ -20,6 +21,7 @@
 
   <TraderKindDef>
     <defName>MFI_EmptyTrader_PlantFoodRaw</defName>
+    <commonality>0</commonality>
     <stockGenerators>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
@@ -36,6 +38,7 @@
 
   <TraderKindDef>
     <defName>MFI_EmptyTrader_Weapons</defName>
+    <commonality>0</commonality>
     <stockGenerators>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
@@ -52,6 +55,7 @@
 
   <TraderKindDef>
     <defName>MFI_EmptyTrader_Medicine</defName>
+    <commonality>0</commonality>
     <stockGenerators>
       <li Class="StockGenerator_SingleDef">      
         <thingDef>Silver</thingDef>

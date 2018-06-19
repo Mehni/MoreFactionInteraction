@@ -9,16 +9,18 @@ namespace MoreFactionInteraction
     public class IncidentWorker_ReverseTradeRequest : IncidentWorker
     {
         private const int TimeoutTicks = GenDate.TicksPerDay;
+        private static List<Map> tmpAvailableMaps = new List<Map>();
 
-        protected override bool CanFireNowSub(IIncidentTarget target)
+        protected override bool CanFireNowSub(IncidentParms parms)
         {
-            Map map = (Map)target;
-            return IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(map.Tile) != null && base.CanFireNowSub(target);
+            return TryGetRandomAvailableTargetMap(out Map map) && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile) != null && base.CanFireNowSub(parms);
+
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Settlement settlement = IncidentWorker_CaravanRequest.RandomNearbyTradeableSettlement(parms.target.Tile);
+            if (!TryGetRandomAvailableTargetMap(out Map map)) return false;
+            Settlement settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile);
             if (settlement != null)
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
@@ -26,7 +28,6 @@ namespace MoreFactionInteraction
                 thingCategoryDef = DetermineThingCategoryDef();
 
                 string letterToSend = DetermineLetterToSend(thingCategoryDef);
-                Map map = (Map)parms.target;
                 int feeRequest = Math.Max(Rand.Range(150, 300), (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
                 ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(this.def.letterLabel, letterToSend.Translate(new object[]
@@ -45,6 +46,7 @@ namespace MoreFactionInteraction
 
                 choiceLetter_ReverseTradingRequest.thingCategoryDef = thingCategoryDef;
                 choiceLetter_ReverseTradingRequest.map = map;
+                parms.target = map;
                 choiceLetter_ReverseTradingRequest.incidentParms = parms;
                 choiceLetter_ReverseTradingRequest.faction = settlement.Faction;
                 choiceLetter_ReverseTradingRequest.fee = feeRequest;
@@ -90,6 +92,22 @@ namespace MoreFactionInteraction
                 default:
                     return "MFI_ReverseTradeRequest_Pyro";
             }
+        }
+
+        private bool TryGetRandomAvailableTargetMap(out Map map)
+        {
+            IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Clear();
+            List<Map> maps = Find.Maps;
+            for (int i = 0; i < maps.Count; i++)
+            {
+                if (maps[i].IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(maps[i].Tile) != null)
+                {
+                    IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Add(maps[i]);
+                }
+            }
+            bool result = IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.TryRandomElement(out map);
+            IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Clear();
+            return result;
         }
     }
 }

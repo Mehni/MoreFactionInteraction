@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+    <IncidentDef>
+		<defName>MFI_ReverseTradeRequest</defName>
+		<label>trade request</label>
+		<category>Misc</category>
+        <targetTypes>
+            <li>World</li>
+        </targetTypes>
+		<workerClass>MoreFactionInteraction.IncidentWorker_ReverseTradeRequest</workerClass>
+		<letterLabel>Trade request</letterLabel>
+		<letterDef>ReverseTradeRequest</letterDef>
+		<baseChance>1.3</baseChance>
+		<earliestDay>1</earliestDay>
+		<minRefireDays>15</minRefireDays>
+		<chanceFactorByPopulationCurve>
+			<points>
+				<li>(2,0)</li>
+				<li>(7,1)</li>
+			</points>
+		</chanceFactorByPopulationCurve>
+	</IncidentDef>
+
+	<IncidentDef>
+    <defName>MFI_BumperCropRequest</defName>
+    <label>harvesting request</label>
+		<category>Misc</category>
+    <targetTypes>
+      <li>World</li>
+    </targetTypes>
+    <workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_BumperCrop</workerClass>
+    <baseChance>1</baseChance>
+		<minPopulation>4</minPopulation>
+		<earliestDay>15</earliestDay>
+		<chanceFactorByPopulationCurve>
+			<points>
+				<li>(2,0)</li>
+				<li>(7,1)</li>
+			</points>
+		</chanceFactorByPopulationCurve>
+  </IncidentDef>
+
+</Defs>

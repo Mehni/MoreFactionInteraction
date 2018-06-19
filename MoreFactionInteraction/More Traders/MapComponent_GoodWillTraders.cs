@@ -28,10 +28,8 @@ namespace MoreFactionInteraction
             get
             {
                 //intermingled :D
-                Log.Message("TT 1");
                 foreach (Faction faction in NextFactionInteraction.Keys)
                 {
-                    Log.Message("TT 2: "+ faction.Name);
                     if (!timesTraded.Keys.Contains(faction)) timesTraded.Add(faction, 0);
                 }
                 //trust betrayed, reset count.
@@ -89,7 +87,7 @@ namespace MoreFactionInteraction
                     {
                         Faction faction = kvp.Key;
 
-                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(Find.Storyteller.def, IncidentCategory.AllyArrival, map);
+                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, map);
                         incidentParms.forced = true;
                         incidentParms.faction = faction;
                         //trigger incident somewhere between half a day and 3 days from now
@@ -111,7 +109,7 @@ namespace MoreFactionInteraction
             {
                 case 0: 
                 case 1: return MFI_DefOf.ReverseTradeRequest;
-                case 2: return IncidentDefOf.CaravanRequest;
+                case 2: return IncidentDefOf.Quest_TradeRequest;
                 case 3:
                 case 4: return IncidentDefOf.TraderCaravanArrival;
 
