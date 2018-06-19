@@ -12,8 +12,8 @@
   </LetterDef>
 
   <LetterDef ParentName="CustomChoiceLetterBase">
-  	<defName>DiplomaticWedding</defName>
-  	<letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticWedding</letterClass>
+  	<defName>DiplomaticMarriage</defName>
+  	<letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticMarriage</letterClass>
   </LetterDef>
 
 </Defs>

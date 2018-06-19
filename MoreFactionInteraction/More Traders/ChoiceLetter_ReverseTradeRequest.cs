@@ -21,54 +21,61 @@ namespace MoreFactionInteraction
         {
             get
             {
-                int traveltime = CalcuteTravelTimeForTrader(this.tile);
-                DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
+                if (base.ArchivedOnly)
                 {
-                    action = () =>
+                    yield return base.OK;
+                }
+                else
+                {
+                    int traveltime = CalcuteTravelTimeForTrader(this.tile);
+                    DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
                     {
+                        action = () =>
+                        {
                         //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
                         //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
                         incidentParms.faction = this.faction;
-                        TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
-                        
-                        traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
-                        traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.min += fee;
+                            TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
 
-                        traderKind.label = this.thingCategoryDef.label + " "+ "MFI_Trader".Translate();
-                        incidentParms.traderKind = traderKind;
-                        incidentParms.forced = true;
+                            traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
+                            traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.min += fee;
 
-                        Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + traveltime, incidentParms);
-                        TradeUtility.LaunchSilver(this.map, this.fee);
-                    },
-                };
-                DiaNode diaNode = new DiaNode("MFI_TraderSent".Translate(new object[]
-                {
+                            traderKind.label = this.thingCategoryDef.label + " " + "MFI_Trader".Translate();
+                            incidentParms.traderKind = traderKind;
+                            incidentParms.forced = true;
+
+                            Find.Storyteller.incidentQueue.Add(IncidentDefOf.TraderCaravanArrival, Find.TickManager.TicksGame + traveltime, incidentParms);
+                            TradeUtility.LaunchSilver(this.map, this.fee);
+                        },
+                    };
+                    DiaNode diaNode = new DiaNode("MFI_TraderSent".Translate(new object[]
+                    {
                     faction.leader.LabelShort,
                     traveltime.ToStringTicksToPeriodVague(false, true)
-                }).CapitalizeFirst());
-                diaNode.options.Add(base.OK);
-                accept.link = diaNode;
+                    }).CapitalizeFirst());
+                    diaNode.options.Add(base.OK);
+                    accept.link = diaNode;
 
-                if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
-                {
-                    accept.Disable("NeedSilverLaunchable".Translate(new object[]
+                    if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
                     {
+                        accept.Disable("NeedSilverLaunchable".Translate(new object[]
+                        {
                     this.fee.ToString()
-                    }));
-                }
-                yield return accept;
+                        }));
+                    }
+                    yield return accept;
 
-                DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
-                {
-                    action = () =>
+                    DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
                     {
-                        Find.LetterStack.RemoveLetter(this);
-                    },
-                    resolveTree = true
-                };
-                yield return reject;
-                yield return base.Postpone;
+                        action = () =>
+                        {
+                            Find.LetterStack.RemoveLetter(this);
+                        },
+                        resolveTree = true
+                    };
+                    yield return reject;
+                    yield return base.Postpone;
+                }
             }
         }
 

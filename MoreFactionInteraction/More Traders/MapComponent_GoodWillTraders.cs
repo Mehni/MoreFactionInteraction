@@ -108,7 +108,7 @@ namespace MoreFactionInteraction
             switch (Rand.RangeInclusive(0,4))
             {
                 case 0: 
-                case 1: return MFI_DefOf.ReverseTradeRequest;
+                case 1: return MFI_DefOf.MFI_ReverseTradeRequest;
                 case 2: return IncidentDefOf.Quest_TradeRequest;
                 case 3:
                 case 4: return IncidentDefOf.TraderCaravanArrival;

@@ -52,6 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
+    <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\GenStep_HuntersLodge.cs" />
     <Compile Include="More Traders\ChoiceLetter_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\FactionInteractionTimeSeperator.cs" />

@@ -23,7 +23,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.HuntersLodge, null, out faction, true, null);
+            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.MFI_HuntersLodge, null, out faction, true, null);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -32,7 +32,7 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 return false;
             }
-            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.HuntersLodge, singleSitePartTag: null, faction, false, null);
+            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.MFI_HuntersLodge, singleSitePartTag: null, faction, false, null);
             if (site == null)
             {
                 return false;

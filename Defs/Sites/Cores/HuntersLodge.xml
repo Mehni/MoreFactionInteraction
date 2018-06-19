@@ -2,7 +2,7 @@
 <Defs>
   
   <SiteCoreDef>
-    <defName>HuntersLodge</defName>
+    <defName>MFI_HuntersLodge</defName>
     <label>Hunters lodge</label>
 		<description>A small outpost, used by friendly factions as a hunting base.</description>
     <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
@@ -11,8 +11,8 @@
   </SiteCoreDef>
 
   <GenStepDef>
-    <defName>HuntersLodge</defName>
-    <linkWithSite>HuntersLodge</linkWithSite>
+    <defName>MFI_HuntersLodge</defName>
+    <linkWithSite>MFI_HuntersLodge</linkWithSite>
     <order>1600</order>
     <genStep Class="MoreFactionInteraction.World_Incidents.GenStep_HuntersLodge">
     </genStep>

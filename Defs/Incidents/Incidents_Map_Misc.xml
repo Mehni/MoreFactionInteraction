@@ -21,27 +21,5 @@
 			</points>
 		</chanceFactorByPopulationCurve>
 	</IncidentDef>
-	
-	<IncidentDef>
-		<defName>MFI_DiplomaticMarriage</defName>
-		<label>diplomatic marriage</label>
-		<category>Misc</category>
-    <targetTypes>
-      <li>Map_PlayerHome</li>
-    </targetTypes>
-		<workerClass>MoreFactionInteraction.IncidentWorker_DiplomaticMarriage</workerClass>
-		<letterLabel>diplomatic marriage</letterLabel>
-		<letterDef>DiplomaticMarriage</letterDef>
-		<baseChance>0.8</baseChance>
-		<earliestDay>15</earliestDay>
-		<minRefireDays>30</minRefireDays>
-		<chanceFactorByPopulationCurve>
-			<points>
-				<li>(5,0)</li>
-				<li>(12,1)</li>
-				<li>(20,2)</li>
-			</points>
-		</chanceFactorByPopulationCurve>
-	</IncidentDef>
 
 </Defs>

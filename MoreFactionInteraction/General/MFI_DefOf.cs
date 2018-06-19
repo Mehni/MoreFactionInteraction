@@ -9,7 +9,7 @@ namespace MoreFactionInteraction
     [DefOf]
     public static class MFI_DefOf
     {
-        public static IncidentDef ReverseTradeRequest;
-        public static SiteCoreDef HuntersLodge;
+        public static IncidentDef MFI_ReverseTradeRequest;
+        public static SiteCoreDef MFI_HuntersLodge;
     }
 }

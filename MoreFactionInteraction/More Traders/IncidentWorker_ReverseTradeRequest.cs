@@ -63,7 +63,6 @@ namespace MoreFactionInteraction
             ThingCategoryDef thingCategoryDef;
 
             int rand = Rand.RangeInclusive(0, 100);
-            Log.Message(rand.ToString());
             if (rand < 33) thingCategoryDef = ThingCategoryDefOf.Apparel;
             else if (rand > 33 && rand < 66) thingCategoryDef = ThingCategoryDefOf.PlantFoodRaw;
             else if (rand > 66 && rand < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;

@@ -18,42 +18,49 @@ namespace MoreFactionInteraction
         {
             get
             {
-                DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
+                if (base.ArchivedOnly)
                 {
-                    action = () =>
-                    {
-                        TradeUtility.LaunchSilver(this.map, this.fee);
-                        Find.LetterStack.RemoveLetter(this);
-                    },
-                    resolveTree = true
-                };
-                if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
-                {
-                    accept.Disable("NeedSilverLaunchable".Translate(new object[]
-                    {
-                        this.fee.ToString()
-                    }));
+                    yield return base.OK;
                 }
-                yield return accept;
-
-                DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
+                else
                 {
-                    action = () =>
+                    DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
                     {
-                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
-                        incidentParms.forced = true;
-                        incidentParms.faction = this.faction;
-                        incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
-                        incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
-                        incidentParms.target = this.map;
-                        if (outpost) incidentParms.points *= 0.7f;
-                        IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
-                        Find.LetterStack.RemoveLetter(this);
-                    },
-                    resolveTree = true
-                };
-                yield return reject;
-                yield return base.Postpone;
+                        action = () =>
+                        {
+                            TradeUtility.LaunchSilver(this.map, this.fee);
+                            Find.LetterStack.RemoveLetter(this);
+                        },
+                        resolveTree = true
+                    };
+                    if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
+                    {
+                        accept.Disable("NeedSilverLaunchable".Translate(new object[]
+                        {
+                        this.fee.ToString()
+                        }));
+                    }
+                    yield return accept;
+
+                    DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
+                    {
+                        action = () =>
+                        {
+                            IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
+                            incidentParms.forced = true;
+                            incidentParms.faction = this.faction;
+                            incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
+                            incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
+                            incidentParms.target = this.map;
+                            if (outpost) incidentParms.points *= 0.7f;
+                            IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
+                            Find.LetterStack.RemoveLetter(this);
+                        },
+                        resolveTree = true
+                    };
+                    yield return reject;
+                    yield return base.Postpone;
+                }
             }
         }
 
