@@ -37,7 +37,7 @@ namespace MoreFactionInteraction
                     {
                         accept.Disable("NeedSilverLaunchable".Translate(new object[]
                         {
-                        this.fee.ToString()
+                            this.fee.ToString()
                         }));
                     }
                     yield return accept;

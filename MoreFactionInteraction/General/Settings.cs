@@ -32,6 +32,8 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             Scribe_Values.Look(ref ticksToUpgrade, "ticksToUpgrade", 2700000);
+            Scribe_Values.Look(ref timeModifierBetweenFactionInteraction, "timeModifierBetweenFactionInteraction", 1f);
+            Scribe_Values.Look(ref traderWealthOffsetFromTimesTraded, "traderWealthOffsetFromTimesTraded", 1f);
         }
     }
 

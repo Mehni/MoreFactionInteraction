@@ -32,9 +32,9 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                        //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
-                        //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
-                        incidentParms.faction = this.faction;
+                            //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
+                            //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
+                            incidentParms.faction = this.faction;
                             TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
 
                             traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
@@ -50,8 +50,8 @@ namespace MoreFactionInteraction
                     };
                     DiaNode diaNode = new DiaNode("MFI_TraderSent".Translate(new object[]
                     {
-                    faction.leader.LabelShort,
-                    traveltime.ToStringTicksToPeriodVague(false, true)
+                        faction.leader.LabelShort,
+                        traveltime.ToStringTicksToPeriodVague(false, true)
                     }).CapitalizeFirst());
                     diaNode.options.Add(base.OK);
                     accept.link = diaNode;
@@ -60,7 +60,7 @@ namespace MoreFactionInteraction
                     {
                         accept.Disable("NeedSilverLaunchable".Translate(new object[]
                         {
-                    this.fee.ToString()
+                            this.fee.ToString()
                         }));
                     }
                     yield return accept;
@@ -105,4 +105,3 @@ namespace MoreFactionInteraction
         }
     }
 }
-

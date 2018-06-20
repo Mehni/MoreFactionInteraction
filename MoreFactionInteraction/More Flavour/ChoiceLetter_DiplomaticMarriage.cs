@@ -4,21 +4,20 @@ using System.Linq;
 using System.Text;
 using RimWorld;
 using Verse;
+using RimWorld.Planet;
 
 namespace MoreFactionInteraction
 {
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
         public Pawn betrothed;
-        public Map map;
-        public Faction faction;
+        public Pawn marriageSeeker;
 
         public override bool CanShowInLetterStack
         {
             get
             {
-                Log.Message("can show");
-                return base.CanShowInLetterStack && PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists_NoCryptosleep.Contains(this.betrothed);
+                return base.CanShowInLetterStack && PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Contains(this.betrothed);
             }
         }
 
@@ -32,15 +31,32 @@ namespace MoreFactionInteraction
                 }
                 else
                 {
+                    //possible outcomes: 
+                    //dowry
+                    //goodwill based on pawn value
+                    //wedding (doable)
+                    //bring us the betrothed? (complicated.)
+                    //betrothed picks a transport pod (meh)
                     DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
                     {
                         action = () =>
                         {
-                            betrothed.Kill(null, null);
-                            faction.TryAffectGoodwillWith(Faction.OfPlayer, 100, true, false, "They're getting it on now!");
+                            int goodWillGainedFromMarriage = (int)(betrothed.MarketValue / InteractionDefOf.RomanceAttempt.Worker.RandomSelectionWeight(marriageSeeker, betrothed));
+                            Log.Message(goodWillGainedFromMarriage.ToString() + " = " + betrothed.MarketValue + " / " + InteractionDefOf.RomanceAttempt.Worker.RandomSelectionWeight(marriageSeeker, betrothed).ToString());
+                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage, true, false, "They're getting it on now!");
+                            betrothed.relations.AddDirectRelation(PawnRelationDefOf.Fiance, marriageSeeker);
+                            if (betrothed.GetCaravan() is Caravan caravan)
+                            {
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(betrothed, caravan.PawnsListForReading);
+                                caravan.RemovePawn(betrothed);
+                                HealIfPossible(betrothed);
+                            }
+                            if (!marriageSeeker.HostileTo(Faction.OfPlayer))
+                                betrothed.SetFaction(marriageSeeker.Faction);
+                            else
+                                betrothed.SetFaction(null);
                         }
                     };
-
                     DiaNode dialogueNodeAccept = new DiaNode("MFI_TraderSent".Translate().CapitalizeFirst());
                             dialogueNodeAccept.options.Add(base.OK);
                             accept.link = dialogueNodeAccept;
@@ -49,11 +65,10 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                            Log.Message("rejected, boohoo");
                             IncidentParms parms = new IncidentParms
                             {
-                                target = map,
-                                faction = faction,
+                                target = betrothed.Map,
+                                faction = marriageSeeker.Faction,
                                 points = 10000f
                             };
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
@@ -70,11 +85,33 @@ namespace MoreFactionInteraction
             }
         }
 
+        private static void HealIfPossible(Pawn p)
+        {
+            List<Hediff> tmpHediffs = new List<Hediff>();
+            tmpHediffs.AddRange(p.health.hediffSet.hediffs);
+            for (int i = 0; i < tmpHediffs.Count; i++)
+            {
+                if (tmpHediffs[i] is Hediff_Injury hediff_Injury && !hediff_Injury.IsPermanent())
+                {
+                    p.health.RemoveHediff(hediff_Injury);
+                }
+                else
+                {
+                    ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(tmpHediffs[i].def);
+                    if (immunityRecord != null)
+                    {
+                        immunityRecord.immunity = 1f;
+                    }
+                }
+            }
+            tmpHediffs.Clear();
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Map>(ref this.map, "map");
             Scribe_References.Look<Pawn>(ref this.betrothed, "betrothed");
+            Scribe_References.Look<Pawn>(ref this.marriageSeeker, "marriageSeeker");
         }
     }
 }

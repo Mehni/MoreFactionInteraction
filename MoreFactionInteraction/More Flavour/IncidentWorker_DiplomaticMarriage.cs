@@ -10,60 +10,51 @@ namespace MoreFactionInteraction
 {
     public class IncidentWorker_DiplomaticMarriage : IncidentWorker
     {
-        private Faction faction;
-        private Pawn pawn;
+        private Pawn marriageSeeker;
+        private Pawn betrothed;
         private const int TimeoutTicks = GenDate.TicksPerDay;
 
         public override float AdjustedChance => base.AdjustedChance - Find.Storyteller.intenderPopulation.PopulationIntent;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return true; // base.CanFireNowSub(parms) && this.TryFindFaction(out Faction faction) && TryFindBetrothed(out Pawn pawn);
+            return base.CanFireNowSub(parms) && this.TryFindMarriageSeeker(out Pawn marriageSeeker) && TryFindBetrothed(out Pawn betrothed);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindFaction(out faction)) { Log.Warning("no faction"); return false; }
-            if (!TryFindBetrothed(out pawn)) { Log.Warning("no betrothed"); return false; }
+            if (!TryFindMarriageSeeker(out marriageSeeker)) { Log.Warning("no marriageseeker"); return false; }
+            if (!TryFindBetrothed(out betrothed)) { Log.Message("no betrothed"); return false; }
 
-            Log.Message(pawn.LabelShort);
-            Log.Message(faction.Name);
-            Log.Message("sending letter");
             ChoiceLetter_DiplomaticMarriage choiceLetter_DiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_DiplomaticMarriage".Translate(new object[]
             {
-                    faction.leader.LabelShort,
-                    pawn.LabelShort
-            }).AdjustedFor(faction.leader), this.def.letterDef);
-            Log.Message("3");
+                    marriageSeeker.LabelShort,
+                    betrothed.LabelShort
+            }).AdjustedFor(marriageSeeker), this.def.letterDef);
+
             choiceLetter_DiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(new object[]
             {
-                    pawn.LabelShort
+                    betrothed.LabelShort
             }).CapitalizeFirst();
             choiceLetter_DiplomaticMarriage.radioMode = true;
-            choiceLetter_DiplomaticMarriage.faction = faction;
-            choiceLetter_DiplomaticMarriage.betrothed = pawn;
+            choiceLetter_DiplomaticMarriage.marriageSeeker = marriageSeeker;
+            choiceLetter_DiplomaticMarriage.betrothed = betrothed;
             choiceLetter_DiplomaticMarriage.StartTimeout(TimeoutTicks);
             Find.LetterStack.ReceiveLetter(choiceLetter_DiplomaticMarriage);
             return true;
         }
 
-        private bool TryFindBetrothed(out Pawn pawn)
-        {
-            Log.Message("2");
-            return (from potentialPartners in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners_NoCryptosleep
-                    select potentialPartners).TryRandomElement(out pawn);
-        }
+        private bool TryFindBetrothed(out Pawn betrothed) => (from potentialPartners in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners_NoCryptosleep
+                                                              select potentialPartners).TryRandomElementByWeight((Pawn marriageSeeker2) => this.marriageSeeker.relations.SecondaryLovinChanceFactor(marriageSeeker2), out betrothed);
 
-        private bool TryFindFaction(out Faction faction)
-        {
-            Log.Message("1");
-            return (from x in Find.FactionManager.AllFactions
-                    where !x.def.hidden && !x.def.permanentEnemy && !x.IsPlayer && !x.defeated
-                    && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x) && !this.PeaceTalksExist(x)
-                    && x.leader != null && !x.leader.IsPrisoner && !x.leader.Spawned
-                    && (x.def.techLevel <= TechLevel.Medieval /*|| x.def.techLevel == TechLevel.Archotech*/) // not today space kitties
-                    select x).TryRandomElement/*ByWeight(x => -x.PlayerGoodwill,*/ (out faction); //more likely to select hostile.
-        }
+        private bool TryFindMarriageSeeker(out Pawn marriageSeeker) => (from x in Find.WorldPawns.AllPawnsAlive
+                                                                        where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer && !x.Faction.defeated
+                                                                        && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !this.PeaceTalksExist(x.Faction)
+                                                                        && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned
+                                                                        && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
+                                                                        && !x.IsPrisoner && !x.Spawned
+                                                                        && (!LovePartnerRelationUtility.HasAnyLovePartner(x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
+                                                                        select x).TryRandomElementByWeight(x => -x.Faction.PlayerGoodwill, out marriageSeeker); //more likely to select hostile.
 
         private bool PeaceTalksExist(Faction faction)
         {
