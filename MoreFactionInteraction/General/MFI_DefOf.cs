@@ -11,5 +11,6 @@ namespace MoreFactionInteraction
     {
         public static IncidentDef MFI_ReverseTradeRequest;
         public static SiteCoreDef MFI_HuntersLodge;
+        public static IncidentDef MFI_WeddingGuestsArrival;
     }
 }

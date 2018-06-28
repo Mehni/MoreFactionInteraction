@@ -32,12 +32,15 @@ namespace MoreFactionInteraction
             #endregion
 
             #region WorldIncidents
-            harmony.Patch(AccessTools.Method(typeof(Settlement), nameof(Settlement.GetCaravanGizmos)), null,
-                new HarmonyMethod(typeof(HarmonyPatches), nameof(Settlement_CaravanGizmos_Postfix)), null);
+            harmony.Patch(AccessTools.Method(typeof(SettlementBase), nameof(SettlementBase.GetCaravanGizmos)), null,
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(SettlementBase_CaravanGizmos_Postfix)), null);
 
             harmony.Patch(AccessTools.Method(typeof(WorldReachabilityUtility), nameof(WorldReachabilityUtility.CanReach)), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(WorldReachUtility_PostFix)), null);
             #endregion
+
+            harmony.Patch(AccessTools.Method(typeof(MarriageCeremonyUtility), nameof(MarriageCeremonyUtility.AcceptableGameConditionsToStartCeremony)), null,
+                new HarmonyMethod(typeof(HarmonyPatches), nameof(NICEDAYTODAY_PostFix)), null);
         }
 
         #region MoreTraders
@@ -232,7 +235,7 @@ namespace MoreFactionInteraction
         #endregion
 
         #region WorldIncidents
-        private static void Settlement_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
+        private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
         {
             if (__instance.GetComponent<World_Incidents.SettlementBumperCropComponent>()?.ActiveRequest ?? false)
             {
@@ -279,7 +282,7 @@ namespace MoreFactionInteraction
 
         private static void WorldReachUtility_PostFix(ref bool __result, ref Caravan c)
         {
-            Settlement settlement = CaravanVisitUtility.SettlementVisitedNow(c);
+            SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(c);
             if (settlement != null)
             {
                 World_Incidents.SettlementBumperCropComponent bumperCropComponent = settlement.GetComponent<World_Incidents.SettlementBumperCropComponent>();
@@ -290,5 +293,10 @@ namespace MoreFactionInteraction
             }
         }
         #endregion
+
+        private static void NICEDAYTODAY_PostFix(ref bool __result)
+        {
+            __result = true;
+        }
     }
 }

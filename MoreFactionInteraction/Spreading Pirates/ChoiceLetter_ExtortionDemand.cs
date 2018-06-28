@@ -20,7 +20,7 @@ namespace MoreFactionInteraction
             {
                 if (base.ArchivedOnly)
                 {
-                    yield return base.OK;
+                    yield return base.Option_Dismiss;
                 }
                 else
                 {
@@ -59,7 +59,7 @@ namespace MoreFactionInteraction
                         resolveTree = true
                     };
                     yield return reject;
-                    yield return base.Postpone;
+                    yield return base.Option_Postpone;
                 }
             }
         }

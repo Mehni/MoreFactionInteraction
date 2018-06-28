@@ -23,8 +23,16 @@ namespace MoreFactionInteraction
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindMarriageSeeker(out marriageSeeker)) { Log.Warning("no marriageseeker"); return false; }
-            if (!TryFindBetrothed(out betrothed)) { Log.Message("no betrothed"); return false; }
+            if (!TryFindMarriageSeeker(out marriageSeeker))
+            {
+                if (Prefs.LogVerbose) Log.Warning("no marriageseeker");
+                return false;
+            }
+            if (!TryFindBetrothed(out betrothed))
+            {
+                if (Prefs.LogVerbose) Log.Warning ("no betrothed");
+                return false;
+            }
 
             ChoiceLetter_DiplomaticMarriage choiceLetter_DiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_DiplomaticMarriage".Translate(new object[]
             {
@@ -54,7 +62,7 @@ namespace MoreFactionInteraction
                                                                         && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
                                                                         && !x.IsPrisoner && !x.Spawned
                                                                         && (!LovePartnerRelationUtility.HasAnyLovePartner(x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
-                                                                        select x).TryRandomElementByWeight(x => -x.Faction.PlayerGoodwill, out marriageSeeker); //more likely to select hostile.
+                                                                        select x).TryRandomElement(out marriageSeeker); //make more likely to select hostile.
 
         private bool PeaceTalksExist(Faction faction)
         {

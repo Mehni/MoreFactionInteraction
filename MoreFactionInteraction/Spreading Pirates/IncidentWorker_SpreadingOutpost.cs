@@ -39,9 +39,9 @@ namespace MoreFactionInteraction
             return true;
         }
 
-        private Settlement RandomNearbyHostileSettlement(int originTile)
+        private SettlementBase RandomNearbyHostileSettlement(int originTile)
         {
-            return (from settlement in Find.WorldObjects.Settlements
+            return (from settlement in Find.WorldObjects.SettlementBases
                     where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
                     && Find.WorldReachability.CanReach(originTile, settlement.Tile) && settlement.Faction == this.faction
                     select settlement).RandomElementWithFallback(null);

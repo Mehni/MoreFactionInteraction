@@ -20,7 +20,7 @@ namespace MoreFactionInteraction
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             if (!TryGetRandomAvailableTargetMap(out Map map)) return false;
-            Settlement settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile);
+            SettlementBase settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile);
             if (settlement != null)
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.

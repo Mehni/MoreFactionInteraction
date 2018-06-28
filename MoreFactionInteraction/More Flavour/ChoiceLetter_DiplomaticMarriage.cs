@@ -5,6 +5,9 @@ using System.Text;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
+using UnityEngine;
+using Verse.AI;
+using Verse.AI.Group;
 
 namespace MoreFactionInteraction
 {
@@ -27,7 +30,7 @@ namespace MoreFactionInteraction
             {
                 if (base.ArchivedOnly)
                 {
-                    yield return base.OK;
+                    yield return base.Option_Dismiss;
                 }
                 else
                 {
@@ -41,48 +44,59 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                            int goodWillGainedFromMarriage = (int)(betrothed.MarketValue / InteractionDefOf.RomanceAttempt.Worker.RandomSelectionWeight(marriageSeeker, betrothed));
-                            Log.Message(goodWillGainedFromMarriage.ToString() + " = " + betrothed.MarketValue + " / " + InteractionDefOf.RomanceAttempt.Worker.RandomSelectionWeight(marriageSeeker, betrothed).ToString());
-                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage, true, false, "They're getting it on now!");
+                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(((betrothed.MarketValue / 20) * marriageSeeker.relations.SecondaryLovinChanceFactor(betrothed)), DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, DiplomacyTuning.Goodwill_PeaceTalksSuccessRange.RandomInRange);
+                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage, true, true, "LetterLabelAcceptedProposal".Translate());
                             betrothed.relations.AddDirectRelation(PawnRelationDefOf.Fiance, marriageSeeker);
                             if (betrothed.GetCaravan() is Caravan caravan)
                             {
                                 CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(betrothed, caravan.PawnsListForReading);
-                                caravan.RemovePawn(betrothed);
                                 HealIfPossible(betrothed);
+                                caravan.RemovePawn(betrothed);
                             }
-                            if (!marriageSeeker.HostileTo(Faction.OfPlayer))
-                                betrothed.SetFaction(marriageSeeker.Faction);
-                            else
-                                betrothed.SetFaction(null);
+                            //if (!marriageSeeker.HostileTo(Faction.OfPlayer))
+                            //    betrothed.SetFaction(marriageSeeker.Faction);
+                            //else
+                            //    betrothed.SetFaction(null);
+
+                            DetermineAndDoOutcome(marriageSeeker, betrothed);
                         }
                     };
                     DiaNode dialogueNodeAccept = new DiaNode("MFI_TraderSent".Translate().CapitalizeFirst());
-                            dialogueNodeAccept.options.Add(base.OK);
+                            dialogueNodeAccept.options.Add(base.Option_Dismiss);
                             accept.link = dialogueNodeAccept;
 
                     DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
                     {
                         action = () =>
                         {
-                            IncidentParms parms = new IncidentParms
-                            {
-                                target = betrothed.Map,
-                                faction = marriageSeeker.Faction,
-                                points = 10000f
-                            };
-                            IncidentDefOf.RaidEnemy.Worker.TryExecute(parms);
+                            //if (Rand.Chance(0.2f))
+                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, true, true, "LetterLabelRejectedProposal".Translate());
                         }
                     };
                     DiaNode dialogueNodeReject = new DiaNode("MFI_TraderSent".Translate().CapitalizeFirst());
-                            dialogueNodeReject.options.Add(base.OK);
+                            dialogueNodeReject.options.Add(base.Option_Dismiss);
                             reject.link = dialogueNodeReject;
 
                     yield return accept;
                     yield return reject;
-                    yield return base.Postpone;
+                    yield return base.Option_Postpone;
                 }
             }
+        }
+
+        private void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
+        {
+            if (Prefs.LogVerbose) Log.Warning(" Determine and do outcome after marriage.");
+            GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
+            Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
+            foreach (Pawn lazybum in betrothed.Map.mapPawns.FreeColonistsSpawned)
+            {
+                PARTYHARD.AddPawn(lazybum);
+            } 
+            //betrothed.Map.lordsStarter.TryStartMarriageCeremony(betrothed, marriageSeeker);
+            IncidentParms parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, marriageSeeker.Map);
+            parms.faction = marriageSeeker.Faction;
+            MFI_DefOf.MFI_WeddingGuestsArrival.Worker.TryExecute(parms);
         }
 
         private static void HealIfPossible(Pawn p)

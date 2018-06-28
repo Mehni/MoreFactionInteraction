@@ -101,7 +101,7 @@ namespace MoreFactionInteraction.World_Incidents
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(allMembersCapableOfGrowing);
 
             //TODO: Calculate a good amount
-            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(1, (float)allMembersCapableOfGrowing.Average(pawn => pawn.skills.GetSkill(SkillDefOf.Growing).Level));
+            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(1, (float)allMembersCapableOfGrowing.Average(pawn => pawn.skills.GetSkill(SkillDefOf.Plants).Level));
 
             Thing reward = ThingMaker.MakeThing(bumperCrop);
             reward.stackCount = Mathf.RoundToInt(totalreward);
@@ -115,7 +115,7 @@ namespace MoreFactionInteraction.World_Incidents
                 reward.LabelCap
             }), caravan), LetterDefOf.PositiveEvent, caravan, null);
 
-            allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Growing, expGain, true));
+            allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Plants, expGain, true));
         }
 
         private float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)

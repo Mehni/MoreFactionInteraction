@@ -3,7 +3,7 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/WorldObjectDef[defName="FactionBase"]/comps</xpath>
+        <xpath>/Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
             <value>
                 <li Class="MoreFactionInteraction.World_Incidents.WorldObjectCompProperties_BumperCrop" />
             </value>

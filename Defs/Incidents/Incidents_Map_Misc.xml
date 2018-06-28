@@ -22,4 +22,25 @@
 		</chanceFactorByPopulationCurve>
 	</IncidentDef>
 
+	<IncidentDef>
+		<defName>MFI_WeddingGuestsArrival</defName>
+		<label>wedding guests arrived</label>
+		<category>Misc</category>
+    <targetTypes>
+      <li>Map_PlayerHome</li>
+    </targetTypes>
+		<workerClass>MoreFactionInteraction.IncidentWorker_WeddingGuestsArrival</workerClass>
+		<letterLabel>Wedding guests have arrived</letterLabel>
+		<letterDef>PositiveEvent</letterDef>
+		<baseChance>0</baseChance> <!-- basically never happens, unless triggered by special events.-->
+		<earliestDay>1</earliestDay>
+		<minRefireDays>15</minRefireDays>
+		<chanceFactorByPopulationCurve>
+			<points>
+				<li>(2,0)</li>
+				<li>(7,0)</li>
+			</points>
+		</chanceFactorByPopulationCurve>
+	</IncidentDef>
+
 </Defs>

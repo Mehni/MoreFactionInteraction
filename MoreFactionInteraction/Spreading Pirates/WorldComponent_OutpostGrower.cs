@@ -39,10 +39,10 @@ namespace MoreFactionInteraction
 
                 if (toUpgrade != null)
                 {
-                    FactionBase factionBase = (FactionBase)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.FactionBase);
+                    Settlement factionBase = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
                     factionBase.SetFaction(toUpgrade.Faction);
                     factionBase.Tile = toUpgrade.Tile;
-                    factionBase.Name = FactionBaseNameGenerator.GenerateFactionBaseName(factionBase);
+                    factionBase.Name = SettlementNameGenerator.GenerateSettlementName(factionBase);
                     Find.WorldObjects.Remove(toUpgrade);
                     Find.WorldObjects.Add(factionBase);
                     Find.LetterStack.ReceiveLetter("LetterLabelBanditOutpostUpgraded".Translate(), "LetterBanditOutpostUpgraded".Translate(new object[]

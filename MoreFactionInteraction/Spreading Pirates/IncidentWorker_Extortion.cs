@@ -43,7 +43,7 @@ namespace MoreFactionInteraction
                 forTile = Find.CurrentMap.Tile;
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
-                                    where (worldObject is Settlement || worldObject is Site)
+                                    where (worldObject is SettlementBase || worldObject is Site)
                                     && worldObject.Faction.HostileTo(Faction.OfPlayer)
                                     && Find.WorldGrid.ApproxDistanceInTiles(forTile, worldObject.Tile) < 15f
                                     && (Find.WorldReachability.CanReach(forTile, worldObject.Tile) || forTile == -1)
