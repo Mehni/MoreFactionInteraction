@@ -19,39 +19,42 @@ namespace MoreFactionInteraction.World_Incidents
         private const int MaxDistance = 15;
 
         private static readonly IntRange TimeoutDaysRange = new IntRange(15, 25);
-        private Faction faction;
+
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.MFI_HuntersLodge, null, out faction, true, null);
+            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.MFI_HuntersLodge, null, out Faction faction, true, null);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
+            Faction faction = parms.faction;
+            if (faction == null)
+                faction = Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined);
+
             if (!this.TryFindTile(out int tile))
-            {
                 return false;
-            }
+
             Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.MFI_HuntersLodge, singleSitePartTag: null, faction, false, null);
+
             if (site == null)
-            {
                 return false;
-            }
-            site.Tile = tile;
+
             if (!TryFindAnimalKind(tile, out PawnKindDef pawnKindDef))
-            {
                 return false;
-            }
+
+            if (pawnKindDef == null) pawnKindDef = PawnKindDefOf.Thrumbo; //mostly for testing.
 
             int randomInRange = IncidentWorker_HuntersLodge.TimeoutDaysRange.RandomInRange;
+            site.Tile = tile;
             site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
-            site.SetFaction(faction);
-            site.GetComponent<MigratoryHerdComp>().pawnKindDef = pawnKindDef;
-            site.GetComponent<MigratoryHerdComp>().parmesan = parms;
+            site.SetFaction(faction);            
+            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().pawnKindDef = pawnKindDef;            
+            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().parmesan = parms;
+            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().faction = faction;
 
             Find.WorldObjects.Add(site);
-            string text = string.Format(this.def.letterText, pawnKindDef.label, randomInRange).CapitalizeFirst();
-
+            string text = string.Format(this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();
             Find.LetterStack.ReceiveLetter(this.def.letterLabel, text, this.def.letterDef, site, null);
             return true;
         }

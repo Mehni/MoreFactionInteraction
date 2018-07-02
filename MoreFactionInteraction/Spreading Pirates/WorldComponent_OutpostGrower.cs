@@ -24,7 +24,7 @@ namespace MoreFactionInteraction
                 //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
                 IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
                                           where site.Faction.HostileTo(Faction.OfPlayer) && site.Faction.def.permanentEnemy && !site.Faction.def.hidden && !site.Faction.defeated
-                                          && site.parts.Contains<SitePartDef>(SitePartDefOf.Outpost) && !site.GetComponent<TimeoutComp>().Active
+                                          && site.parts.Any((SitePart x) => x.Def == SitePartDefOf.Outpost) && !site.GetComponent<TimeoutComp>().Active
                                           select site;
 
                 Site toUpgrade = null;

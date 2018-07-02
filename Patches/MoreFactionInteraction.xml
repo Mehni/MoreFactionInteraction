@@ -10,11 +10,18 @@
     </Operation>
 
     <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/WorldObjectDef[defName="Site"]/comps</xpath>
+            <value>
+                <li Class="MoreFactionInteraction.World_Incidents.WorldObjectCompProperties_MigratoryHerd" />
+            </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAdd">
         <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
             <value>
                 <comps>
                     <li>
-                        <compClass>MoreFactionInteraction.World_Incidents.CaravanComp</compClass>
+                        <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
                     </li>
                 </comps>
             </value>

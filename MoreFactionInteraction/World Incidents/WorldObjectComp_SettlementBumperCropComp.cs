@@ -10,7 +10,7 @@ using Verse;
 
 namespace MoreFactionInteraction.World_Incidents
 {
-    public class SettlementBumperCropComponent : WorldObjectComp
+    public class WorldObjectComp_SettlementBumperCropComp : WorldObjectComp
     {
         //attentive readers may find similarities between this and the Peacetalks quest. 
         public ThingDef bumperCrop;
@@ -22,22 +22,6 @@ namespace MoreFactionInteraction.World_Incidents
         private const int workAmount = GenDate.TicksPerDay;
         private const float expGain = 6000f;
         private static readonly IntRange FactionRelationOffset = new IntRange(3, 8);
-
-        //private static readonly SimpleCurve BadOutcomeFactorAtHarvestingPower = new SimpleCurve
-        //{
-        //    {
-        //        new CurvePoint(0f, 4f),
-        //        true
-        //    },
-        //    {
-        //        new CurvePoint(1f, 1f),
-        //        true
-        //    },
-        //    {
-        //        new CurvePoint(1.5f, 0.4f),
-        //        true
-        //    }
-        //};
 
         public bool CaravanIsWorking
         {
@@ -55,7 +39,7 @@ namespace MoreFactionInteraction.World_Incidents
             }
         }
 
-        public SettlementBumperCropComponent()
+        public WorldObjectComp_SettlementBumperCropComp()
         {
         }
 
@@ -80,15 +64,15 @@ namespace MoreFactionInteraction.World_Incidents
         {
             workStarted = true;
             workLeft = Find.TickManager.TicksGame + workAmount;
-            caravan.GetComponent<CaravanComp>().workWillBeDoneAtTick = workLeft;
-            caravan.GetComponent<CaravanComp>().caravanIsWorking = true;
+            caravan.GetComponent<WorldObjectComp_CaravanComp>().workWillBeDoneAtTick = workLeft;
+            caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = true;
             Disable();
         }
 
         public void DoOutcome(Caravan caravan)
         {
             workStarted = false;
-            caravan.GetComponent<CaravanComp>().caravanIsWorking = false;
+            caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = false;
             Outcome_Triumph(caravan);
         }
 

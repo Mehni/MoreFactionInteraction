@@ -47,21 +47,18 @@ namespace MoreFactionInteraction
                             int goodWillGainedFromMarriage = (int)Mathf.Clamp(((betrothed.MarketValue / 20) * marriageSeeker.relations.SecondaryLovinChanceFactor(betrothed)), DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, DiplomacyTuning.Goodwill_PeaceTalksSuccessRange.RandomInRange);
                             marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage, true, true, "LetterLabelAcceptedProposal".Translate());
                             betrothed.relations.AddDirectRelation(PawnRelationDefOf.Fiance, marriageSeeker);
+
                             if (betrothed.GetCaravan() is Caravan caravan)
                             {
                                 CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(betrothed, caravan.PawnsListForReading);
                                 HealIfPossible(betrothed);
                                 caravan.RemovePawn(betrothed);
                             }
-                            //if (!marriageSeeker.HostileTo(Faction.OfPlayer))
-                            //    betrothed.SetFaction(marriageSeeker.Faction);
-                            //else
-                            //    betrothed.SetFaction(null);
 
                             DetermineAndDoOutcome(marriageSeeker, betrothed);
                         }
                     };
-                    DiaNode dialogueNodeAccept = new DiaNode("MFI_TraderSent".Translate().CapitalizeFirst());
+                    DiaNode dialogueNodeAccept = new DiaNode("MFI_AcceptedProposal".Translate().CapitalizeFirst());
                             dialogueNodeAccept.options.Add(base.Option_Dismiss);
                             accept.link = dialogueNodeAccept;
 
@@ -73,7 +70,7 @@ namespace MoreFactionInteraction
                             marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, true, true, "LetterLabelRejectedProposal".Translate());
                         }
                     };
-                    DiaNode dialogueNodeReject = new DiaNode("MFI_TraderSent".Translate().CapitalizeFirst());
+                    DiaNode dialogueNodeReject = new DiaNode("MFI_DejectedProposal".Translate().CapitalizeFirst());
                             dialogueNodeReject.options.Add(base.Option_Dismiss);
                             reject.link = dialogueNodeReject;
 
@@ -87,16 +84,22 @@ namespace MoreFactionInteraction
         private void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
         {
             if (Prefs.LogVerbose) Log.Warning(" Determine and do outcome after marriage.");
-            GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
-            Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
-            foreach (Pawn lazybum in betrothed.Map.mapPawns.FreeColonistsSpawned)
-            {
-                PARTYHARD.AddPawn(lazybum);
-            } 
-            //betrothed.Map.lordsStarter.TryStartMarriageCeremony(betrothed, marriageSeeker);
-            IncidentParms parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, marriageSeeker.Map);
-            parms.faction = marriageSeeker.Faction;
-            MFI_DefOf.MFI_WeddingGuestsArrival.Worker.TryExecute(parms);
+
+            if (!marriageSeeker.HostileTo(Faction.OfPlayer))
+                betrothed.SetFaction(marriageSeeker.Faction);
+            else
+                betrothed.SetFaction(null);
+
+            //GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
+            //Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
+            //foreach (Pawn lazybum in betrothed.Map.mapPawns.FreeColonistsSpawned)
+            //{
+            //    PARTYHARD.AddPawn(lazybum);
+            //} 
+            ////betrothed.Map.lordsStarter.TryStartMarriageCeremony(betrothed, marriageSeeker);
+            //IncidentParms parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, marriageSeeker.Map);
+            //parms.faction = marriageSeeker.Faction;
+            //MFI_DefOf.MFI_WeddingGuestsArrival.Worker.TryExecute(parms);
         }
 
         private static void HealIfPossible(Pawn p)

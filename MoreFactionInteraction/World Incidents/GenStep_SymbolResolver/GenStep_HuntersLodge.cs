@@ -17,11 +17,11 @@ namespace MoreFactionInteraction.World_Incidents
 
         public override int SeedPart => 735013949;
 
-        public override void Generate(Map map)
+        public override void Generate(Map map, GenStepParams genStepParams)
         {
-            if (!MapGenerator.TryGetVar<CellRect>("RectOfInterest", out CellRect rectToDefend))
+            if (!MapGenerator.TryGetVar<CellRect>("RectOfInterest", out CellRect centralPoint))
             {
-                rectToDefend = CellRect.SingleCell(map.Center);
+                centralPoint = CellRect.SingleCell(map.Center);
             }
             Faction faction;
             if (map.ParentFaction == null || map.ParentFaction == Faction.OfPlayer)
@@ -33,7 +33,7 @@ namespace MoreFactionInteraction.World_Incidents
                 faction = map.ParentFaction;
             }
             ResolveParams resolveParams = default;
-            resolveParams.rect = this.GetHuntersLodgeRect(rectToDefend, map);
+            resolveParams.rect = this.GetHuntersLodgeRect(centralPoint, map);
             resolveParams.faction = faction;
             BaseGen.globalSettings.map = map;
             BaseGen.globalSettings.minBuildings = 1;
@@ -42,19 +42,19 @@ namespace MoreFactionInteraction.World_Incidents
             BaseGen.Generate();
         }
 
-        private CellRect GetHuntersLodgeRect(CellRect rectToDefend, Map map)
+        private CellRect GetHuntersLodgeRect(CellRect centralPoint, Map map)
         {
-            GenStep_HuntersLodge.possibleRects.Add(new CellRect(rectToDefend.minX - 1 - Size, rectToDefend.CenterCell.z - 8, Size, Size));
-            GenStep_HuntersLodge.possibleRects.Add(new CellRect(rectToDefend.maxX + 1, rectToDefend.CenterCell.z - 8, Size, Size));
-            GenStep_HuntersLodge.possibleRects.Add(new CellRect(rectToDefend.CenterCell.x - 8, rectToDefend.minZ - 1 - Size, Size, Size));
-            GenStep_HuntersLodge.possibleRects.Add(new CellRect(rectToDefend.CenterCell.x - 8, rectToDefend.maxZ + 1, Size, Size));
+            GenStep_HuntersLodge.possibleRects.Add(new CellRect(centralPoint.minX - 1 - Size, centralPoint.CenterCell.z - 8, Size, Size));
+            GenStep_HuntersLodge.possibleRects.Add(new CellRect(centralPoint.maxX + 1, centralPoint.CenterCell.z - 8, Size, Size));
+            GenStep_HuntersLodge.possibleRects.Add(new CellRect(centralPoint.CenterCell.x - 8, centralPoint.minZ - 1 - Size, Size, Size));
+            GenStep_HuntersLodge.possibleRects.Add(new CellRect(centralPoint.CenterCell.x - 8, centralPoint.maxZ + 1, Size, Size));
             CellRect mapRect = new CellRect(0, 0, map.Size.x, map.Size.z);
             GenStep_HuntersLodge.possibleRects.RemoveAll((CellRect x) => !x.FullyContainedWithin(mapRect));
             if (GenStep_HuntersLodge.possibleRects.Any<CellRect>())
             {
                 return GenStep_HuntersLodge.possibleRects.RandomElement<CellRect>();
             }
-            return rectToDefend;
+            return centralPoint;
         }
     }
 }

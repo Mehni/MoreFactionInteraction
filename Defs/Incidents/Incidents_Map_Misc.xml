@@ -22,7 +22,7 @@
 		</chanceFactorByPopulationCurve>
 	</IncidentDef>
 
-	<IncidentDef>
+	<!-- <IncidentDef>
 		<defName>MFI_WeddingGuestsArrival</defName>
 		<label>wedding guests arrived</label>
 		<category>Misc</category>
@@ -32,7 +32,7 @@
 		<workerClass>MoreFactionInteraction.IncidentWorker_WeddingGuestsArrival</workerClass>
 		<letterLabel>Wedding guests have arrived</letterLabel>
 		<letterDef>PositiveEvent</letterDef>
-		<baseChance>0</baseChance> <!-- basically never happens, unless triggered by special events.-->
+		<baseChance>0</baseChance> 
 		<earliestDay>1</earliestDay>
 		<minRefireDays>15</minRefireDays>
 		<chanceFactorByPopulationCurve>
@@ -41,6 +41,6 @@
 				<li>(7,0)</li>
 			</points>
 		</chanceFactorByPopulationCurve>
-	</IncidentDef>
+	</IncidentDef> -->
 
 </Defs>

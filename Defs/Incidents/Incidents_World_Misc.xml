@@ -16,12 +16,28 @@
 		<minRefireDays>30</minRefireDays>
 		<chanceFactorByPopulationCurve>
 			<points>
-                <li>(1,0)</li>
+				<li>(1,0)</li>
 				<li>(5,0)</li>
 				<li>(12,1)</li>
 				<li>(20,2)</li>
 			</points>
 		</chanceFactorByPopulationCurve>
+	</IncidentDef>
+
+	<IncidentDef>
+		<defName>MFI_HuntersLodge</defName>
+		<label>hunters lodge</label>
+		<category>Misc</category>
+    <targetTypes>
+      <li>World</li>
+    </targetTypes>
+		<workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HuntersLodge</workerClass>
+		<letterLabel>Hunters lodge</letterLabel>
+		<letterDef>PositiveEvent</letterDef>
+		<letterText>You are invited to {0}'s {1} summer retreat, to come hunt {2}. This offer expires in {3} days.</letterText>
+		<baseChance>0.8</baseChance>
+		<earliestDay>15</earliestDay>
+		<minRefireDays>30</minRefireDays>
 	</IncidentDef>
 
 </Defs>

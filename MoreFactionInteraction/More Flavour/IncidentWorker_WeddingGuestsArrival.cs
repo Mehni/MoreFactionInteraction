@@ -22,7 +22,6 @@ namespace MoreFactionInteraction
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             Map map = (Map)parms.target;
-            Log.Warning(MarriageCeremonyUtility.AcceptableGameConditionsToStartCeremony(map).ToString());
             return base.CanFireNowSub(parms) && MarriageCeremonyUtility.AcceptableGameConditionsToStartCeremony(map);
         }
 

@@ -237,7 +237,7 @@ namespace MoreFactionInteraction
         #region WorldIncidents
         private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
         {
-            if (__instance.GetComponent<World_Incidents.SettlementBumperCropComponent>()?.ActiveRequest ?? false)
+            if (__instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>()?.ActiveRequest ?? false)
             {
                 Texture2D SetPlantToGrowTex = ContentFinder<Texture2D>.Get("UI/Commands/SetPlantToGrow", true);
                 Caravan localCaravan = caravan;
@@ -249,7 +249,7 @@ namespace MoreFactionInteraction
                     icon = SetPlantToGrowTex,
                     action = delegate
                     {
-                        World_Incidents.SettlementBumperCropComponent bumperCrop2 = __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                        World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop2 = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
                         if (bumperCrop2 != null)
                         {
                             if (!bumperCrop2.ActiveRequest)
@@ -271,7 +271,7 @@ namespace MoreFactionInteraction
                     }
                 };
 
-                World_Incidents.SettlementBumperCropComponent bumperCrop = __instance.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
                 if (BestCaravanPawnUtility.FindPawnWithBestStat(localCaravan, StatDefOf.PlantHarvestYield) == null)
                 {
                     command_Action.Disable("MFI_MessageBumperCropNoGrower".Translate());
@@ -285,7 +285,7 @@ namespace MoreFactionInteraction
             SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(c);
             if (settlement != null)
             {
-                World_Incidents.SettlementBumperCropComponent bumperCropComponent = settlement.GetComponent<World_Incidents.SettlementBumperCropComponent>();
+                World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
                 if (bumperCropComponent != null)
                 {
                     __result = !bumperCropComponent.CaravanIsWorking;

@@ -11,7 +11,7 @@ namespace MoreFactionInteraction.World_Incidents
     {
         public WorldObjectCompProperties_BumperCrop()
         {
-            this.compClass = typeof(SettlementBumperCropComponent);
+            this.compClass = typeof(WorldObjectComp_SettlementBumperCropComp);
         }
     }
 }

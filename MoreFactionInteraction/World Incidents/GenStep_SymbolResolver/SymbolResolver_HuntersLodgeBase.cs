@@ -67,8 +67,21 @@ namespace MoreFactionInteraction.World_Incidents
             ResolveParams emptyRoom = rp;
             emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));
             emptyRoom.faction = faction;
+            emptyRoom.addRoomCenterToRootsToUnfog = true;
             BaseGen.symbolStack.Push("emptyRoom", emptyRoom);
 
+            ResolveParams tableButcher = rp;
+            tableButcher.rect = emptyRoom.rect.ContractedBy(1);
+            tableButcher.skipSingleThingIfHasToWipeBuildingOrDoesntFit = false;
+            tableButcher.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamed("TableButcher"), DefDatabase<ThingDef>.GetNamed("ButcherSpot"));
+            BaseGen.symbolStack.Push("thing", tableButcher);
+
+            //ResolveParams mealSource = tableButcher;
+            //if (DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.building.isMealSource).TryRandomElement(out ThingDef table))
+            //{
+            //    mealSource.singleThingDef = table;
+            //    BaseGen.symbolStack.Push("thing", mealSource);
+            //}
         }
     }
 }

@@ -39,7 +39,7 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 return false;
             }
-            SettlementBumperCropComponent component = settlement.GetComponent<SettlementBumperCropComponent>();
+            WorldObjectComp_SettlementBumperCropComp component = settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>();
 
             if (!this.TryGenerateBumperCrop(component, map))
             {
@@ -53,7 +53,7 @@ namespace MoreFactionInteraction.World_Incidents
             return true;
         }
 
-        private bool TryGenerateBumperCrop(SettlementBumperCropComponent target, Map map)
+        private bool TryGenerateBumperCrop(WorldObjectComp_SettlementBumperCropComp target, Map map)
         {
             int num = this.RandomOfferDuration(map.Tile, target.parent.Tile);
             if (num < 1)
@@ -83,7 +83,7 @@ namespace MoreFactionInteraction.World_Incidents
         {
             return (from settlement in Find.WorldObjects.Settlements
                     where settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null && !settlement.GetComponent<TradeRequestComp>().ActiveRequest 
-                    && !settlement.GetComponent<SettlementBumperCropComponent>().ActiveRequest && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
+                    && !settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>().ActiveRequest && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
                     && Find.WorldReachability.CanReach(originTile, settlement.Tile)
                     select settlement).RandomElementWithFallback(null);
         }
