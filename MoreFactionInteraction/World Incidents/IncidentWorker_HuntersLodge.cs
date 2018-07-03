@@ -23,7 +23,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && this.TryFindTile(out int num) && SiteMakerHelper.TryFindRandomFactionFor(MFI_DefOf.MFI_HuntersLodge, null, out Faction faction, true, null);
+            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && this.TryFindTile(out int num);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -35,23 +35,23 @@ namespace MoreFactionInteraction.World_Incidents
             if (!this.TryFindTile(out int tile))
                 return false;
 
-            Site site = SiteMaker.TryMakeSite_SingleSitePart(MFI_DefOf.MFI_HuntersLodge, singleSitePartTag: null, faction, false, null);
+            Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, MFI_DefOf.MFI_HuntersLodge, tile, faction, false);
 
             if (site == null)
                 return false;
 
             if (!TryFindAnimalKind(tile, out PawnKindDef pawnKindDef))
                 return false;
-
+            
             if (pawnKindDef == null) pawnKindDef = PawnKindDefOf.Thrumbo; //mostly for testing.
 
             int randomInRange = IncidentWorker_HuntersLodge.TimeoutDaysRange.RandomInRange;
             site.Tile = tile;
             site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
-            site.SetFaction(faction);            
-            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().pawnKindDef = pawnKindDef;            
-            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().parmesan = parms;
-            site.GetComponent<WorldObjectComp_MigratoryHerdComp>().faction = faction;
+            site.SetFaction(faction);
+            
+            if(site.parts.First(x => x.def == MFI_DefOf.MFI_HuntersLodge).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
+                sitePart.pawnKindDef = pawnKindDef;
 
             Find.WorldObjects.Add(site);
             string text = string.Format(this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();

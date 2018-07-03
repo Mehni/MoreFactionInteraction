@@ -41,47 +41,30 @@ namespace MoreFactionInteraction.World_Incidents
             resolveParams4.faction = faction;
             BaseGen.symbolStack.Push("ensureCanReachMapEdge", resolveParams4);
 
-            
-            //bottomLeft
-            ResolveParams farmBottomLeft = rp;
-            farmBottomLeft.rect = new CellRect(rp.rect.minX, rp.rect.minZ, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(num);
-            farmBottomLeft.faction = faction;
-            BaseGen.symbolStack.Push("farm", farmBottomLeft);
+            ThingDef mealsource = ThingDefOf.Campfire;
 
-            //bottomRight
-            ResolveParams farmBottomRight = rp;
-            farmBottomRight.rect = new CellRect((rp.rect.maxX - rp.rect.Width / 2) - 1, rp.rect.minZ, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(3, 6));
-            farmBottomRight.faction = faction;
-            BaseGen.symbolStack.Push("farm", farmBottomRight);
-
-            ResolveParams farmTopLeft = rp;
-            farmTopLeft.rect = new CellRect(rp.rect.minX, (rp.rect.maxZ - rp.rect.Height / 2) - 1, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(3,7));
-            farmTopLeft.faction = faction;
-            BaseGen.symbolStack.Push("farm", farmTopLeft);
-
-            ResolveParams farmTopRight = rp;
-            farmTopRight.rect = new CellRect((rp.rect.maxX - rp.rect.Width / 2) - 1, (rp.rect.maxZ - rp.rect.Height / 2) - 1, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(1, 4));
-            farmTopRight.faction = faction;
-            BaseGen.symbolStack.Push("farm", farmTopRight);
-
-            ResolveParams emptyRoom = rp;
-            emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));
-            emptyRoom.faction = faction;
-            emptyRoom.addRoomCenterToRootsToUnfog = true;
-            BaseGen.symbolStack.Push("emptyRoom", emptyRoom);
+            ResolveParams mealSource = rp;
+            mealSource.rect = rp.rect;
+            mealSource.singleThingDef = mealsource;
+            mealSource.skipSingleThingIfHasToWipeBuildingOrDoesntFit = true;
+            BaseGen.symbolStack.Push("thing", mealSource);
 
             ResolveParams tableButcher = rp;
-            tableButcher.rect = emptyRoom.rect.ContractedBy(1);
-            tableButcher.skipSingleThingIfHasToWipeBuildingOrDoesntFit = false;
-            tableButcher.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamed("TableButcher"), DefDatabase<ThingDef>.GetNamed("ButcherSpot"));
+            tableButcher.rect = rp.rect;
+            tableButcher.singleThingDef = //DefDatabase<ThingDef>.GetNamed("TableButcher");
+            Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("TableButcher"), DefDatabase<ThingDef>.GetNamedSilentFail("ButcherSpot"));
             BaseGen.symbolStack.Push("thing", tableButcher);
 
-            //ResolveParams mealSource = tableButcher;
-            //if (DefDatabase<ThingDef>.AllDefsListForReading.Where(x => x.building.isMealSource).TryRandomElement(out ThingDef table))
-            //{
-            //    mealSource.singleThingDef = table;
-            //    BaseGen.symbolStack.Push("thing", mealSource);
-            //}
+            ResolveParams bigFarmA = rp;
+            bigFarmA.faction = faction;
+            BaseGen.symbolStack.Push("basePart_outdoors_division", bigFarmA);
+
+
+
+            //ResolveParams emptyRoom = rp;
+            //emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));
+            //emptyRoom.faction = faction;
+            //BaseGen.symbolStack.Push("emptyRoom", emptyRoom);
         }
     }
 }

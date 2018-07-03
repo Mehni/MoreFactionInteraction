@@ -23,7 +23,7 @@ namespace MoreFactionInteraction
             {
                 if (base.ArchivedOnly)
                 {
-                    yield return base.Option_Dismiss;
+                    yield return base.Option_Close;
                 }
                 else
                 {
@@ -53,7 +53,7 @@ namespace MoreFactionInteraction
                         faction.leader.LabelShort,
                         traveltime.ToStringTicksToPeriodVague(false, true)
                     }).CapitalizeFirst());
-                    diaNode.options.Add(base.Option_Dismiss);
+                    diaNode.options.Add(base.Option_Close);
                     accept.link = diaNode;
 
                     if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))

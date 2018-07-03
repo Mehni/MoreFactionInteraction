@@ -31,7 +31,13 @@ namespace MoreFactionInteraction.World_Incidents
         protected override List<Pawn> GeneratePawns(IncidentParms parms)
         {
             Map map = parms.target as Map;
-            pawnKindDef = map.Parent.GetComponent<WorldObjectComp_MigratoryHerdComp>()?.pawnKindDef ?? PawnKindDefOf.Alphabeaver;
+
+            pawnKindDef = PawnKindDefOf.Thrumbo;
+            if (parms.target is Site site)
+            {
+                SitePartWorker_MigratoryHerd sitePart = (SitePartWorker_MigratoryHerd)site.parts.First(x => x.def == DefDatabase<SitePartDef>.GetNamed("MFI_HuntersLodge")).Def.Worker;
+                pawnKindDef = sitePart?.pawnKindDef;
+            }
             int num = new IntRange(30, 50).RandomInRange;
 
             List<Pawn> list = new List<Pawn>();

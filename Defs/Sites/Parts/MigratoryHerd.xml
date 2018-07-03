@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <SitePartDef>
+    <defName>MFI_HuntersLodge</defName>
+    <label>Hunter's lodge</label>
+    <description>A small outpost, used by friendly factions as a hunting base.</description>
+    <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
+    <expandingIconTexture>World/WorldObjects/Expanding/Sites/Nothing</expandingIconTexture>
+    <descriptionDialogue>there is an outpost at the site you're free to use</descriptionDialogue>
+    <workerClass>MoreFactionInteraction.World_Incidents.SitePartWorker_MigratoryHerd</workerClass>
+    <showFactionInInspectString>true</showFactionInInspectString>
+    <requiresFaction>true</requiresFaction>
+    <approachOrderString>Visit {0}</approachOrderString>
+    <approachingReportString>Visiting {0}</approachingReportString>
+    <arrivedLetter>There is a hunter's lodge in this area.</arrivedLetter>
+    <arrivedLetterLabel>Hunter's lodge</arrivedLetterLabel>
+    <arrivedLetterDef>PositiveEvent</arrivedLetterDef>
+    <tags>
+      <li>MigratoryHerd</li>
+    </tags>
+  </SitePartDef>
+
+  <GenStepDef>
+    <defName>MFI_HuntersLodge</defName>
+    <linkWithSite>MFI_HuntersLodge</linkWithSite>
+    <order>450</order>
+    <genStep Class="MoreFactionInteraction.World_Incidents.GenStep_HuntersLodge" />
+  </GenStepDef>
+
+
+</Defs>

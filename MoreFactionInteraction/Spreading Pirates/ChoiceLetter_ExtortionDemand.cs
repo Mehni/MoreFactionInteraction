@@ -20,7 +20,7 @@ namespace MoreFactionInteraction
             {
                 if (base.ArchivedOnly)
                 {
-                    yield return base.Option_Dismiss;
+                    yield return base.Option_Close;
                 }
                 else
                 {

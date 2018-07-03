@@ -27,7 +27,7 @@ namespace MoreFactionInteraction
             int pirateTile = RandomNearbyHostileSettlement(map.Tile).Tile;
 
             if (!TileFinder.TryFindNewSiteTile(out int tile, 2, 8, false, true, pirateTile)) return false;
-            Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, SitePartDefOf.Outpost, faction);
+            Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, SitePartDefOf.Outpost, tile, faction);
             site.Tile = tile;
             Find.WorldObjects.Add(site);
             base.SendStandardLetter(site, faction, new string[]

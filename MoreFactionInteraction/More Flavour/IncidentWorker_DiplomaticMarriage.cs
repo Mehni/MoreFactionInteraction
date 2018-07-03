@@ -62,7 +62,7 @@ namespace MoreFactionInteraction
                                                                         && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
                                                                         && !x.IsPrisoner && !x.Spawned
                                                                         && (!LovePartnerRelationUtility.HasAnyLovePartner(x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
-                                                                        select x).TryRandomElement(out marriageSeeker); //make more likely to select hostile.
+                                                                        select x).TryRandomElement(out marriageSeeker); //todo: make more likely to select hostile.
 
         private bool PeaceTalksExist(Faction faction)
         {

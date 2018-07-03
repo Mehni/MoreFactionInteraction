@@ -11,6 +11,16 @@
     </resolvers>
   </RuleDef>
 
+  <RuleDef>
+    <defName>huntersLodgeBigFarm</defName>
+    <symbol>huntersLodgeBigFarm</symbol>
+    <resolvers>
+      <li Class="MoreFactionInteraction.World_Incidents.SymbolResolver_HuntersLodgeBigFarm">
+        <minRectSize>(12, 12)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
   <!-- <RuleDef>
     <defName>LodgePart_Outdoors</defName>
     <symbol>lodgePart_outdoors</symbol>

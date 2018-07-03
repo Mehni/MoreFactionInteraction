@@ -38,9 +38,6 @@ namespace MoreFactionInteraction
             harmony.Patch(AccessTools.Method(typeof(WorldReachabilityUtility), nameof(WorldReachabilityUtility.CanReach)), null,
                 new HarmonyMethod(typeof(HarmonyPatches), nameof(WorldReachUtility_PostFix)), null);
             #endregion
-
-            harmony.Patch(AccessTools.Method(typeof(MarriageCeremonyUtility), nameof(MarriageCeremonyUtility.AcceptableGameConditionsToStartCeremony)), null,
-                new HarmonyMethod(typeof(HarmonyPatches), nameof(NICEDAYTODAY_PostFix)), null);
         }
 
         #region MoreTraders
@@ -294,9 +291,6 @@ namespace MoreFactionInteraction
         }
         #endregion
 
-        private static void NICEDAYTODAY_PostFix(ref bool __result)
-        {
-            __result = true;
-        }
+
     }
 }

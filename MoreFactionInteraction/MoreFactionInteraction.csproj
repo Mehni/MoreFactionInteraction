@@ -69,15 +69,15 @@
     <Compile Include="General\Settings.cs" />
     <Compile Include="General\SettingsHelper.cs" />
     <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
+    <Compile Include="World Incidents\GenStep_SymbolResolver\SymbolResolver_HuntersLodgeBigFarm.cs" />
     <Compile Include="World Incidents\WorldObjectComp_CaravanComp.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\SymbolResolver_HuntersLodgeBase.cs" />
     <Compile Include="World Incidents\IncidentWorker_BumperCrop.cs" />
     <Compile Include="World Incidents\IncidentWorker_HerdMigration_Ambush.cs" />
     <Compile Include="World Incidents\IncidentWorker_HuntersLodge.cs" />
-    <Compile Include="World Incidents\WorldObjectComp_MigratoryHerdComp.cs" />
+    <Compile Include="World Incidents\SitePartWorker_MigratoryHerd.cs" />
     <Compile Include="World Incidents\WorldObjectComp_SettlementBumperCropComp.cs" />
     <Compile Include="World Incidents\WorldObjectCompProperties_BumperCrop.cs" />
-    <Compile Include="World Incidents\WorldObjectCompProperties_MigratoryHerd.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

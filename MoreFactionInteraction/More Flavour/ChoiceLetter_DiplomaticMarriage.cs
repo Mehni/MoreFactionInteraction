@@ -30,7 +30,7 @@ namespace MoreFactionInteraction
             {
                 if (base.ArchivedOnly)
                 {
-                    yield return base.Option_Dismiss;
+                    yield return base.Option_Close;
                 }
                 else
                 {
@@ -59,7 +59,7 @@ namespace MoreFactionInteraction
                         }
                     };
                     DiaNode dialogueNodeAccept = new DiaNode("MFI_AcceptedProposal".Translate().CapitalizeFirst());
-                            dialogueNodeAccept.options.Add(base.Option_Dismiss);
+                            dialogueNodeAccept.options.Add(base.Option_Close);
                             accept.link = dialogueNodeAccept;
 
                     DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
@@ -71,7 +71,7 @@ namespace MoreFactionInteraction
                         }
                     };
                     DiaNode dialogueNodeReject = new DiaNode("MFI_DejectedProposal".Translate().CapitalizeFirst());
-                            dialogueNodeReject.options.Add(base.Option_Dismiss);
+                            dialogueNodeReject.options.Add(base.Option_Close);
                             reject.link = dialogueNodeReject;
 
                     yield return accept;
