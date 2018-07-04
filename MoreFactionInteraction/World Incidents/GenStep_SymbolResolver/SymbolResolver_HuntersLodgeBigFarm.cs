@@ -12,8 +12,6 @@ namespace MoreFactionInteraction.World_Incidents
     {
         public override bool CanResolve(ResolveParams rp)
         {
-            Log.Message("can resolve bigFarmA " + base.CanResolve(rp));
-
             return base.CanResolve(rp);
         }
 

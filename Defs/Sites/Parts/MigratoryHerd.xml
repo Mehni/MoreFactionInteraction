@@ -13,7 +13,7 @@
     <requiresFaction>true</requiresFaction>
     <approachOrderString>Visit {0}</approachOrderString>
     <approachingReportString>Visiting {0}</approachingReportString>
-    <arrivedLetter>There is a hunter's lodge in this area.</arrivedLetter>
+    <arrivedLetter>Your caravan has arrived at the hunter's lodge.</arrivedLetter>
     <arrivedLetterLabel>Hunter's lodge</arrivedLetterLabel>
     <arrivedLetterDef>PositiveEvent</arrivedLetterDef>
     <tags>
@@ -28,5 +28,13 @@
     <genStep Class="MoreFactionInteraction.World_Incidents.GenStep_HuntersLodge" />
   </GenStepDef>
 
+  <GenStepDef>
+    <defName>MFI_HuntersLodgePower</defName>
+    <linkWithSite>MFI_HuntersLodge</linkWithSite>
+    <order>451</order>
+    <genStep Class="GenStep_Power">
+    <canSpawnPowerGenerators>false<canSpawnPowerGenerators>
+    </genStep>
+  </GenStepDef>
 
 </Defs>

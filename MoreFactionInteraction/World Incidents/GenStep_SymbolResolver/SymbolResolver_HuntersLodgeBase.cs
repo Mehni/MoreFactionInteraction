@@ -41,25 +41,20 @@ namespace MoreFactionInteraction.World_Incidents
             resolveParams4.faction = faction;
             BaseGen.symbolStack.Push("ensureCanReachMapEdge", resolveParams4);
 
-            ThingDef mealsource = ThingDefOf.Campfire;
+            //ResolveParams mealSource = rp;
+            //mealSource.rect = rp.rect;
+            //mealSource.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("FueledStove"), ThingDefOf.Campfire);
+            //mealSource.skipSingleThingIfHasToWipeBuildingOrDoesntFit = true;
+            //BaseGen.symbolStack.Push("thing", mealSource);
 
-            ResolveParams mealSource = rp;
-            mealSource.rect = rp.rect;
-            mealSource.singleThingDef = mealsource;
-            mealSource.skipSingleThingIfHasToWipeBuildingOrDoesntFit = true;
-            BaseGen.symbolStack.Push("thing", mealSource);
+            //ResolveParams tableButcher = rp;
+            //tableButcher.rect = rp.rect;
+            //tableButcher.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("TableButcher"), DefDatabase<ThingDef>.GetNamedSilentFail("ButcherSpot"));
+            //BaseGen.symbolStack.Push("thing", tableButcher);
 
-            ResolveParams tableButcher = rp;
-            tableButcher.rect = rp.rect;
-            tableButcher.singleThingDef = //DefDatabase<ThingDef>.GetNamed("TableButcher");
-            Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("TableButcher"), DefDatabase<ThingDef>.GetNamedSilentFail("ButcherSpot"));
-            BaseGen.symbolStack.Push("thing", tableButcher);
-
-            ResolveParams bigFarmA = rp;
-            bigFarmA.faction = faction;
-            BaseGen.symbolStack.Push("basePart_outdoors_division", bigFarmA);
-
-
+            ResolveParams mainBasePart = rp;
+            mainBasePart.faction = faction;
+            BaseGen.symbolStack.Push("basePart_outdoors_division", mainBasePart);
 
             //ResolveParams emptyRoom = rp;
             //emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));
