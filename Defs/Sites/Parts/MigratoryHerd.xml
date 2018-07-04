@@ -2,7 +2,7 @@
 <Defs>
 
   <SitePartDef>
-    <defName>MFI_HuntersLodge</defName>
+    <defName>MFI_HuntersLodgePart</defName>
     <label>Hunter's lodge</label>
     <description>A small outpost, used by friendly factions as a hunting base.</description>
     <siteTexture>World/WorldObjects/Sites/GenericSite</siteTexture>
@@ -22,18 +22,18 @@
   </SitePartDef>
 
   <GenStepDef>
-    <defName>MFI_HuntersLodge</defName>
-    <linkWithSite>MFI_HuntersLodge</linkWithSite>
+    <defName>MFI_HuntersLodgePart</defName>
+    <linkWithSite>MFI_HuntersLodgePart</linkWithSite>
     <order>450</order>
     <genStep Class="MoreFactionInteraction.World_Incidents.GenStep_HuntersLodge" />
   </GenStepDef>
 
   <GenStepDef>
-    <defName>MFI_HuntersLodgePower</defName>
-    <linkWithSite>MFI_HuntersLodge</linkWithSite>
+    <defName>MFI_HuntersLodgePartPower</defName>
+    <linkWithSite>MFI_HuntersLodgePart</linkWithSite>
     <order>451</order>
     <genStep Class="GenStep_Power">
-    <canSpawnPowerGenerators>false<canSpawnPowerGenerators>
+    <canSpawnPowerGenerators>false</canSpawnPowerGenerators>
     </genStep>
   </GenStepDef>
 

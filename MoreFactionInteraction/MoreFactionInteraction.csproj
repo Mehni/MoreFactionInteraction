@@ -80,6 +80,8 @@
     <Compile Include="World Incidents\WorldObjectComp_SettlementBumperCropComp.cs" />
     <Compile Include="World Incidents\WorldObjectCompProperties_BumperCrop.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MoreFactionWar\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

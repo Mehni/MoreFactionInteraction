@@ -35,7 +35,7 @@ namespace MoreFactionInteraction.World_Incidents
             if (!this.TryFindTile(out int tile))
                 return false;
 
-            Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, MFI_DefOf.MFI_HuntersLodge, tile, faction, false);
+            Site site = SiteMaker.MakeSite(MFI_DefOf.MFI_HuntersLodgeCore, MFI_DefOf.MFI_HuntersLodgePart, tile, faction, false);
 
             if (site == null)
                 return false;
@@ -50,7 +50,7 @@ namespace MoreFactionInteraction.World_Incidents
             site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
             site.SetFaction(faction);
             
-            if(site.parts.First(x => x.def == MFI_DefOf.MFI_HuntersLodge).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
+            if(site.parts.First(x => x.def == MFI_DefOf.MFI_HuntersLodgePart).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
                 sitePart.pawnKindDef = pawnKindDef;
 
             Find.WorldObjects.Add(site);
