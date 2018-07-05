@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorldObjectDef>
+    <defName>MFI_FactionWarPeaceTalks</defName>
+    <label>peace talks</label>
+    <description>A site designated for peace talks.</description>
+    <worldObjectClass>MoreFactionInteraction.FactionWarPeaceTalks</worldObjectClass>
+    <texture>FactionPeaceTalks</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>Expanding/FactionPeaceTalks</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+    <comps>
+      <li Class="WorldObjectCompProperties_Timeout" />
+    </comps>
+  </WorldObjectDef>
+
+</Defs>

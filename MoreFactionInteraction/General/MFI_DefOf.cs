@@ -12,6 +12,7 @@ namespace MoreFactionInteraction
         public static IncidentDef MFI_ReverseTradeRequest;
         public static SiteCoreDef MFI_HuntersLodgeCore;
         public static SitePartDef MFI_HuntersLodgePart;
+        public static WorldObjectDef MFI_FactionWarPeaceTalks;
         //public static IncidentDef MFI_WeddingGuestsArrival;
     }
 }

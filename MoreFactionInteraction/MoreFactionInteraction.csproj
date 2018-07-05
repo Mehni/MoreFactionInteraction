@@ -54,6 +54,10 @@
   <ItemGroup>
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
+    <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\WorldComponent_MFI_FactionWar.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\GenStep_HuntersLodge.cs" />
     <Compile Include="More Traders\ChoiceLetter_ReverseTradeRequest.cs" />
     <Compile Include="More Traders\FactionInteractionTimeSeperator.cs" />
@@ -80,8 +84,6 @@
     <Compile Include="World Incidents\WorldObjectComp_SettlementBumperCropComp.cs" />
     <Compile Include="World Incidents\WorldObjectCompProperties_BumperCrop.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MoreFactionWar\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
