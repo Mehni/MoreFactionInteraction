@@ -55,6 +55,8 @@
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\Dialogue_FactionWarNegotiation.cs" />
+    <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />
     <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\WorldComponent_MFI_FactionWar.cs" />

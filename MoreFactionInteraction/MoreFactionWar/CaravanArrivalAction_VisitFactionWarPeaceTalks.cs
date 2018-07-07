@@ -38,7 +38,27 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         public override FloatMenuAcceptanceReport StillValid(Caravan caravan, int destinationTile)
         {
-            return base.StillValid(caravan, destinationTile);
+            if (base.StillValid(caravan, destinationTile))
+                return base.StillValid(caravan, destinationTile);
+
+            else if (this.factionWarPeaceTalks?.Tile != destinationTile)
+                return false;
+
+            else
+                return CanVisit(caravan, this.factionWarPeaceTalks);
+        }
+
+        public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, FactionWarPeaceTalks factionWarPeaceTalks)
+        {
+            return factionWarPeaceTalks != null && factionWarPeaceTalks.Spawned;
+        }
+
+        public static IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan, FactionWarPeaceTalks factionWarPeaceTalks)
+        {
+            return CaravanArrivalActionUtility.GetFloatMenuOptions<CaravanArrivalAction_VisitFactionWarPeaceTalks>(() => CaravanArrivalAction_VisitFactionWarPeaceTalks.CanVisit(caravan, factionWarPeaceTalks), () => new CaravanArrivalAction_VisitFactionWarPeaceTalks(factionWarPeaceTalks), "VisitPeaceTalks".Translate(new object[]
+            {
+                factionWarPeaceTalks.Label
+            }), caravan, factionWarPeaceTalks.Tile, factionWarPeaceTalks);
         }
     }
 }
