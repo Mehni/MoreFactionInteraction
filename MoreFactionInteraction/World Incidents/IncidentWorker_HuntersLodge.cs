@@ -23,12 +23,12 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false, minTechLevel: TechLevel.Undefined) != null) && TryFindTile(tile: out int num);
+            return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false) != null) && TryFindTile(tile: out int num);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Faction faction = parms.faction ?? Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false, minTechLevel: TechLevel.Undefined);
+            Faction faction = parms.faction ?? Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false);
 
             if (!TryFindTile(tile: out int tile))
                 return false;
@@ -53,7 +53,7 @@ namespace MoreFactionInteraction.World_Incidents
 
             Find.WorldObjects.Add(o: site);
             string text = string.Format(format: this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();
-            Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: site, relatedFaction: null);
+            Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: site);
             return true;
         }
 

@@ -91,7 +91,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         private static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome)
         {
-            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.DiplomacyPower, applyPostProcess: true));
+            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.DiplomacyPower));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
             factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 

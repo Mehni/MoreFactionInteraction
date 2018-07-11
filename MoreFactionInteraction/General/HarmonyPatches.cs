@@ -19,24 +19,24 @@ namespace MoreFactionInteraction
 
             #region MoreTraders
             harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PriceTypeSetter_PostFix)), transpiler: null);
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PriceTypeSetter_PostFix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)), transpiler: null);
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
                 prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)), postfix: null);
 
             harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)), transpiler: null);
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
             #endregion
 
             #region WorldIncidents
             harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)), transpiler: null);
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)), transpiler: null);
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
         }
 
@@ -75,30 +75,12 @@ namespace MoreFactionInteraction
 
         private static readonly SimpleCurve WealthSilverIncreaseDeterminationCurve = new SimpleCurve
         {
-            {
-                new CurvePoint(x: 0, y: 0.8f),
-                true
-            },
-            {
-                new CurvePoint(x: 10000, y: 1),
-                true
-            },
-            {
-                new CurvePoint(x: 75000, y: 2),
-                true
-            },
-            {
-                new CurvePoint(x: 300000, y: 4),
-                true
-            },
-            {
-                new CurvePoint(x: 1000000, y: 6f),
-                true
-            },
-            {
-                new CurvePoint(x: 2000000, y: 7f),
-                true
-            },
+            new CurvePoint(x: 0, y: 0.8f),
+            new CurvePoint(x: 10000, y: 1),
+            new CurvePoint(x: 75000, y: 2),
+            new CurvePoint(x: 300000, y: 4),
+            new CurvePoint(x: 1000000, y: 6f),
+            new CurvePoint(x: 2000000, y: 7f),
         };
 
         #region TradeQualityImprovements
@@ -146,58 +128,22 @@ namespace MoreFactionInteraction
         #region SimpleCurves
         private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
         {
-            {
-                new CurvePoint(x: 0, y: 1),
-                true
-            },
-            {
-                new CurvePoint(x: 10000, y: 1.5f),
-                true
-            },
-            {
-                new CurvePoint(x: 75000, y: 2.5f),
-                true
-            },
-            {
-                new CurvePoint(x: 300000, y: 3),
-                true
-            },
-            {
-                new CurvePoint(x: 1000000, y: 3.8f),
-                true
-            },
-            {
-                new CurvePoint(x: 2000000, y: 4.3f),
-                true
-            },
+            new CurvePoint(x: 0, y: 1),
+            new CurvePoint(x: 10000, y: 1.5f),
+            new CurvePoint(x: 75000, y: 2.5f),
+            new CurvePoint(x: 300000, y: 3),
+            new CurvePoint(x: 1000000, y: 3.8f),
+            new CurvePoint(x: 2000000, y: 4.3f),
         };
 
         private static readonly SimpleCurve WealthQualitySpreadDeterminationCurve = new SimpleCurve
         {
-            {
-                new CurvePoint(x: 0, y: 4.2f),
-                true
-            },
-            {
-                new CurvePoint(x: 10000, y: 4), //5.5
-                true
-            },
-            {
-                new CurvePoint(x: 75000, y: 2.5f), //5
-                true
-            },
-            {
-                new CurvePoint(x: 300000, y: 2.1f), //5.1
-                true
-            },
-            {
-                new CurvePoint(x: 1000000, y: 1.5f), //5.3
-                true
-            },
-            {
-                new CurvePoint(x: 2000000, y: 1.2f), //5.5
-                true
-            },
+            new CurvePoint(x: 0, y: 4.2f),
+            new CurvePoint(x: 10000, y: 4),
+            new CurvePoint(x: 75000, y: 2.5f),
+            new CurvePoint(x: 300000, y: 2.1f),
+            new CurvePoint(x: 1000000, y: 1.5f),
+            new CurvePoint(x: 2000000, y: 1.2f),
         };
         #endregion SimpleCurves
         #endregion TradeQualityImprovements
@@ -236,7 +182,7 @@ namespace MoreFactionInteraction
         {
             if (__instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>()?.ActiveRequest ?? false)
             {
-                Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow", reportFailure: true);
+                Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
                 Caravan localCaravan = caravan;
 
                 Command_Action command_Action = new Command_Action
@@ -263,7 +209,7 @@ namespace MoreFactionInteraction
                             confirmedAct: delegate
                             {
                                 bumperCrop2.NotifyCaravanArrived(caravan: localCaravan);
-                            }, destructive: false, title: null));
+                            }));
                         }
                     }
                 };

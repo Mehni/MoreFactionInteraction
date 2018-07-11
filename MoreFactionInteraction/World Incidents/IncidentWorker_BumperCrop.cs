@@ -49,7 +49,7 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 settlement.Label,
                 (component.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F0")
-            }), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement, relatedFaction: null);
+            }), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement);
             return true;
         }
 
@@ -85,7 +85,7 @@ namespace MoreFactionInteraction.World_Incidents
                     where settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null && !settlement.GetComponent<TradeRequestComp>().ActiveRequest 
                     && !settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>().ActiveRequest && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f 
                     && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile)
-                    select settlement).RandomElementWithFallback(fallback: null);
+                    select settlement).RandomElementWithFallback();
         }
 
         private static int RandomOfferDuration(int tileIdFrom, int tileIdTo)

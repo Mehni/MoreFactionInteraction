@@ -69,9 +69,9 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Map>(refee: ref this.map, label: "map", saveDestroyedThings: false);
-            Scribe_References.Look<Faction>(refee: ref this.faction, label: "faction", saveDestroyedThings: false);
-            Scribe_Values.Look<int>(value: ref this.fee, label: "fee", defaultValue: 0, forceSave: false);
+            Scribe_References.Look<Map>(refee: ref this.map, label: "map");
+            Scribe_References.Look<Faction>(refee: ref this.faction, label: "faction");
+            Scribe_Values.Look<int>(value: ref this.fee, label: "fee");
         }
     }
 }

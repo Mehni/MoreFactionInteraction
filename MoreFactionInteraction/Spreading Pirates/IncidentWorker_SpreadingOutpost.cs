@@ -17,7 +17,7 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30, allowCaravans: false, preferCloserTiles: true, nearThisTile: -1);
+            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -42,7 +42,7 @@ namespace MoreFactionInteraction
             return (from settlement in Find.WorldObjects.SettlementBases
                     where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f 
                     && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile) && settlement.Faction == this.faction
-                    select settlement).RandomElementWithFallback(fallback: null);
+                    select settlement).RandomElementWithFallback();
         }
 
         private static bool TryFindFaction(out Faction enemyFaction)

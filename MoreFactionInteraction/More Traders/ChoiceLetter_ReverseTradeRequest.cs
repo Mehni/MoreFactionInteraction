@@ -51,7 +51,7 @@ namespace MoreFactionInteraction
                     DiaNode diaNode = new DiaNode(text: "MFI_TraderSent".Translate(args: new object[]
                     {
                         this.faction.leader.LabelShort,
-                        traveltime.ToStringTicksToPeriodVague(vagueMin: false, vagueMax: true)
+                        traveltime.ToStringTicksToPeriodVague(vagueMin: false)
                     }).CapitalizeFirst());
                     diaNode.options.Add(item: this.Option_Close);
                     accept.link = diaNode;
@@ -92,8 +92,8 @@ namespace MoreFactionInteraction
             base.ExposeData();
             Scribe_Defs.Look<ThingCategoryDef>(value: ref this.thingCategoryDef, label: "MFI_thingCategoryDef");
             Scribe_Deep.Look<IncidentParms>(target: ref this.incidentParms, label: "MFI_incidentParms", ctorArgs: new object[0]);
-            Scribe_References.Look<Map>(refee: ref this.map, label: "MFI_map", saveDestroyedThings: false);
-            Scribe_References.Look<Faction>(refee: ref this.faction, label: "MFI_faction", saveDestroyedThings: false);
+            Scribe_References.Look<Map>(refee: ref this.map, label: "MFI_map");
+            Scribe_References.Look<Faction>(refee: ref this.faction, label: "MFI_faction");
             Scribe_Values.Look<int>(value: ref this.fee, label: "MFI_fee");
             Scribe_Values.Look<int>(value: ref this.tile, label: "MFI_tile");
         }

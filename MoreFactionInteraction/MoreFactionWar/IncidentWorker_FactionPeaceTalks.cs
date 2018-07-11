@@ -37,8 +37,8 @@ namespace MoreFactionInteraction.MoreFactionWar
                 int randomInRange = TimeoutDaysRange.RandomInRange;
                 factionWarPeaceTalks.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
                 Find.WorldObjects.Add(o: factionWarPeaceTalks);
-                string text = string.Format(format: this.def.letterText.AdjustedFor(p: faction.leader, pawnSymbol: "PAWN"), arg0: faction.def.leaderTitle, arg1: faction.Name, arg2: randomInRange).CapitalizeFirst();
-                Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: factionWarPeaceTalks, relatedFaction: faction, debugInfo: null);
+                string text = string.Format(format: this.def.letterText.AdjustedFor(p: faction.leader), arg0: faction.def.leaderTitle, arg1: faction.Name, arg2: randomInRange).CapitalizeFirst();
+                Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: factionWarPeaceTalks, relatedFaction: faction);
                 return true;
             }
             return false;
@@ -46,7 +46,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         private static bool TryFindTile(out int tile)
         {
-            return TileFinder.TryFindNewSiteTile(tile: out tile, minDist: 5, maxDist: 13, allowCaravans: false, preferCloserTiles: false, nearThisTile: -1);
+            return TileFinder.TryFindNewSiteTile(tile: out tile, minDist: 5, maxDist: 13, allowCaravans: false, preferCloserTiles: false);
         }
 
         private bool FoundTwoFactions()

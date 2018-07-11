@@ -48,7 +48,7 @@ namespace MoreFactionInteraction
                     Find.LetterStack.ReceiveLetter(label: "LetterLabelBanditOutpostUpgraded".Translate(), text: "LetterBanditOutpostUpgraded".Translate(args: new object[]
                     {
                             factionBase.Faction.Name,
-                    }), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase, relatedFaction: null);
+                    }), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase);
                 }
             }
         }

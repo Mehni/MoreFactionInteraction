@@ -65,7 +65,7 @@ namespace MoreFactionInteraction
 
         private static Material MatFrom(string texPath, Shader shader, Color color, Color colorTwo, int renderQueue)
         {
-            MaterialRequest materialRequest = new MaterialRequest(tex: ContentFinder<Texture2D>.Get(itemPath: texPath, reportFailure: true), shader: shader)
+            MaterialRequest materialRequest = new MaterialRequest(tex: ContentFinder<Texture2D>.Get(itemPath: texPath), shader: shader)
             {
                 renderQueue = renderQueue,
                 color = colorTwo,

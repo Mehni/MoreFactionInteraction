@@ -37,7 +37,7 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 return "MFI_HarvestRequestInfo".Translate(args: new object[]
                 {
-                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F1")
+                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays()
                 });
             }
             return null;
@@ -84,14 +84,14 @@ namespace MoreFactionInteraction.World_Incidents
                 this.parent.Faction.def.pawnsPlural, this.parent.Faction.Name,
                 Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
-            }), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: null);
+            }), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan);
 
             allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
 
         private static float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
         {           
-            return caravanMembersCapableOfGrowing.Select(selector: x => x.GetStatValue(stat: StatDefOf.PlantHarvestYield, applyPostProcess: true)).Sum();
+            return caravanMembersCapableOfGrowing.Select(selector: x => x.GetStatValue(stat: StatDefOf.PlantHarvestYield)).Sum();
         }
 
         private static string GetLetterText(string baseText, Caravan caravan)

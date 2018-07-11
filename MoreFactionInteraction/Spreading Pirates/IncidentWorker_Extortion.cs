@@ -27,7 +27,7 @@ namespace MoreFactionInteraction
 
         private static bool RandomNearbyHostileWorldObject(int originTile, out WorldObject encampment, out Faction faction)
         {
-            encampment = NearbyHostileEncampments(forTile: originTile).RandomElementWithFallback(fallback: null);
+            encampment = NearbyHostileEncampments(forTile: originTile).RandomElementWithFallback();
 
             faction = encampment?.Faction;
             return faction != null;

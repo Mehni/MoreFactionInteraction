@@ -25,7 +25,7 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
     {
         public override void Resolve(ResolveParams rp)
         {
-            InteriorSymbolResolverUtility.PushBedroomHeatersCoolersAndLightSourcesSymbols(rp: rp, hasToSpawnLightSource: true);
+            InteriorSymbolResolverUtility.PushBedroomHeatersCoolersAndLightSourcesSymbols(rp: rp);
             BaseGen.symbolStack.Push(symbol: "fillWithKitchen", resolveParams: rp);
         }
     }

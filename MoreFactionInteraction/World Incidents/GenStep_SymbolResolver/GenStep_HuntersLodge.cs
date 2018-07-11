@@ -26,7 +26,7 @@ namespace MoreFactionInteraction.World_Incidents
             Faction faction;
             if (map.ParentFaction == null || map.ParentFaction == Faction.OfPlayer)
             {
-                faction = Find.FactionManager.RandomEnemyFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: true, minTechLevel: TechLevel.Undefined);
+                faction = Find.FactionManager.RandomEnemyFaction();
             }
             else
             {
