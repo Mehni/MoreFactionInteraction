@@ -18,51 +18,50 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && TryFindMarriageSeeker(out Pawn marriageSeeker) && TryFindBetrothed(out Pawn betrothed);
+            return base.CanFireNowSub(parms: parms) && TryFindMarriageSeeker(marriageSeeker: out Pawn marriageSeeker) && this.TryFindBetrothed(betrothed: out Pawn betrothed);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindMarriageSeeker(out marriageSeeker))
+            if (!TryFindMarriageSeeker(marriageSeeker: out this.marriageSeeker))
             {
-                if (Prefs.LogVerbose) Log.Warning("no marriageseeker");
+                if (Prefs.LogVerbose) Log.Warning(text: "no marriageseeker");
                 return false;
             }
-            if (!TryFindBetrothed(out betrothed))
+            if (!this.TryFindBetrothed(betrothed: out this.betrothed))
             {
-                if (Prefs.LogVerbose) Log.Warning ("no betrothed");
+                if (Prefs.LogVerbose) Log.Warning (text: "no betrothed");
                 return false;
             }
 
-            ChoiceLetter_DiplomaticMarriage choiceLetter_DiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_DiplomaticMarriage".Translate(new object[]
+            ChoiceLetter_DiplomaticMarriage choiceLetter_DiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_DiplomaticMarriage".Translate(args: new object[]
             {
-                    marriageSeeker.LabelShort,
-                    betrothed.LabelShort
-            }).AdjustedFor(marriageSeeker), this.def.letterDef);
+                this.marriageSeeker.LabelShort, this.betrothed.LabelShort
+            }).AdjustedFor(p: this.marriageSeeker), def: this.def.letterDef);
 
-            choiceLetter_DiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(new object[]
+            choiceLetter_DiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(args: new object[]
             {
-                    betrothed.LabelShort
+                this.betrothed.LabelShort
             }).CapitalizeFirst();
             choiceLetter_DiplomaticMarriage.radioMode = true;
-            choiceLetter_DiplomaticMarriage.marriageSeeker = marriageSeeker;
-            choiceLetter_DiplomaticMarriage.betrothed = betrothed;
-            choiceLetter_DiplomaticMarriage.StartTimeout(TimeoutTicks);
-            Find.LetterStack.ReceiveLetter(choiceLetter_DiplomaticMarriage);
+            choiceLetter_DiplomaticMarriage.marriageSeeker = this.marriageSeeker;
+            choiceLetter_DiplomaticMarriage.betrothed = this.betrothed;
+            choiceLetter_DiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
+            Find.LetterStack.ReceiveLetter(@let: choiceLetter_DiplomaticMarriage);
             return true;
         }
 
         private bool TryFindBetrothed(out Pawn betrothed) => (from potentialPartners in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners_NoCryptosleep
-                                                              select potentialPartners).TryRandomElementByWeight((Pawn marriageSeeker2) => this.marriageSeeker.relations.SecondaryLovinChanceFactor(marriageSeeker2), out betrothed);
+                                                              select potentialPartners).TryRandomElementByWeight(weightSelector: (Pawn marriageSeeker2) => this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: marriageSeeker2), result: out betrothed);
 
         private static bool TryFindMarriageSeeker(out Pawn marriageSeeker) => (from x in Find.WorldPawns.AllPawnsAlive
                                                                         where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer && !x.Faction.defeated
-                                                                        && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !PeaceTalksExist(x.Faction)
+                                                                        && !SettlementUtility.IsPlayerAttackingAnySettlementOf(faction: x.Faction) && !PeaceTalksExist(faction: x.Faction)
                                                                         && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned
                                                                         && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
                                                                         && !x.IsPrisoner && !x.Spawned
-                                                                        && (!LovePartnerRelationUtility.HasAnyLovePartner(x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
-                                                                        select x).TryRandomElement(out marriageSeeker); //todo: make more likely to select hostile.
+                                                                        && (!LovePartnerRelationUtility.HasAnyLovePartner(pawn: x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(p: x, allowDead: false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
+                                                                        select x).TryRandomElement(result: out marriageSeeker); //todo: make more likely to select hostile.
 
         private static bool PeaceTalksExist(Faction faction)
         {

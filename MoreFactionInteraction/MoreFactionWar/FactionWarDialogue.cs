@@ -29,11 +29,11 @@ namespace MoreFactionInteraction.MoreFactionWar
             string factionOneLeaderName =
                 factionOne.leader != null ? factionOne.leader.Name.ToStringFull : factionOne.Name;
 
-            DiaNode dialogueGreeting = new DiaNode("MFI_FactionWarPeaceTalksIntroduction".Translate(new object[] { factionOneLeaderName, factionInstigatorLeaderName, pawn.Label }));
+            DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate(args: new object[] { factionOneLeaderName, factionInstigatorLeaderName, pawn.Label }));
 
-            foreach (DiaOption option in FactionWarDialogue.DialogueOptions(pawn, factionOne, factionInstigator))
+            foreach (DiaOption option in DialogueOptions(pawn: pawn, factionOne: factionOne, factionInstigator: factionInstigator))
             {
-                dialogueGreeting.options.Add(option);
+                dialogueGreeting.options.Add(item: option);
             }
 
             return dialogueGreeting;
@@ -43,72 +43,72 @@ namespace MoreFactionInteraction.MoreFactionWar
         {
             string factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            yield return new DiaOption("MFI_FactionWarPeaceTalksCurryFavour".Translate(new object[] { factionOne.Name }))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate(args: new object[] { factionOne.Name }))
             {
                 action = () =>
                 {
-                    factionOne.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionInstigator.TryAffectGoodwillWith(pawn.Faction, -20);
-                    DetermineOutcome(factionOne, factionInstigator, pawn, 1, out factionWarNegotiationsOutcome);
+                    factionOne.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionInstigator.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: -20);
+                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 1, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(factionWarNegotiationsOutcome)),
+                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
             };
-            yield return new DiaOption("MFI_FactionWarPeaceTalksCurryFavour".Translate(new object[] { factionInstigator.Name }))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate(args: new object[] { factionInstigator.Name }))
             {
                 action = () =>
                 {
-                    factionInstigator.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionOne.TryAffectGoodwillWith(pawn.Faction, -20);
-                    DetermineOutcome(factionInstigator, factionOne, pawn, 2, out factionWarNegotiationsOutcome);
+                    factionInstigator.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionOne.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: -20);
+                    DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: 2, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(factionWarNegotiationsOutcome)),
+                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
             };
-            yield return new DiaOption("MFI_FactionWarPeaceTalksSabotage".Translate())
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksSabotage".Translate())
             {
                 action = () =>
                 {
-                    factionOne.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionInstigator.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionInstigator.TryAffectGoodwillWith(factionOne, -100, true, true, "You fucked up.");
+                    factionOne.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionInstigator.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionInstigator.TryAffectGoodwillWith(other: factionOne, goodwillChange: -100, canSendMessage: true, canSendHostilityLetter: true, reason: "You fucked up.");
 
-                    DetermineOutcome(factionOne, factionInstigator, pawn, 3, out factionWarNegotiationsOutcome);
+                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 3, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(factionWarNegotiationsOutcome)),
+                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
             };
-            yield return new DiaOption("MFI_FactionWarPeaceTalksBrokerPeace".Translate())
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksBrokerPeace".Translate())
             {
                 action = () =>
                 {
-                    factionOne.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionInstigator.TryAffectGoodwillWith(pawn.Faction, 10);
-                    factionInstigator.TryAffectGoodwillWith(factionOne, 100, true, true, "You did well.");
+                    factionOne.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionInstigator.TryAffectGoodwillWith(other: pawn.Faction, goodwillChange: 10);
+                    factionInstigator.TryAffectGoodwillWith(other: factionOne, goodwillChange: 100, canSendMessage: true, canSendHostilityLetter: true, reason: "You did well.");
 
-                    DetermineOutcome(factionOne, factionInstigator, pawn, 4, out factionWarNegotiationsOutcome);
+                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 4, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(factionWarNegotiationsOutcome)),
+                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
             };
         }
 
         private static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome)
         {
-            float badOutcomeWeightFactor = FactionWarDialogue.GetBadOutcomeWeightFactor(pawn.GetStatValue(StatDefOf.DiplomacyPower, true));
+            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.DiplomacyPower, applyPostProcess: true));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
             factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
             if (desiredOutcome == 1 || desiredOutcome == 2)
             {
                 tmpPossibleOutcomes.Clear();
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Disaster * badOutcomeWeightFactor), "MFI_FactionWarFavourFactionDisaster".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Backfire * badOutcomeWeightFactor), "MFI_FactionWarFavourFactionBackFire".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_TalksFlounder),                     "MFI_FactionWarFavourFactionFlounder".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Success * goodOutcomeWeightFactor), "MFI_FactionWarFavourFactionSuccess".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Triumph * goodOutcomeWeightFactor), "MFI_FactionWarFavourFactionTriumph".Translate()));                
+                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(first: () => Outcome_TalksFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),       second: BaseWeight_Disaster * badOutcomeWeightFactor), second: "MFI_FactionWarFavourFactionDisaster".Translate()));
+                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(first: () => Outcome_TalksFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),       second: BaseWeight_Backfire * badOutcomeWeightFactor), second: "MFI_FactionWarFavourFactionBackFire".Translate()));
+                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(first: () => Outcome_TalksFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),       second: BaseWeight_TalksFlounder),                     second: "MFI_FactionWarFavourFactionFlounder".Translate()));
+                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(first: () => Outcome_TalksFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),       second: BaseWeight_Success * goodOutcomeWeightFactor), second: "MFI_FactionWarFavourFactionSuccess".Translate()));
+                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(first: () => Outcome_TalksFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),       second: BaseWeight_Triumph * goodOutcomeWeightFactor), second: "MFI_FactionWarFavourFactionTriumph".Translate()));                
 
-                Action first = FactionWarDialogue.tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).First.First;
-                factionWarNegotiationsOutcome = FactionWarDialogue.tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).Second;
+                Action first = tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).First.First;
+                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).Second;
                 first();
 
-                pawn.skills.Learn(SkillDefOf.Social, 6000f, true);
+                pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
 
             }
             else if (desiredOutcome == 3)
@@ -125,41 +125,41 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         private static DiaNode DialogueResolver(string textResult)
         {
-            DiaNode resolver = new DiaNode(textResult);
-            DiaOption diaOption = new DiaOption("Ok then.")
+            DiaNode resolver = new DiaNode(text: textResult);
+            DiaOption diaOption = new DiaOption(text: "Ok then.")
             {
                 resolveTree = true
             };
-            resolver.options.Add(diaOption);
+            resolver.options.Add(item: diaOption);
             return resolver;
         }
 
         private static void Outcome_TalksDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+            Find.LetterStack.ReceiveLetter(label: "LetterLabelPeaceTalks_TalksFlounder".Translate(), text: "test", textLetterDef: LetterDefOf.Death);
         }
         private static void Outcome_TalksBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+            Find.LetterStack.ReceiveLetter(label: "LetterLabelPeaceTalks_TalksFlounder".Translate(), text: "test", textLetterDef: LetterDefOf.Death);
         }
         private static void Outcome_TalksFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+            Find.LetterStack.ReceiveLetter(label: "LetterLabelPeaceTalks_TalksFlounder".Translate(), text: "test", textLetterDef: LetterDefOf.Death);
         }
         private static void Outcome_TalksSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+            Find.LetterStack.ReceiveLetter(label: "LetterLabelPeaceTalks_TalksFlounder".Translate(), text: "test", textLetterDef: LetterDefOf.Death);
         }
         private static void Outcome_TalksTriump(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
-            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+            Find.LetterStack.ReceiveLetter(label: "LetterLabelPeaceTalks_TalksFlounder".Translate(), text: "test", textLetterDef: LetterDefOf.Death);
         }
 
 
 
         private static float GetBadOutcomeWeightFactor(float diplomacyPower)
         {
-            return FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(diplomacyPower);
+            return FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(x: diplomacyPower);
         }
 
 

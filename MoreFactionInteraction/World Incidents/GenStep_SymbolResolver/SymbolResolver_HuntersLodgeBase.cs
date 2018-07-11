@@ -22,24 +22,24 @@ namespace MoreFactionInteraction.World_Incidents
             }
 
             float num2 = (float)rp.rect.Area / 144f * 0.17f;
-            BaseGen.globalSettings.minEmptyNodes = ((num2 >= 1f) ? GenMath.RoundRandom(num2) : 0);
+            BaseGen.globalSettings.minEmptyNodes = ((num2 >= 1f) ? GenMath.RoundRandom(f: num2) : 0);
 
-            BaseGen.symbolStack.Push("outdoorLighting", rp);
+            BaseGen.symbolStack.Push(symbol: "outdoorLighting", resolveParams: rp);
             if (faction.def.techLevel >= TechLevel.Industrial)
             {
-                int num4 = (!Rand.Chance(0.75f)) ? 0 : GenMath.RoundRandom((float)rp.rect.Area / 400f);
+                int num4 = (!Rand.Chance(chance: 0.75f)) ? 0 : GenMath.RoundRandom(f: (float)rp.rect.Area / 400f);
                 for (int i = 0; i < num4; i++)
                 {
                     ResolveParams resolveParams2 = rp;
                     resolveParams2.faction = faction;
-                    BaseGen.symbolStack.Push("firefoamPopper", resolveParams2);
+                    BaseGen.symbolStack.Push(symbol: "firefoamPopper", resolveParams: resolveParams2);
                 }
             }
 
             ResolveParams resolveParams4 = rp;
-            resolveParams4.rect = rp.rect.ContractedBy(num);
+            resolveParams4.rect = rp.rect.ContractedBy(dist: num);
             resolveParams4.faction = faction;
-            BaseGen.symbolStack.Push("ensureCanReachMapEdge", resolveParams4);
+            BaseGen.symbolStack.Push(symbol: "ensureCanReachMapEdge", resolveParams: resolveParams4);
 
             //ResolveParams mealSource = rp;
             //mealSource.rect = rp.rect;
@@ -54,7 +54,7 @@ namespace MoreFactionInteraction.World_Incidents
 
             ResolveParams mainBasePart = rp;
             mainBasePart.faction = faction;
-            BaseGen.symbolStack.Push("basePart_outdoors_division", mainBasePart);
+            BaseGen.symbolStack.Push(symbol: "basePart_outdoors_division", resolveParams: mainBasePart);
 
             //ResolveParams emptyRoom = rp;
             //emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));

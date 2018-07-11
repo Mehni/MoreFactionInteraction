@@ -21,9 +21,9 @@ namespace MoreFactionInteraction.World_Incidents
         private bool workStarted;
         private const int workAmount = GenDate.TicksPerDay;
         private const float expGain = 6000f;
-        private static readonly IntRange FactionRelationOffset = new IntRange(3, 8);
+        private static readonly IntRange FactionRelationOffset = new IntRange(min: 3, max: 8);
 
-        public bool CaravanIsWorking => workStarted && Find.TickManager.TicksGame < workLeft;
+        public bool CaravanIsWorking => this.workStarted && Find.TickManager.TicksGame < this.workLeft;
 
         public bool ActiveRequest => this.expiration > Find.TickManager.TicksGame;
 
@@ -35,9 +35,9 @@ namespace MoreFactionInteraction.World_Incidents
         {
             if (this.ActiveRequest)
             {
-                return "MFI_HarvestRequestInfo".Translate(new object[]
+                return "MFI_HarvestRequestInfo".Translate(args: new object[]
                 {
-                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays("F1")
+                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F1")
                 });
             }
             return null;
@@ -50,58 +50,57 @@ namespace MoreFactionInteraction.World_Incidents
 
         public void NotifyCaravanArrived(Caravan caravan)
         {
-            workStarted = true;
-            workLeft = Find.TickManager.TicksGame + workAmount;
-            caravan.GetComponent<WorldObjectComp_CaravanComp>().workWillBeDoneAtTick = workLeft;
+            this.workStarted = true;
+            this.workLeft = Find.TickManager.TicksGame + workAmount;
+            caravan.GetComponent<WorldObjectComp_CaravanComp>().workWillBeDoneAtTick = this.workLeft;
             caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = true;
-            Disable();
+            this.Disable();
         }
 
         public void DoOutcome(Caravan caravan)
         {
-            workStarted = false;
+            this.workStarted = false;
             caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = false;
-            Outcome_Triumph(caravan);
+            this.Outcome_Triumph(caravan: caravan);
         }
 
         private void Outcome_Triumph(Caravan caravan)
         {
             int randomInRange = FactionRelationOffset.RandomInRange;
-            parent.Faction.TryAffectGoodwillWith(Faction.OfPlayer, randomInRange);
+            this.parent.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: randomInRange);
 
-            List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan);
-            float totalYieldPowerForCaravan = CalculateYieldForCaravan(allMembersCapableOfGrowing);
+            List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan: caravan);
+            float totalYieldPowerForCaravan = CalculateYieldForCaravan(caravanMembersCapableOfGrowing: allMembersCapableOfGrowing);
 
             //TODO: Calculate a good amount
-            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(1, (float)allMembersCapableOfGrowing.Average(pawn => pawn.skills.GetSkill(SkillDefOf.Plants).Level));
+            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level));
 
-            Thing reward = ThingMaker.MakeThing(bumperCrop);
-            reward.stackCount = Mathf.RoundToInt(totalreward);
-            CaravanInventoryUtility.GiveThing(caravan, reward);
+            Thing reward = ThingMaker.MakeThing(def: this.bumperCrop);
+            reward.stackCount = Mathf.RoundToInt(f: totalreward);
+            CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
-            Find.LetterStack.ReceiveLetter("MFI_LetterLabelHarvest_Triumph".Translate(), GetLetterText("MFI_Harvest_Triumph".Translate(new object[]
+            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(args: new object[]
             {
-                parent.Faction.def.pawnsPlural,
-                parent.Faction.Name,
-                Mathf.RoundToInt(randomInRange),
+                this.parent.Faction.def.pawnsPlural, this.parent.Faction.Name,
+                Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
-            }), caravan), LetterDefOf.PositiveEvent, caravan, null);
+            }), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: null);
 
-            allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Plants, expGain, true));
+            allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
 
         private static float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
         {           
-            return caravanMembersCapableOfGrowing.Select(x => x.GetStatValue(StatDefOf.PlantHarvestYield, true)).Sum();
+            return caravanMembersCapableOfGrowing.Select(selector: x => x.GetStatValue(stat: StatDefOf.PlantHarvestYield, applyPostProcess: true)).Sum();
         }
 
         private static string GetLetterText(string baseText, Caravan caravan)
         {
             StringBuilder text = new StringBuilder();
-            text.Append(baseText + "\n");
-            foreach (Pawn pawn in AllCaravanMembersCapableOfGrowing(caravan))
+            text.Append(value: baseText + "\n");
+            foreach (Pawn pawn in AllCaravanMembersCapableOfGrowing(caravan: caravan))
             {
-                text.Append("\n" + "MFI_BumperCropXPGain".Translate(new object[]
+                text.Append(value: "\n" + "MFI_BumperCropXPGain".Translate(args: new object[]
                 {
                     pawn.LabelShort,
                     expGain
@@ -112,8 +111,8 @@ namespace MoreFactionInteraction.World_Incidents
 
         private static List<Pawn> AllCaravanMembersCapableOfGrowing(Caravan caravan)
         {
-            return caravan.PawnsListForReading.Where(pawn => !pawn.Dead && !pawn.Downed && !pawn.InMentalState && caravan.IsOwner(pawn) && pawn.health.capacities.CanBeAwake
-               && !StatDefOf.PlantHarvestYield.Worker.IsDisabledFor(pawn)).ToList();
+            return caravan.PawnsListForReading.Where(predicate: pawn => !pawn.Dead && !pawn.Downed && !pawn.InMentalState && caravan.IsOwner(p: pawn) && pawn.health.capacities.CanBeAwake
+               && !StatDefOf.PlantHarvestYield.Worker.IsDisabledFor(thing: pawn)).ToList();
         }
     }
 }

@@ -13,22 +13,22 @@ namespace MoreFactionInteraction.MoreFactionWar
         public static readonly SimpleCurve BadOutcomeFactorAtDiplomacyPower = new SimpleCurve
         {
             {
-                new CurvePoint(0f, 4f),
+                new CurvePoint(x: 0f, y: 4f),
                 true
             },
             {
-                new CurvePoint(1f, 1f),
+                new CurvePoint(x: 1f, y: 1f),
                 true
             },
             {
-                new CurvePoint(1.5f, 0.4f),
+                new CurvePoint(x: 1.5f, y: 0.4f),
                 true
             }
         };
 
-        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactHuge = new IntRange(50, 80);
-        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactBig = new IntRange(30, 70);
-        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactMedium = new IntRange(20, 50);
-        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactSmall = new IntRange(10, 30);
+        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactHuge = new IntRange(min: 50, max: 80);
+        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactBig = new IntRange(min: 30, max: 70);
+        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactMedium = new IntRange(min: 20, max: 50);
+        public static readonly IntRange GoodWill_FactionWarPeaceTalks_ImpactSmall = new IntRange(min: 10, max: 30);
     }
 }

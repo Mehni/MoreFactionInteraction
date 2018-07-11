@@ -13,23 +13,23 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return TryGetRandomAvailableTargetMap(out Map map) && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile) != null && base.CanFireNowSub(parms);
+            return TryGetRandomAvailableTargetMap(map: out Map map) && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile) != null && base.CanFireNowSub(parms: parms);
 
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryGetRandomAvailableTargetMap(out Map map)) return false;
-            SettlementBase settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(map.Tile);
+            if (!TryGetRandomAvailableTargetMap(map: out Map map)) return false;
+            SettlementBase settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile);
             if (settlement != null)
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
                 ThingCategoryDef thingCategoryDef = DetermineThingCategoryDef();
 
-                string letterToSend = DetermineLetterToSend(thingCategoryDef);
-                int feeRequest = Math.Max(Rand.Range(150, 300), (int)parms.points);
+                string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
+                int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(this.def.letterLabel, letterToSend.Translate(new object[]
+                ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(args: new object[]
                 {
                     settlement.Faction.leader.LabelShort,
                     settlement.Faction.def.leaderTitle,
@@ -37,8 +37,8 @@ namespace MoreFactionInteraction
                     settlement.Label,
                     categorylabel,
                     feeRequest,
-                }).AdjustedFor(settlement.Faction.leader), this.def.letterDef);
-                choiceLetter_ReverseTradingRequest.title = "MFI_ReverseTradeRequestTitle".Translate(new object[]
+                }).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
+                choiceLetter_ReverseTradingRequest.title = "MFI_ReverseTradeRequestTitle".Translate(args: new object[]
                 {
                     map.info.parent.Label
                 }).CapitalizeFirst();
@@ -49,9 +49,9 @@ namespace MoreFactionInteraction
                 choiceLetter_ReverseTradingRequest.incidentParms = parms;
                 choiceLetter_ReverseTradingRequest.faction = settlement.Faction;
                 choiceLetter_ReverseTradingRequest.fee = feeRequest;
-                choiceLetter_ReverseTradingRequest.StartTimeout(TimeoutTicks);
+                choiceLetter_ReverseTradingRequest.StartTimeout(duration: TimeoutTicks);
                 choiceLetter_ReverseTradingRequest.tile = settlement.Tile;
-                Find.LetterStack.ReceiveLetter(choiceLetter_ReverseTradingRequest);
+                Find.LetterStack.ReceiveLetter(@let: choiceLetter_ReverseTradingRequest);
                 return true;
             }
             return false;
@@ -61,7 +61,7 @@ namespace MoreFactionInteraction
         {
             ThingCategoryDef thingCategoryDef;
 
-            int rand = Rand.RangeInclusive(0, 100);
+            int rand = Rand.RangeInclusive(min: 0, max: 100);
             if (rand < 33) thingCategoryDef = ThingCategoryDefOf.Apparel;
             else if (rand > 33 && rand < 66) thingCategoryDef = ThingCategoryDefOf.PlantFoodRaw;
             else if (rand > 66 && rand < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;
@@ -74,7 +74,7 @@ namespace MoreFactionInteraction
 
             if (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) return "MFI_ReverseTradeRequest_Blight";
 
-            switch (Rand.RangeInclusive(0, 4))
+            switch (Rand.RangeInclusive(min: 0, max: 4))
             {
                 case 0:
                     return "MFI_ReverseTradeRequest_Pyro";                
@@ -94,17 +94,17 @@ namespace MoreFactionInteraction
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
-            IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Clear();
+            tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
             foreach (Map potentialTargetMap in maps)
             {
-                if (potentialTargetMap.IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(potentialTargetMap.Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: potentialTargetMap.Tile) != null)
                 {
-                    IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Add(potentialTargetMap);
+                    tmpAvailableMaps.Add(item: potentialTargetMap);
                 }
             }
-            bool result = IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.TryRandomElement(out map);
-            IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Clear();
+            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
+            tmpAvailableMaps.Clear();
             return result;
         }
     }

@@ -18,55 +18,55 @@ namespace MoreFactionInteraction.World_Incidents
         private const int MinDistance = 2;
         private const int MaxDistance = 15;
 
-        private static readonly IntRange TimeoutDaysRange = new IntRange(15, 25);
+        private static readonly IntRange TimeoutDaysRange = new IntRange(min: 15, max: 25);
 
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && TryFindTile(out int num);
+            return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false, minTechLevel: TechLevel.Undefined) != null) && TryFindTile(tile: out int num);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Faction faction = parms.faction ?? Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined);
+            Faction faction = parms.faction ?? Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false, minTechLevel: TechLevel.Undefined);
 
-            if (!TryFindTile(out int tile))
+            if (!TryFindTile(tile: out int tile))
                 return false;
 
-            Site site = SiteMaker.MakeSite(MFI_DefOf.MFI_HuntersLodgeCore, MFI_DefOf.MFI_HuntersLodgePart, tile, faction, false);
+            Site site = SiteMaker.MakeSite(core: MFI_DefOf.MFI_HuntersLodgeCore, sitePart: MFI_DefOf.MFI_HuntersLodgePart, tile: tile, faction: faction, ifHostileThenMustRemainHostile: false);
 
             if (site == null)
                 return false;
 
-            if (!TryFindAnimalKind(tile, out PawnKindDef pawnKindDef))
+            if (!this.TryFindAnimalKind(tile: tile, animalKind: out PawnKindDef pawnKindDef))
                 return false;
             
             if (pawnKindDef == null) pawnKindDef = PawnKindDefOf.Thrumbo; //mostly for testing.
 
-            int randomInRange = IncidentWorker_HuntersLodge.TimeoutDaysRange.RandomInRange;
+            int randomInRange = TimeoutDaysRange.RandomInRange;
             site.Tile = tile;
-            site.GetComponent<TimeoutComp>().StartTimeout(randomInRange * GenDate.TicksPerDay);
-            site.SetFaction(faction);
+            site.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
+            site.SetFaction(newFaction: faction);
             
-            if(site.parts.First(x => x.def == MFI_DefOf.MFI_HuntersLodgePart).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
+            if(site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
                 sitePart.pawnKindDef = pawnKindDef;
 
-            Find.WorldObjects.Add(site);
-            string text = string.Format(this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();
-            Find.LetterStack.ReceiveLetter(this.def.letterLabel, text, this.def.letterDef, site, null);
+            Find.WorldObjects.Add(o: site);
+            string text = string.Format(format: this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();
+            Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: site, relatedFaction: null);
             return true;
         }
 
         private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
         {
             return (from k in DefDatabase<PawnKindDef>.AllDefs
-                    where k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile, k.race)
-                    select k).TryRandomElementByWeight((PawnKindDef x) => x.RaceProps.wildness, out animalKind);
+                    where k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile: tile, animalRace: k.race)
+                    select k).TryRandomElementByWeight(weightSelector: (PawnKindDef x) => x.RaceProps.wildness, result: out animalKind);
         }
 
         private static bool TryFindTile(out int tile)
         {
-            return TileFinder.TryFindNewSiteTile(out tile, MinDistance, MaxDistance, true, false);
+            return TileFinder.TryFindNewSiteTile(tile: out tile, minDist: MinDistance, maxDist: MaxDistance, allowCaravans: true, preferCloserTiles: false);
         }
     }
 }

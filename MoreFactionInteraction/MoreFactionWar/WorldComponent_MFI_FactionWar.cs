@@ -10,19 +10,19 @@ namespace MoreFactionInteraction
 {
     public class WorldComponent_MFI_FactionWar : WorldComponent
     {
-        public WorldComponent_MFI_FactionWar(World world) : base (world)
+        public WorldComponent_MFI_FactionWar(World world) : base (world: world)
         {
             this.world = world;
         }
 
         public void StartWar()
         {
-            WarIsOngoing = true;
+            this.WarIsOngoing = true;
         }
 
         public void ResolveWar()
         {
-            WarIsOngoing = false;
+            this.WarIsOngoing = false;
         }
 
         public bool WarIsOngoing { get; private set; } = false;

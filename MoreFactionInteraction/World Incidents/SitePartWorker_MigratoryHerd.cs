@@ -21,9 +21,9 @@ namespace MoreFactionInteraction.World_Incidents
 
         public override void PostMapGenerate(Map map)
         {
-            IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.Misc, map);
-            QueuedIncident queuedIncident = new QueuedIncident(new FiringIncident(DefDatabase<IncidentDef>.GetNamed("MFI_HerdMigration_Ambush"), null, incidentParms), Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 5));
-            Find.Storyteller.incidentQueue.Add(queuedIncident);
+            IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.Misc, target: map);
+            QueuedIncident queuedIncident = new QueuedIncident(firingInc: new FiringIncident(def: DefDatabase<IncidentDef>.GetNamed(defName: "MFI_HerdMigration_Ambush"), source: null, parms: incidentParms), fireTick: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 5));
+            Find.Storyteller.incidentQueue.Add(qi: queuedIncident);
         }
 
 

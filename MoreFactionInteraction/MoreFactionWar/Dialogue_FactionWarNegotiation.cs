@@ -16,9 +16,9 @@ namespace MoreFactionInteraction
         private Faction factionOne;
         private Faction factionInstigator;
 
-        public override Vector2 InitialSize => new Vector2(720f, 600f);
+        public override Vector2 InitialSize => new Vector2(x: 720f, y: 600f);
 
-        public Dialogue_FactionWarNegotiation(Faction factionOne, Faction factionInstigator, DiaNode nodeRoot, bool delayInteractivity = false, bool radioMode = false, string title = null) : base(nodeRoot, delayInteractivity, radioMode, title)
+        public Dialogue_FactionWarNegotiation(Faction factionOne, Faction factionInstigator, DiaNode nodeRoot, bool delayInteractivity = false, bool radioMode = false, string title = null) : base(nodeRoot: nodeRoot, delayInteractivity: delayInteractivity, radioMode: radioMode, title: title)
         {
             this.factionOne = factionOne;
             this.factionInstigator = factionInstigator;
@@ -26,44 +26,44 @@ namespace MoreFactionInteraction
 
         public override void DoWindowContents(Rect inRect)
         {
-            GUI.BeginGroup(inRect);
-            Rect leftFactionLabel = new Rect(0f, 0f, inRect.width / 2f, TitleHeight);
-            Rect leftBox = new Rect(0f, leftFactionLabel.yMax, leftFactionLabel.width, InfoHeight);
-            Rect rightFactionLabel = new Rect(inRect.width / 2f, 0f, inRect.width / 2f, TitleHeight);
-            Rect rightBox = new Rect(inRect.width / 2f, leftFactionLabel.yMax, leftFactionLabel.width, InfoHeight);
+            GUI.BeginGroup(position: inRect);
+            Rect leftFactionLabel = new Rect(x: 0f, y: 0f, width: inRect.width / 2f, height: TitleHeight);
+            Rect leftBox = new Rect(x: 0f, y: leftFactionLabel.yMax, width: leftFactionLabel.width, height: InfoHeight);
+            Rect rightFactionLabel = new Rect(x: inRect.width / 2f, y: 0f, width: inRect.width / 2f, height: TitleHeight);
+            Rect rightBox = new Rect(x: inRect.width / 2f, y: leftFactionLabel.yMax, width: leftFactionLabel.width, height: InfoHeight);
 
             Text.Font = GameFont.Medium;
-            Widgets.Label(leftFactionLabel, this.factionOne.GetCallLabel());
+            Widgets.Label(rect: leftFactionLabel, label: this.factionOne.GetCallLabel());
             Text.Anchor = TextAnchor.UpperRight;
-            Widgets.Label(rightFactionLabel, this.factionInstigator.GetCallLabel());
+            Widgets.Label(rect: rightFactionLabel, label: this.factionInstigator.GetCallLabel());
             Text.Anchor = TextAnchor.UpperLeft;
             Text.Font = GameFont.Small;
-            GUI.color = new Color(1f, 1f, 1f, 0.7f);
-            Widgets.Label(leftBox, factionOne.GetInfoText());
-            if (factionOne != null)
+            GUI.color = new Color(r: 1f, g: 1f, b: 1f, a: 0.7f);
+            Widgets.Label(rect: leftBox, label: this.factionOne.GetInfoText());
+            if (this.factionOne != null)
             {
-                FactionRelationKind playerRelationKind = factionOne.PlayerRelationKind;
+                FactionRelationKind playerRelationKind = this.factionOne.PlayerRelationKind;
                 GUI.color = playerRelationKind.GetColor();
-                Rect factionOneRelactionBox = new Rect(leftBox.x, leftBox.y + Text.CalcHeight(factionOne.GetInfoText(), leftBox.width) + Text.SpaceBetweenLines, leftBox.width, 30f);
-                Widgets.Label(factionOneRelactionBox, playerRelationKind.GetLabel());
+                Rect factionOneRelactionBox = new Rect(x: leftBox.x, y: leftBox.y + Text.CalcHeight(text: this.factionOne.GetInfoText(), width: leftBox.width) + Text.SpaceBetweenLines, width: leftBox.width, height: 30f);
+                Widgets.Label(rect: factionOneRelactionBox, label: playerRelationKind.GetLabel());
             }
-            GUI.color = new Color(1f, 1f, 1f, 0.7f);
+            GUI.color = new Color(r: 1f, g: 1f, b: 1f, a: 0.7f);
             Text.Anchor = TextAnchor.UpperRight;
-            Widgets.Label(rightBox, factionInstigator.GetInfoText());
+            Widgets.Label(rect: rightBox, label: this.factionInstigator.GetInfoText());
 
-            if (factionInstigator != null)
+            if (this.factionInstigator != null)
             {
-                FactionRelationKind playerRelationKind = factionInstigator.PlayerRelationKind;
+                FactionRelationKind playerRelationKind = this.factionInstigator.PlayerRelationKind;
                 GUI.color = playerRelationKind.GetColor();
-                Rect factionInstigatorRelactionBox = new Rect(rightBox.x, rightBox.y + Text.CalcHeight(factionInstigator.GetInfoText(), rightBox.width) + Text.SpaceBetweenLines, rightBox.width, 30f);
-                Widgets.Label(factionInstigatorRelactionBox, playerRelationKind.GetLabel());
+                Rect factionInstigatorRelactionBox = new Rect(x: rightBox.x, y: rightBox.y + Text.CalcHeight(text: this.factionInstigator.GetInfoText(), width: rightBox.width) + Text.SpaceBetweenLines, width: rightBox.width, height: 30f);
+                Widgets.Label(rect: factionInstigatorRelactionBox, label: playerRelationKind.GetLabel());
             }
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
             GUI.EndGroup();
             const float magicalNum = 147f;
-            Rect middleRemainingRectForDialog = new Rect(0f, magicalNum, inRect.width, inRect.height - magicalNum);
-            base.DrawNode(middleRemainingRectForDialog);
+            Rect middleRemainingRectForDialog = new Rect(x: 0f, y: magicalNum, width: inRect.width, height: inRect.height - magicalNum);
+            this.DrawNode(rect: middleRemainingRectForDialog);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MoreFactionInteraction.World_Incidents
     {
         public override bool CanResolve(ResolveParams rp)
         {
-            return base.CanResolve(rp);
+            return base.CanResolve(rp: rp);
         }
 
         public override void Resolve(ResolveParams rp)
@@ -24,21 +24,21 @@ namespace MoreFactionInteraction.World_Incidents
             }
             //bottomLeft
             ResolveParams farmBottomLeft = rp;
-            farmBottomLeft.rect = new CellRect(rp.rect.minX, rp.rect.minZ, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(num);
-            BaseGen.symbolStack.Push("farm", farmBottomLeft);
+            farmBottomLeft.rect = new CellRect(minX: rp.rect.minX, minZ: rp.rect.minZ, width: rp.rect.Width / 2 - 1, height: rp.rect.Height / 2 - 1).ContractedBy(dist: num);
+            BaseGen.symbolStack.Push(symbol: "farm", resolveParams: farmBottomLeft);
 
             //bottomRight
             ResolveParams farmBottomRight = rp;
-            farmBottomRight.rect = new CellRect((rp.rect.maxX - rp.rect.Width / 2) - 1, rp.rect.minZ, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(3, 6));
-            BaseGen.symbolStack.Push("farm", farmBottomRight);
+            farmBottomRight.rect = new CellRect(minX: (rp.rect.maxX - rp.rect.Width / 2) - 1, minZ: rp.rect.minZ, width: rp.rect.Width / 2 - 1, height: rp.rect.Height / 2 - 1).ContractedBy(dist: Rand.Range(min: 3, max: 6));
+            BaseGen.symbolStack.Push(symbol: "farm", resolveParams: farmBottomRight);
 
             ResolveParams farmTopLeft = rp;
-            farmTopLeft.rect = new CellRect(rp.rect.minX, (rp.rect.maxZ - rp.rect.Height / 2) - 1, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(3, 7));
-            BaseGen.symbolStack.Push("farm", farmTopLeft);
+            farmTopLeft.rect = new CellRect(minX: rp.rect.minX, minZ: (rp.rect.maxZ - rp.rect.Height / 2) - 1, width: rp.rect.Width / 2 - 1, height: rp.rect.Height / 2 - 1).ContractedBy(dist: Rand.Range(min: 3, max: 7));
+            BaseGen.symbolStack.Push(symbol: "farm", resolveParams: farmTopLeft);
 
             ResolveParams farmTopRight = rp;
-            farmTopRight.rect = new CellRect((rp.rect.maxX - rp.rect.Width / 2) - 1, (rp.rect.maxZ - rp.rect.Height / 2) - 1, rp.rect.Width / 2 - 1, rp.rect.Height / 2 - 1).ContractedBy(Rand.Range(1, 4));
-            BaseGen.symbolStack.Push("farm", farmTopRight);
+            farmTopRight.rect = new CellRect(minX: (rp.rect.maxX - rp.rect.Width / 2) - 1, minZ: (rp.rect.maxZ - rp.rect.Height / 2) - 1, width: rp.rect.Width / 2 - 1, height: rp.rect.Height / 2 - 1).ContractedBy(dist: Rand.Range(min: 1, max: 4));
+            BaseGen.symbolStack.Push(symbol: "farm", resolveParams: farmTopRight);
         }
     }
 }

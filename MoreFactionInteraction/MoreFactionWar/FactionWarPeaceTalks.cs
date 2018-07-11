@@ -24,9 +24,9 @@ namespace MoreFactionInteraction
             {
                 if (this.cachedMat == null)
                 {
-                    if (base.Faction != null)
+                    if (this.Faction != null)
                     {
-                        this.cachedMat = MaterialPool.MatFrom(this.def.texture, ShaderDatabase.WorldOverlayTransparentLit, (factionOne?.Color ?? Color.white), WorldMaterials.WorldObjectRenderQueue);
+                        this.cachedMat = MaterialPool.MatFrom(texPath: this.def.texture, shader: ShaderDatabase.WorldOverlayTransparentLit, color: (this.factionOne?.Color ?? Color.white), renderQueue: WorldMaterials.WorldObjectRenderQueue);
                     }
                     //works for the small zoomed in icon, but is too ugly. Doesn't work for large icon. (Shader unsupported)
                     //this.cachedMat = MatFrom(this.def.texture, ShaderDatabase.CutoutComplex, factionOne.Color, factionInstigator.Color, WorldMaterials.WorldObjectRenderQueue);
@@ -41,38 +41,38 @@ namespace MoreFactionInteraction
         {
             get
             {
-                if (cachedExpandoIco == null)
+                if (this.cachedExpandoIco == null)
                 {
-                    cachedExpandoIco = MatFrom(this.def.expandingIconTexture, ShaderDatabase.CutoutComplex, factionOne.Color, factionInstigator.Color, WorldMaterials.WorldObjectRenderQueue).GetMaskTexture();
+                    this.cachedExpandoIco = MatFrom(texPath: this.def.expandingIconTexture, shader: ShaderDatabase.CutoutComplex, color: this.factionOne.Color, colorTwo: this.factionInstigator.Color, renderQueue: WorldMaterials.WorldObjectRenderQueue).GetMaskTexture();
                 }
-                return cachedExpandoIco;
+                return this.cachedExpandoIco;
             }
         }
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
-            Pawn pawn = BestCaravanPawnUtility.FindBestDiplomat(caravan);
+            Pawn pawn = BestCaravanPawnUtility.FindBestDiplomat(caravan: caravan);
             if (pawn == null)
             {
-                Messages.Message("MessagePeaceTalksNoDiplomat".Translate(), caravan, MessageTypeDefOf.NegativeEvent, false);
+                Messages.Message(text: "MessagePeaceTalksNoDiplomat".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent, historical: false);
             }
             else
             {
-                CameraJumper.TryJumpAndSelect(caravan);
-                Find.WindowStack.Add(new Dialogue_FactionWarNegotiation(factionOne, factionInstigator, FactionWarDialogue.FactionWarPeaceTalks(pawn, factionOne, factionInstigator)));
+                CameraJumper.TryJumpAndSelect(target: caravan);
+                Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator)));
             }
         }
 
         private static Material MatFrom(string texPath, Shader shader, Color color, Color colorTwo, int renderQueue)
         {
-            MaterialRequest materialRequest = new MaterialRequest(ContentFinder<Texture2D>.Get(texPath, true), shader)
+            MaterialRequest materialRequest = new MaterialRequest(tex: ContentFinder<Texture2D>.Get(itemPath: texPath, reportFailure: true), shader: shader)
             {
                 renderQueue = renderQueue,
                 color = colorTwo,
                 colorTwo = color,
-                maskTex = ContentFinder<Texture2D>.Get(texPath + Graphic_Single.MaskSuffix, false),
+                maskTex = ContentFinder<Texture2D>.Get(itemPath: texPath + Graphic_Single.MaskSuffix, reportFailure: false),
             };
-            return MaterialPool.MatFrom(materialRequest);
+            return MaterialPool.MatFrom(req: materialRequest);
         }
 
         public void SetWarringFactions(Faction factionOne, Faction factionInstigator)
@@ -83,11 +83,11 @@ namespace MoreFactionInteraction
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
-            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan))
+            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan))
             {
                 yield return o;
             }
-            foreach (FloatMenuOption f in CaravanArrivalAction_VisitFactionWarPeaceTalks.GetFloatMenuOptions(caravan, this))
+            foreach (FloatMenuOption f in CaravanArrivalAction_VisitFactionWarPeaceTalks.GetFloatMenuOptions(caravan: caravan, factionWarPeaceTalks: this))
             {
                 yield return f;
             }

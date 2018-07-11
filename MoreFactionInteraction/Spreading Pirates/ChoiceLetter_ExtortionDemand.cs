@@ -18,60 +18,60 @@ namespace MoreFactionInteraction
         {
             get
             {
-                if (base.ArchivedOnly)
+                if (this.ArchivedOnly)
                 {
-                    yield return base.Option_Close;
+                    yield return this.Option_Close;
                 }
                 else
                 {
-                    DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
+                    DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
                     {
                         action = () =>
                         {
-                            TradeUtility.LaunchSilver(this.map, this.fee);
-                            Find.LetterStack.RemoveLetter(this);
+                            TradeUtility.LaunchSilver(map: this.map, fee: this.fee);
+                            Find.LetterStack.RemoveLetter(@let: this);
                         },
                         resolveTree = true
                     };
-                    if (!TradeUtility.ColonyHasEnoughSilver(this.map, this.fee))
+                    if (!TradeUtility.ColonyHasEnoughSilver(map: this.map, fee: this.fee))
                     {
-                        accept.Disable("NeedSilverLaunchable".Translate(new object[]
+                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(args: new object[]
                         {
                             this.fee.ToString()
                         }));
                     }
                     yield return accept;
 
-                    DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
+                    DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
                     {
                         action = () =>
                         {
-                            IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, map);
+                            IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.ThreatBig, target: this.map);
                             incidentParms.forced = true;
                             incidentParms.faction = this.faction;
                             incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
                             incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                             incidentParms.target = this.map;
-                            if (outpost) incidentParms.points *= 0.7f;
-                            IncidentDefOf.RaidEnemy.Worker.TryExecute(incidentParms);
-                            Find.LetterStack.RemoveLetter(this);
+                            if (this.outpost) incidentParms.points *= 0.7f;
+                            IncidentDefOf.RaidEnemy.Worker.TryExecute(parms: incidentParms);
+                            Find.LetterStack.RemoveLetter(@let: this);
                         },
                         resolveTree = true
                     };
                     yield return reject;
-                    yield return base.Option_Postpone;
+                    yield return this.Option_Postpone;
                 }
             }
         }
 
-        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(this.map);
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(item: this.map);
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Map>(ref this.map, "map", false);
-            Scribe_References.Look<Faction>(ref this.faction, "faction", false);
-            Scribe_Values.Look<int>(ref this.fee, "fee", 0, false);
+            Scribe_References.Look<Map>(refee: ref this.map, label: "map", saveDestroyedThings: false);
+            Scribe_References.Look<Faction>(refee: ref this.faction, label: "faction", saveDestroyedThings: false);
+            Scribe_Values.Look<int>(value: ref this.fee, label: "fee", defaultValue: 0, forceSave: false);
         }
     }
 }

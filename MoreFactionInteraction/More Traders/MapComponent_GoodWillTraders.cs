@@ -12,7 +12,7 @@ namespace MoreFactionInteraction
     public class MapComponent_GoodWillTrader : MapComponent
     {
         //empty constructor
-        public MapComponent_GoodWillTrader(Map map) : base(map)
+        public MapComponent_GoodWillTrader(Map map) : base(map: map)
         {
         }
 
@@ -28,13 +28,13 @@ namespace MoreFactionInteraction
             get
             {
                 //intermingled :D
-                foreach (Faction faction in NextFactionInteraction.Keys)
+                foreach (Faction faction in this.NextFactionInteraction.Keys)
                 {
-                    if (!timesTraded.Keys.Contains(faction)) timesTraded.Add(faction, 0);
+                    if (!this.timesTraded.Keys.Contains(value: faction)) this.timesTraded.Add(key: faction, value: 0);
                 }
                 //trust betrayed, reset count.
-                timesTraded.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
-                return timesTraded;
+                this.timesTraded.RemoveAll(predicate: x => x.Key.HostileTo(other: Faction.OfPlayerSilentFail));
+                return this.timesTraded;
             }
         }
 
@@ -46,13 +46,13 @@ namespace MoreFactionInteraction
                 if (this.nextFactionInteraction.Count == 0)
                 {
                     IEnumerable<Faction> friendlyFactions = from faction in Find.FactionManager.AllFactionsVisible
-                                                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(faction)
+                                                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(other: faction)
                                                         select faction;
 
 
                     foreach (Faction faction in friendlyFactions)
                     {
-                        nextFactionInteraction.Add(faction, Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 8));
+                        this.nextFactionInteraction.Add(key: faction, value: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 8));
                     }
                 }
                 //if a faction became hostile, remove
@@ -61,16 +61,16 @@ namespace MoreFactionInteraction
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
-                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !faction.HostileTo(Faction.OfPlayerSilentFail) && !nextFactionInteraction.ContainsKey(faction)
+                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !faction.HostileTo(other: Faction.OfPlayerSilentFail) && !this.nextFactionInteraction.ContainsKey(key: faction)
                         select faction).Any())
                 {
-                    nextFactionInteraction.Add(
+                    this.nextFactionInteraction.Add(
                         key: (from faction in Find.FactionManager.AllFactionsVisible
-                              where !faction.HostileTo(Faction.OfPlayerSilentFail) && !faction.IsPlayer && !nextFactionInteraction.ContainsKey(faction)
+                              where !faction.HostileTo(other: Faction.OfPlayerSilentFail) && !faction.IsPlayer && !this.nextFactionInteraction.ContainsKey(key: faction)
                               select faction).First(),
-                        value: Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 4));
+                        value: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 4));
                 }
-                return nextFactionInteraction;
+                return this.nextFactionInteraction;
             }
         }
 
@@ -81,20 +81,20 @@ namespace MoreFactionInteraction
             //We don't need to run all that often
             if (Find.TickManager.TicksGame % 531 == 0 && GenDate.DaysPassed > 8)
             {
-                foreach (KeyValuePair<Faction, int> kvp in NextFactionInteraction)
+                foreach (KeyValuePair<Faction, int> kvp in this.NextFactionInteraction)
                 {
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
 
-                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, map);
+                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.FactionArrival, target: this.map);
                         incidentParms.forced = true;
                         incidentParms.faction = faction;
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(IncidentDef(), Rand.Range(GenDate.TicksPerDay / 2, GenDate.TicksPerDay * 3), incidentParms);
+                        Find.Storyteller.incidentQueue.Add(def: IncidentDef(), fireTick: Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), parms: incidentParms);
 
-                        NextFactionInteraction[faction] =
-                                    Find.TickManager.TicksGame + (int)FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.GoodwillWith(Faction.OfPlayer));
+                        this.NextFactionInteraction[key: faction] =
+                                    Find.TickManager.TicksGame + (int)FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(x: faction.GoodwillWith(other: Faction.OfPlayer));
 
                         //kids, you shouldn't change values you iterate over.
                         break;
@@ -105,7 +105,7 @@ namespace MoreFactionInteraction
 
         private static IncidentDef IncidentDef()
         {
-            switch (Rand.RangeInclusive(0,4))
+            switch (Rand.RangeInclusive(min: 0,max: 4))
             {
                 case 0: 
                 case 1: return MFI_DefOf.MFI_ReverseTradeRequest;
@@ -127,8 +127,8 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look<Faction, int>(ref nextFactionInteraction, "MFI_nextFactionInteraction", LookMode.Reference, LookMode.Value, ref factionsListforInteraction, ref intListForInteraction);
-            Scribe_Collections.Look<Faction, int>(ref timesTraded, "MFI_timesTraded", LookMode.Reference, LookMode.Value, ref factionsListforTimesTraded, ref intListforTimesTraded);
+            Scribe_Collections.Look<Faction, int>(dict: ref this.nextFactionInteraction, label: "MFI_nextFactionInteraction", keyLookMode: LookMode.Reference, valueLookMode: LookMode.Value, keysWorkingList: ref this.factionsListforInteraction, valuesWorkingList: ref this.intListForInteraction);
+            Scribe_Collections.Look<Faction, int>(dict: ref this.timesTraded, label: "MFI_timesTraded", keyLookMode: LookMode.Reference, valueLookMode: LookMode.Value, keysWorkingList: ref this.factionsListforTimesTraded, valuesWorkingList: ref this.intListforTimesTraded);
         }
     }
 }

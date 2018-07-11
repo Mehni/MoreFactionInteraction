@@ -16,21 +16,15 @@ namespace MoreFactionInteraction
         public Pawn betrothed;
         public Pawn marriageSeeker;
 
-        public override bool CanShowInLetterStack
-        {
-            get
-            {
-                return base.CanShowInLetterStack && PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Contains(this.betrothed);
-            }
-        }
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack && PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Contains(value: this.betrothed);
 
         public override IEnumerable<DiaOption> Choices
         {
             get
             {
-                if (base.ArchivedOnly)
+                if (this.ArchivedOnly)
                 {
-                    yield return base.Option_Close;
+                    yield return this.Option_Close;
                 }
                 else
                 {
@@ -40,55 +34,55 @@ namespace MoreFactionInteraction
                     //wedding (doable)
                     //bring us the betrothed? (complicated.)
                     //betrothed picks a transport pod (meh)
-                    DiaOption accept = new DiaOption("RansomDemand_Accept".Translate())
+                    DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
                     {
                         action = () =>
                         {
-                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(((betrothed.MarketValue / 20) * marriageSeeker.relations.SecondaryLovinChanceFactor(betrothed)), DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, DiplomacyTuning.Goodwill_PeaceTalksSuccessRange.RandomInRange);
-                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, goodWillGainedFromMarriage, true, true, "LetterLabelAcceptedProposal".Translate());
-                            betrothed.relations.AddDirectRelation(PawnRelationDefOf.Fiance, marriageSeeker);
+                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(value: ((this.betrothed.MarketValue / 20) * this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: this.betrothed)), min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: DiplomacyTuning.Goodwill_PeaceTalksSuccessRange.RandomInRange);
+                            this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: goodWillGainedFromMarriage, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
+                            this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 
-                            if (betrothed.GetCaravan() is Caravan caravan)
+                            if (this.betrothed.GetCaravan() is Caravan caravan)
                             {
-                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(betrothed, caravan.PawnsListForReading);
-                                HealIfPossible(betrothed);
-                                caravan.RemovePawn(betrothed);
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(@from: this.betrothed, candidates: caravan.PawnsListForReading);
+                                HealIfPossible(p: this.betrothed);
+                                caravan.RemovePawn(p: this.betrothed);
                             }
 
-                            DetermineAndDoOutcome(marriageSeeker, betrothed);
+                            DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
                         }
                     };
-                    DiaNode dialogueNodeAccept = new DiaNode("MFI_AcceptedProposal".Translate().CapitalizeFirst());
-                            dialogueNodeAccept.options.Add(base.Option_Close);
+                    DiaNode dialogueNodeAccept = new DiaNode(text: "MFI_AcceptedProposal".Translate().CapitalizeFirst());
+                            dialogueNodeAccept.options.Add(item: this.Option_Close);
                             accept.link = dialogueNodeAccept;
 
-                    DiaOption reject = new DiaOption("RansomDemand_Reject".Translate())
+                    DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
                     {
                         action = () =>
                         {
                             //if (Rand.Chance(0.2f))
-                            marriageSeeker.Faction.TryAffectGoodwillWith(Faction.OfPlayer, DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, true, true, "LetterLabelRejectedProposal".Translate());
+                            this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelRejectedProposal".Translate());
                         }
                     };
-                    DiaNode dialogueNodeReject = new DiaNode("MFI_DejectedProposal".Translate().CapitalizeFirst());
-                            dialogueNodeReject.options.Add(base.Option_Close);
+                    DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate().CapitalizeFirst());
+                            dialogueNodeReject.options.Add(item: this.Option_Close);
                             reject.link = dialogueNodeReject;
 
                     yield return accept;
                     yield return reject;
-                    yield return base.Option_Postpone;
+                    yield return this.Option_Postpone;
                 }
             }
         }
 
         private static void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
         {
-            if (Prefs.LogVerbose) Log.Warning(" Determine and do outcome after marriage.");
+            if (Prefs.LogVerbose) Log.Warning(text: " Determine and do outcome after marriage.");
 
-            if (!marriageSeeker.HostileTo(Faction.OfPlayer))
-                betrothed.SetFaction(marriageSeeker.Faction);
+            if (!marriageSeeker.HostileTo(fac: Faction.OfPlayer))
+                betrothed.SetFaction(newFaction: marriageSeeker.Faction);
             else
-                betrothed.SetFaction(null);
+                betrothed.SetFaction(newFaction: null);
 
             //GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
             //Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
@@ -105,16 +99,16 @@ namespace MoreFactionInteraction
         private static void HealIfPossible(Pawn p)
         {
             List<Hediff> tmpHediffs = new List<Hediff>();
-            tmpHediffs.AddRange(p.health.hediffSet.hediffs);
+            tmpHediffs.AddRange(collection: p.health.hediffSet.hediffs);
             foreach (Hediff hediffTemp in tmpHediffs)
             {
                 if (hediffTemp is Hediff_Injury hediff_Injury && !hediff_Injury.IsPermanent())
                 {
-                    p.health.RemoveHediff(hediff_Injury);
+                    p.health.RemoveHediff(hediff: hediff_Injury);
                 }
                 else
                 {
-                    ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(hediffTemp.def);
+                    ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(def: hediffTemp.def);
                     if (immunityRecord != null)
                     {
                         immunityRecord.immunity = 1f;
@@ -127,8 +121,8 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Pawn>(ref this.betrothed, "betrothed");
-            Scribe_References.Look<Pawn>(ref this.marriageSeeker, "marriageSeeker");
+            Scribe_References.Look<Pawn>(refee: ref this.betrothed, label: "betrothed");
+            Scribe_References.Look<Pawn>(refee: ref this.marriageSeeker, label: "marriageSeeker");
         }
     }
 }

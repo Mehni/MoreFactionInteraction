@@ -17,24 +17,22 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && IncidentWorker_SpreadingOutpost.TryFindFaction(out faction) && TileFinder.TryFindNewSiteTile(out int tile, 8, 30, false, true, -1);
+            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30, allowCaravans: false, preferCloserTiles: true, nearThisTile: -1);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!IncidentWorker_SpreadingOutpost.TryFindFaction(out faction)) return false;
-            this.TryGetRandomAvailableTargetMap(out Map map);
-            int pirateTile = RandomNearbyHostileSettlement(map.Tile).Tile;
+            if (!TryFindFaction(enemyFaction: out this.faction)) return false;
+            this.TryGetRandomAvailableTargetMap(map: out Map map);
+            int pirateTile = this.RandomNearbyHostileSettlement(originTile: map.Tile).Tile;
 
-            if (!TileFinder.TryFindNewSiteTile(out int tile, 2, 8, false, true, pirateTile)) return false;
-            Site site = SiteMaker.MakeSite(SiteCoreDefOf.Nothing, SitePartDefOf.Outpost, tile, faction);
+            if (!TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile)) return false;
+            Site site = SiteMaker.MakeSite(core: SiteCoreDefOf.Nothing, sitePart: SitePartDefOf.Outpost, tile: tile, faction: this.faction);
             site.Tile = tile;
-            Find.WorldObjects.Add(site);
-            base.SendStandardLetter(site, faction, new string[]
+            Find.WorldObjects.Add(o: site);
+            this.SendStandardLetter(lookTargets: site, relatedFaction: this.faction, textArgs: new string[]
             {
-                    faction.leader.LabelShort,
-                    faction.def.leaderTitle,
-                    faction.Name,
+                this.faction.leader.LabelShort, this.faction.def.leaderTitle, this.faction.Name,
             });
             return true;
         }
@@ -42,16 +40,16 @@ namespace MoreFactionInteraction
         private SettlementBase RandomNearbyHostileSettlement(int originTile)
         {
             return (from settlement in Find.WorldObjects.SettlementBases
-                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f 
-                    && Find.WorldReachability.CanReach(originTile, settlement.Tile) && settlement.Faction == this.faction
-                    select settlement).RandomElementWithFallback(null);
+                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f 
+                    && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile) && settlement.Faction == this.faction
+                    select settlement).RandomElementWithFallback(fallback: null);
         }
 
         private static bool TryFindFaction(out Faction enemyFaction)
         {
             if ((from x in Find.FactionManager.AllFactions
-                 where !x.def.hidden && !x.defeated && !x.IsPlayer && x.HostileTo(Faction.OfPlayer) && x.def.permanentEnemy
-                 select x).TryRandomElement(out enemyFaction))
+                 where !x.def.hidden && !x.defeated && !x.IsPlayer && x.HostileTo(other: Faction.OfPlayer) && x.def.permanentEnemy
+                 select x).TryRandomElement(result: out enemyFaction))
             {
                 return true;
             };
@@ -61,17 +59,17 @@ namespace MoreFactionInteraction
 
         private bool TryGetRandomAvailableTargetMap(out Map map)
         {
-            IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Clear();
+            tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
             foreach (Map potentialTargetMap in maps)
             {
-                if (potentialTargetMap.IsPlayerHome && this.RandomNearbyHostileSettlement(potentialTargetMap.Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && this.RandomNearbyHostileSettlement(originTile: potentialTargetMap.Tile) != null)
                 {
-                    IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Add(potentialTargetMap);
+                    tmpAvailableMaps.Add(item: potentialTargetMap);
                 }
             }
-            bool result = IncidentWorker_SpreadingOutpost.tmpAvailableMaps.TryRandomElement(out map);
-            IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Clear();
+            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
+            tmpAvailableMaps.Clear();
             return result;
         }
     }

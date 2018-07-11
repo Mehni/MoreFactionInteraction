@@ -27,7 +27,7 @@ namespace MoreFactionInteraction
 
         private static bool RandomNearbyHostileWorldObject(int originTile, out WorldObject encampment, out Faction faction)
         {
-            encampment = NearbyHostileEncampments(originTile).RandomElementWithFallback(null);
+            encampment = NearbyHostileEncampments(forTile: originTile).RandomElementWithFallback(fallback: null);
 
             faction = encampment?.Faction;
             return faction != null;
@@ -42,47 +42,43 @@ namespace MoreFactionInteraction
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
                                     where (worldObject is SettlementBase || worldObject is Site)
-                                    && worldObject.Faction.HostileTo(Faction.OfPlayer)
-                                    && Find.WorldGrid.ApproxDistanceInTiles(forTile, worldObject.Tile) < 15f
-                                    && (Find.WorldReachability.CanReach(forTile, worldObject.Tile) || forTile == -1)
+                                    && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
+                                    && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 15f
+                                    && (Find.WorldReachability.CanReach(startTile: forTile, destTile: worldObject.Tile) || forTile == -1)
                                     select worldObject;
         }
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             Map map = (Map)parms.target;
-            return CommsConsoleUtility.PlayerHasPoweredCommsConsole(map) && base.CanFireNowSub(parms) && RandomNearbyHostileWorldObject(parms.target.Tile, out worldObject, out faction);
+            return CommsConsoleUtility.PlayerHasPoweredCommsConsole(map: map) && base.CanFireNowSub(parms: parms) && RandomNearbyHostileWorldObject(originTile: parms.target.Tile, encampment: out this.worldObject, faction: out this.faction);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             Map map = (Map)parms.target;
             
-            if (RandomNearbyHostileWorldObject(map.Tile, out worldObject, out faction))
+            if (RandomNearbyHostileWorldObject(originTile: map.Tile, encampment: out this.worldObject, faction: out this.faction))
             {
                 //technically the math.max is nonsense since this incident uses Misc category, and points don't get calculated for that. Left in for future expansion.
-                int extorsionDemand = Math.Max(Rand.Range(150, 300), (int)parms.points) * NearbyHostileEncampments(map.Tile).Count();
+                int extorsionDemand = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points) * NearbyHostileEncampments(forTile: map.Tile).Count();
 
-                ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(this.def.letterLabel, "MFI_ExtortionDemand".Translate(new object[]
+                ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(args: new object[]
                 {
-                    faction.leader.LabelShort,
-                    faction.def.leaderTitle,
-                    faction.Name,
-                    worldObject.def.label,
-                    worldObject.Label,
+                    this.faction.leader.LabelShort, this.faction.def.leaderTitle, this.faction.Name, this.worldObject.def.label, this.worldObject.Label,
                     extorsionDemand,
-                }).AdjustedFor(faction.leader), this.def.letterDef);
-                choiceLetter_ExtortionDemand.title = "MFI_ExtortionDemandTitle".Translate(new object[]
+                }).AdjustedFor(p: this.faction.leader), def: this.def.letterDef);
+                choiceLetter_ExtortionDemand.title = "MFI_ExtortionDemandTitle".Translate(args: new object[]
                 {
                     map.info.parent.Label
                 }).CapitalizeFirst();
-                if (worldObject is Site) choiceLetter_ExtortionDemand.outpost = true;
+                if (this.worldObject is Site) choiceLetter_ExtortionDemand.outpost = true;
                 choiceLetter_ExtortionDemand.radioMode = true;
-                choiceLetter_ExtortionDemand.faction = faction;
+                choiceLetter_ExtortionDemand.faction = this.faction;
                 choiceLetter_ExtortionDemand.map = map;
                 choiceLetter_ExtortionDemand.fee = extorsionDemand;
-                choiceLetter_ExtortionDemand.StartTimeout(TimeoutTicks);
-                Find.LetterStack.ReceiveLetter(choiceLetter_ExtortionDemand);
+                choiceLetter_ExtortionDemand.StartTimeout(duration: TimeoutTicks);
+                Find.LetterStack.ReceiveLetter(@let: choiceLetter_ExtortionDemand);
                 return true;
             }
             return false;
