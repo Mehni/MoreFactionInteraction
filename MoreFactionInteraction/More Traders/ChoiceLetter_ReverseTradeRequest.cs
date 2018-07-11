@@ -37,8 +37,8 @@ namespace MoreFactionInteraction
                             incidentParms.faction = this.faction;
                             TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed("MFI_EmptyTrader_" + this.thingCategoryDef);
 
-                            traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.max += fee;
-                            traderKind.stockGenerators.Where(x => x.HandlesThingDef(ThingDefOf.Silver)).First().countRange.min += fee;
+                            traderKind.stockGenerators.First(x => x.HandlesThingDef(ThingDefOf.Silver)).countRange.max += fee;
+                            traderKind.stockGenerators.First(x => x.HandlesThingDef(ThingDefOf.Silver)).countRange.min += fee;
 
                             traderKind.label = this.thingCategoryDef.label + " " + "MFI_Trader".Translate();
                             incidentParms.traderKind = traderKind;
@@ -85,13 +85,7 @@ namespace MoreFactionInteraction
             return Math.Min(travelTime, GenDate.TicksPerDay * 4);
         }
 
-        public override bool CanShowInLetterStack
-        {
-            get
-            {
-                return base.CanShowInLetterStack && Find.Maps.Contains(this.map) && !this.faction.HostileTo(Faction.OfPlayer);
-            }
-        }
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(this.map) && !this.faction.HostileTo(Faction.OfPlayer);
 
         public override void ExposeData()
         {

@@ -35,13 +35,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        public override Color ExpandingIconColor
-        {
-            get
-            {
-                return Color.white;
-            }
-        }
+        public override Color ExpandingIconColor => Color.white;
 
         public override Texture2D ExpandingIcon
         {

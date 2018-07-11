@@ -23,16 +23,14 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && this.TryFindTile(out int num);
+            return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined) != null) && TryFindTile(out int num);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            Faction faction = parms.faction;
-            if (faction == null)
-                faction = Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined);
+            Faction faction = parms.faction ?? Find.FactionManager.RandomNonHostileFaction(false, false, false, TechLevel.Undefined);
 
-            if (!this.TryFindTile(out int tile))
+            if (!TryFindTile(out int tile))
                 return false;
 
             Site site = SiteMaker.MakeSite(MFI_DefOf.MFI_HuntersLodgeCore, MFI_DefOf.MFI_HuntersLodgePart, tile, faction, false);
@@ -66,7 +64,7 @@ namespace MoreFactionInteraction.World_Incidents
                     select k).TryRandomElementByWeight((PawnKindDef x) => x.RaceProps.wildness, out animalKind);
         }
 
-        private bool TryFindTile(out int tile)
+        private static bool TryFindTile(out int tile)
         {
             return TileFinder.TryFindNewSiteTile(out tile, MinDistance, MaxDistance, true, false);
         }

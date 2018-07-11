@@ -81,7 +81,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        private void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
+        private static void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
         {
             if (Prefs.LogVerbose) Log.Warning(" Determine and do outcome after marriage.");
 
@@ -106,15 +106,15 @@ namespace MoreFactionInteraction
         {
             List<Hediff> tmpHediffs = new List<Hediff>();
             tmpHediffs.AddRange(p.health.hediffSet.hediffs);
-            for (int i = 0; i < tmpHediffs.Count; i++)
+            foreach (Hediff hediffTemp in tmpHediffs)
             {
-                if (tmpHediffs[i] is Hediff_Injury hediff_Injury && !hediff_Injury.IsPermanent())
+                if (hediffTemp is Hediff_Injury hediff_Injury && !hediff_Injury.IsPermanent())
                 {
                     p.health.RemoveHediff(hediff_Injury);
                 }
                 else
                 {
-                    ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(tmpHediffs[i].def);
+                    ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(hediffTemp.def);
                     if (immunityRecord != null)
                     {
                         immunityRecord.immunity = 1f;

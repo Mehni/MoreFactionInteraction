@@ -18,7 +18,7 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && this.TryFindMarriageSeeker(out Pawn marriageSeeker) && TryFindBetrothed(out Pawn betrothed);
+            return base.CanFireNowSub(parms) && TryFindMarriageSeeker(out Pawn marriageSeeker) && TryFindBetrothed(out Pawn betrothed);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -55,21 +55,21 @@ namespace MoreFactionInteraction
         private bool TryFindBetrothed(out Pawn betrothed) => (from potentialPartners in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners_NoCryptosleep
                                                               select potentialPartners).TryRandomElementByWeight((Pawn marriageSeeker2) => this.marriageSeeker.relations.SecondaryLovinChanceFactor(marriageSeeker2), out betrothed);
 
-        private bool TryFindMarriageSeeker(out Pawn marriageSeeker) => (from x in Find.WorldPawns.AllPawnsAlive
+        private static bool TryFindMarriageSeeker(out Pawn marriageSeeker) => (from x in Find.WorldPawns.AllPawnsAlive
                                                                         where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer && !x.Faction.defeated
-                                                                        && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !this.PeaceTalksExist(x.Faction)
+                                                                        && !SettlementUtility.IsPlayerAttackingAnySettlementOf(x.Faction) && !PeaceTalksExist(x.Faction)
                                                                         && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned
                                                                         && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
                                                                         && !x.IsPrisoner && !x.Spawned
                                                                         && (!LovePartnerRelationUtility.HasAnyLovePartner(x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(x, false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
                                                                         select x).TryRandomElement(out marriageSeeker); //todo: make more likely to select hostile.
 
-        private bool PeaceTalksExist(Faction faction)
+        private static bool PeaceTalksExist(Faction faction)
         {
             List<PeaceTalks> peaceTalks = Find.WorldObjects.PeaceTalks;
-            for (int i = 0; i < peaceTalks.Count; i++)
+            foreach (PeaceTalks peaceTalk in peaceTalks)
             {
-                if (peaceTalks[i].Faction == faction)
+                if (peaceTalk.Faction == faction)
                 {
                     return true;
                 }

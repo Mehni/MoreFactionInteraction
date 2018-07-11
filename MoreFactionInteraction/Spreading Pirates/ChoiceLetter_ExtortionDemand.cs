@@ -64,13 +64,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        public override bool CanShowInLetterStack
-        {
-            get
-            {
-                return base.CanShowInLetterStack && Find.Maps.Contains(this.map);
-            }
-        }
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(this.map);
 
         public override void ExposeData()
         {

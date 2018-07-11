@@ -23,21 +23,9 @@ namespace MoreFactionInteraction.World_Incidents
         private const float expGain = 6000f;
         private static readonly IntRange FactionRelationOffset = new IntRange(3, 8);
 
-        public bool CaravanIsWorking
-        {
-            get
-            {
-                return workStarted && Find.TickManager.TicksGame < workLeft;
-            }
-        }
+        public bool CaravanIsWorking => workStarted && Find.TickManager.TicksGame < workLeft;
 
-        public bool ActiveRequest
-        {
-            get
-            {
-                return this.expiration > Find.TickManager.TicksGame;
-            }
-        }
+        public bool ActiveRequest => this.expiration > Find.TickManager.TicksGame;
 
         public WorldObjectComp_SettlementBumperCropComp()
         {
@@ -91,7 +79,7 @@ namespace MoreFactionInteraction.World_Incidents
             reward.stackCount = Mathf.RoundToInt(totalreward);
             CaravanInventoryUtility.GiveThing(caravan, reward);
 
-            Find.LetterStack.ReceiveLetter("MFI_LetterLabelHarvest_Triumph".Translate(), this.GetLetterText("MFI_Harvest_Triumph".Translate(new object[]
+            Find.LetterStack.ReceiveLetter("MFI_LetterLabelHarvest_Triumph".Translate(), GetLetterText("MFI_Harvest_Triumph".Translate(new object[]
             {
                 parent.Faction.def.pawnsPlural,
                 parent.Faction.Name,
@@ -102,12 +90,12 @@ namespace MoreFactionInteraction.World_Incidents
             allMembersCapableOfGrowing.ForEach(pawn => pawn.skills.Learn(SkillDefOf.Plants, expGain, true));
         }
 
-        private float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
+        private static float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
         {           
             return caravanMembersCapableOfGrowing.Select(x => x.GetStatValue(StatDefOf.PlantHarvestYield, true)).Sum();
         }
 
-        private string GetLetterText(string baseText, Caravan caravan)
+        private static string GetLetterText(string baseText, Caravan caravan)
         {
             StringBuilder text = new StringBuilder();
             text.Append(baseText + "\n");

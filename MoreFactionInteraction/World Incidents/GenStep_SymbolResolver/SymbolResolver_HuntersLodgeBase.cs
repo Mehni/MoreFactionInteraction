@@ -12,8 +12,8 @@ namespace MoreFactionInteraction.World_Incidents
     {
         public override void Resolve(ResolveParams rp)
         {
-            Map map = BaseGen.globalSettings.map;
-            Faction faction = rp.faction ?? Find.FactionManager.RandomAlliedFaction(false, false, true, TechLevel.Undefined);
+            //Map map = BaseGen.globalSettings.map;
+            Faction faction = rp.faction ?? Find.FactionManager.RandomAlliedFaction();
             int num = 0;
 
             if (rp.rect.Width >= 20 && rp.rect.Height >= 20 && (faction.def.techLevel >= TechLevel.Industrial || Rand.Bool))

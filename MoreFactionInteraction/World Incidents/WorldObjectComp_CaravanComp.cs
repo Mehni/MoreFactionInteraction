@@ -25,12 +25,9 @@ namespace MoreFactionInteraction.World_Incidents
 
         public override void CompTick()
         {
-            if (caravanIsWorking)
+            if (caravanIsWorking && Find.TickManager.TicksGame > workWillBeDoneAtTick)
             {
-                if (Find.TickManager.TicksGame > workWillBeDoneAtTick)
-                {
-                   CaravanVisitUtility.SettlementVisitedNow((Caravan)parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>().DoOutcome((Caravan)parent);
-                }
+                CaravanVisitUtility.SettlementVisitedNow((Caravan)parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>().DoOutcome((Caravan)parent);
             }
         }
     }

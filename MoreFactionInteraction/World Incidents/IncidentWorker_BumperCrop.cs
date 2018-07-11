@@ -55,7 +55,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         private bool TryGenerateBumperCrop(WorldObjectComp_SettlementBumperCropComp target, Map map)
         {
-            int num = this.RandomOfferDuration(map.Tile, target.parent.Tile);
+            int num = RandomOfferDuration(map.Tile, target.parent.Tile);
             if (num < 1)
             {
                 return false;
@@ -65,7 +65,7 @@ namespace MoreFactionInteraction.World_Incidents
             return true;
         }
 
-        private ThingDef RandomRawFood()
+        private static ThingDef RandomRawFood()
         {
             //a long list of things to excluse stuff like milk and kibble. In retrospect, it may have been easier to get all plants and get their harvestables.
             if (!(from x in ThingSetMakerUtility.allGeneratableItems
@@ -88,7 +88,7 @@ namespace MoreFactionInteraction.World_Incidents
                     select settlement).RandomElementWithFallback(null);
         }
 
-        private int RandomOfferDuration(int tileIdFrom, int tileIdTo)
+        private static int RandomOfferDuration(int tileIdFrom, int tileIdTo)
         {
             int offerValidForDays = IncidentWorker_BumperCrop.OfferDurationRange.RandomInRange;
             int travelTimeByCaravan = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(tileIdFrom, tileIdTo, null);
@@ -106,11 +106,11 @@ namespace MoreFactionInteraction.World_Incidents
         {
             IncidentWorker_BumperCrop.tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
-            for (int i = 0; i < maps.Count; i++)
+            foreach (Map potentialTargetMap in maps)
             {
-                if (maps[i].IsPlayerHome && this.AtLeast2HealthyColonists(maps[i]) && IncidentWorker_BumperCrop.RandomNearbyGrowerSettlement(maps[i].Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && AtLeast2HealthyColonists(potentialTargetMap) && IncidentWorker_BumperCrop.RandomNearbyGrowerSettlement(potentialTargetMap.Tile) != null)
                 {
-                    IncidentWorker_BumperCrop.tmpAvailableMaps.Add(maps[i]);
+                    IncidentWorker_BumperCrop.tmpAvailableMaps.Add(potentialTargetMap);
                 }
             }
             bool result = IncidentWorker_BumperCrop.tmpAvailableMaps.TryRandomElement(out map);
@@ -118,22 +118,19 @@ namespace MoreFactionInteraction.World_Incidents
             return result;
         }
         
-        private bool AtLeast2HealthyColonists(Map map)
+        private static bool AtLeast2HealthyColonists(Map map)
         {
             List<Pawn> pawnList = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
             int healthyColonists = 0;
 
-            for (int i = 0; i < pawnList.Count; i++)
+            foreach (Pawn pawn in pawnList)
             {
-                if (pawnList[i].IsFreeColonist)
+                if (pawn.IsFreeColonist && !HealthAIUtility.ShouldSeekMedicalRest(pawn))
                 {
-                    if (!HealthAIUtility.ShouldSeekMedicalRest(pawnList[i]))
+                    healthyColonists++;
+                    if (healthyColonists >= 2)
                     {
-                        healthyColonists++;
-                        if (healthyColonists >= 2)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }

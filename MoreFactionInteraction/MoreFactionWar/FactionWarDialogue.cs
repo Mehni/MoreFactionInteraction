@@ -21,11 +21,15 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         public static DiaNode FactionWarPeaceTalks(Pawn pawn, Faction factionOne, Faction factionInstigator)
         {
-            string factionInstigatorLeaderName = GetFactionLeaderName(factionInstigator);
-            string factionOneLeaderName = GetFactionLeaderName(factionOne);
 
-            DiaNode dialogueGreeting = new DiaNode("MFI_FactionWarPeaceTalksIntroduction".Translate(new object[] { factionOneLeaderName, factionInstigatorLeaderName, pawn.Label }));//"$"The two faction leaders {factionOneLeaderName} and {factionInstigatorLeaderName} sit in opposite corners of the camp," +
-               // $" each surrounded by their trusted whathaveyou's. {pawn.LabelCap} strides into camp, knowing what they say can have far reaching consequences.\n\nYour negotiator has the following options:");
+            string factionInstigatorLeaderName = factionInstigator.leader != null
+                ? factionInstigator.leader.Name.ToStringFull
+                : factionInstigator.Name;
+
+            string factionOneLeaderName =
+                factionOne.leader != null ? factionOne.leader.Name.ToStringFull : factionOne.Name;
+
+            DiaNode dialogueGreeting = new DiaNode("MFI_FactionWarPeaceTalksIntroduction".Translate(new object[] { factionOneLeaderName, factionInstigatorLeaderName, pawn.Label }));
 
             foreach (DiaOption option in FactionWarDialogue.DialogueOptions(pawn, factionOne, factionInstigator))
             {
@@ -33,15 +37,6 @@ namespace MoreFactionInteraction.MoreFactionWar
             }
 
             return dialogueGreeting;
-        }
-
-        private static string GetFactionLeaderName(Faction faction)
-        {
-            if (faction.leader != null)
-                return faction.leader.Name.ToStringFull;
-            
-            else
-                return faction.Name;            
         }
 
         private static IEnumerable<DiaOption> DialogueOptions(Pawn pawn, Faction factionOne, Faction factionInstigator)
@@ -98,22 +93,16 @@ namespace MoreFactionInteraction.MoreFactionWar
         {
             float badOutcomeWeightFactor = FactionWarDialogue.GetBadOutcomeWeightFactor(pawn.GetStatValue(StatDefOf.DiplomacyPower, true));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
-
+            factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
             if (desiredOutcome == 1 || desiredOutcome == 2)
             {
-                //because t
-                var pawi = new Pair<Pair<Action, float>, string> (new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn), 1f), "letter");
-
-                
-
                 tmpPossibleOutcomes.Clear();
                 FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Disaster * badOutcomeWeightFactor), "MFI_FactionWarFavourFactionDisaster".Translate()));
                 FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Backfire * badOutcomeWeightFactor), "MFI_FactionWarFavourFactionBackFire".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_TalksFlounder), "MFI_FactionWarFavourFactionFlounder".Translate()));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Success * goodOutcomeWeightFactor));
-                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Triumph * goodOutcomeWeightFactor));
-                
+                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_TalksFlounder),                     "MFI_FactionWarFavourFactionFlounder".Translate()));
+                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Success * goodOutcomeWeightFactor), "MFI_FactionWarFavourFactionSuccess".Translate()));
+                FactionWarDialogue.tmpPossibleOutcomes.Add(new Pair<Pair<Action, float>, string>(new Pair<Action, float>(() => Outcome_TalksFlounder(favouredFaction, burdenedFaction, pawn),       BaseWeight_Triumph * goodOutcomeWeightFactor), "MFI_FactionWarFavourFactionTriumph".Translate()));                
 
                 Action first = FactionWarDialogue.tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).First.First;
                 factionWarNegotiationsOutcome = FactionWarDialogue.tmpPossibleOutcomes.RandomElementByWeight(((Pair<Pair<Action, float>, string> x) => x.First.Second)).Second;
@@ -131,7 +120,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             }
             else throw new NotImplementedException();
-            factionWarNegotiationsOutcome = "Hi mom!";
+
         }
 
         private static DiaNode DialogueResolver(string textResult)
@@ -145,31 +134,35 @@ namespace MoreFactionInteraction.MoreFactionWar
             return resolver;
         }
 
+        private static void Outcome_TalksDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
+        {
+            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+        }
+        private static void Outcome_TalksBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
+        {
+            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+        }
         private static void Outcome_TalksFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
         }
+        private static void Outcome_TalksSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
+        {
+            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+        }
+        private static void Outcome_TalksTriump(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
+        {
+            Find.LetterStack.ReceiveLetter("LetterLabelPeaceTalks_TalksFlounder".Translate(), "test", LetterDefOf.Death);
+        }
+
+
 
         private static float GetBadOutcomeWeightFactor(float diplomacyPower)
         {
-            return FactionWarDialogue.BadOutcomeFactorAtDiplomacyPower.Evaluate(diplomacyPower);
+            return FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(diplomacyPower);
         }
 
-        private static readonly SimpleCurve BadOutcomeFactorAtDiplomacyPower = new SimpleCurve
-        {
-            {
-                new CurvePoint(0f, 4f),
-                true
-            },
-            {
-                new CurvePoint(1f, 1f),
-                true
-            },
-            {
-                new CurvePoint(1.5f, 0.4f),
-                true
-            }
-        };
+
 
     }
 }

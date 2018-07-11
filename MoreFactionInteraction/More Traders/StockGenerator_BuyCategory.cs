@@ -11,9 +11,9 @@ namespace MoreFactionInteraction
 	public class StockGenerator_BuyCategory : StockGenerator
 	{
 		public ThingCategoryDef thingCategoryDef;
-        private readonly float maxValuePerUnit = 1000f;
+	    private const float maxValuePerUnit = 1000f;
 
-        public override IEnumerable<Thing> GenerateThings(int forTile)
+	    public override IEnumerable<Thing> GenerateThings(int forTile)
 		{
             yield break;
 		}
@@ -24,7 +24,7 @@ namespace MoreFactionInteraction
             //TODO: Balance maxValuePerUnit. 1k is nonsense since traders generally don't have much more than that, but then again I also want some limit. Currently ignores stuff, so golden helmets ahoy.
             return this.thingCategoryDef.DescendantThingDefs.Contains(thingDef) 
                 && thingDef.tradeability != Tradeability.None 
-                && thingDef.BaseMarketValue / thingDef.VolumePerUnit < this.maxValuePerUnit;
+                && thingDef.BaseMarketValue / thingDef.VolumePerUnit < maxValuePerUnit;
 		}
 	}
 }

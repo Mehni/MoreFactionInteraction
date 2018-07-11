@@ -24,8 +24,7 @@ namespace MoreFactionInteraction
             if (settlement != null)
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
-                ThingCategoryDef thingCategoryDef;
-                thingCategoryDef = DetermineThingCategoryDef();
+                ThingCategoryDef thingCategoryDef = DetermineThingCategoryDef();
 
                 string letterToSend = DetermineLetterToSend(thingCategoryDef);
                 int feeRequest = Math.Max(Rand.Range(150, 300), (int)parms.points);
@@ -93,15 +92,15 @@ namespace MoreFactionInteraction
             }
         }
 
-        private bool TryGetRandomAvailableTargetMap(out Map map)
+        private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
             IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
-            for (int i = 0; i < maps.Count; i++)
+            foreach (Map potentialTargetMap in maps)
             {
-                if (maps[i].IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(maps[i].Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(potentialTargetMap.Tile) != null)
                 {
-                    IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Add(maps[i]);
+                    IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.Add(potentialTargetMap);
                 }
             }
             bool result = IncidentWorker_ReverseTradeRequest.tmpAvailableMaps.TryRandomElement(out map);

@@ -60,14 +60,14 @@ namespace MoreFactionInteraction
 
                 if (parms.traderDef.orbital || parms.traderDef.defName.Contains("Base_") && map != null)
                 {
-                    float silverCount = __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount;
+                    float silverCount = __result.First(x => x.def == ThingDefOf.Silver).stackCount;
                     silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(map.PlayerWealthForStoryteller);
-                    __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount = (int)silverCount;
+                    __result.First(x => x.def == ThingDefOf.Silver).stackCount = (int)silverCount;
                     return;
                 }
                 if (map != null && parms.traderFaction != null)
                 {
-                    __result.Where(x => x.def == ThingDefOf.Silver).First().stackCount += (int)(parms.traderFaction.GoodwillWith(Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
+                    __result.First(x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.traderFaction.GoodwillWith(Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
                     return;
                 }
             }
@@ -280,13 +280,11 @@ namespace MoreFactionInteraction
         private static void WorldReachUtility_PostFix(ref bool __result, ref Caravan c)
         {
             SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(c);
-            if (settlement != null)
+            World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement?.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
+
+            if (bumperCropComponent != null)
             {
-                World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
-                if (bumperCropComponent != null)
-                {
-                    __result = !bumperCropComponent.CaravanIsWorking;
-                }
+                __result = !bumperCropComponent.CaravanIsWorking;
             }
         }
         #endregion

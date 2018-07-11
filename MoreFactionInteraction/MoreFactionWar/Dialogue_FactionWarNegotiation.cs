@@ -16,13 +16,7 @@ namespace MoreFactionInteraction
         private Faction factionOne;
         private Faction factionInstigator;
 
-        public override Vector2 InitialSize
-        {
-            get
-            {
-                return new Vector2(720f, 600f);
-            }
-        }
+        public override Vector2 InitialSize => new Vector2(720f, 600f);
 
         public Dialogue_FactionWarNegotiation(Faction factionOne, Faction factionInstigator, DiaNode nodeRoot, bool delayInteractivity = false, bool radioMode = false, string title = null) : base(nodeRoot, delayInteractivity, radioMode, title)
         {
@@ -67,8 +61,8 @@ namespace MoreFactionInteraction
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
             GUI.EndGroup();
-            float num = 147f;
-            Rect middleRemainingRectForDialog = new Rect(0f, num, inRect.width, inRect.height - num);
+            const float magicalNum = 147f;
+            Rect middleRemainingRectForDialog = new Rect(0f, magicalNum, inRect.width, inRect.height - magicalNum);
             base.DrawNode(middleRemainingRectForDialog);
         }
     }

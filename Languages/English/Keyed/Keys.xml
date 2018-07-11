@@ -11,4 +11,10 @@
 
     <MFI_CaravanWorking>Caravan is working.</MFI_CaravanWorking>
 
+    <MFI_FactionWarPeaceTalksIntroduction>The two opposing faction leaders {0} and {1} each made quarters in opposite corners of the make-shift camp. Tensions are high as your negotiator {2} walks in. The past few days have been taxing on all parties involved, and your negotiator knows that what they'll say can have far reaching consequences.\n\n{2} has the following options:</MFI_FactionWarPeaceTalksIntroduction>
+    
+    <MFI_FactionWarPeaceTalksCurryFavour>Curry favor with {0}</MFI_FactionWarPeaceTalksCurryFavour>
+    <MFI_FactionWarPeaceTalksSabotage>Sabotage the peacetalks to better the colony</MFI_FactionWarPeaceTalksSabotage>
+    <MFI_FactionWarPeaceTalksBrokerPeace>Broker peace between the two factions</MFI_FactionWarPeaceTalksBrokerPeace>
+
 </LanguageData>

@@ -15,7 +15,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms) && this.FoundTwoFactions() && this.TryFindTile(out int tile) && !Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing;
+            return base.CanFireNowSub(parms) && this.FoundTwoFactions() && TryFindTile(out int tile) && !Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing;
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -23,7 +23,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             if (!this.FoundTwoFactions())
                 return false;
 
-            if (!this.TryFindTile(out int tile))
+            if (!TryFindTile(out int tile))
                 return false;
 
             Faction faction = TryFindFactions(out Faction instigatingFaction);
@@ -44,7 +44,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             return false;
         }
 
-        private bool TryFindTile(out int tile)
+        private static bool TryFindTile(out int tile)
         {
             return TileFinder.TryFindNewSiteTile(out tile, 5, 13, false, false, -1);
         }
@@ -54,16 +54,14 @@ namespace MoreFactionInteraction.MoreFactionWar
             return TryFindFactions(out Faction instigatingFaction) != null;
         }
 
-        private Faction TryFindFactions(out Faction instigatingFaction)
+        private static Faction TryFindFactions(out Faction instigatingFaction)
         {
             IEnumerable<Faction> factions = Find.FactionManager.AllFactions.Where(x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy);
             Faction alliedFaction = factions.RandomElement();
 
             IEnumerable<Faction> factionsPartTwo = Find.FactionManager.AllFactions.Where(x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy && x != alliedFaction);
 
-            if (factionsPartTwo.TryRandomElement(out instigatingFaction)) return alliedFaction;
-
-            return null;
+            return factionsPartTwo.TryRandomElement(out instigatingFaction) ? alliedFaction : null;
         }
     }
 }

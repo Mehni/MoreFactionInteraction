@@ -49,7 +49,7 @@ namespace MoreFactionInteraction
                                                         where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(faction)
                                                         select faction;
 
-                    Log.Message(Faction.OfPlayer.RelationWith(friendlyFactions.First()).ToString());
+
                     foreach (Faction faction in friendlyFactions)
                     {
                         nextFactionInteraction.Add(faction, Find.TickManager.TicksGame + Rand.RangeInclusive(GenDate.TicksPerDay * 2, GenDate.TicksPerDay * 8));

@@ -30,9 +30,7 @@ namespace MoreFactionInteraction
             encampment = NearbyHostileEncampments(originTile).RandomElementWithFallback(null);
 
             faction = encampment?.Faction;
-            if (faction != null) return true;
-
-            return false;
+            return faction != null;
         }
 
         private static IEnumerable<WorldObject> NearbyHostileEncampments(int forTile = -1)

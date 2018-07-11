@@ -63,11 +63,11 @@ namespace MoreFactionInteraction
         {
             IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
-            for (int i = 0; i < maps.Count; i++)
+            foreach (Map potentialTargetMap in maps)
             {
-                if (maps[i].IsPlayerHome && this.RandomNearbyHostileSettlement(maps[i].Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && this.RandomNearbyHostileSettlement(potentialTargetMap.Tile) != null)
                 {
-                    IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Add(maps[i]);
+                    IncidentWorker_SpreadingOutpost.tmpAvailableMaps.Add(potentialTargetMap);
                 }
             }
             bool result = IncidentWorker_SpreadingOutpost.tmpAvailableMaps.TryRandomElement(out map);

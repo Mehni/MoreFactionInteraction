@@ -60,7 +60,7 @@ namespace MoreFactionInteraction.World_Incidents
             return string.Format(this.def.letterText, pawnKindDef.GetLabelPlural());
         }
 
-        private IntVec3 TryFindEndCell(Map map, List<Pawn> generatedPawns, out IntVec3 end)
+        private static IntVec3 TryFindEndCell(Map map, List<Pawn> generatedPawns, out IntVec3 end)
         {
             end = IntVec3.Invalid;
             for (int i = 0; i < 8; i++)
