@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />

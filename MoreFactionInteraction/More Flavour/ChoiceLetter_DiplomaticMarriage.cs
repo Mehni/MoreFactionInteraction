@@ -11,6 +11,8 @@ using Verse.AI.Group;
 
 namespace MoreFactionInteraction
 {
+    using MoreFactionWar;
+
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
         public Pawn betrothed;
@@ -38,13 +40,13 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(value: ((this.betrothed.MarketValue / 20) * this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: this.betrothed)), min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: DiplomacyTuning.Goodwill_PeaceTalksSuccessRange.RandomInRange);
+                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(value: ((this.betrothed.MarketValue / 20) * this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: this.betrothed)), min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: goodWillGainedFromMarriage, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
                             this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 
                             if (this.betrothed.GetCaravan() is Caravan caravan)
                             {
-                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(@from: this.betrothed, candidates: caravan.PawnsListForReading);
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(from: this.betrothed, candidates: caravan.PawnsListForReading);
                                 HealIfPossible(p: this.betrothed);
                                 caravan.RemovePawn(p: this.betrothed);
                             }

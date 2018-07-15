@@ -24,7 +24,7 @@
     <MFI_LetterLabelHarvest_Triumph>Bumper crop harvested</MFI_LetterLabelHarvest_Triumph>
     <MFI_BumperCropXPGain>Your grower {0} has gained {1} growing experience.</MFI_BumperCropXPGain>
 
-    <MFI_DiplomaticMarriage>Word of {1}'s charm has reached {0} and they want to get it on with them. Accepting this marriage proposal will cement relations and help factions yadda yadda, this is CK2. Your hear whinnying in the background.</MFI_DiplomaticMarriage>
-    <MFI_DiplomaticMarriageLabel>Someone has the hots for {0}...</MFI_DiplomaticMarriageLabel>
+    <MFI_DiplomaticMarriage>Word of {1}'s charm has reached {0} and they've asked you for {1}'s hand in marriage. Accepting this marriage proposal will cement relations and strengthen faction ties, but {1} will join their faction.</MFI_DiplomaticMarriage>
+    <MFI_DiplomaticMarriageLabel>Diplomatic marriage</MFI_DiplomaticMarriageLabel>
 
 </LanguageData>

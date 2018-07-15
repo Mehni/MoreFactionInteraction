@@ -7,6 +7,8 @@ using Verse;
 using Harmony;
 using UnityEngine;
 using RimWorld.Planet;
+using System.Reflection;
+using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
@@ -38,6 +40,17 @@ namespace MoreFactionInteraction
             harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
+
+            harmony.Patch(AccessTools.Method(typeof(DebugWindowsOpener), "ToggleDebugActionsMenu"), null, null,
+                          new HarmonyMethod(typeof(HarmonyPatches), nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+        }
+
+        //thx Brrainz
+        static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
+        {
+            var from = AccessTools.Constructor(typeof(Dialog_DebugActionsMenu));
+            var to   = AccessTools.Constructor(typeof(Dialog_MFIDebugActionMenu));
+            return instructions.MethodReplacer(from, to);
         }
 
         #region MoreTraders
