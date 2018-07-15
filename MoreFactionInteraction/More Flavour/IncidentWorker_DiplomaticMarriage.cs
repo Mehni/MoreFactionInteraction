@@ -60,8 +60,8 @@ namespace MoreFactionInteraction
                                                                         && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned
                                                                         && (x.Faction.def.techLevel <= TechLevel.Medieval) /*|| x.Faction.def.techLevel == TechLevel.Archotech*/ // not today space kitties
                                                                         && !x.IsPrisoner && !x.Spawned
-                                                                        && (!LovePartnerRelationUtility.HasAnyLovePartner(pawn: x) || ((LovePartnerRelationUtility.ExistingMostLikedLovePartner(p: x, allowDead: false) is Pawn pawn && pawn.Faction is Faction faction && faction == Faction.OfPlayer))) // HOW I NULL COALESCE ??
-                                                                        select x).TryRandomElement(result: out marriageSeeker); //todo: make more likely to select hostile.
+                                                                        && (!LovePartnerRelationUtility.HasAnyLovePartner(pawn: x) || LovePartnerRelationUtility.ExistingMostLikedLovePartner(p: x, allowDead: false)?.Faction == Faction.OfPlayer)
+                                                                               select x).TryRandomElement(result: out marriageSeeker); //todo: make more likely to select hostile.
 
         private static bool PeaceTalksExist(Faction faction)
         {

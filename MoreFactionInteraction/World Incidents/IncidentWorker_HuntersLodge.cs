@@ -14,7 +14,6 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class IncidentWorker_HuntersLodge : IncidentWorker
     {
-        private const float NoSitePartChance = 0.3f;
         private const int MinDistance = 2;
         private const int MaxDistance = 15;
 

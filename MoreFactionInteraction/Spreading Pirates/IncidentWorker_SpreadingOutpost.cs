@@ -17,14 +17,19 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30);
+            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) 
+                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30) 
+                                                    && this.TryGetRandomAvailableTargetMap(out Map map);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             if (!TryFindFaction(enemyFaction: out this.faction)) return false;
-            this.TryGetRandomAvailableTargetMap(map: out Map map);
-            int pirateTile = this.RandomNearbyHostileSettlement(originTile: map.Tile).Tile;
+            if (!this.TryGetRandomAvailableTargetMap(map: out Map map)) return false;
+
+            int pirateTile = this.RandomNearbyHostileSettlement(map.Tile)?.Tile ?? Tile.Invalid;
+
+            if (pirateTile == Tile.Invalid) return false;
 
             if (!TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile)) return false;
             Site site = SiteMaker.MakeSite(core: SiteCoreDefOf.Nothing, sitePart: SitePartDefOf.Outpost, tile: tile, faction: this.faction);

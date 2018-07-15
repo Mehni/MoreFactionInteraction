@@ -13,8 +13,8 @@ namespace MoreFactionInteraction
     {
         private const float TitleHeight = 70f;
         private const float InfoHeight = 60f;
-        private Faction factionOne;
-        private Faction factionInstigator;
+        private readonly Faction factionOne;
+        private readonly Faction factionInstigator;
 
         public override Vector2 InitialSize => new Vector2(x: 720f, y: 600f);
 

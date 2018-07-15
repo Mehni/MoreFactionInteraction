@@ -5,16 +5,37 @@
     <MFI_LetterLabelBanditOutpostUpgraded>Bandit outpost upgraded</MFI_LetterLabelBanditOutpostUpgraded>
     <MFI_LetterBanditOutpostUpgraded>Pirates from {0} have upgraded a nearby outpost of theirs to a base!\n\nThey'll sent out occasional raiding parties to test your defences, and to settle new outposts that may become bases.</MFI_LetterBanditOutpostUpgraded>
     <MFI_DesperateTrader>Desperate trader</MFI_DesperateTrader>
-    <MFI_TraderSent>{0} thanks you. Their trade carravan will arrive in about {1}.</MFI_TraderSent>
+    <MFI_TraderSent>{0} thanks you. Their trade caravan will arrive in about {1}.</MFI_TraderSent>
     <MFI_Trader>trader</MFI_Trader>
     <MFI_HuntersLodgeInspectString>{0} invited you to hunt {1} here.</MFI_HuntersLodgeInspectString>
 
     <MFI_CaravanWorking>Caravan is working.</MFI_CaravanWorking>
 
     <MFI_FactionWarPeaceTalksIntroduction>The two opposing faction leaders {0} and {1} each made quarters in opposite corners of the make-shift camp. Tensions are high as your negotiator {2} walks in. The past few days have been taxing on all parties involved, and your negotiator knows that what they'll say can have far reaching consequences.\n\n{2} has the following options:</MFI_FactionWarPeaceTalksIntroduction>
-    
-    <MFI_FactionWarPeaceTalksCurryFavour>Curry favor with {0}</MFI_FactionWarPeaceTalksCurryFavour>
-    <MFI_FactionWarPeaceTalksSabotage>Sabotage the peacetalks to better the colony</MFI_FactionWarPeaceTalksSabotage>
+
+    <MFI_FactionWarPeaceTalksCurryFavour>Curry favour with {0}</MFI_FactionWarPeaceTalksCurryFavour>
+    <MFI_FactionWarPeaceTalksSabotage>Sabotage the peace talks to better the colony</MFI_FactionWarPeaceTalksSabotage>
     <MFI_FactionWarPeaceTalksBrokerPeace>Broker peace between the two factions</MFI_FactionWarPeaceTalksBrokerPeace>
+
+    <!-- Faction war, favour one faction over the other -->
+    <MFI_FactionWarFavourFactionDisaster>The talks were a disaster. Neither faction appreciated your negotiator's attempt to butter up {0} and efforts to seek out a victor in the strife were considered an act of aggression and the peace talks broke down as a result.\n\nRelations with {0} have deteriorated somewhat.\n\nRelations with {1} have deteriorated massively.</MFI_FactionWarFavourFactionDisaster>
+    <MFI_FactionWarFavourFactionBackFire>The talks have backfired. While faction delegates discussed key differences, dissuasions your negotiator made were seen as unconstructive towards the goals and the talks soon devolved.\n\nRelations with {0} deteriorated.\n\nRelations with {1} have deteriorated massively.</MFI_FactionWarFavourFactionBackFire>
+    <MFI_FactionWarFavourFactionFlounder>The talks floundered. As faction delegates communicated clearly on their most important issues, your negotiator was not able to make any meaningful contributions to the peace talks.\n\nRelations with {0} have increased somewhat.\n\nRelations with {1} deteriorated considerably.</MFI_FactionWarFavourFactionFlounder>
+    <MFI_FactionWarFavourFactionSuccess>The talks were a success. Delegates of both factions hammered out a basic treaty, and your negotiator managed to sway the talks and convince {1} to make amends with {0}.\n\nRelations with {0} increased considerably.\n\nRelations with {1} deteriorated somewhat.</MFI_FactionWarFavourFactionSuccess>
+    <MFI_FactionWarFavourFactionTriumph>The talks were a great triumph! Your negotiator played a large role in convincing {1} to pay reparations for past aggressions, much to the delight of {0}.\n\nRelations with {0} increased massively.\n\nRelations with {1} deteriorated.</MFI_FactionWarFavourFactionTriumph>
+
+    <!-- Faction war, sabotage to benefit colony -->
+    <MFI_FactionWarSabotageDisaster>The sabotage was a massive failure. The delegates quickly uncovered your negotiator's intent to sabotage and both factions turned against you! As your caravan made a hurried departure, warriors from both factions caught up with it and attacked!\n\nRelations with {0} have broken down. They are now hostile towards you.\n\nRelations with {1} have broken down. They are now hostile towards you.</MFI_FactionWarSabotageDisaster>
+    <MFI_FactionWarSabotageBackFire>The sabotage has backfired. As delegates exchanged pleasantries and subsequently got down to business, they soon realised the unconstructive nature of your negotiator and excluded them from the talks.\n\nRelations with {0} deteriorated massively.\n\nRelations with {1} deteriorated massively.</MFI_FactionWarSabotageBackFire>
+    <MFI_FactionWarSabotageFlounder>The sabotage floundered. Your negotiator proved unable to get a word in edge-wise or provide meaningful contributions to the peace talks one way or the other.\n\nRelations with {0} and {2} remain unchanged.</MFI_FactionWarSabotageFlounder>
+    <MFI_FactionWarSabotageSuccess >The sabotage was a dubious success. While delegates bickered over important issues, your negotiator navigated the political minefield and left an amicable impression on both factions while ensuring no actual progress was made.\n\nRelations with {0} increased considerably.\n\nRelations with {1} increased considerably.</MFI_FactionWarSabotageSuccess>
+    <MFI_FactionWarSabotageTriumph >The sabotage was a great triumph of sorts! Delegates of both factions were expertly played out against one another, and not long after the initial greetings the discussion broke down into insults and recriminations while both aggressors were left with a very favourable impression of your faction.\n\nRelations with {0} have increased immensely.\n\nRelations with {1} have increased immensely.</MFI_FactionWarSabotageTriumph>
+
+    <!-- Faction war, broker peace -->
+    <MFI_FactionWarBrokerPeaceDisaster>The talks were a disaster. The delegates barely got past their initial greetings before the discussion broke down into insults and recriminations. Nothing your negotiator said was met with any approval, and relations with both opposing factions are worse than before.\n\nRelations with {0} deteriorated.\n\nRelations with {1} deteriorated.</MFI_FactionWarBrokerPeaceDisaster>
+    <MFI_FactionWarBrokerPeaceBackFire>The talks have backfired. Despite exchanging some pleasantries, the delegates made no progress on substantive issues, and multiple statements were interpreted as insults. They've decided to resume and reschedule the peace talks for a later date.\n\nRelations with {0} remain unchanged.\n\nRelations with {1} remain unchanged.</MFI_FactionWarBrokerPeaceBackFire>
+    <MFI_FactionWarBrokerPeaceFlounder>The talks floundered. Delegates managed to communicate clearly and with basic respect, but were not able to make progress on any genuine issues until your negotiator arrived. They played a large part in assuaging fears and smoothing over ruffled feathers.\n\nRelations with {0} have increased somewhat.\n\nRelations with {1} have increased somewhat.</MFI_FactionWarBrokerPeaceFlounder>
+    <MFI_FactionWarBrokerPeaceSuccess >The talks were a success. Thanks in no small part to your negotiator, delegates reached new mutual understanding on several substantial issues.\n\nRelations with {0} have increased considerably.\n\nRelations with {1} have increased considerably.</MFI_FactionWarBrokerPeaceSuccess>
+    <MFI_FactionWarBrokerPeaceTriumph >The talks were a great triumph! Your negotiator quickly connected the delegates and paved the way to truly see each others' perspective on the most difficult issues of the day.\n\nRelations with {0} have increased immensely.\n\nRelations with {1} have increased immensely.</MFI_FactionWarBrokerPeaceTriumph>
 
 </LanguageData>

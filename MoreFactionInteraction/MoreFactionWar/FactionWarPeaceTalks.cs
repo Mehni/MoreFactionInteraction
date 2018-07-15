@@ -59,7 +59,7 @@ namespace MoreFactionInteraction
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
-                Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator)));
+                Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator, incidentTarget: caravan)));
             }
         }
 
