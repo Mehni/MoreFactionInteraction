@@ -41,16 +41,26 @@ namespace MoreFactionInteraction
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
-            harmony.Patch(AccessTools.Method(typeof(DebugWindowsOpener), "ToggleDebugActionsMenu"), null, null,
-                          new HarmonyMethod(typeof(HarmonyPatches), nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
+                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+
+            harmony.Patch(AccessTools.Method(typeof(MainTabWindow_Factions), nameof(MainTabWindow_Factions.DoWindowContents)),
+                          null,
+                          new HarmonyMethod(typeof(HarmonyPatches), nameof(FactionWindow_Postfix)));
+        }
+
+        private static void FactionWindow_Postfix()
+        {
+
+            Log.Message("window");
         }
 
         //thx Brrainz
-        static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
+        private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
         {
-            var from = AccessTools.Constructor(typeof(Dialog_DebugActionsMenu));
-            var to   = AccessTools.Constructor(typeof(Dialog_MFIDebugActionMenu));
-            return instructions.MethodReplacer(from, to);
+            ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
+            ConstructorInfo to   = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
+            return instructions.MethodReplacer(from: from, to: to);
         }
 
         #region MoreTraders
@@ -93,7 +103,7 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 75000, y: 2),
             new CurvePoint(x: 300000, y: 4),
             new CurvePoint(x: 1000000, y: 6f),
-            new CurvePoint(x: 2000000, y: 7f),
+            new CurvePoint(x: 2000000, y: 7f)
         };
 
         #region TradeQualityImprovements
@@ -146,7 +156,7 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 75000, y: 2.5f),
             new CurvePoint(x: 300000, y: 3),
             new CurvePoint(x: 1000000, y: 3.8f),
-            new CurvePoint(x: 2000000, y: 4.3f),
+            new CurvePoint(x: 2000000, y: 4.3f)
         };
 
         private static readonly SimpleCurve WealthQualitySpreadDeterminationCurve = new SimpleCurve
@@ -156,7 +166,7 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 75000, y: 2.5f),
             new CurvePoint(x: 300000, y: 2.1f),
             new CurvePoint(x: 1000000, y: 1.5f),
-            new CurvePoint(x: 2000000, y: 1.2f),
+            new CurvePoint(x: 2000000, y: 1.2f)
         };
         #endregion SimpleCurves
         #endregion TradeQualityImprovements

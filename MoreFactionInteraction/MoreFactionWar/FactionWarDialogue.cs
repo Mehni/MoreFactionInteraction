@@ -211,11 +211,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksFactionFavourDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
@@ -225,11 +225,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksFactionsFavourBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
@@ -239,33 +239,33 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksFactionsFavourFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
         }
 
         private static void Outcome_TalksFactionsFavourSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
         }
 
         private static void Outcome_TalksFactionsFavourTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
         }
     #endregion
@@ -274,11 +274,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksSabotageTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar();
@@ -287,11 +287,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksSabotageSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
             Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar();
@@ -305,11 +305,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksSabotageBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ResolveWar();
@@ -318,13 +318,13 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksSabotageDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, IIncidentTarget incidentTarget)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             favouredFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
@@ -371,33 +371,33 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksBrokerPeaceTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
         }
 
         private static void Outcome_TalksBrokerPeaceSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
         }
 
         private static void Outcome_TalksBrokerPeaceFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
         }
 
@@ -409,11 +409,11 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static void Outcome_TalksBrokerPeaceDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
         {
             favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                  .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
 
             Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar();
@@ -421,6 +421,6 @@ namespace MoreFactionInteraction.MoreFactionWar
     #endregion
 
         private static float GetBadOutcomeWeightFactor(float diplomacyPower) =>
-            FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(x: diplomacyPower);
+            FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(x: diplomacyPower);
     }
 }

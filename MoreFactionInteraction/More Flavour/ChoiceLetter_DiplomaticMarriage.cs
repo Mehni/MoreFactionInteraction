@@ -15,6 +15,7 @@ namespace MoreFactionInteraction
 
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
+        private int goodWillGainedFromMarriage;
         public Pawn betrothed;
         public Pawn marriageSeeker;
 
@@ -39,22 +40,23 @@ namespace MoreFactionInteraction
                     DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
                     {
                         action = () =>
-                        {
-                            int goodWillGainedFromMarriage = (int)Mathf.Clamp(value: ((this.betrothed.MarketValue / 20) * this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: this.betrothed)), min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionWarPeaceTalksDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-                            this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: goodWillGainedFromMarriage, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
-                            this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
-
-                            if (this.betrothed.GetCaravan() is Caravan caravan)
                             {
-                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(from: this.betrothed, candidates: caravan.PawnsListForReading);
-                                HealIfPossible(p: this.betrothed);
-                                caravan.RemovePawn(p: this.betrothed);
-                            }
+                                this.goodWillGainedFromMarriage = (int)FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
+                                    //(int)Mathf.Clamp(value: this.betrothed.MarketValue / 20, min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
+                                this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
+                                this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 
-                            DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
+                                if (this.betrothed.GetCaravan() is Caravan caravan)
+                                {
+                                    CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(from: this.betrothed, candidates: caravan.PawnsListForReading);
+                                    HealIfPossible(p: this.betrothed);
+                                    caravan.RemovePawn(p: this.betrothed);
+                                }
+
+                                DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
                         }
                     };
-                    DiaNode dialogueNodeAccept = new DiaNode(text: "MFI_AcceptedProposal".Translate().CapitalizeFirst());
+                    DiaNode dialogueNodeAccept = new DiaNode(text: "MFI_AcceptedProposal".Translate(this.betrothed, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
                             dialogueNodeAccept.options.Add(item: this.Option_Close);
                             accept.link = dialogueNodeAccept;
 
@@ -66,7 +68,7 @@ namespace MoreFactionInteraction
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelRejectedProposal".Translate());
                         }
                     };
-                    DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate().CapitalizeFirst());
+                    DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate(this.marriageSeeker.Name, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
                             dialogueNodeReject.options.Add(item: this.Option_Close);
                             reject.link = dialogueNodeReject;
 
@@ -81,10 +83,9 @@ namespace MoreFactionInteraction
         {
             if (Prefs.LogVerbose) Log.Warning(text: " Determine and do outcome after marriage.");
 
-            if (!marriageSeeker.HostileTo(fac: Faction.OfPlayer))
-                betrothed.SetFaction(newFaction: marriageSeeker.Faction);
-            else
-                betrothed.SetFaction(newFaction: null);
+            betrothed.SetFaction(newFaction: !marriageSeeker.HostileTo(fac: Faction.OfPlayer)
+                                                 ? marriageSeeker.Faction
+                                                 : null);
 
             //GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
             //Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
@@ -104,17 +105,16 @@ namespace MoreFactionInteraction
             tmpHediffs.AddRange(collection: p.health.hediffSet.hediffs);
             foreach (Hediff hediffTemp in tmpHediffs)
             {
-                if (hediffTemp is Hediff_Injury hediff_Injury && !hediff_Injury.IsPermanent())
+                if (hediffTemp is Hediff_Injury hediffInjury && !hediffInjury.IsPermanent())
                 {
-                    p.health.RemoveHediff(hediff: hediff_Injury);
+                    p.health.RemoveHediff(hediff: hediffInjury);
                 }
                 else
                 {
                     ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(def: hediffTemp.def);
                     if (immunityRecord != null)
-                    {
                         immunityRecord.immunity = 1f;
-                    }
+                    
                 }
             }
             tmpHediffs.Clear();

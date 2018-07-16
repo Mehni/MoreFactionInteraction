@@ -41,11 +41,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             if (base.StillValid(caravan: caravan, destinationTile: destinationTile))
                 return base.StillValid(caravan: caravan, destinationTile: destinationTile);
 
-            else if (this.factionWarPeaceTalks?.Tile != destinationTile)
+            if (this.factionWarPeaceTalks?.Tile != destinationTile)
                 return false;
-
-            else
-                return CanVisit(caravan: caravan, factionWarPeaceTalks: this.factionWarPeaceTalks);
+            
+            return CanVisit(caravan: caravan, factionWarPeaceTalks: this.factionWarPeaceTalks);
         }
 
         public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, FactionWarPeaceTalks factionWarPeaceTalks)

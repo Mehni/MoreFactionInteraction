@@ -86,7 +86,7 @@ namespace MoreFactionInteraction
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
-
+                        Log.Message("faction: "+ faction.Name + " value: " + kvp.Value);
                         IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.FactionArrival, target: this.map);
                         incidentParms.forced = true;
                         incidentParms.faction = faction;
