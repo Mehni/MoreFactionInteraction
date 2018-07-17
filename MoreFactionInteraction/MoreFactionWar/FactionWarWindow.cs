@@ -68,7 +68,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 // scooch down original. amount of offset depends on devmode or not (because of devmode "show all" button)
                 Rect baseRect = fillRect;
                 baseRect.y = (Prefs.DevMode) ? fillRect.y + 120f: fillRect.y + 75f ;
-                baseRect.yMax = Prefs.DevMode ? fillRect.yMax - 120f + yMaxOffset : fillRect.yMax - 75f + yMaxOffset;
+                baseRect.yMax = fillRect.yMax + yMaxOffset;
 
                 GUI.BeginGroup(baseRect);
                 base.DoWindowContents(baseRect);

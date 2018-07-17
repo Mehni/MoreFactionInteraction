@@ -38,4 +38,6 @@
     <MFI_FactionWarBrokerPeaceSuccess >The talks were a success. Thanks in no small part to your negotiator, delegates reached new mutual understanding on several substantial issues.\n\nRelations with {0} have increased considerably.\n\nRelations with {1} have increased considerably.</MFI_FactionWarBrokerPeaceSuccess>
     <MFI_FactionWarBrokerPeaceTriumph >The talks were a great triumph! Your negotiator quickly connected the delegates and paved the way to truly see each others' perspective on the most difficult issues of the day.\n\nRelations with {0} have increased immensely.\n\nRelations with {1} have increased immensely.</MFI_FactionWarBrokerPeaceTriumph>
 
+    <MFI_FactionWarProgress>Faction war progress</MFI_FactionWarProgress>
+
 </LanguageData>
