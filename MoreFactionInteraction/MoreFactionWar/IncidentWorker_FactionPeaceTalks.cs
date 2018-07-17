@@ -39,6 +39,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 Find.WorldObjects.Add(o: factionWarPeaceTalks);
                 string text = string.Format(format: this.def.letterText.AdjustedFor(p: faction.leader), faction.def.leaderTitle, faction.Name, instigatingFaction.Name, randomInRange).CapitalizeFirst();
                 Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: factionWarPeaceTalks, relatedFaction: faction);
+                Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartUnrest(faction, instigatingFaction);
                 return true;
             }
             return false;

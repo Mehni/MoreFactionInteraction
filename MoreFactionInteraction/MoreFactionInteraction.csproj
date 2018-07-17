@@ -60,6 +60,7 @@
     <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />
     <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\FactionWarWindow.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\WorldComponent_MFI_FactionWar.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\GenStep_HuntersLodge.cs" />

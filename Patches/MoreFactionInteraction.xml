@@ -29,4 +29,11 @@
             </value>
     </Operation>
 
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/MainButtonDef[defName="Factions"]/tabWindowClass</xpath>
+            <value>
+                <tabWindowClass>MoreFactionInteraction.MoreFactionWar.FactionWarWindow</tabWindowClass>
+            </value>
+    </Operation>
+
 </Patch>

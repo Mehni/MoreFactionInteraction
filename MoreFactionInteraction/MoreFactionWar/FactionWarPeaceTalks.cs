@@ -23,14 +23,9 @@ namespace MoreFactionInteraction
             get
             {
                 if (this.cachedMat == null)
-                {
                     if (this.Faction != null)
-                    {
                         this.cachedMat = MaterialPool.MatFrom(texPath: this.def.texture, shader: ShaderDatabase.WorldOverlayTransparentLit, color: (this.factionOne?.Color ?? Color.white), renderQueue: WorldMaterials.WorldObjectRenderQueue);
-                    }
-                    //works for the small zoomed in icon, but is too ugly. Doesn't work for large icon. (Shader unsupported)
-                    //this.cachedMat = MatFrom(this.def.texture, ShaderDatabase.CutoutComplex, factionOne.Color, factionInstigator.Color, WorldMaterials.WorldObjectRenderQueue);
-                }
+
                 return this.cachedMat;
             }
         }
@@ -41,10 +36,7 @@ namespace MoreFactionInteraction
         {
             get
             {
-                if (this.cachedExpandoIco == null)
-                {
-                    this.cachedExpandoIco = MatFrom(texPath: this.def.expandingIconTexture, shader: ShaderDatabase.CutoutComplex, color: this.factionOne.Color, colorTwo: this.factionInstigator.Color, renderQueue: WorldMaterials.WorldObjectRenderQueue).GetMaskTexture();
-                }
+                if (this.cachedExpandoIco == null) this.cachedExpandoIco = MatFrom(texPath: this.def.expandingIconTexture, shader: ShaderDatabase.CutoutComplex, color: this.factionOne.Color, colorTwo: this.factionInstigator.Color, renderQueue: WorldMaterials.WorldObjectRenderQueue).GetMaskTexture();
                 return this.cachedExpandoIco;
             }
         }
@@ -83,14 +75,15 @@ namespace MoreFactionInteraction
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
-            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan))
-            {
-                yield return o;
-            }
-            foreach (FloatMenuOption f in CaravanArrivalAction_VisitFactionWarPeaceTalks.GetFloatMenuOptions(caravan: caravan, factionWarPeaceTalks: this))
-            {
-                yield return f;
-            }
+            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan)) yield return o;
+            foreach (FloatMenuOption f in CaravanArrivalAction_VisitFactionWarPeaceTalks.GetFloatMenuOptions(caravan: caravan, factionWarPeaceTalks: this)) yield return f;
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_References.Look(ref this.factionInstigator, "MFI_PeaceTalksFactionInstigator");
+            Scribe_References.Look(ref this.factionOne, "MFI_PeaceTalksFactionOne");
         }
     }
 }

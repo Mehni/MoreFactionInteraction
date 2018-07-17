@@ -43,16 +43,6 @@ namespace MoreFactionInteraction
 
             harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
                           transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
-
-            harmony.Patch(AccessTools.Method(typeof(MainTabWindow_Factions), nameof(MainTabWindow_Factions.DoWindowContents)),
-                          null,
-                          new HarmonyMethod(typeof(HarmonyPatches), nameof(FactionWindow_Postfix)));
-        }
-
-        private static void FactionWindow_Postfix()
-        {
-
-            Log.Message("window");
         }
 
         //thx Brrainz
