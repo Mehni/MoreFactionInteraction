@@ -43,7 +43,7 @@ namespace MoreFactionInteraction.MoreFactionWar
         Faction factionOne        = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
         Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
 
-        //todo: Thank Zorba for TweakValues.
+        //thx Zorba ;)
         [TweakValue("FactionWarWindow", -100f, 150f)]
         private static float yMaxOffset = 0;
 
@@ -94,7 +94,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             Text.Font = GameFont.Medium;
             GUI.color = Color.cyan;
             Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(centreBoxForBigFactionwar, "MFI_FactionWarProgress".Translate());
+            string factionWarStatus = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing
+                                          ? "MFI_FactionWarProgress".Translate()
+                                          : "MFI_UnrestIsBrewing".Translate();
+            Widgets.Label(centreBoxForBigFactionwar, factionWarStatus);
             GUI.color = Color.white;
             Text.Anchor = TextAnchor.UpperLeft;
 
