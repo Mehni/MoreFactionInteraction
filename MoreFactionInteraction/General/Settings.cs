@@ -20,7 +20,7 @@ namespace MoreFactionInteraction
             Listing_Standard options = new Listing_Standard();
             options.Begin(rect: rect);
             options.Gap();
-            options.SliderLabeled(label: "MFI.ticksToUpgrade".Translate(), val: ref ticksToUpgrade, format: ticksToUpgrade.ToStringTicksToPeriodVague(vagueMin: false), min: 0, max: GenDate.TicksPerYear);
+            options.SliderLabeled(label: "MFI_ticksToUpgrade".Translate(), val: ref ticksToUpgrade, format: ticksToUpgrade.ToStringTicksToPeriodVague(vagueMin: false), min: 0, max: GenDate.TicksPerYear);
             options.GapLine();
             options.SliderLabeled(label: "MFI_timeModifierBetweenFactionInteraction".Translate(), val: ref timeModifierBetweenFactionInteraction, format: timeModifierBetweenFactionInteraction.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.5f, max: 3f);
             options.Gap();
