@@ -10,6 +10,9 @@ using RimWorld.Planet;
 
 namespace MoreFactionInteraction
 {
+    using JetBrains.Annotations;
+
+    [UsedImplicitly]
     public class IncidentWorker_SpreadingOutpost : IncidentWorker
     {
         private Faction faction;
@@ -52,12 +55,11 @@ namespace MoreFactionInteraction
 
         private static bool TryFindFaction(out Faction enemyFaction)
         {
-            if ((from x in Find.FactionManager.AllFactions
-                 where !x.def.hidden && !x.defeated && !x.IsPlayer && x.HostileTo(other: Faction.OfPlayer) && x.def.permanentEnemy
-                 select x).TryRandomElement(result: out enemyFaction))
-            {
+            if (Find.FactionManager.AllFactions
+                    .Where(x => !x.def.hidden && !x.defeated && x.HostileTo(other: Faction.OfPlayer) && x.def.permanentEnemy)
+                    .TryRandomElement(result: out enemyFaction))
                 return true;
-            };
+
             enemyFaction = null;
             return false;
         }

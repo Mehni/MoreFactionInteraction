@@ -12,13 +12,27 @@ namespace MoreFactionInteraction
     {
         private Faction factionOne;
         private Faction factionTwo;
-        private bool warIsOngoing;
-        private bool unrestIsBrewing;
-        private float factionOneScore = 0.5f;
-        private float factionTwoScore = 0.5f;
+        private bool    warIsOngoing;
+        private bool    unrestIsBrewing;
+        private int     factionOneBattlesWon = 10;
+        private int     factionTwoBattlesWon = 10;
 
-        public Faction WarringFactionOne => this.factionOne;
-        public Faction WarringFactionTwo => this.factionTwo;
+
+        public Faction WarringFactionOne
+        {
+            get
+            {
+                return this.factionOne;
+            }
+        }
+
+        public Faction WarringFactionTwo
+        {
+            get
+            {
+                return this.factionTwo;
+            }
+        }
 
         public bool WarIsOngoing => this.warIsOngoing;
         public bool UnrestIsBrewing => this.unrestIsBrewing;
@@ -44,6 +58,8 @@ namespace MoreFactionInteraction
             this.unrestIsBrewing = false;
             this.SetFirstWarringFaction(factionOne);
             this.SetSecondWarringFaction(factionTwo);
+            factionOne.TrySetRelationKind(factionTwo, FactionRelationKind.Hostile, false);
+            factionTwo?.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
         }
 
         public void StartUnrest(Faction factionOne, Faction factionTwo = null)
@@ -60,10 +76,20 @@ namespace MoreFactionInteraction
             this.SetSecondWarringFaction(null);
         }
 
+        public void AllOuttaFactionSettlements()
+        {
+            this.ResolveWar();
+        }
+
         public float ScoreForFaction(Faction faction)
         {
-            if (faction == this.factionOne) return 0.5f;
-            return 0.5f;
+            if (faction == this.factionOne)
+                return (float)this.factionOneBattlesWon / (this.factionOneBattlesWon + this.factionTwoBattlesWon);
+
+            if (faction == this.factionTwo)
+                return (float)this.factionTwoBattlesWon / (this.factionOneBattlesWon + this.factionTwoBattlesWon);
+
+            return 0f;
         }
 
 
@@ -75,8 +101,15 @@ namespace MoreFactionInteraction
             Scribe_Values.Look(ref this.warIsOngoing,    "MFI_warIsOngoing");
             Scribe_Values.Look(ref this.unrestIsBrewing, "MFI_UnrestIsBrewing");
 
-            Scribe_Values.Look(ref this.factionOneScore, "MFI_factionOneScore");
-            Scribe_Values.Look(ref this.factionTwoScore, "MFI_factionTwoScore");
+            Scribe_Values.Look(ref this.factionOneBattlesWon, "MFI_factionOneScore", 10);
+            Scribe_Values.Look(ref this.factionTwoBattlesWon, "MFI_factionTwoScore", 10);
+        }
+
+        public void NotifyBattleWon(Faction faction)
+        {
+            if (faction == this.factionOne) this.factionOneBattlesWon++;
+
+            if (faction == this.factionTwo) this.factionTwoBattlesWon++;
         }
     }
 }

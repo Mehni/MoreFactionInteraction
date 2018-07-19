@@ -26,3 +26,7 @@ TODO:
 Special world maps:
 - Ancient cities. Spawned just like faction bases, but preferably in remote/barren locations. No soil, just concrete or stone floor. Destroyed cities, rock rubble, etc.
 - Send pawn to faction as inter-marriage for faction goodwill
+
+IDEAS:
+Spawn/split off factions
+Faction asks for materials to upgrade itself/roads

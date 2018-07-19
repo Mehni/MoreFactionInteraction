@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
+    <Compile Include="General\MFI_Utilities.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="MoreFactionWar\FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\FactionWarWindow.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\IncidentWorker_SettlementBaseAttack.cs" />
     <Compile Include="MoreFactionWar\WorldComponent_MFI_FactionWar.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\GenStep_HuntersLodge.cs" />
     <Compile Include="More Traders\ChoiceLetter_ReverseTradeRequest.cs" />

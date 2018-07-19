@@ -38,6 +38,15 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: option);
             }
+            if (Prefs.DevMode)
+            {
+                dialogueGreeting.options.Add(item: new DiaOption(text: "Start war (Dev Mode only)")
+                                                { action =() => 
+                                                {
+                                                    Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator);
+                                                }, linkLateBind = () => DialogueResolver("Alrighty")
+                                                });
+            }
 
             return dialogueGreeting;
         }
@@ -52,7 +61,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 {
                     DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 1, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
+                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate(args: new object[] { factionInstigator.Name }))
             {
@@ -60,7 +69,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 {
                     DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: 2, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
+                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksSabotage".Translate())
             {
@@ -68,7 +77,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 {
                     DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 3, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget);
                 },
-                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
+                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksBrokerPeace".Translate())
             {
@@ -76,13 +85,13 @@ namespace MoreFactionInteraction.MoreFactionWar
                 {
                     DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 4, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
                 },
-                linkLateBind = (() => DialogueResolver(textResult: factionWarNegotiationsOutcome)),
+                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
         }
 
         private static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
         {
-            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.DiplomacyPower));
+            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.NegotiationAbility));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
             factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 

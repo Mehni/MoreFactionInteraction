@@ -16,15 +16,14 @@ namespace MoreFactionInteraction
         private Texture2D cachedExpandoIco;
 
         private Faction factionOne;
-        private Faction factionInstigator;        
+        private Faction factionInstigator;
 
         public override Material Material
         {
             get
             {
-                if (this.cachedMat == null)
-                    if (this.Faction != null)
-                        this.cachedMat = MaterialPool.MatFrom(texPath: this.def.texture, shader: ShaderDatabase.WorldOverlayTransparentLit, color: (this.factionOne?.Color ?? Color.white), renderQueue: WorldMaterials.WorldObjectRenderQueue);
+                if (this.cachedMat == null && this.Faction != null)
+                    this.cachedMat = MaterialPool.MatFrom(texPath: this.def.texture, shader: ShaderDatabase.WorldOverlayTransparentLit, color: (this.factionOne?.Color ?? Color.white), renderQueue: WorldMaterials.WorldObjectRenderQueue);
 
                 return this.cachedMat;
             }

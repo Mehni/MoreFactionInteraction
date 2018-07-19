@@ -9,6 +9,8 @@ using Verse;
 
 namespace MoreFactionInteraction
 {
+    using JetBrains.Annotations;
+
     public class MoreFactionInteraction_Settings : ModSettings
     {
         public static int ticksToUpgrade = 3 * GenDate.DaysPerQuadrum * GenDate.TicksPerDay;
@@ -37,7 +39,7 @@ namespace MoreFactionInteraction
         }
     }
 
-
+    [UsedImplicitly]
     public class MoreFactionInteractionMod : Mod
     {
         public MoreFactionInteractionMod(ModContentPack content) : base(content: content)

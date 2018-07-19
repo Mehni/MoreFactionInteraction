@@ -43,7 +43,8 @@ namespace MoreFactionInteraction.MoreFactionWar
         Faction factionOne        = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
         Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
 
-        //thx Zorba ;)
+
+#pragma warning disable IDE0044 // Add readonly modifier
         [TweakValue("FactionWarWindow", -100f, 150f)]
         private static float yMaxOffset = 0;
 
@@ -52,12 +53,12 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         [TweakValue("FactionWarWindow", -50f, 50f)]
         private static float barHeight = 32;
+#pragma warning restore IDE0044 // Add readonly modifier
 
         public override void DoWindowContents(Rect fillRect)
         {
             //regular faction tab if no war/unrest. Fancy tab otherwise.
-            if (!Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing &&
-                !Find.World.GetComponent<WorldComponent_MFI_FactionWar>().UnrestIsBrewing)
+            if (!Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing)
             {
                 base.DoWindowContents(fillRect);
             }

@@ -20,7 +20,7 @@ namespace MoreFactionInteraction
         {
             get
             {
-                float modifier = NearbyHostileEncampments().Count() / 10;
+                float modifier = (float)NearbyHostileEncampments().Count() / 10;
                 return this.def.baseChance * 1 + modifier;
             }
         }

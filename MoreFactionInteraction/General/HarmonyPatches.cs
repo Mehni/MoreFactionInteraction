@@ -114,8 +114,8 @@ namespace MoreFactionInteraction
         {
             if (map != null && faction != null)
             {
-                float qualityIncreaseFromTimesTradedWithFaction = Mathf.Clamp01(value: map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: faction] / 100);
-                float qualityIncreaseFactorFromPlayerGoodWill = Mathf.Clamp01(value: faction.GoodwillWith(other: Faction.OfPlayer) / 100);
+                float qualityIncreaseFromTimesTradedWithFaction = Mathf.Clamp01(value: (float)map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: faction] / 100);
+                float qualityIncreaseFactorFromPlayerGoodWill = Mathf.Clamp01(value: (float)faction.GoodwillWith(other: Faction.OfPlayer) / 100);
 
                 if (Rand.Value < 0.25f)
                 {

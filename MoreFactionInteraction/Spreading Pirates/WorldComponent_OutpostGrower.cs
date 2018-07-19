@@ -45,7 +45,7 @@ namespace MoreFactionInteraction
                     factionBase.Name = SettlementNameGenerator.GenerateSettlementName(factionBase: factionBase);
                     Find.WorldObjects.Remove(o: toUpgrade);
                     Find.WorldObjects.Add(o: factionBase);
-                    Find.LetterStack.ReceiveLetter(label: "LetterLabelBanditOutpostUpgraded".Translate(), text: "LetterBanditOutpostUpgraded".Translate(args: new object[]
+                    Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelBanditOutpostUpgraded".Translate(), text: "MFI_LetterBanditOutpostUpgraded".Translate(args: new object[]
                     {
                             factionBase.Faction.Name,
                     }), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase);
