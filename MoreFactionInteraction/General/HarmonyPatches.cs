@@ -164,7 +164,7 @@ namespace MoreFactionInteraction
         /// </summary>
         private static void IncidentFired_TradeCounter_Postfix(ref FiringIncident qi)
         {
-            if (qi.parms.target is Map map && qi.def == IncidentDefOf.TraderCaravanArrival)
+            if (qi.parms.target is Map map && qi.def == IncidentDefOf.TraderCaravanArrival && qi.parms.faction != null)
             {
                 map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: qi.parms.faction] += 1;
             }
@@ -203,10 +203,10 @@ namespace MoreFactionInteraction
                     icon = setPlantToGrowTex,
                     action = delegate
                     {
-                        World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop2 = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
-                        if (bumperCrop2 != null)
+                        World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
+                        if (bumperCrop != null)
                         {
-                            if (!bumperCrop2.ActiveRequest)
+                            if (!bumperCrop.ActiveRequest)
                             {
                                 Log.Error(text: "Attempted to fulfill an unavailable request");
                                 return;
@@ -219,13 +219,13 @@ namespace MoreFactionInteraction
                             Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(args: new object[] {localCaravan.LabelCap}),
                             confirmedAct: delegate
                             {
-                                bumperCrop2.NotifyCaravanArrived(caravan: localCaravan);
+                                bumperCrop.NotifyCaravanArrived(caravan: localCaravan);
                             }));
                         }
                     }
                 };
 
-                World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
+
                 if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
                 {
                     command_Action.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());

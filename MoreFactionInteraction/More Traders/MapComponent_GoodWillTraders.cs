@@ -104,9 +104,11 @@ namespace MoreFactionInteraction
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))
             {
-                case  5: return MFI_DefOf.MFI_ReverseTradeRequest;
+                case  6: return MFI_DefOf.MFI_ReverseTradeRequest;
                 case 10: return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
                 case 20: return MFI_DefOf.MFI_BumperCropRequest;
+                case 24: return MFI_DefOf.MFI_HuntersLodge;
+                case 26: return MFI_DefOf.MFI_DiplomaticMarriage;
                 case 30: return RimWorld.IncidentDef.Named("Quest_ItemStash");
                 case 40: return IncidentDefOf.Quest_TradeRequest;
                 case 50: return IncidentDefOf.TraderCaravanArrival;

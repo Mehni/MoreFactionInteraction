@@ -11,6 +11,7 @@ namespace MoreFactionInteraction
         public static IncidentDef MFI_HuntersLodge;
         public static IncidentDef MFI_SettlementBaseAttack;
         public static IncidentDef MFI_QuestSpreadingPirateCamp;
+        public static IncidentDef MFI_DiplomaticMarriage;
 
         public static SiteCoreDef MFI_HuntersLodgeCore;
         public static SitePartDef MFI_HuntersLodgePart;
