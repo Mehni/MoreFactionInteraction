@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -14,7 +12,7 @@ namespace MoreFactionInteraction
         private Pawn betrothed;
         private const int TimeoutTicks = GenDate.TicksPerDay;
 
-        public override float AdjustedChance => base.AdjustedChance - Find.Storyteller.intenderPopulation.PopulationIntent;
+        public override float AdjustedChance => base.AdjustedChance - StorytellerUtilityPopulation.PopulationIntent;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {

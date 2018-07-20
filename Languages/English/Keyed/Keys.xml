@@ -52,4 +52,7 @@
     <MFI_FactionWarBaseDestroyed>Attackers from {1} pillaged the base and then burned it down. This is a heavy blow for {0}.</MFI_FactionWarBaseDestroyed>
     <MFI_FactionWarBaseSuccessfullyDefended>Defenders successfully held off against the attack and quickly repelled them. {0} considers this a win in the great faction war.</MFI_FactionWarBaseSuccessfullyDefended>
 
+    <MFI_FactionWarStarted>Faction war started</MFI_FactionWarStarted>
+    <MFI_FactionWarExplanation>A war between {0} and {1} has broken out. They will occasionally launch attacks on each others bases. If you are all</MFI_FactionWarExplanation>
+
 </LanguageData>

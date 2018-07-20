@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using RimWorld;
 using Verse;
-using UnityEngine;
-using Harmony;
 
 namespace MoreFactionInteraction
 {
@@ -108,8 +104,8 @@ namespace MoreFactionInteraction
         {
             switch (Rand.RangeInclusive(min: 0,max: 4))
             {
-                case 0: 
-                case 1: return MFI_DefOf.MFI_ReverseTradeRequest;
+                case 0: return MFI_DefOf.MFI_ReverseTradeRequest;
+                case 1: return RimWorld.IncidentDef.Named("Quest_ItemStash");
                 case 2: return IncidentDefOf.Quest_TradeRequest;
                 case 3:
                 case 4: return IncidentDefOf.TraderCaravanArrival;

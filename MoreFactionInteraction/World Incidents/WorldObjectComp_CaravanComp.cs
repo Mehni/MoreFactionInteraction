@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RimWorld.Planet;
-using RimWorld;
+﻿using RimWorld.Planet;
 using Verse;
 
 namespace MoreFactionInteraction.World_Incidents

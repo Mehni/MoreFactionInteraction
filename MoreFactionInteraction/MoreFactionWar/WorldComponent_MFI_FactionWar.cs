@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 using RimWorld.Planet;
 
 namespace MoreFactionInteraction
 {
+    using System.Linq;
+    using MoreFactionWar;
+
     public class WorldComponent_MFI_FactionWar : WorldComponent
     {
         private Faction factionOne;
@@ -53,17 +52,33 @@ namespace MoreFactionInteraction
             this.world = world;
         }
 
-        public void StartWar(Faction factionOne, Faction factionTwo = null)
+        /// <summary>
+        /// Starts the war and sets up stuff.
+        /// </summary>
+        /// <param name="factionOne"></param>
+        /// <param name="factionTwo"></param>
+        /// <param name="canSendLetter">Used in cases where we don't want to send standard letter. (i.e. DetermineWarAsIfNoPlayerInteraction)</param>
+        public void StartWar(Faction factionOne, Faction factionTwo, bool canSendLetter)
         {
             this.warIsOngoing = true;
             this.unrestIsBrewing = false;
             this.SetFirstWarringFaction(factionOne);
             this.SetSecondWarringFaction(factionTwo);
             factionOne.TrySetRelationKind(factionTwo, FactionRelationKind.Hostile, false);
-            factionTwo?.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
+            factionTwo.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
+
+            if (!canSendLetter) return;
+
+            WorldObject peacetalks =
+                (WorldObject) (Find.WorldObjects.AllWorldObjects.FirstOrDefault(x => x.def == MFI_DefOf.MFI_FactionWarPeaceTalks) 
+                            ?? GlobalTargetInfo.Invalid);
+
+            Find.LetterStack.ReceiveLetter("MFI_FactionWarStarted".Translate(),
+                                           "MFI_FactionWarExplanation".Translate(factionOne.Name, factionTwo.Name),
+                                           LetterDefOf.NegativeEvent, new GlobalTargetInfo(peacetalks), factionOne);
         }
 
-        public void StartUnrest(Faction factionOne, Faction factionTwo = null)
+        public void StartUnrest(Faction factionOne, Faction factionTwo)
         {
             this.unrestIsBrewing = true;
             this.SetFirstWarringFaction(factionOne);
@@ -111,6 +126,18 @@ namespace MoreFactionInteraction
 
             Scribe_Values.Look(ref this.factionOneBattlesWon, "MFI_factionOneScore", 1);
             Scribe_Values.Look(ref this.factionTwoBattlesWon, "MFI_factionTwoScore", 1);
+        }
+
+        public void DetermineWarAsIfNoPlayerInteraction(Faction faction, Faction factionInstigator)
+        {
+            this.unrestIsBrewing = false;
+
+            if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
+            {
+                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
+                FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
+                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(), "MFI_FactionWarLeaderDecided".Translate(), LetterDefOf.NeutralEvent);
+            }
         }
     }
 }

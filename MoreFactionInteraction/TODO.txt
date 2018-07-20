@@ -47,3 +47,4 @@ Cargo pod surprise?
 => lore snippets, like quest system
 => something of great interest to faction
 => faction diaries
+

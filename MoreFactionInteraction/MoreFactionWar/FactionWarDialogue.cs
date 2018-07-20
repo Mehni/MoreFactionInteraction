@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using RimWorld;
 using Verse;
-using System.Collections;
 using RimWorld.Planet;
+using Verse.AI.Group;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
-    using UnityEngine;
-    using Verse.AI.Group;
 
     public static class FactionWarDialogue
     {
@@ -42,7 +39,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                                                 { action =() => 
-                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator);
+                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator, true);
                                                 }, linkLateBind = () => DialogueResolver("Alrighty. War started.")
                                                 });
             }
@@ -88,7 +85,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             };
         }
 
-        private static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
+        public static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
         {
             float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.NegotiationAbility));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
@@ -227,7 +224,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksFactionsFavourBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -241,7 +238,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksFactionsFavourFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -289,7 +286,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksSabotageSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -302,7 +299,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksSabotageFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -336,7 +333,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
             burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
 
             LongEventHandler.QueueLongEvent(delegate
             {
@@ -424,7 +421,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
         }
     #endregion
 

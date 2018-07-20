@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using RimWorld;
 using Verse;
@@ -8,7 +6,6 @@ using RimWorld.Planet;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
-    using System.Runtime.Remoting.Messaging;
     using General;
     using JetBrains.Annotations;
 

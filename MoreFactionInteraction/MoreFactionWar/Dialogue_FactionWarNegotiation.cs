@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
-using RimWorld.Planet;
 using UnityEngine;
 
 namespace MoreFactionInteraction

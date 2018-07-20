@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -51,6 +48,7 @@ namespace MoreFactionInteraction
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
                 Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator, incidentTarget: caravan)));
+                Find.WorldObjects.Remove(this);
             }
         }
 
@@ -76,6 +74,12 @@ namespace MoreFactionInteraction
         {
             foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan)) yield return o;
             foreach (FloatMenuOption f in CaravanArrivalAction_VisitFactionWarPeaceTalks.GetFloatMenuOptions(caravan: caravan, factionWarPeaceTalks: this)) yield return f;
+        }
+
+        public override void PostRemove()
+        {
+            base.PostRemove();
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().DetermineWarAsIfNoPlayerInteraction(this.factionOne, this.factionInstigator);
         }
 
         public override void ExposeData()

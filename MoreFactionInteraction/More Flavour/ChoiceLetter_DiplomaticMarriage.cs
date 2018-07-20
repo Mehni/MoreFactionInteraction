@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
-using UnityEngine;
-using Verse.AI;
-using Verse.AI.Group;
 
 namespace MoreFactionInteraction
 {
@@ -114,7 +109,6 @@ namespace MoreFactionInteraction
                     ImmunityRecord immunityRecord = p.health.immunity.GetImmunityRecord(def: hediffTemp.def);
                     if (immunityRecord != null)
                         immunityRecord.immunity = 1f;
-                    
                 }
             }
             tmpHediffs.Clear();

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
-using RimWorld.BaseGen;
 using Verse;
 //using Kitchen.Sink;
-using Verse.AI;
-using Verse.AI.Group;
 
 namespace MoreFactionInteraction.World_Incidents
 {

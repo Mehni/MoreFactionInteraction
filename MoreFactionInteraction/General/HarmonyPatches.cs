@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using RimWorld;
 using Verse;
 using Harmony;
 using UnityEngine;
 using RimWorld.Planet;
 using System.Reflection;
-using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
