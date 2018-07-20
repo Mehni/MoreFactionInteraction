@@ -64,6 +64,8 @@ namespace MoreFactionInteraction
             this.unrestIsBrewing = false;
             this.SetFirstWarringFaction(factionOne);
             this.SetSecondWarringFaction(factionTwo);
+            this.factionOneBattlesWon = 1;
+            this.factionTwoBattlesWon = 2;
             factionOne.TrySetRelationKind(factionTwo, FactionRelationKind.Hostile, false);
             factionTwo.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
 
@@ -87,10 +89,10 @@ namespace MoreFactionInteraction
         
         public void ResolveWar()
         {
+            Find.LetterStack.ReceiveLetter("MFI_FactionWarOverLabel".Translate(), "MFI_FactionWarOver".Translate(WarringFactionOne, WarringFactionTwo), LetterDefOf.PositiveEvent);
             this.warIsOngoing = false;
             this.SetFirstWarringFaction(null);
             this.SetSecondWarringFaction(null);
-            Find.LetterStack.ReceiveLetter("Faction war is over!", "Yep. It's all good. Peace and joy. No factions got hurt. No villages destroyed. No pawns died.", LetterDefOf.PositiveEvent);
         }
 
         public void AllOuttaFactionSettlements()
@@ -114,6 +116,8 @@ namespace MoreFactionInteraction
             if (faction == this.factionOne) this.factionOneBattlesWon++;
 
             if (faction == this.factionTwo) this.factionTwoBattlesWon++;
+
+            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 10 || Rand.Chance(0.25f))  this.ResolveWar();
         }
 
         public override void ExposeData()

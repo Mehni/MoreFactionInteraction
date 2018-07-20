@@ -317,7 +317,6 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ResolveWar();
         }
 
         private static void Outcome_TalksSabotageDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, IIncidentTarget incidentTarget)
