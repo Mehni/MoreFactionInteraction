@@ -14,15 +14,16 @@ namespace MoreFactionInteraction
         private Faction factionTwo;
         private bool    warIsOngoing;
         private bool    unrestIsBrewing;
-        private int     factionOneBattlesWon = 10;
-        private int     factionTwoBattlesWon = 10;
+        
+        private int    factionOneBattlesWon = 1;
+        private int    factionTwoBattlesWon = 1;
 
 
         public Faction WarringFactionOne
         {
             get
             {
-                return this.factionOne;
+                return factionOne;
             }
         }
 
@@ -30,7 +31,7 @@ namespace MoreFactionInteraction
         {
             get
             {
-                return this.factionTwo;
+                return factionTwo;
             }
         }
 
@@ -74,6 +75,7 @@ namespace MoreFactionInteraction
             this.warIsOngoing = false;
             this.SetFirstWarringFaction(null);
             this.SetSecondWarringFaction(null);
+            Find.LetterStack.ReceiveLetter("Faction war is over!", "Yep. It's all good. Peace and joy. No factions got hurt. No villages destroyed. No pawns died.", LetterDefOf.PositiveEvent);
         }
 
         public void AllOuttaFactionSettlements()
@@ -92,6 +94,12 @@ namespace MoreFactionInteraction
             return 0f;
         }
 
+        public void NotifyBattleWon(Faction faction)
+        {
+            if (faction == this.factionOne) this.factionOneBattlesWon++;
+
+            if (faction == this.factionTwo) this.factionTwoBattlesWon++;
+        }
 
         public override void ExposeData()
         {
@@ -101,15 +109,8 @@ namespace MoreFactionInteraction
             Scribe_Values.Look(ref this.warIsOngoing,    "MFI_warIsOngoing");
             Scribe_Values.Look(ref this.unrestIsBrewing, "MFI_UnrestIsBrewing");
 
-            Scribe_Values.Look(ref this.factionOneBattlesWon, "MFI_factionOneScore", 10);
-            Scribe_Values.Look(ref this.factionTwoBattlesWon, "MFI_factionTwoScore", 10);
-        }
-
-        public void NotifyBattleWon(Faction faction)
-        {
-            if (faction == this.factionOne) this.factionOneBattlesWon++;
-
-            if (faction == this.factionTwo) this.factionTwoBattlesWon++;
+            Scribe_Values.Look(ref this.factionOneBattlesWon, "MFI_factionOneScore", 1);
+            Scribe_Values.Look(ref this.factionTwoBattlesWon, "MFI_factionTwoScore", 1);
         }
     }
 }

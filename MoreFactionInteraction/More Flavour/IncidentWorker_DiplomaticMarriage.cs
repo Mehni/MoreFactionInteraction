@@ -18,7 +18,8 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && TryFindMarriageSeeker(marriageSeeker: out this.marriageSeeker) && this.TryFindBetrothed(betrothed: out this.betrothed);
+            return base.CanFireNowSub(parms: parms) && TryFindMarriageSeeker(marriageSeeker: out this.marriageSeeker) 
+                                                    && this.TryFindBetrothed(betrothed: out this.betrothed);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -69,9 +70,7 @@ namespace MoreFactionInteraction
             foreach (PeaceTalks peaceTalk in peaceTalks)
             {
                 if (peaceTalk.Faction == faction)
-                {
                     return true;
-                }
             }
             return false;
         }

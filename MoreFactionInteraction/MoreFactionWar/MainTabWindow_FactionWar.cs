@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
-    public class FactionWarWindow : MainTabWindow_Factions
+    public class MainTabWindow_FactionWar : MainTabWindow_Factions
     {
         private const float TitleHeight = 70f;
         private const float InfoHeight  = 60f;
@@ -22,7 +22,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 if (this.factionOneColorTexture == null)
                 {
-                    this.factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(this.factionOne.Color);
+                    this.factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
                 }
                 return this.factionOneColorTexture;
             }
@@ -34,7 +34,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 if (this.factionTwoColorTexture == null)
                 {
-                    this.factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(this.factionInstigator.Color);
+                    this.factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
                 }
                 return this.factionTwoColorTexture;
             }
@@ -45,13 +45,13 @@ namespace MoreFactionInteraction.MoreFactionWar
 
 
 #pragma warning disable IDE0044 // Add readonly modifier
-        [TweakValue("FactionWarWindow", -100f, 150f)]
+        [TweakValue("MainTabWindow_FactionWar", -100f, 150f)]
         private static float yMaxOffset = 0;
 
-        [TweakValue("FactionWarWindow", -50f, 50f)]
+        [TweakValue("MainTabWindow_FactionWar", -50f, 50f)]
         private static float yPositionBar = 33;
 
-        [TweakValue("FactionWarWindow", -50f, 50f)]
+        [TweakValue("MainTabWindow_FactionWar", -50f, 50f)]
         private static float barHeight = 32;
 #pragma warning restore IDE0044 // Add readonly modifier
 
@@ -103,9 +103,9 @@ namespace MoreFactionInteraction.MoreFactionWar
             Text.Anchor = TextAnchor.UpperLeft;
 
             //"score card" bar
-            Rect leftFactionOneScoreBox = new Rect(0f, yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(this.factionOne), barHeight);
+            Rect leftFactionOneScoreBox = new Rect(0f, yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), barHeight);
             GUI.DrawTexture(leftFactionOneScoreBox, this.FactionOneColorTexture);
-            Rect rightFactionTwoScoreBox = new Rect(position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(this.factionOne), yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(this.factionInstigator), barHeight);
+            Rect rightFactionTwoScoreBox = new Rect(position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(this.factionInstigator), barHeight);
             GUI.DrawTexture(rightFactionTwoScoreBox, this.FactionTwoColorTexture);
 
             //stuff that fills up and does the faction name and call label boxes.

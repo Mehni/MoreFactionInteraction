@@ -40,11 +40,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             }
             if (Prefs.DevMode)
             {
-                dialogueGreeting.options.Add(item: new DiaOption(text: "Start war (Dev Mode only)")
+                dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                                                 { action =() => 
-                                                {
-                                                    Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator);
-                                                }, linkLateBind = () => DialogueResolver("Alrighty")
+                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator);
+                                                }, linkLateBind = () => DialogueResolver("Alrighty. War started.")
                                                 });
             }
 

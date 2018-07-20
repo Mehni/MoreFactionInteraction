@@ -15,17 +15,10 @@ namespace MoreFactionInteraction.MoreFactionWar
     [UsedImplicitly]
     public class IncidentWorker_SettlementBaseAttack : IncidentWorker
     {
-        Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
-        Faction factionTwo = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
-
         public override float AdjustedChance => base.AdjustedChance;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            Log.Message("base: "+ base.CanFireNowSub(parms).ToString());
-            Log.Message("faction war: " + Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing);
-            Log.Message("faction one: " + factionOne.Name);
-            Log.Message("faction two: " + factionTwo.Name);
             return base.CanFireNowSub(parms: parms) && Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing;
         }
 
@@ -135,15 +128,21 @@ namespace MoreFactionInteraction.MoreFactionWar
             return "MFI_FactionWarBaseDestroyed".Translate(someRandomPreferablyNearbySettlement.Faction, someRandomPreferablyNearbySettlement.Faction.EnemyInFactionWar());
         }
 
-        private SettlementBase RandomPreferablyNearbySettlementOfFactionInvolvedInWar(int originTile)
+        private static SettlementBase RandomPreferablyNearbySettlementOfFactionInvolvedInWar(int originTile)
         {
+            Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+            Faction factionTwo = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+
             return (from settlement in Find.WorldObjects.SettlementBases
-                    where (settlement.Faction == this.factionOne || settlement.Faction == this.factionTwo) && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 66f
+                    where (settlement.Faction == factionOne || settlement.Faction == factionTwo) && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 66f
                     select settlement).RandomElementWithFallback(RandomSettlementOfFactionInvolvedInWarThatCanBeABitFurtherAwayIDontParticularlyCare());
         }
 
-        private SettlementBase RandomSettlementOfFactionInvolvedInWarThatCanBeABitFurtherAwayIDontParticularlyCare()
+        private static SettlementBase RandomSettlementOfFactionInvolvedInWarThatCanBeABitFurtherAwayIDontParticularlyCare()
         {
+            Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+            Faction factionTwo = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+
             return (from settlement in Find.WorldObjects.SettlementBases
                     where (settlement.Faction == factionOne || settlement.Faction == factionTwo)
                     select settlement).RandomElementWithFallback(null);

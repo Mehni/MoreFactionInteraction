@@ -52,7 +52,9 @@ namespace MoreFactionInteraction
 
                     foreach (Faction faction in friendlyFactions)
                     {
+                        Rand.PushState(replacementSeed: faction.loadID ^ faction.GetHashCode());
                         this.nextFactionInteraction.Add(key: faction, value: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 8));
+                        Rand.PopState();
                     }
                 }
                 //if a faction became hostile, remove
@@ -86,7 +88,6 @@ namespace MoreFactionInteraction
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
-                        Log.Message("faction: "+ faction.Name + " value: " + kvp.Value);
                         IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.FactionArrival, target: this.map);
                         incidentParms.forced = true;
                         incidentParms.faction = faction;

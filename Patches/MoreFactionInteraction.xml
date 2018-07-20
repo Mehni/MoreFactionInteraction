@@ -32,7 +32,7 @@
     <Operation Class="PatchOperationReplace">
         <xpath>/Defs/MainButtonDef[defName="Factions"]/tabWindowClass</xpath>
             <value>
-                <tabWindowClass>MoreFactionInteraction.MoreFactionWar.FactionWarWindow</tabWindowClass>
+                <tabWindowClass>MoreFactionInteraction.MoreFactionWar.MainTabWindow_FactionWar</tabWindowClass>
             </value>
     </Operation>
 

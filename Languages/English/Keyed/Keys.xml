@@ -49,7 +49,7 @@
     <MFI_FactionWarBaseAttacked>A base belonging to {0} was attacked by {1}!</MFI_FactionWarBaseAttacked>
     <MFI_FactionWarBaseDefeated>They were unable to defend themselves against the onslaught and have taken a heavy hit.</MFI_FactionWarBaseDefeated>
     <MFI_FactionWarBaseTakenOver>After driving out {0}, the faction of {1} has now taken over the base and claimed ownership of the surrounding area.</MFI_FactionWarBaseTakenOver>
-    <MFI_FactionWarBaseDestroyed>Attackers from {1} ransacked the base and torched it down. This is a heavy blow for {0}.</MFI_FactionWarBaseDestroyed>
+    <MFI_FactionWarBaseDestroyed>Attackers from {1} pillaged the base and then burned it down. This is a heavy blow for {0}.</MFI_FactionWarBaseDestroyed>
     <MFI_FactionWarBaseSuccessfullyDefended>Defenders successfully held off against the attack and quickly repelled them. {0} considers this a win in the great faction war.</MFI_FactionWarBaseSuccessfullyDefended>
 
 </LanguageData>

@@ -49,7 +49,7 @@
 		</targetTypes>
 		<workerClass>MoreFactionInteraction.MoreFactionWar.IncidentWorker_SettlementBaseAttack</workerClass>
 		<baseChance>0.8</baseChance>
-		<earliestDay>1</earliestDay>
+		<earliestDay>20</earliestDay>
 		<minRefireDays>5</minRefireDays>
 	</IncidentDef>
 
