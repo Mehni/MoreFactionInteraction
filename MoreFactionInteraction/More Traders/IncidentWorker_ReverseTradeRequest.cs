@@ -13,8 +13,9 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return TryGetRandomAvailableTargetMap(map: out Map map) && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile) != null && base.CanFireNowSub(parms: parms);
-
+            return base.CanFireNowSub(parms: parms)  && TryGetRandomAvailableTargetMap(map: out Map map) 
+                                                     && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile) != null 
+                                                     && CommsConsoleUtility.PlayerHasPoweredCommsConsole(map);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

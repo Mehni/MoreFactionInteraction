@@ -49,7 +49,8 @@ namespace MoreFactionInteraction
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             Map map = (Map)parms.target;
-            return CommsConsoleUtility.PlayerHasPoweredCommsConsole(map: map) && base.CanFireNowSub(parms: parms) && RandomNearbyHostileWorldObject(originTile: parms.target.Tile, encampment: out this.worldObject, faction: out this.faction);
+            return base.CanFireNowSub(parms: parms) && CommsConsoleUtility.PlayerHasPoweredCommsConsole(map: map) 
+                                                    && RandomNearbyHostileWorldObject(originTile: parms.target.Tile, encampment: out this.worldObject, faction: out this.faction);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

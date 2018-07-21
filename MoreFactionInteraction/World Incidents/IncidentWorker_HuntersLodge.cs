@@ -16,7 +16,9 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null && (Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false) != null) && TryFindTile(tile: out int num);
+            return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null 
+                                                    && Find.FactionManager.RandomNonHostileFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false) != null 
+                                                    && TryFindTile(tile: out int num);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

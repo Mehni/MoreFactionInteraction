@@ -25,24 +25,24 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && this.TryGetRandomAvailableTargetMap(map: out Map map) && RandomNearbyGrowerSettlement(originTile: map.Tile) != null
-                && VirtualPlantsUtility.EnvironmentAllowsEatingVirtualPlantsNowAt(tile: RandomNearbyGrowerSettlement(originTile: map.Tile).Tile);
+            return base.CanFireNowSub(parms: parms) && TryGetRandomAvailableTargetMap(map: out Map map)
+                                                    && RandomNearbyGrowerSettlement(originTile: map.Tile) != null
+                                                    && VirtualPlantsUtility.EnvironmentAllowsEatingVirtualPlantsNowAt(tile: RandomNearbyGrowerSettlement(originTile: map.Tile).Tile);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            this.TryGetRandomAvailableTargetMap(map: out Map map);
+            TryGetRandomAvailableTargetMap(map: out Map map);
             Settlement settlement = RandomNearbyGrowerSettlement(originTile: map.Tile);
+
             if (settlement == null)
-            {
                 return false;
-            }
+            
             WorldObjectComp_SettlementBumperCropComp component = settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>();
 
-            if (!this.TryGenerateBumperCrop(target: component, map: map))
-            {
+            if (!TryGenerateBumperCrop(target: component, map: map))
                 return false;
-            }
+            
             Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabel_HarvestRequest".Translate(), text: "MFI_LetterHarvestRequest".Translate(args: new object[]
             {
                 settlement.Label,
@@ -51,7 +51,7 @@ namespace MoreFactionInteraction.World_Incidents
             return true;
         }
 
-        private bool TryGenerateBumperCrop(WorldObjectComp_SettlementBumperCropComp target, Map map)
+        private static bool TryGenerateBumperCrop(WorldObjectComp_SettlementBumperCropComp target, Map map)
         {
             int num = RandomOfferDuration(tileIdFrom: map.Tile, tileIdTo: target.parent.Tile);
             if (num < 1)
@@ -66,15 +66,11 @@ namespace MoreFactionInteraction.World_Incidents
         private static ThingDef RandomRawFood()
         {
             //a long list of things to excluse stuff like milk and kibble. In retrospect, it may have been easier to get all plants and get their harvestables.
-            if (!(from x in ThingSetMakerUtility.allGeneratableItems
-                  where x.IsNutritionGivingIngestible && !x.IsCorpse && x.ingestible.HumanEdible && !x.IsMeat 
-                    && !x.IsDrug && !x.HasComp(compType: typeof(CompHatcher)) && !x.HasComp(compType: typeof(CompIngredients)) 
-                    && x.BaseMarketValue <3 && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
-                  select x).TryRandomElement(result: out ThingDef thingDef))
-            {
-                return null;
-            }
-            return thingDef;
+            return !(from x in ThingSetMakerUtility.allGeneratableItems
+                     where x.IsNutritionGivingIngestible && !x.IsCorpse                               && x.ingestible.HumanEdible && !x.IsMeat 
+                        && !x.IsDrug                     && !x.HasComp(compType: typeof(CompHatcher)) && !x.HasComp(compType: typeof(CompIngredients)) 
+                        && x.BaseMarketValue <3          && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
+                     select x).TryRandomElement(result: out ThingDef thingDef) ? null : thingDef;
         }
 
         public static Settlement RandomNearbyGrowerSettlement(int originTile)
@@ -100,7 +96,7 @@ namespace MoreFactionInteraction.World_Incidents
             return GenDate.TicksPerDay * offerValidForDays;
         }
 
-        private bool TryGetRandomAvailableTargetMap(out Map map)
+        private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
             tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
