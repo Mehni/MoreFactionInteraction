@@ -40,6 +40,7 @@ namespace MoreFactionInteraction
     {
         public MoreFactionInteractionMod(ModContentPack content) : base(content: content)
         {
+            this.GetSettings<MoreFactionInteraction_Settings>();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)

@@ -5,6 +5,7 @@ using Verse;
 
 namespace MoreFactionInteraction
 {
+
     public class MapComponent_GoodWillTrader : MapComponent
     {
         //empty constructor
@@ -45,7 +46,6 @@ namespace MoreFactionInteraction
                                                         where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(other: faction)
                                                         select faction;
 
-
                     foreach (Faction faction in friendlyFactions)
                     {
                         Rand.PushState(replacementSeed: faction.loadID ^ faction.GetHashCode());
@@ -66,7 +66,7 @@ namespace MoreFactionInteraction
                         key: (from faction in Find.FactionManager.AllFactionsVisible
                               where !faction.HostileTo(other: Faction.OfPlayerSilentFail) && !faction.IsPlayer && !this.nextFactionInteraction.ContainsKey(key: faction)
                               select faction).First(),
-                        value: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 4));
+                        value: Find.TickManager.TicksGame + Rand.RangeInclusive(min: GenDate.TicksPerDay * 2, max: GenDate.TicksPerDay * 8));
                 }
                 return this.nextFactionInteraction;
             }
@@ -85,13 +85,19 @@ namespace MoreFactionInteraction
                     {
                         Faction faction = kvp.Key;
                         IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.FactionArrival, target: this.map);
-                        incidentParms.forced = true;
                         incidentParms.faction = faction;
+                        //forced, because half the time game doesn't feel like firing events.
+                        incidentParms.forced = true;
+                        
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncidentDef(), fireTick: Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), parms: incidentParms);
+                        Find.Storyteller.incidentQueue.Add(def: IncidentDef(), 
+                                                           fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), 
+                                                           parms: incidentParms);
 
                         this.NextFactionInteraction[key: faction] =
-                                    Find.TickManager.TicksGame + (int)FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(x: faction.GoodwillWith(other: Faction.OfPlayer));
+                            Find.TickManager.TicksGame 
+                              + (int)(FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill) 
+                                    * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
 
                         //kids, you shouldn't change values you iterate over.
                         break;
@@ -104,14 +110,29 @@ namespace MoreFactionInteraction
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))
             {
-                case  6: return MFI_DefOf.MFI_ReverseTradeRequest;
-                case 10: return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
-                case 20: return MFI_DefOf.MFI_BumperCropRequest;
-                case 24: return MFI_DefOf.MFI_HuntersLodge;
-                case 26: return MFI_DefOf.MFI_DiplomaticMarriage;
-                case 30: return RimWorld.IncidentDef.Named("Quest_ItemStash");
-                case 40: return IncidentDefOf.Quest_TradeRequest;
-                case 50: return IncidentDefOf.TraderCaravanArrival;
+                case int n when n <= 6:
+                    return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
+
+                case int n when n <= 10:
+                    return MFI_DefOf.MFI_ReverseTradeRequest;
+
+                case int n when n <= 20:
+                    return MFI_DefOf.MFI_BumperCropRequest;
+
+                case int n when n <= 24:
+                    return MFI_DefOf.MFI_HuntersLodge;
+
+                case int n when n <= 26:
+                    return MFI_DefOf.MFI_DiplomaticMarriage;
+
+                case int n when n <= 30:
+                    return RimWorld.IncidentDef.Named("Quest_ItemStash");
+
+                case int n when n <= 40:
+                    return IncidentDefOf.Quest_TradeRequest;
+                
+                case int n when n <= 50:
+                    return IncidentDefOf.TraderCaravanArrival;
 
                 default: return IncidentDefOf.TraderCaravanArrival;
             }
