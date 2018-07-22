@@ -95,7 +95,7 @@ namespace MoreFactionInteraction
         };
 
         #region TradeQualityImprovements
-        private static bool CompQuality_TradeQualityIncreasePreFix(CompQuality __instance, ref TraderKindDef trader, ref int forTile, ref Faction forFaction)
+        private static bool CompQuality_TradeQualityIncreasePreFix(CompQuality __instance, TraderKindDef trader, int forTile, Faction forFaction)
         {
             //forTile is assigned in RimWorld.ThingSetMaker_TraderStock.Generate. It's either a best-effort map, or -1.
             Map map = null;
@@ -162,15 +162,15 @@ namespace MoreFactionInteraction
         /// <summary>
         /// Increment TimesTraded count of dictionary by one for this faction.
         /// </summary>
-        private static void IncidentFired_TradeCounter_Postfix(ref FiringIncident qi)
+        private static void IncidentFired_TradeCounter_Postfix(ref FiringIncident fi)
         {
-            if (qi.parms.target is Map map && qi.def == IncidentDefOf.TraderCaravanArrival && qi.parms.faction != null)
+            if (fi.parms.target is Map map && fi.def == IncidentDefOf.TraderCaravanArrival && fi.parms.faction != null)
             {
-                map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: qi.parms.faction] += 1;
+                map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: fi.parms.faction] += 1;
             }
         }
 
-        private static void PriceTypeSetter_PostFix(ref TraderKindDef __instance, ref PriceType __result, TradeAction action)
+        private static void PriceTypeSetter_PostFix(TraderKindDef __instance, ref PriceType __result, TradeAction action)
         {
             //PriceTypeSetter is more finicky than I'd like, part of the reason traders arrive without any sellable inventory.
             // had issues with pricetype undefined, pricetype normal and *all* traders having pricetype expensive for *all* goods. This works.
@@ -189,7 +189,7 @@ namespace MoreFactionInteraction
         #endregion
 
         #region WorldIncidents
-        private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, ref Caravan caravan, ref IEnumerable<Gizmo> __result)
+        private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, Caravan caravan, ref IEnumerable<Gizmo> __result)
         {
             if (__instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>()?.ActiveRequest ?? false)
             {
@@ -234,7 +234,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        private static void WorldReachUtility_PostFix(ref bool __result, ref Caravan c)
+        private static void WorldReachUtility_PostFix(ref bool __result, Caravan c)
         {
             SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(caravan: c);
             World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement?.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
