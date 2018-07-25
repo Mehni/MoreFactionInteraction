@@ -18,7 +18,7 @@ namespace MoreFactionInteraction
         static HarmonyPatches()
         {
             HarmonyInstance harmony = HarmonyInstance.Create(id: "Mehni.RimWorld.MFI.main");
-            HarmonyInstance.DEBUG = true;
+            //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
             harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)), prefix: null,
@@ -56,12 +56,11 @@ namespace MoreFactionInteraction
             {
                 if (instructionList[i].opcode == OpCodes.Ldstr)
                 {
-                    for (int j = 0; j < 6; j++)
+                    for (int j = 0; j < 7; j++)
                     {
                         instructionList[i + j].opcode = OpCodes.Nop;
                     }
                 }
-
                 yield return instructionList[i];
             }
         }
@@ -71,7 +70,7 @@ namespace MoreFactionInteraction
         {
             ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
             ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
-            return instructions.MethodReplacer(from: from, to: to);
+            return instructions.ConstructorReplacer(from: from, to: to);
         }
 
         #region MoreTraders

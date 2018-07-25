@@ -50,7 +50,7 @@ namespace MoreFactionInteraction.World_Incidents
 
             ResolveParams mainBasePart = rp;
             mainBasePart.faction = faction;
-            BaseGen.symbolStack.Push(symbol: "basePart_outdoors_division", resolveParams: mainBasePart);
+            BaseGen.symbolStack.Push(symbol: "MFI_basePart_outdoors_division", resolveParams: mainBasePart);
 
             //ResolveParams emptyRoom = rp;
             //emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));

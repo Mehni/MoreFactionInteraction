@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <!-- time to copy-pasta everything and make the Hunter's Lodge less of a loot pinata. -->
+
   <RuleDef>
     <defName>huntersLodgeBase</defName>
     <symbol>huntersLodgeBase</symbol>
@@ -17,6 +19,19 @@
     <resolvers>
       <li Class="MoreFactionInteraction.World_Incidents.SymbolResolver_HuntersLodgeBigFarm">
         <minRectSize>(12, 12)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>MFI_BasePart_Outdoors_Division</defName>
+    <symbol>MFI_basePart_outdoors_division</symbol>
+    <resolvers>
+      <li Class="SymbolResolver_BasePart_Outdoors_Division_Grid">
+        <minRectSize>(12, 12)</minRectSize>
+      </li>
+      <li Class="SymbolResolver_BasePart_Outdoors_Division_Split">
+        <minRectSize>(3, 3)</minRectSize> 
       </li>
     </resolvers>
   </RuleDef>

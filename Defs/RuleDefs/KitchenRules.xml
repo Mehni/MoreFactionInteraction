@@ -26,6 +26,6 @@
     <resolvers>
       <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.SymbolResolver_FillWithKitchen" />
     </resolvers>
-  </RuleDef>  
+  </RuleDef>
 
 </Defs>
