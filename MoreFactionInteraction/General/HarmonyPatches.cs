@@ -70,7 +70,7 @@ namespace MoreFactionInteraction
         {
             ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
             ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
-            return instructions.ConstructorReplacer(from: from, to: to);
+            return instructions.MethodReplacer(from: from, to: to);
         }
 
         #region MoreTraders
@@ -91,7 +91,7 @@ namespace MoreFactionInteraction
                     map = Find.CurrentMap;
 
 
-                if (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_") && map != null)
+                if (map != null && (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_")))
                 {
                     float silverCount = __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount;
                     silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(x: map.PlayerWealthForStoryteller);

@@ -36,7 +36,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             factionWarPeaceTalks.SetFaction(newFaction: faction);
             factionWarPeaceTalks.SetWarringFactions(factionOne: faction, factionInstigator: instigatingFaction);
             int randomInRange = TimeoutDaysRange.RandomInRange;
-            factionWarPeaceTalks.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
+            factionWarPeaceTalks.GetComponent<TimeoutComp>().StartTimeout(/*ticks: randomInRange **/ GenDate.TicksPerDay);
             Find.WorldObjects.Add(o: factionWarPeaceTalks);
 
             string text = string.Format(format: this.def.letterText.AdjustedFor(p: faction.leader), faction.def.leaderTitle, faction.Name, instigatingFaction.Name, randomInRange).CapitalizeFirst();

@@ -38,8 +38,10 @@ FactionWar related:
 Guard an outpost
 Allegiance shift through trade
 Peacetalks to end?
-End after X time or outposts destroyed
+
 Bring resources for war effort
+
+Squatters in destroyed outposts.
 
 
 Cargo pod surprise?

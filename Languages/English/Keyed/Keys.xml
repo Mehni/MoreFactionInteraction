@@ -58,6 +58,7 @@
     <MFI_FactionWarOver>After many battles and great losses, the war between {0} and {1} is over.</MFI_FactionWarOver>
 
     <MFI_FactionWarLeaderDecidedLabel>Peace talks outcome</MFI_FactionWarLeaderDecidedLabel>
-    <MFI_FactionWarLeaderDecided>The peace talks have ended. Both faction leaders sat down and worked towards resolving the unrest.</MFI_FactionWarLeaderDecided>
+    <MFI_FactionWarLeaderDecidedOnWar>The peace talks have ended in failure, and a war between {0} and {1} has broken out. They will occasionally launch attacks on each others bases. If you favoured one faction over the other, they may call upon you for help.\n\nYou can keep track of the faction war in the Factions tab.</MFI_FactionWarLeaderDecidedOnWar>
+    <MFI_FactionWarLeaderDecidedAgainstWar>The peace talks have ended. Tensions have been alleviated and the factions of {0} and {1} have reached an initial agreement.</MFI_FactionWarLeaderDecidedAgainstWar>
 
 </LanguageData>

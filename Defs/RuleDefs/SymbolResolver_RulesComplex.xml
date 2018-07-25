@@ -24,37 +24,66 @@
   </RuleDef>
 
   <RuleDef>
-    <defName>MFI_BasePart_Outdoors_Division</defName>
-    <symbol>MFI_basePart_outdoors_division</symbol>
+    <defName>MFI_BasePart_Outdoors</defName>
+    <symbol>MFI_basePart_outdoors</symbol>
     <resolvers>
-      <li Class="SymbolResolver_BasePart_Outdoors_Division_Grid">
-        <minRectSize>(12, 12)</minRectSize>
-      </li>
-      <li Class="SymbolResolver_BasePart_Outdoors_Division_Split">
-        <minRectSize>(3, 3)</minRectSize> 
-      </li>
-    </resolvers>
-  </RuleDef>
-
-  <!-- <RuleDef>
-    <defName>LodgePart_Outdoors</defName>
-    <symbol>lodgePart_outdoors</symbol>
-    <resolvers>
-      <li Class="MoreFactionInteraction.World_Incidents.SymbolResolver_LodgePart_Outdoors" />
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors" />
     </resolvers>
   </RuleDef>
 
   <RuleDef>
-    <defName>LodgePart_Outdoors_Division</defName>
-    <symbol>lodgePart_outdoors_division</symbol>
+    <defName>MFI_BasePart_Outdoors_Division</defName>
+    <symbol>MFI_basePart_outdoors_division</symbol>
     <resolvers>
-      <li Class="MoreFactionInteraction.World_Incidents.SymbolResolver_LodgePart_Outdoors_Division_Grid">
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Division_Grid">
         <minRectSize>(12, 12)</minRectSize>
       </li>
-      <li Class="MoreFactionInteraction.World_Incidents.SymbolResolver_LodgePart_Outdoors_Division_Split">
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Division_Split">
         <minRectSize>(3, 3)</minRectSize> 
       </li>
     </resolvers>
-  </RuleDef> -->
+  </RuleDef>
+
+  <RuleDef>
+    <defName>MFI_BasePart_Outdoors_LeafPossiblyDecorated</defName>
+    <symbol>MFI_basePart_outdoors_leafPossiblyDecorated</symbol>
+    <resolvers>
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_LeafPossiblyDecorated" />
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>MFI_BasePart_Outdoors_LeafDecorated</defName>
+    <symbol>MFI_basePart_outdoors_leafDecorated</symbol>
+    <resolvers>
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_LeafDecorated_EdgeStreet">
+        <minRectSize>(3, 3)</minRectSize>
+      </li>
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_LeafDecorated_RandomInnerRect">
+        <minRectSize>(3, 3)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+  <RuleDef>
+    <defName>MFI_BasePart_Outdoors_Leaf</defName>
+    <symbol>MFI_basePart_outdoors_leaf</symbol>
+    <resolvers>
+      <li Class="SymbolResolver_BasePart_Outdoors_Leaf_Empty">
+        <selectionWeight>0.01</selectionWeight>
+      </li>
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Leaf_Farm">
+        <selectionWeight>0.65</selectionWeight>
+      </li>
+      <li Class="SymbolResolver_BasePart_Outdoors_Leaf_PowerPlant">
+        <selectionWeight>0.3</selectionWeight>
+      </li>
+      <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Leaf_Building">
+        <minRectSize>(4, 4)</minRectSize>
+      </li>
+    </resolvers>
+  </RuleDef>
+
+<!--MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_ -->
 
 </Defs>

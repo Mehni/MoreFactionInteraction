@@ -56,8 +56,8 @@ namespace MoreFactionInteraction
         /// </summary>
         /// <param name="factionOne"></param>
         /// <param name="factionInstigator"></param>
-        /// <param name="canSendLetter">Used in cases where we don't want to send standard letter. (i.e. DetermineWarAsIfNoPlayerInteraction)</param>
-        public void StartWar(Faction factionOne, Faction factionInstigator, bool canSendLetter)
+        /// <param name="selfResolved">Used in cases where we don't want to send standard letter. (i.e. DetermineWarAsIfNoPlayerInteraction)</param>
+        public void StartWar(Faction factionOne, Faction factionInstigator, bool selfResolved)
         {
             this.warIsOngoing = true;
             this.unrestIsBrewing = false;
@@ -68,8 +68,7 @@ namespace MoreFactionInteraction
             factionOne.TrySetRelationKind(factionInstigator, FactionRelationKind.Hostile, false);
             factionInstigator.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
 
-
-            if (!canSendLetter) return;
+            if (selfResolved) return;
 
             WorldObject peacetalks =
                 (WorldObject) (Find.WorldObjects.AllWorldObjects.FirstOrDefault(x => x.def == MFI_DefOf.MFI_FactionWarPeaceTalks) 
@@ -117,7 +116,9 @@ namespace MoreFactionInteraction
 
             if (faction == this.factionTwo) this.factionTwoBattlesWon++;
 
-            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 10 || (this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f)))  this.ResolveWar();
+            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 12 
+             || this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f))
+                this.ResolveWar();
         }
 
         public override void ExposeData()
@@ -138,10 +139,11 @@ namespace MoreFactionInteraction
 
             if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
+                int rollForIntendedOutcome =  Rand.Bool ? 1 : 4;
                 FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
-                Log.Message(blah);
-                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(), "MFI_FactionWarLeaderDecided".Translate(), LetterDefOf.NeutralEvent);
+                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(), 
+                                               WarIsOngoing ? "MFI_FactionWarLeaderDecidedAgainstWar".Translate(faction, factionInstigator) : "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator), 
+                                               WarIsOngoing ? LetterDefOf.NegativeEvent : LetterDefOf.NeutralEvent);
             }
         }
     }

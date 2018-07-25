@@ -31,31 +31,14 @@ namespace MoreFactionInteraction.World_Incidents
                     BaseGen.symbolStack.Push(symbol: "firefoamPopper", resolveParams: resolveParams2);
                 }
             }
-
             ResolveParams resolveParams4 = rp;
             resolveParams4.rect = rp.rect.ContractedBy(dist: num);
             resolveParams4.faction = faction;
             BaseGen.symbolStack.Push(symbol: "ensureCanReachMapEdge", resolveParams: resolveParams4);
 
-            //ResolveParams mealSource = rp;
-            //mealSource.rect = rp.rect;
-            //mealSource.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("FueledStove"), ThingDefOf.Campfire);
-            //mealSource.skipSingleThingIfHasToWipeBuildingOrDoesntFit = true;
-            //BaseGen.symbolStack.Push("thing", mealSource);
-
-            //ResolveParams tableButcher = rp;
-            //tableButcher.rect = rp.rect;
-            //tableButcher.singleThingDef = Rand.Element<ThingDef>(DefDatabase<ThingDef>.GetNamedSilentFail("TableButcher"), DefDatabase<ThingDef>.GetNamedSilentFail("ButcherSpot"));
-            //BaseGen.symbolStack.Push("thing", tableButcher);
-
             ResolveParams mainBasePart = rp;
             mainBasePart.faction = faction;
             BaseGen.symbolStack.Push(symbol: "MFI_basePart_outdoors_division", resolveParams: mainBasePart);
-
-            //ResolveParams emptyRoom = rp;
-            //emptyRoom.rect = rp.rect.ContractedBy(Rand.RangeInclusive(10,14));
-            //emptyRoom.faction = faction;
-            //BaseGen.symbolStack.Push("emptyRoom", emptyRoom);
         }
     }
 }

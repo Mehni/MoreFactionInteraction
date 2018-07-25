@@ -31,7 +31,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate( factionOneLeaderName, factionInstigatorLeaderName, pawn.Label ));
 
-            foreach (DiaOption option in DialogueOptions(pawn: pawn, factionOne: factionOne, factionInstigator: factionInstigator, incidentTarget))
+            foreach (DiaOption option in DialogueOptions(pawn: pawn, factionOne: factionOne, factionInstigator: factionInstigator, incidentTarget: incidentTarget))
             {
                 dialogueGreeting.options.Add(item: option);
             }
@@ -39,11 +39,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                                                 { action =() => 
-                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator, true);},
+                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: true);},
                                                     linkLateBind = 
-                                                        () => DialogueResolver("Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option.")});
+                                                        () => DialogueResolver(textResult: "Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option.")});
             }
-
             return dialogueGreeting;
         }
 
@@ -131,7 +130,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 tmpPossibleOutcomes.Clear();
 
                 tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageDisaster(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn, incidentTarget),
+                                                                                        first: () => Outcome_TalksSabotageDisaster(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn, incidentTarget: incidentTarget),
                                                                                         second: BaseWeight_Disaster * badOutcomeWeightFactor),
                                                                                     second: "MFI_FactionWarSabotageDisaster".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
@@ -191,7 +190,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                                     second: "MFI_FactionWarBrokerPeaceTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
                 Action first = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).First.First;
-                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second + "\n\n" + "PeaceTalksSocialXPGain".Translate(pawn.LabelShort, 6000f.ToString("F0"));
+                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second + "\n\n" + "PeaceTalksSocialXPGain".Translate(pawn.LabelShort, 6000f.ToString(format: "F0"));
                 first();
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
@@ -222,9 +221,9 @@ namespace MoreFactionInteraction.MoreFactionWar
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
+            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksFactionsFavourBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -236,9 +235,9 @@ namespace MoreFactionInteraction.MoreFactionWar
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                      .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
+            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksFactionsFavourFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -286,7 +285,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksSabotageSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -299,7 +298,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
         }
 
         private static void Outcome_TalksSabotageFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
@@ -325,49 +324,49 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
 
-            favouredFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
+            favouredFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
 
             burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(pawn.Faction, FactionRelationKind.Hostile, false, null, null);
+            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
 
-            LongEventHandler.QueueLongEvent(delegate
+            LongEventHandler.QueueLongEvent(action: delegate
             {
 
-                IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.ThreatBig, incidentTarget);
+                IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.ThreatBig, target: incidentTarget);
                 incidentParms.faction = favouredFaction;
-                PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
+                PawnGroupMakerParms defaultPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(groupKind: PawnGroupKindDefOf.Combat, parms: incidentParms, ensureCanGenerateAtLeastOnePawn: true);
                 defaultPawnGroupMakerParms.generateFightersOnly = true;
-                List<Pawn> list = PawnGroupMakerUtility.GeneratePawns(defaultPawnGroupMakerParms).ToList();
+                List<Pawn> list = PawnGroupMakerUtility.GeneratePawns(parms: defaultPawnGroupMakerParms).ToList();
 
                 IncidentParms burdenedFactionIncidentParms = incidentParms;
                 burdenedFactionIncidentParms.faction = burdenedFaction;
-                PawnGroupMakerParms burdenedFactionPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(PawnGroupKindDefOf.Combat, incidentParms, true);
+                PawnGroupMakerParms burdenedFactionPawnGroupMakerParms = IncidentParmsUtility.GetDefaultPawnGroupMakerParms(groupKind: PawnGroupKindDefOf.Combat, parms: incidentParms, ensureCanGenerateAtLeastOnePawn: true);
                 burdenedFactionPawnGroupMakerParms.generateFightersOnly = true;
-                List<Pawn> burdenedFactionWarriors = PawnGroupMakerUtility.GeneratePawns(burdenedFactionPawnGroupMakerParms).ToList();
+                List<Pawn> burdenedFactionWarriors = PawnGroupMakerUtility.GeneratePawns(parms: burdenedFactionPawnGroupMakerParms).ToList();
 
                 List<Pawn> combinedList = new List<Pawn>();
-                combinedList.AddRange(list);
-                combinedList.AddRange(burdenedFactionWarriors);
+                combinedList.AddRange(collection: list);
+                combinedList.AddRange(collection: burdenedFactionWarriors);
 
-                Map map = CaravanIncidentUtility.SetupCaravanAttackMap(incidentTarget as Caravan, combinedList, true);
+                Map map = CaravanIncidentUtility.SetupCaravanAttackMap(caravan: incidentTarget as Caravan, enemies: combinedList, sendLetterIfRelatedPawns: true);
 
                 if (list.Any())
                 {
-                    LordMaker.MakeNewLord(incidentParms.faction, new LordJob_AssaultColony(favouredFaction), map, list);
+                    LordMaker.MakeNewLord(faction: incidentParms.faction, lordJob: new LordJob_AssaultColony(assaulterFaction: favouredFaction), map: map, startingPawns: list);
                 }
 
                 if (burdenedFactionWarriors.Any())
                 {
-                    LordMaker.MakeNewLord(burdenedFactionIncidentParms.faction, new LordJob_AssaultColony(burdenedFaction), map, burdenedFactionWarriors);
+                    LordMaker.MakeNewLord(faction: burdenedFactionIncidentParms.faction, lordJob: new LordJob_AssaultColony(assaulterFaction: burdenedFaction), map: map, startingPawns: burdenedFactionWarriors);
                 }
 
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
 
-            }, "GeneratingMapForNewEncounter", false, null);
+            }, textKey: "GeneratingMapForNewEncounter", doAsynchronously: false, exceptionHandler: null);
         }
     #endregion
 
@@ -420,7 +419,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                   goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
                                                                   .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(favouredFaction, burdenedFaction, favouredFaction.leader == pawn);
+            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
         }
     #endregion
 
