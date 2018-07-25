@@ -7,7 +7,7 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class GenStep_HuntersLodge : GenStep
     {
-        private const int Size = 36;
+        private const int Size = 24;
 
         private static List<CellRect> possibleRects = new List<CellRect>();
 
@@ -19,15 +19,10 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 centralPoint = CellRect.SingleCell(c: map.Center);
             }
-            Faction faction;
-            if (map.ParentFaction == null || map.ParentFaction == Faction.OfPlayer)
-            {
-                faction = Find.FactionManager.RandomEnemyFaction();
-            }
-            else
-            {
-                faction = map.ParentFaction;
-            }
+
+            Faction faction = map.ParentFaction == null || map.ParentFaction == Faction.OfPlayer
+                                  ? Find.FactionManager.RandomEnemyFaction()
+                                  : map.ParentFaction;
             ResolveParams resolveParams = default;
             resolveParams.rect = this.GetHuntersLodgeRect(centralPoint: centralPoint, map: map);
             resolveParams.faction = faction;

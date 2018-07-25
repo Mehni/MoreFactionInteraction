@@ -13,6 +13,7 @@ SETTINGS:
 
 BUG FIXES AND REFINEMENT:
 - Help out harvesting (letters, balance and fluff)
+- thrumbo herd on hunters lodge
 
 TODO:
 
@@ -31,12 +32,15 @@ Spawn/split off factions
 Faction asks for materials to upgrade itself/roads
 (shooting) Competition
 ransom demand for prisoner
+famed tribal shaman. Bring pawn to them for "free" heal
 
 FactionWar related:
 Guard an outpost
 Allegiance shift through trade
 Peacetalks to end?
 End after X time or outposts destroyed
+Bring resources for war effort
+
 
 Cargo pod surprise?
 - Scyther

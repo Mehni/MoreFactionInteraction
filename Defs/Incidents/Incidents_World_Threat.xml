@@ -5,9 +5,9 @@
 		<defName>MFI_QuestSpreadingPirateCamp</defName>
 		<label>spreading bandit camp</label>
 		<category>Misc</category>
-    <targetTypes>
+    <targetTags>
       <li>World</li>
-    </targetTypes>
+    </targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_SpreadingOutpost</workerClass>
 		<letterLabel>Bandits are spreading</letterLabel>
 		<letterText>{0}, {1} of {2}, feels the need to sent us a taunting message.\n\nIt states they have set up another outpost.</letterText>

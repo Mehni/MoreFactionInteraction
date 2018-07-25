@@ -216,7 +216,7 @@ namespace MoreFactionInteraction
                                 Messages.Message(text: "MFI_MessageBumperCropNoGrower".Translate(), lookTargets: localCaravan, def: MessageTypeDefOf.NegativeEvent);
                                 return;
                             }
-                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(args: new object[] {localCaravan.LabelCap}),
+                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate( localCaravan.LabelCap ),
                             confirmedAct: delegate
                             {
                                 bumperCrop.NotifyCaravanArrived(caravan: localCaravan);

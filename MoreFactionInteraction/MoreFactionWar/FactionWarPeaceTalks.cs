@@ -15,6 +15,8 @@ namespace MoreFactionInteraction
         private Faction factionOne;
         private Faction factionInstigator;
 
+        private bool canRemoveWithoutPostRemove;
+
         public override Material Material
         {
             get
@@ -48,6 +50,7 @@ namespace MoreFactionInteraction
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
                 Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator, incidentTarget: caravan)));
+                this.canRemoveWithoutPostRemove = true;
                 Find.WorldObjects.Remove(this);
             }
         }
@@ -79,7 +82,9 @@ namespace MoreFactionInteraction
         public override void PostRemove()
         {
             base.PostRemove();
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().DetermineWarAsIfNoPlayerInteraction(this.factionOne, this.factionInstigator);
+            //TODO: make so that this doesn't trigger upon MY removal of 'this'
+            if (!this.canRemoveWithoutPostRemove)
+                Find.World.GetComponent<WorldComponent_MFI_FactionWar>().DetermineWarAsIfNoPlayerInteraction(this.factionOne, this.factionInstigator);
         }
 
         public override void ExposeData()

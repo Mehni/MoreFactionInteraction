@@ -5,9 +5,9 @@
 		<defName>MFI_PirateExtortion</defName>
 		<label>pirate extortion</label>
 		<category>Misc</category>
-    <targetTypes>
+    <targetTags>
       <li>Map_PlayerHome</li>
-    </targetTypes>
+    </targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
 		<letterLabel>Pirate fee demand</letterLabel>
 		<letterDef>ExtortionDemand</letterDef>
@@ -26,9 +26,9 @@
 		<defName>MFI_WeddingGuestsArrival</defName>
 		<label>wedding guests arrived</label>
 		<category>Misc</category>
-    <targetTypes>
+    <targetTags>
       <li>Map_PlayerHome</li>
-    </targetTypes>
+    </targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_WeddingGuestsArrival</workerClass>
 		<letterLabel>Wedding guests have arrived</letterLabel>
 		<letterDef>PositiveEvent</letterDef>

@@ -57,4 +57,7 @@
     <MFI_FactionWarOverLabel>Faction war resolved</MFI_FactionWarOverLabel>
     <MFI_FactionWarOver>After many battles and great losses, the war between {0} and {1} is over.</MFI_FactionWarOver>
 
+    <MFI_FactionWarLeaderDecidedLabel>Peace talks outcome</MFI_FactionWarLeaderDecidedLabel>
+    <MFI_FactionWarLeaderDecided>The peace talks have ended. Both faction leaders sat down and worked towards resolving the unrest.</MFI_FactionWarLeaderDecided>
+
 </LanguageData>

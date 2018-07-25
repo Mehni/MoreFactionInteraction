@@ -1,12 +1,11 @@
 ﻿using RimWorld;
 using Verse;
 using RimWorld.Planet;
+using System.Linq;
+using MoreFactionInteraction.MoreFactionWar;
 
 namespace MoreFactionInteraction
 {
-    using System.Linq;
-    using MoreFactionWar;
-
     public class WorldComponent_MFI_FactionWar : WorldComponent
     {
         private Faction factionOne;
@@ -56,19 +55,20 @@ namespace MoreFactionInteraction
         /// Starts the war and sets up stuff.
         /// </summary>
         /// <param name="factionOne"></param>
-        /// <param name="factionTwo"></param>
+        /// <param name="factionInstigator"></param>
         /// <param name="canSendLetter">Used in cases where we don't want to send standard letter. (i.e. DetermineWarAsIfNoPlayerInteraction)</param>
-        public void StartWar(Faction factionOne, Faction factionTwo, bool canSendLetter)
+        public void StartWar(Faction factionOne, Faction factionInstigator, bool canSendLetter)
         {
             this.warIsOngoing = true;
             this.unrestIsBrewing = false;
             this.SetFirstWarringFaction(factionOne);
-            this.SetSecondWarringFaction(factionTwo);
+            this.SetSecondWarringFaction(factionInstigator);
             this.factionOneBattlesWon = 1;
             this.factionTwoBattlesWon = 2;
-            factionOne.TrySetRelationKind(factionTwo, FactionRelationKind.Hostile, false);
-            factionTwo.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
+            factionOne.TrySetRelationKind(factionInstigator, FactionRelationKind.Hostile, false);
+            factionInstigator.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
 
+            
             if (!canSendLetter) return;
 
             WorldObject peacetalks =
@@ -76,8 +76,8 @@ namespace MoreFactionInteraction
                             ?? GlobalTargetInfo.Invalid);
 
             Find.LetterStack.ReceiveLetter("MFI_FactionWarStarted".Translate(),
-                                           "MFI_FactionWarExplanation".Translate(factionOne.Name, factionTwo.Name),
-                                           LetterDefOf.NegativeEvent, new GlobalTargetInfo(peacetalks), factionOne);
+                                           "MFI_FactionWarExplanation".Translate(factionOne.Name, factionInstigator.Name),
+                                           LetterDefOf.NegativeEvent, new GlobalTargetInfo(peacetalks));
         }
 
         public void StartUnrest(Faction factionOne, Faction factionTwo)
@@ -140,6 +140,7 @@ namespace MoreFactionInteraction
             {
                 int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
                 FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
+                Log.Message(blah);
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(), "MFI_FactionWarLeaderDecided".Translate(), LetterDefOf.NeutralEvent);
             }
         }

@@ -14,7 +14,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return Current.Game.Maps.Any(predicate: x=> x.Tile == parms.target.Tile) && base.CanFireNowSub(parms: parms);
+            return base.CanFireNowSub(parms: parms) && Current.Game.Maps.Any(predicate: x => x.Tile == parms.target.Tile);
         }
 
         protected override LordJob CreateLordJob(List<Pawn> generatedPawns, IncidentParms parms)
@@ -30,7 +30,7 @@ namespace MoreFactionInteraction.World_Incidents
             Map map = parms.target as Map;
 
             this.pawnKindDef = PawnKindDefOf.Thrumbo;
-            if (parms.target is Site site)
+            if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
             {
                 SitePartWorker_MigratoryHerd sitePart = (SitePartWorker_MigratoryHerd)site.parts.First(predicate: x => x.def == DefDatabase<SitePartDef>.GetNamed(defName: "MFI_HuntersLodge")).Def.Worker;
                 this.pawnKindDef = sitePart?.pawnKindDef;

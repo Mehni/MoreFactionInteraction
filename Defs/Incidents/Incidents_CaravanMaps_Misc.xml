@@ -5,9 +5,9 @@
     <defName>MFI_HerdMigration_Ambush</defName>
     <label>herd migration</label>
     <category>Misc</category>
-    <targetTypes>
+    <targetTags>
       <li>Map_Misc</li>
-    </targetTypes>
+    </targetTags>
     <workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HerdMigration_Ambush</workerClass>
     <pointsScaleable>true</pointsScaleable>
     <minRefireDays>0.17</minRefireDays>

@@ -5,9 +5,9 @@
 		<defName>MFI_DiplomaticMarriage</defName>
 		<label>diplomatic marriage</label>
 		<category>Misc</category>
-		<targetTypes>
+		<targetTags>
 			<li>World</li>
-		</targetTypes>
+		</targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_DiplomaticMarriage</workerClass>
 		<letterLabel>Diplomatic marriage</letterLabel>
 		<letterDef>DiplomaticMarriage</letterDef>
@@ -28,9 +28,9 @@
 		<defName>MFI_HuntersLodge</defName>
 		<label>hunters lodge</label>
 		<category>Misc</category>
-		<targetTypes>
+		<targetTags>
 			<li>World</li>
-		</targetTypes>
+		</targetTags>
 		<workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HuntersLodge</workerClass>
 		<letterLabel>Hunters lodge</letterLabel>
 		<letterDef>PositiveEvent</letterDef>
@@ -44,9 +44,9 @@
 		<defName>MFI_SettlementBaseAttack</defName>
 		<label>Faction base attacked</label>
 		<category>Misc</category>
-		<targetTypes>
+		<targetTags>
 			<li>World</li>
-		</targetTypes>
+		</targetTags>
 		<workerClass>MoreFactionInteraction.MoreFactionWar.IncidentWorker_SettlementBaseAttack</workerClass>
 		<baseChance>0.8</baseChance>
 		<earliestDay>20</earliestDay>
