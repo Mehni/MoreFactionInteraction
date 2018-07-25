@@ -3,11 +3,10 @@ using System.Linq;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
+using MoreFactionInteraction.MoreFactionWar;
 
 namespace MoreFactionInteraction
 {
-    using MoreFactionWar;
-
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
         private int goodWillGainedFromMarriage;
@@ -76,7 +75,7 @@ namespace MoreFactionInteraction
 
         private static void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
         {
-            if (Prefs.LogVerbose) Log.Warning(text: " Determine and do outcome after marriage.");
+            if (Prefs.LogVerbose) Log.Warning(text: "Determine and do outcome after marriage.");
 
             betrothed.SetFaction(newFaction: !marriageSeeker.HostileTo(fac: Faction.OfPlayer)
                                                  ? marriageSeeker.Faction

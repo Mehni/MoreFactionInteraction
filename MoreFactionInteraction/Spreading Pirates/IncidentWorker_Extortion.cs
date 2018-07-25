@@ -40,9 +40,10 @@ namespace MoreFactionInteraction
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
                                     where (worldObject is SettlementBase || worldObject is Site)
-                                    && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
-                                    && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 15f
-                                    && (Find.WorldReachability.CanReach(startTile: forTile, destTile: worldObject.Tile) || forTile == -1)
+                                            && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
+                                            && worldObject.Faction.def.permanentEnemy
+                                            && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 15f
+                                            && (Find.WorldReachability.CanReach(startTile: forTile, destTile: worldObject.Tile) || forTile == -1)
                                     select worldObject;
         }
 
@@ -60,6 +61,7 @@ namespace MoreFactionInteraction
             if (RandomNearbyHostileWorldObject(originTile: map.Tile, encampment: out this.worldObject, faction: out this.faction))
             {
                 //technically the math.max is nonsense since this incident uses Misc category, and points don't get calculated for that. Left in for future expansion.
+                //update: seems they now do? thx Tynan.
                 int extorsionDemand = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points) * NearbyHostileEncampments(forTile: map.Tile).Count();
 
                 ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(args: new object[]

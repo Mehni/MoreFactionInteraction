@@ -120,9 +120,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             }
             DestroyedSettlement destroyedSettlement = (DestroyedSettlement)WorldObjectMaker.MakeWorldObject(def: WorldObjectDefOf.DestroyedSettlement);
             destroyedSettlement.Tile = someRandomPreferablyNearbySettlement.Tile;
+            Faction loserFaction = someRandomPreferablyNearbySettlement.Faction;
             Find.WorldObjects.Add(o: destroyedSettlement);
             Find.WorldObjects.Remove(o: someRandomPreferablyNearbySettlement);
-            return "MFI_FactionWarBaseDestroyed".Translate(someRandomPreferablyNearbySettlement.Faction, someRandomPreferablyNearbySettlement.Faction.EnemyInFactionWar());
+            return "MFI_FactionWarBaseDestroyed".Translate(loserFaction, loserFaction.EnemyInFactionWar());
         }
 
         private static SettlementBase RandomPreferablyNearbySettlementOfFactionInvolvedInWar(int originTile)

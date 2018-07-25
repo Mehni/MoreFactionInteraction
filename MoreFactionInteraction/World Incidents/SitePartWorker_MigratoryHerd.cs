@@ -1,4 +1,5 @@
 ﻿using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace MoreFactionInteraction.World_Incidents
@@ -6,6 +7,17 @@ namespace MoreFactionInteraction.World_Incidents
     public class SitePartWorker_MigratoryHerd : SitePartWorker
     {
         public PawnKindDef pawnKindDef;
+
+        public override string GetPostProcessedThreatLabel(Site site, SiteCoreOrPartBase siteCoreOrPart)
+        {
+            return string.Concat(base.GetPostProcessedThreatLabel(site, siteCoreOrPart),
+                                     " (",
+                                     GenLabel.BestKindLabel(siteCoreOrPart.parms.animalKind, Gender.None, true),
+                                     ")"
+                                 );
+        }
+
+
         //public IncidentParms parmesan;
         //public Faction faction;
 
@@ -21,7 +33,7 @@ namespace MoreFactionInteraction.World_Incidents
             Find.Storyteller.incidentQueue.Add(qi: queuedIncident);
         }
 
-
+        
 
         //public override void PostExposeData()
         //{

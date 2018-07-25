@@ -10,12 +10,15 @@ using System.Reflection;
 
 namespace MoreFactionInteraction
 {
+    using System.Reflection.Emit;
+
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
         static HarmonyPatches()
         {
             HarmonyInstance harmony = HarmonyInstance.Create(id: "Mehni.RimWorld.MFI.main");
+            HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
             harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)), prefix: null,
@@ -41,13 +44,33 @@ namespace MoreFactionInteraction
 
             harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
                           transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+
+            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
+                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+        }
+
+        private static IEnumerable<CodeInstruction> ErrorSuppressionSssh(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                if (instructionList[i].opcode == OpCodes.Ldstr)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        instructionList[i + j].opcode = OpCodes.Nop;
+                    }
+                }
+
+                yield return instructionList[i];
+            }
         }
 
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
         {
             ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
-            ConstructorInfo to   = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
+            ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
             return instructions.MethodReplacer(from: from, to: to);
         }
 

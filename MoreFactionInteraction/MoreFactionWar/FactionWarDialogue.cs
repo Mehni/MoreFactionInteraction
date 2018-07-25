@@ -29,7 +29,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             string factionOneLeaderName =
                 factionOne.leader != null ? factionOne.leader.Name.ToStringFull : factionOne.Name;
 
-            DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate(args: new object[] { factionOneLeaderName, factionInstigatorLeaderName, pawn.Label }));
+            DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate( factionOneLeaderName, factionInstigatorLeaderName, pawn.Label ));
 
             foreach (DiaOption option in DialogueOptions(pawn: pawn, factionOne: factionOne, factionInstigator: factionInstigator, incidentTarget))
             {
@@ -39,9 +39,9 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                                                 { action =() => 
-                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator, true);
-                                                }, linkLateBind = () => DialogueResolver("Alrighty. War started.")
-                                                });
+                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne, factionInstigator, true);},
+                                                    linkLateBind = 
+                                                        () => DialogueResolver("Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option.")});
             }
 
             return dialogueGreeting;
@@ -191,7 +191,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                                     second: "MFI_FactionWarBrokerPeaceTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
                 Action first = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).First.First;
-                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second;
+                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second + "\n\n" + "PeaceTalksSocialXPGain".Translate(pawn.LabelShort, 6000f.ToString("F0"));
                 first();
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
@@ -204,7 +204,7 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static DiaNode DialogueResolver(string textResult)
         {
             DiaNode resolver = new DiaNode(text: textResult);
-            DiaOption diaOption = new DiaOption(text: "Ok then.")
+            DiaOption diaOption = new DiaOption(text: "OK".Translate())
             {
                 resolveTree = true
             };

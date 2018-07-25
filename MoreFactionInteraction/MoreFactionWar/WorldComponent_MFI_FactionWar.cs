@@ -64,11 +64,11 @@ namespace MoreFactionInteraction
             this.SetFirstWarringFaction(factionOne);
             this.SetSecondWarringFaction(factionInstigator);
             this.factionOneBattlesWon = 1;
-            this.factionTwoBattlesWon = 2;
+            this.factionTwoBattlesWon = 1;
             factionOne.TrySetRelationKind(factionInstigator, FactionRelationKind.Hostile, false);
             factionInstigator.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
 
-            
+
             if (!canSendLetter) return;
 
             WorldObject peacetalks =
@@ -117,7 +117,7 @@ namespace MoreFactionInteraction
 
             if (faction == this.factionTwo) this.factionTwoBattlesWon++;
 
-            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 10 || Rand.Chance(0.25f))  this.ResolveWar();
+            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 10 || (this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f)))  this.ResolveWar();
         }
 
         public override void ExposeData()
