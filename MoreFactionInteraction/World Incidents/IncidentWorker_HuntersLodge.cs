@@ -2,10 +2,10 @@
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
-//using Kitchen.Sink;
 
 namespace MoreFactionInteraction.World_Incidents
 {
+
     public class IncidentWorker_HuntersLodge : IncidentWorker
     {
         private const int MinDistance = 2;
@@ -33,30 +33,25 @@ namespace MoreFactionInteraction.World_Incidents
             if (site == null)
                 return false;
 
-            if (!this.TryFindAnimalKind(tile: tile, animalKind: out PawnKindDef pawnKindDef))
-                return false;
-            
-            if (pawnKindDef == null) pawnKindDef = PawnKindDefOf.Thrumbo; //mostly for testing.
-
             int randomInRange = TimeoutDaysRange.RandomInRange;
+
             site.Tile = tile;
             site.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
             site.SetFaction(newFaction: faction);
-            
-            if(site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).Def.Worker is SitePartWorker_MigratoryHerd sitePart)
-                sitePart.pawnKindDef = pawnKindDef;
+            site.customLabel = site.def.LabelCap + site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).def.Worker
+                                                            .GetPostProcessedThreatLabel(site, site.parts.FirstOrDefault());
 
             Find.WorldObjects.Add(o: site);
-            string text = string.Format(format: this.def.letterText, faction, faction.def.leaderTitle, pawnKindDef.GetLabelPlural(), randomInRange).CapitalizeFirst();
+
+            string text = string.Format(format: this.def.letterText, 
+                                        faction, 
+                                        faction.def.leaderTitle, 
+                                        SitePartUtility.GetDescriptionDialogue(site, site.parts.FirstOrDefault()), 
+                                        randomInRange)
+                                .CapitalizeFirst();
+
             Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: site);
             return true;
-        }
-
-        private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
-        {
-            return (from k in DefDatabase<PawnKindDef>.AllDefs
-                    where k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile: tile, animalRace: k.race)
-                    select k).TryRandomElementByWeight(weightSelector: (PawnKindDef x) => x.RaceProps.wildness, result: out animalKind);
         }
 
         private static bool TryFindTile(out int tile)

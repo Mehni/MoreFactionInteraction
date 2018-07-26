@@ -1,13 +1,13 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using System.Linq;
+using UnityEngine;
 
 namespace MoreFactionInteraction.World_Incidents
 {
     public class SitePartWorker_MigratoryHerd : SitePartWorker
     {
-        public PawnKindDef pawnKindDef;
-
         public override string GetPostProcessedThreatLabel(Site site, SiteCoreOrPartBase siteCoreOrPart)
         {
             return string.Concat(base.GetPostProcessedThreatLabel(site, siteCoreOrPart),
@@ -17,15 +17,6 @@ namespace MoreFactionInteraction.World_Incidents
                                  );
         }
 
-
-        //public IncidentParms parmesan;
-        //public Faction faction;
-
-        //public override string CompInspectStringExtra()
-        //{
-        //    return "MFI_HuntersLodgeInspectString".Translate(new object[] { faction, pawnKindDef.GetLabelPlural() });
-        //}
-
         public override void PostMapGenerate(Map map)
         {
             IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.Misc, target: map);
@@ -33,22 +24,26 @@ namespace MoreFactionInteraction.World_Incidents
             Find.Storyteller.incidentQueue.Add(qi: queuedIncident);
         }
 
-        
+        public override string GetPostProcessedDescriptionDialogue(Site site, SiteCoreOrPartBase siteCoreOrPart)
+        {
+            return string.Format(base.GetPostProcessedDescriptionDialogue(site, siteCoreOrPart), GenLabel.BestKindLabel(siteCoreOrPart.parms.animalKind, Gender.None, true));
+        }
 
-        //public override void PostExposeData()
-        //{
-        //    base.PostExposeData();
-        //    Scribe_Defs.Look(ref pawnKindDef, "MFI_HuntersLodgepawnKindDef");
-        //    Scribe_References.Look(ref faction, "MFI_HuntersLodgeFaction");
-        //    Scribe_Deep.Look<IncidentParms>(ref this.parmesan, "MFI_HuntersLodgeincidentParms", new object[0]);
-        //}
+        private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
+        {
+            return (from k in DefDatabase<PawnKindDef>.AllDefs
+                    where k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile: tile, animalRace: k.race)
+                    select k).TryRandomElementByWeight(weightSelector: (PawnKindDef x) => x.RaceProps.wildness, result: out animalKind);
+        }
+
+        public override SiteCoreOrPartParams GenerateDefaultParams(Site site, float myThreatPoints)
+        {
+            SiteCoreOrPartParams siteCoreOrPartParams = base.GenerateDefaultParams(site, myThreatPoints);
+            if (TryFindAnimalKind(site.Tile, out siteCoreOrPartParams.animalKind))
+            {
+                siteCoreOrPartParams.threatPoints = Mathf.Max(siteCoreOrPartParams.threatPoints, siteCoreOrPartParams.animalKind.combatPower);
+            }
+            return siteCoreOrPartParams;
+        }
     }
-
-    //class WorldObjectCompProperties_MigratoryHerd : WorldObjectCompProperties
-    //{
-    //    public WorldObjectCompProperties_MigratoryHerd()
-    //    {
-    //        this.compClass = typeof(SitePartWorker_MigratoryHerd);
-    //    }
-    //}
 }

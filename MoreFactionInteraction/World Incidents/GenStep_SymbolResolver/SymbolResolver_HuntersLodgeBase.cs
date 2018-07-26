@@ -37,11 +37,6 @@ namespace MoreFactionInteraction.World_Incidents
             BaseGen.symbolStack.Push(symbol: "ensureCanReachMapEdge", resolveParams: resolveParams4);
 
             ResolveParams mainBasePart = rp;
-            ThingSetMakerParams thingSet = default;
-            thingSet.totalMarketValueRange = new FloatRange(300, 1000);
-            thingSet.filter = new ThingFilter();
-            thingSet.filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
-            rp.thingSetMakerParams = thingSet;
             mainBasePart.faction = faction;
             BaseGen.symbolStack.Push(symbol: "MFI_basePart_outdoors_division", resolveParams: mainBasePart);
         }

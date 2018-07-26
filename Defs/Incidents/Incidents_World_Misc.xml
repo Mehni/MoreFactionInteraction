@@ -34,7 +34,7 @@
 		<workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HuntersLodge</workerClass>
 		<letterLabel>Hunter's lodge</letterLabel>
 		<letterDef>PositiveEvent</letterDef>
-		<letterText>You are invited to {0}'s {1} summer retreat. There's usually a large herd of {2} coming through around this time of year. They have all the required facilities there to make meals, and they've extended their hospitality to you. This offer expires in {3} days.</letterText>
+		<letterText>You are invited to {0}'s {1} summer retreat. {2}. There is an outpost at the site with all the required facilities to make meals, and they've extended their hospitality to you. This offer expires in {3} days.</letterText>
 		<baseChance>0.8</baseChance>
 		<earliestDay>15</earliestDay>
 		<minRefireDays>30</minRefireDays>

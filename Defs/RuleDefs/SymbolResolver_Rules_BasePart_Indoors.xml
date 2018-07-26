@@ -25,10 +25,9 @@
         <resolvers>
             <li Class="SymbolResolver_BasePart_Indoors_Leaf_Barracks">
                 <minRectSize>(3, 3)</minRectSize>
-                <selectionWeight>0.65</selectionWeight>
+                <selectionWeight>0.45</selectionWeight>
             </li>
             <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.SymbolResolver_BasePart_Indoors_Leaf_Kitchen">
-                <selectionWeight>0.5</selectionWeight>
                 <minRectSize>(5, 5)</minRectSize>
             </li>
             <li Class="SymbolResolver_BasePart_Indoors_Leaf_Brewery">
@@ -37,7 +36,11 @@
             </li>
             <li Class="SymbolResolver_BasePart_Indoors_Leaf_DiningRoom">
                 <minRectSize>(5, 5)</minRectSize>
-                <selectionWeight>1.25</selectionWeight>
+                <selectionWeight>0.45</selectionWeight>
+            </li>
+            <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Indoors_Leaf_GloriousPotat">
+                <minRectSize>(4, 4)</minRectSize>
+                <selectionWeight>0.3</selectionWeight>
             </li>
         </resolvers>
     </RuleDef>

@@ -62,10 +62,11 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
                 Rot4 rot = (!flipACoin) ? Rot4.North : Rot4.West;
                 if (!GenSpawn.WouldWipeAnythingWith(thingPos: potentialSpot, thingRot: rot, thingDef: thingDef, map: map, predicate: x => x.def.category == ThingCategory.Building))
                 {
-                    if (!BaseGenUtility.AnyDoorAdjacentCardinalTo(rect: GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.Size + thingDef.interactionCellOffset.ToIntVec2), map: map))
+                    IntVec2 dontTouchMe = new IntVec2(thingDef.Size.x + 1, thingDef.Size.z + 1);
+                    if (!BaseGenUtility.AnyDoorAdjacentCardinalTo(rect: GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: dontTouchMe), map: map))
                     {
                         ResolveParams resolveParams = rp;
-                        resolveParams.rect = GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.size);
+                        resolveParams.rect = GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.Size);
                         resolveParams.singleThingDef = (Rand.Element(a: thingDef, b: tableButcher));
                         resolveParams.thingRot = rot;
                         bool? skipSingleThingIfHasToWipeBuildingOrDoesntFit = rp.skipSingleThingIfHasToWipeBuildingOrDoesntFit;

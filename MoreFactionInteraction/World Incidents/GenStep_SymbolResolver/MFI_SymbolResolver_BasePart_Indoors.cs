@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Verse;
 using RimWorld.BaseGen;
+using UnityEngine;
 
 namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
 {
@@ -68,6 +69,30 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
                     BaseGen.symbolStack.Push("MFI_basePart_indoors", resolveParams4);
                 }
             }
+        }
+    }
+
+    class MFI_SymbolResolver_BasePart_Indoors_Leaf_GloriousPotat : SymbolResolver
+    {
+        public override void Resolve(ResolveParams rp)
+        {
+            CellRect rect          = new CellRect(rp.rect.maxX - 3, rp.rect.maxZ - 3, 4, 4);
+            ThingDef gloriousPotat = ThingDefOf.RawPotatoes;
+            int      num           = Rand.RangeInclusive(2, 3);
+            for (int i = 0; i < num; i++)
+            {
+                ResolveParams resolveParams = rp;
+                resolveParams.rect                  = rect.ContractedBy(1);
+                resolveParams.singleThingDef        = gloriousPotat;
+                resolveParams.singleThingStackCount = Rand.RangeInclusive(Mathf.Min(10, gloriousPotat.stackLimit), Mathf.Min(50, gloriousPotat.stackLimit));
+                BaseGen.symbolStack.Push("thing", resolveParams);
+            }
+            ResolveParams resolveParams2 = rp;
+            resolveParams2.rect = rect;
+            BaseGen.symbolStack.Push("ensureCanReachMapEdge", resolveParams2);
+            ResolveParams resolveParams3 = rp;
+            resolveParams3.rect = rect;
+            BaseGen.symbolStack.Push("emptyRoom", resolveParams3);
         }
     }
 }

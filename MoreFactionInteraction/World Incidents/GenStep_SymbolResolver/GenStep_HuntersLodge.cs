@@ -7,7 +7,7 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class GenStep_HuntersLodge : GenStep
     {
-        private const int Size = 24;
+        private const int Size = 36;
 
         private static List<CellRect> possibleRects = new List<CellRect>();
 
@@ -29,7 +29,9 @@ namespace MoreFactionInteraction.World_Incidents
 
             ThingSetMakerParams maxFoodAndStuffForHuntersLodge = default;
             maxFoodAndStuffForHuntersLodge.totalMarketValueRange = new FloatRange(200, 500);
-            maxFoodAndStuffForHuntersLodge.totalNutritionRange   = new FloatRange(0, 50);
+            maxFoodAndStuffForHuntersLodge.totalNutritionRange   = new FloatRange(20, 50);
+            
+            //maxFoodAndStuffForHuntersLodge.filter.SetAllow(ThingCategoryDefOf.PlantFoodRaw, true);
 
             resolveParams.thingSetMakerParams = maxFoodAndStuffForHuntersLodge;
 

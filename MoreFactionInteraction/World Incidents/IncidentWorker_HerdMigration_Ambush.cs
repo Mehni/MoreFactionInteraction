@@ -29,13 +29,12 @@ namespace MoreFactionInteraction.World_Incidents
         {
             Map map = parms.target as Map;
 
-            this.pawnKindDef = PawnKindDefOf.Thrumbo;
-            if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
-            {
-                SitePartWorker_MigratoryHerd sitePart =
-                    (SitePartWorker_MigratoryHerd) site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).def.Worker;
-                this.pawnKindDef = sitePart?.pawnKindDef;
-            }
+            if (map == null)
+                this.pawnKindDef = PawnKindDefOf.Thrumbo; //something went really wrong. Let's uh.. brush it under the rug.
+
+            else if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
+                this.pawnKindDef = site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).parms.animalKind;
+
             int num = new IntRange(min: 30, max: 50).RandomInRange;
 
             List<Pawn> list = new List<Pawn>();
