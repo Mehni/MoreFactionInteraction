@@ -64,22 +64,22 @@ namespace MoreFactionInteraction
                 //update: seems they now do? thx Tynan.
                 int extorsionDemand = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points) * NearbyHostileEncampments(forTile: map.Tile).Count();
 
-                ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(args: new object[]
+                ChoiceLetter_ExtortionDemand choiceLetterExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(args: new object[]
                 {
                     this.faction.leader.LabelShort, this.faction.def.leaderTitle, this.faction.Name, this.worldObject.def.label, this.worldObject.Label,
                     extorsionDemand,
                 }).AdjustedFor(p: this.faction.leader), def: this.def.letterDef);
-                choiceLetter_ExtortionDemand.title = "MFI_ExtortionDemandTitle".Translate(args: new object[]
+                choiceLetterExtortionDemand.title = "MFI_ExtortionDemandTitle".Translate(args: new object[]
                 {
                     map.info.parent.Label
                 }).CapitalizeFirst();
-                if (this.worldObject is Site) choiceLetter_ExtortionDemand.outpost = true;
-                choiceLetter_ExtortionDemand.radioMode = true;
-                choiceLetter_ExtortionDemand.faction = this.faction;
-                choiceLetter_ExtortionDemand.map = map;
-                choiceLetter_ExtortionDemand.fee = extorsionDemand;
-                choiceLetter_ExtortionDemand.StartTimeout(duration: TimeoutTicks);
-                Find.LetterStack.ReceiveLetter(@let: choiceLetter_ExtortionDemand);
+                if (this.worldObject is Site) choiceLetterExtortionDemand.outpost = true;
+                choiceLetterExtortionDemand.radioMode = true;
+                choiceLetterExtortionDemand.faction = this.faction;
+                choiceLetterExtortionDemand.map = map;
+                choiceLetterExtortionDemand.fee = extorsionDemand;
+                choiceLetterExtortionDemand.StartTimeout(duration: TimeoutTicks);
+                Find.LetterStack.ReceiveLetter(@let: choiceLetterExtortionDemand);
                 return true;
             }
             return false;

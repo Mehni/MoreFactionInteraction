@@ -90,7 +90,6 @@ namespace MoreFactionInteraction
                 else if (Find.CurrentMap != null)
                     map = Find.CurrentMap;
 
-
                 if (map != null && (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_")))
                 {
                     float silverCount = __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount;

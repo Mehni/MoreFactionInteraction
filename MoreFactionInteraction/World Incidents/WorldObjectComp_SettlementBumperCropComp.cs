@@ -71,18 +71,19 @@ namespace MoreFactionInteraction.World_Incidents
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(caravanMembersCapableOfGrowing: allMembersCapableOfGrowing);
 
             //TODO: Calculate a good amount
-            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level));
+            float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count 
+                              * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level));
 
             Thing reward = ThingMaker.MakeThing(def: this.bumperCrop);
             reward.stackCount = Mathf.RoundToInt(f: totalreward);
             CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
-            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(args: new object[]
-            {
+            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(
+            
                 this.parent.Faction.def.pawnsPlural, this.parent.Faction.Name,
                 Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
-            }), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan);
+            ), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: this.parent.Faction);
 
             allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
@@ -109,8 +110,17 @@ namespace MoreFactionInteraction.World_Incidents
 
         private static List<Pawn> AllCaravanMembersCapableOfGrowing(Caravan caravan)
         {
-            return caravan.PawnsListForReading.Where(predicate: pawn => !pawn.Dead && !pawn.Downed && !pawn.InMentalState && caravan.IsOwner(p: pawn) && pawn.health.capacities.CanBeAwake
-               && !StatDefOf.PlantHarvestYield.Worker.IsDisabledFor(thing: pawn)).ToList();
+            return caravan.PawnsListForReading.Where(predicate: pawn => !pawn.Dead && !pawn.Downed && !pawn.InMentalState 
+                                                                     && caravan.IsOwner(p: pawn) && pawn.health.capacities.CanBeAwake
+                                                                     && !StatDefOf.PlantHarvestYield.Worker.IsDisabledFor(thing: pawn)).ToList();
+        }
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look<int>(ref this.expiration, "MFI_BumperCropExpiration");
+            Scribe_Values.Look<int>(ref this.workLeft, "MFI_BumperCropWorkLeft");
+            Scribe_Values.Look<bool>(ref this.workStarted, "MFI_BumperCropWorkStarted");
         }
     }
 }

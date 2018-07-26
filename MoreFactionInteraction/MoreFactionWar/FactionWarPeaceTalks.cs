@@ -82,7 +82,6 @@ namespace MoreFactionInteraction
         public override void PostRemove()
         {
             base.PostRemove();
-            //TODO: make so that this doesn't trigger upon MY removal of 'this'
             if (!this.canRemoveWithoutPostRemove)
                 Find.World.GetComponent<WorldComponent_MFI_FactionWar>().DetermineWarAsIfNoPlayerInteraction(this.factionOne, this.factionInstigator);
         }

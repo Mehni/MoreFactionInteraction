@@ -39,7 +39,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                                                 { action =() => 
-                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: true);},
+                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: false);},
                                                     linkLateBind = 
                                                         () => DialogueResolver(textResult: "Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option.")});
             }
@@ -50,7 +50,7 @@ namespace MoreFactionInteraction.MoreFactionWar
         {
             string factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate(args: new object[] { factionOne.Name }))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionOne.Name ))
             {
                 action = () =>
                 {
@@ -58,7 +58,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 },
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
-            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate(args: new object[] { factionInstigator.Name }))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionInstigator.Name ))
             {
                 action = () =>
                 {
@@ -365,6 +365,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                 }
 
                 Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
+                Find.TickManager.slower.SignalForceNormalSpeedShort();
 
             }, textKey: "GeneratingMapForNewEncounter", doAsynchronously: false, exceptionHandler: null);
         }

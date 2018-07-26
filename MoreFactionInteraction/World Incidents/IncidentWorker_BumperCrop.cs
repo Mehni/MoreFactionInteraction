@@ -47,7 +47,7 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 settlement.Label,
                 (component.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F0")
-            }), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement);
+            }), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement, relatedFaction: settlement.Faction);
             return true;
         }
 

@@ -25,5 +25,12 @@ namespace MoreFactionInteraction.World_Incidents
                 CaravanVisitUtility.SettlementVisitedNow(caravan: (Caravan) this.parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>().DoOutcome(caravan: (Caravan) this.parent);
             }
         }
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look<int>(ref this.workWillBeDoneAtTick, "MFI_BumperCropWorkingCaravanWorkWillBeDoneAt");
+            Scribe_Values.Look<bool>(ref this.caravanIsWorking, "MFI_BumperCropCaravanIsWorking");
+        }
     }
 }

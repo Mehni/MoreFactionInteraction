@@ -46,8 +46,8 @@ namespace MoreFactionInteraction
                                     HealIfPossible(p: this.betrothed);
                                     caravan.RemovePawn(p: this.betrothed);
                                 }
-
                                 DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
+                                Find.LetterStack.RemoveLetter(this);
                         }
                     };
                     DiaNode dialogueNodeAccept = new DiaNode(text: "MFI_AcceptedProposal".Translate(this.betrothed, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
@@ -60,6 +60,7 @@ namespace MoreFactionInteraction
                         {
                             //if (Rand.Chance(0.2f))
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelRejectedProposal".Translate());
+                            Find.LetterStack.RemoveLetter(this);
                         }
                     };
                     DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate(this.marriageSeeker.Name, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
