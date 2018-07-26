@@ -22,7 +22,7 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
 
         public override void Resolve(ResolveParams rp)
         {
-            BaseGen.symbolStack.PushMany(rp, "farm", "farm", "farm");
+            BaseGen.symbolStack.PushMany(rp, "farm", "farm", "farm", "farm"); //I really like farms.
             BaseGen.globalSettings.basePart_farmsCoverage += (float)rp.rect.Area / (float)BaseGen.globalSettings.mainRect.Area;
         }
     }

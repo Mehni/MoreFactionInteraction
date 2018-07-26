@@ -6,11 +6,6 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
 {
     public class SymbolResolver_BasePart_Indoors_Leaf_Kitchen : SymbolResolver
     {
-        public override bool CanResolve(ResolveParams rp)
-        {
-            return base.CanResolve(rp: rp);
-        }
-
         public override void Resolve(ResolveParams rp)
         {
             BaseGen.symbolStack.Push(symbol: "kitchen", resolveParams: rp);
@@ -47,7 +42,7 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
             }
             else
             {
-                thingDef = Rand.Element<ThingDef>(a: stoveFueled, b: ThingDefOf.Campfire, c: spotButcher);
+                thingDef = Rand.Element(a: stoveFueled, b: ThingDefOf.Campfire, c: spotButcher);
             }
 
             bool flipACoin = Rand.Bool;
@@ -65,21 +60,20 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
                     continue;
                 }
                 Rot4 rot = (!flipACoin) ? Rot4.North : Rot4.West;
-                if (!GenSpawn.WouldWipeAnythingWith(thingPos: potentialSpot, thingRot: rot, thingDef: thingDef, map: map, predicate: (Thing x) => x.def.category == ThingCategory.Building))
+                if (!GenSpawn.WouldWipeAnythingWith(thingPos: potentialSpot, thingRot: rot, thingDef: thingDef, map: map, predicate: x => x.def.category == ThingCategory.Building))
                 {
-                    if (!BaseGenUtility.AnyDoorAdjacentCardinalTo(rect: GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.Size), map: map))
+                    if (!BaseGenUtility.AnyDoorAdjacentCardinalTo(rect: GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.Size + thingDef.interactionCellOffset.ToIntVec2), map: map))
                     {
                         ResolveParams resolveParams = rp;
                         resolveParams.rect = GenAdj.OccupiedRect(center: potentialSpot, rot: rot, size: thingDef.size);
                         resolveParams.singleThingDef = (Rand.Element(a: thingDef, b: tableButcher));
-                        resolveParams.thingRot = new Rot4?(value: rot);
+                        resolveParams.thingRot = rot;
                         bool? skipSingleThingIfHasToWipeBuildingOrDoesntFit = rp.skipSingleThingIfHasToWipeBuildingOrDoesntFit;
-                        resolveParams.skipSingleThingIfHasToWipeBuildingOrDoesntFit = new bool?(value: !skipSingleThingIfHasToWipeBuildingOrDoesntFit.HasValue || skipSingleThingIfHasToWipeBuildingOrDoesntFit.Value);
+                        resolveParams.skipSingleThingIfHasToWipeBuildingOrDoesntFit = !skipSingleThingIfHasToWipeBuildingOrDoesntFit.HasValue || skipSingleThingIfHasToWipeBuildingOrDoesntFit.Value;
                         BaseGen.symbolStack.Push(symbol: "thing", resolveParams: resolveParams);
                     }
                 }
             }
         }
     }
-
 }

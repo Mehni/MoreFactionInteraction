@@ -32,7 +32,8 @@ namespace MoreFactionInteraction.World_Incidents
             this.pawnKindDef = PawnKindDefOf.Thrumbo;
             if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
             {
-                SitePartWorker_MigratoryHerd sitePart = (SitePartWorker_MigratoryHerd)site.parts.First(predicate: x => x.def == DefDatabase<SitePartDef>.GetNamed(defName: "MFI_HuntersLodge")).Def.Worker;
+                SitePartWorker_MigratoryHerd sitePart =
+                    (SitePartWorker_MigratoryHerd) site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).def.Worker;
                 this.pawnKindDef = sitePart?.pawnKindDef;
             }
             int num = new IntRange(min: 30, max: 50).RandomInRange;
@@ -49,7 +50,7 @@ namespace MoreFactionInteraction.World_Incidents
 
         protected override string GetLetterLabel(Pawn anyPawn, IncidentParms parms)
         {
-            return string.Format(format: this.def.letterLabel, arg0: this.pawnKindDef.GetLabelPlural());
+            return string.Format(format: this.def.letterLabel, arg0: this.pawnKindDef.GetLabelPlural().CapitalizeFirst());
         }
 
         protected override string GetLetterText(Pawn anyPawn, IncidentParms parms)

@@ -23,11 +23,11 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
             public bool merged;
         }
 
-        private List<Pair<int, int>> optionsX = new List<Pair<int, int>>();
+        private readonly List<Pair<int, int>> optionsX = new List<Pair<int, int>>();
 
-        private List<Pair<int, int>> optionsZ = new List<Pair<int, int>>();
+        private readonly List<Pair<int, int>> optionsZ = new List<Pair<int, int>>();
 
-        private List<MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child> children =
+        private readonly List<MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child> children =
             new List<MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child>();
 
         private const int MinWidthOrHeight = 13;
@@ -36,15 +36,13 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
 
         private const int MaxRoomsPerRow = 4;
 
-        private const int MinPathwayWidth = 1;
-
         private const int MaxPathwayWidth = 5;
 
         private const int MinRoomSize = 6;
 
         private const float AllowNonSquareRoomsInTheFirstStepChance = 0.2f;
 
-        private static List<Pair<Pair<int, int>, Pair<int, int>>> options =
+        private static readonly List<Pair<Pair<int, int>, Pair<int, int>>> options =
             new List<Pair<Pair<int, int>, Pair<int, int>>>();
 
         public override bool CanResolve(ResolveParams rp)
@@ -240,10 +238,16 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
                 for (int l = 0; l < roomsPerRowZ; l++)
                 {
                     MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child child =
-                        new MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child();
-                    child.rect  = new CellRect(rp.rect.minX + num, rp.rect.minZ + num2, roomSize, roomSize2);
-                    child.gridX = k;
-                    child.gridY = l;
+                        new MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child
+                        {
+                            rect = new CellRect(rp.rect.minX + num,
+                                                rp.rect.minZ +
+                                                num2,
+                                                roomSize,
+                                                roomSize2),
+                            gridX = k,
+                            gridY = l
+                        };
                     this.children.Add(child);
                     num2 += roomSize2 + pathwayWidthZ;
                 }
@@ -298,14 +302,16 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
                         this.children.Remove(child);
                         this.children.Remove(child3);
                         MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child child2 =
-                            new MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child();
-                        child2.gridX  = Mathf.Min(child.gridX, child3.gridX);
-                        child2.gridY  = Mathf.Min(child.gridY, child3.gridY);
-                        child2.merged = true;
-                        child2.rect = CellRect.FromLimits(Mathf.Min(child.rect.minX, child3.rect.minX),
-                                                          Mathf.Min(child.rect.minZ, child3.rect.minZ),
-                                                          Mathf.Max(child.rect.maxX, child3.rect.maxX),
-                                                          Mathf.Max(child.rect.maxZ, child3.rect.maxZ));
+                            new MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.Child
+                            {
+                                gridX = Mathf.Min(child.gridX, child3.gridX),
+                                gridY = Mathf.Min(child.gridY, child3.gridY),
+                                merged = true,
+                                rect = CellRect.FromLimits(Mathf.Min(child.rect.minX, child3.rect.minX),
+                                                           Mathf.Min(child.rect.minZ, child3.rect.minZ),
+                                                           Mathf.Max(child.rect.maxX, child3.rect.maxX),
+                                                           Mathf.Max(child.rect.maxZ, child3.rect.maxZ))
+                            };
                         this.children.Add(child2);
                     }
                 }

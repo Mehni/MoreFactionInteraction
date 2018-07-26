@@ -26,6 +26,13 @@ namespace MoreFactionInteraction.World_Incidents
             ResolveParams resolveParams = default;
             resolveParams.rect = this.GetHuntersLodgeRect(centralPoint: centralPoint, map: map);
             resolveParams.faction = faction;
+
+            ThingSetMakerParams maxFoodAndStuffForHuntersLodge = default;
+            maxFoodAndStuffForHuntersLodge.totalMarketValueRange = new FloatRange(200, 500);
+            maxFoodAndStuffForHuntersLodge.totalNutritionRange   = new FloatRange(0, 50);
+
+            resolveParams.thingSetMakerParams = maxFoodAndStuffForHuntersLodge;
+
             BaseGen.globalSettings.map = map;
             BaseGen.globalSettings.minBuildings = 1;
             BaseGen.globalSettings.minBarracks = 1;

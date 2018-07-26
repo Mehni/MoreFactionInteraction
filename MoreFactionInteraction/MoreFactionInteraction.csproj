@@ -81,11 +81,13 @@
     <Compile Include="General\Settings.cs" />
     <Compile Include="General\SettingsHelper.cs" />
     <Compile Include="Spreading Pirates\WorldComponent_OutpostGrower.cs" />
+    <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Indoors.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Outdoors.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Outdoors_Division_Grid.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Outdoors_Division_Split.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Outdoors_Leaf.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\MFI_SymbolResolver_BasePart_Outdoors_LeafDeco.cs" />
+    <Compile Include="World Incidents\GenStep_SymbolResolver\SymbolResolver_HuntersLodgeBigFarm.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\SymbolResolver_Kitchen.cs" />
     <Compile Include="World Incidents\WorldObjectComp_CaravanComp.cs" />
     <Compile Include="World Incidents\GenStep_SymbolResolver\SymbolResolver_HuntersLodgeBase.cs" />

@@ -10,15 +10,6 @@
     </Operation>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/RuleDef[defName="BasePart_Indoors_Leaf"]/resolvers</xpath>
-            <value>
-                <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.SymbolResolver_BasePart_Indoors_Leaf_Kitchen">
-                    <minRectSize>(5, 5)</minRectSize>
-                </li>
-            </value>
-    </Operation>
-
-    <Operation Class="PatchOperationAdd">
         <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
             <value>
                 <comps>
