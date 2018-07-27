@@ -34,6 +34,7 @@ Adds more interaction with and between factions, bringing the world to life.
 - Bumper crops
 - Hunter's Lodge
 - Pirate extortion
+- Mystical Shaman
 - Faction WAR
 
 ## Credits
