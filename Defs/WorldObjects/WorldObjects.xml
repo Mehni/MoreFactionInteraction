@@ -15,4 +15,18 @@
     </comps>
   </WorldObjectDef>
 
+  <WorldObjectDef>
+    <defName>MFI_MysticalShaman</defName>
+    <label>mystical shaman</label>
+    <description>The tent where a mystical shaman recides.</description>
+    <worldObjectClass>MoreFactionInteraction.More_Flavour.MysticalShaman</worldObjectClass>
+    <texture>FactionPeaceTalks</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>Expanding/HealerHand</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+    <comps>
+      <li Class="WorldObjectCompProperties_Timeout" />
+    </comps>
+  </WorldObjectDef>
+
 </Defs>

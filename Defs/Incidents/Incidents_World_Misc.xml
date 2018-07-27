@@ -25,6 +25,21 @@
 	</IncidentDef>
 
 	<IncidentDef>
+		<defName>MFI_MysticalShaman</defName>
+		<label>mystical shaman</label>
+		<category>Misc</category>
+		<targetTags>
+			<li>World</li>
+		</targetTags>
+		<workerClass>MoreFactionInteraction.IncidentWorker_MysticalShaman</workerClass>
+		<letterLabel>Mystical shaman</letterLabel>
+		<letterDef>MysticalShaman</letterDef>
+		<baseChance>0.8</baseChance>
+		<earliestDay>1</earliestDay>
+		<minRefireDays>20</minRefireDays>
+	</IncidentDef>
+
+	<IncidentDef>
 		<defName>MFI_HuntersLodge</defName>
 		<label>hunters lodge</label>
 		<category>Misc</category>

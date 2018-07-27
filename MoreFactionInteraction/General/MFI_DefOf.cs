@@ -15,7 +15,9 @@ namespace MoreFactionInteraction
 
         public static SiteCoreDef MFI_HuntersLodgeCore;
         public static SitePartDef MFI_HuntersLodgePart;
+
         public static WorldObjectDef MFI_FactionWarPeaceTalks;
+        public static WorldObjectDef MFI_MysticalShaman;
         //public static IncidentDef MFI_WeddingGuestsArrival;
     }
 }

@@ -79,7 +79,6 @@ namespace MoreFactionInteraction.World_Incidents
             CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
             Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(
-            
                 this.parent.Faction.def.pawnsPlural, this.parent.Faction.Name,
                 Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
@@ -88,7 +87,7 @@ namespace MoreFactionInteraction.World_Incidents
             allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
 
-        private static float CalculateYieldForCaravan(List<Pawn> caravanMembersCapableOfGrowing)
+        private static float CalculateYieldForCaravan(IEnumerable<Pawn> caravanMembersCapableOfGrowing)
         {           
             return caravanMembersCapableOfGrowing.Select(selector: x => x.GetStatValue(stat: StatDefOf.PlantHarvestYield)).Sum();
         }
@@ -118,9 +117,9 @@ namespace MoreFactionInteraction.World_Incidents
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<int>(ref this.expiration, "MFI_BumperCropExpiration");
-            Scribe_Values.Look<int>(ref this.workLeft, "MFI_BumperCropWorkLeft");
-            Scribe_Values.Look<bool>(ref this.workStarted, "MFI_BumperCropWorkStarted");
+            Scribe_Values.Look<int>(value: ref this.expiration, label: "MFI_BumperCropExpiration");
+            Scribe_Values.Look<int>(value: ref this.workLeft, label: "MFI_BumperCropWorkLeft");
+            Scribe_Values.Look<bool>(value: ref this.workStarted, label: "MFI_BumperCropWorkStarted");
         }
     }
 }

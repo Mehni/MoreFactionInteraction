@@ -10,8 +10,8 @@ namespace MoreFactionInteraction
     public class MoreFactionInteraction_Settings : ModSettings
     {
         public static int ticksToUpgrade = 3 * GenDate.DaysPerQuadrum * GenDate.TicksPerDay;
-        public static float timeModifierBetweenFactionInteraction = 1f;
-        public static float traderWealthOffsetFromTimesTraded = 1f;
+        public static float timeModifierBetweenFactionInteraction = 2f;
+        public static float traderWealthOffsetFromTimesTraded = 0.7f;
 
         public void DoWindowContents(Rect rect)
         {
@@ -30,8 +30,8 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             Scribe_Values.Look(value: ref ticksToUpgrade, label: "ticksToUpgrade", defaultValue: 2700000);
-            Scribe_Values.Look(value: ref timeModifierBetweenFactionInteraction, label: "timeModifierBetweenFactionInteraction", defaultValue: 1f);
-            Scribe_Values.Look(value: ref traderWealthOffsetFromTimesTraded, label: "traderWealthOffsetFromTimesTraded", defaultValue: 1f);
+            Scribe_Values.Look(value: ref timeModifierBetweenFactionInteraction, label: "timeModifierBetweenFactionInteraction", defaultValue: 2f);
+            Scribe_Values.Look(value: ref traderWealthOffsetFromTimesTraded, label: "traderWealthOffsetFromTimesTraded", defaultValue: 0.8f);
         }
     }
 

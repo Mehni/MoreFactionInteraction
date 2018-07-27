@@ -55,8 +55,12 @@
   <ItemGroup>
     <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
     <Compile Include="General\MFI_Utilities.cs" />
+    <Compile Include="More Flavour\CaravanArrivalAction_VisitMysticalShaman.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
+    <Compile Include="More Flavour\ChoiceLetter_MysticalShaman.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
+    <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />
+    <Compile Include="More Flavour\MysticalShaman.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\Dialogue_FactionWarNegotiation.cs" />
     <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />

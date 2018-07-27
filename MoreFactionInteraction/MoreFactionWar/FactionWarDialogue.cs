@@ -119,9 +119,9 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                                         second: BaseWeight_Triumph * goodOutcomeWeightFactor),
                                                                                     second: "MFI_FactionWarFavourFactionTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
-                Action first = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).First.First;
-                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second;
-                first();
+                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
+                outcome.First.First();
+                factionWarNegotiationsOutcome = outcome.Second;
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
             }
@@ -154,9 +154,9 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                                         second: BaseWeight_Triumph * goodOutcomeWeightFactor),
                                                                                     second: "MFI_FactionWarSabotageTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
-                Action first = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).First.First;
-                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second;
-                first();
+                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
+                outcome.First.First();
+                factionWarNegotiationsOutcome = outcome.Second;
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
             }
@@ -189,9 +189,9 @@ namespace MoreFactionInteraction.MoreFactionWar
                                                                                         second: BaseWeight_Triumph * goodOutcomeWeightFactor),
                                                                                     second: "MFI_FactionWarBrokerPeaceTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
 
-                Action first = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).First.First;
-                factionWarNegotiationsOutcome = tmpPossibleOutcomes.RandomElementByWeight(weightSelector: (Pair<Pair<Action, float>, string> x) => x.First.Second).Second + "\n\n" + "PeaceTalksSocialXPGain".Translate(pawn.LabelShort, 6000f.ToString(format: "F0"));
-                first();
+                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
+                outcome.First.First();
+                factionWarNegotiationsOutcome = outcome.Second;
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
             }
@@ -364,8 +364,7 @@ namespace MoreFactionInteraction.MoreFactionWar
                     LordMaker.MakeNewLord(faction: burdenedFactionIncidentParms.faction, lordJob: new LordJob_AssaultColony(assaulterFaction: burdenedFaction), map: map, startingPawns: burdenedFactionWarriors);
                 }
 
-                Find.TickManager.CurTimeSpeed = TimeSpeed.Paused;
-                Find.TickManager.slower.SignalForceNormalSpeedShort();
+                Find.TickManager.Notify_GeneratedPotentiallyHostileMap();
 
             }, textKey: "GeneratingMapForNewEncounter", doAsynchronously: false, exceptionHandler: null);
         }

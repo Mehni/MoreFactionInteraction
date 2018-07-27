@@ -53,7 +53,7 @@
 		<letterText>You've received a message from [PAWN_nameDef], {0} of {1}. Their faction recently had diplomatic troubles with another faction and call upon you to negotiate between them and {2}. They've picked a neutral nearby location and invite you to come negotiate.\n\nIt could be a great opportunity to improve relations with their faction, but beware - a poor negotiator can cause more harm than good and even anger them.\n\nThe offer will expire after {3} days, after which [PAWN_nameDef] fears the worst.</letterText>
 		<letterDef>NeutralEvent</letterDef>
 		<baseChance>0.51</baseChance>
-		<minRefireDays>12</minRefireDays>
+		<minRefireDays>50</minRefireDays>
 	</IncidentDef>
 
 </Defs>

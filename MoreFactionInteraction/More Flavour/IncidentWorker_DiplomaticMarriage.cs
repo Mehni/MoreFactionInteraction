@@ -33,20 +33,20 @@ namespace MoreFactionInteraction
                 return false;
             }
 
-            ChoiceLetter_DiplomaticMarriage choiceLetter_DiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_DiplomaticMarriage".Translate(args: new object[]
+            ChoiceLetter_DiplomaticMarriage choiceLetterDiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_DiplomaticMarriage".Translate(args: new object[]
             {
-                this.marriageSeeker.LabelShort, this.betrothed.LabelShort
+                this.marriageSeeker.LabelShort, this.betrothed.LabelShort, this.marriageSeeker.Faction.Name
             }).AdjustedFor(p: this.marriageSeeker), def: this.def.letterDef);
 
-            choiceLetter_DiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(args: new object[]
+            choiceLetterDiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(args: new object[]
             {
                 this.betrothed.LabelShort
             }).CapitalizeFirst();
-            choiceLetter_DiplomaticMarriage.radioMode = true;
-            choiceLetter_DiplomaticMarriage.marriageSeeker = this.marriageSeeker;
-            choiceLetter_DiplomaticMarriage.betrothed = this.betrothed;
-            choiceLetter_DiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
-            Find.LetterStack.ReceiveLetter(@let: choiceLetter_DiplomaticMarriage);
+            choiceLetterDiplomaticMarriage.radioMode = true;
+            choiceLetterDiplomaticMarriage.marriageSeeker = this.marriageSeeker;
+            choiceLetterDiplomaticMarriage.betrothed = this.betrothed;
+            choiceLetterDiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
+            Find.LetterStack.ReceiveLetter(@let: choiceLetterDiplomaticMarriage);
             return true;
         }
 
