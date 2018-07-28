@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>狩猟小屋</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>小さな監視キャンプです。狩りの拠点として友軍の派閥が利用しています。</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>例年なら、この時期には{0} の大きな群れが通過する時期です。</MFI_HuntersLodgePart.descriptionDialogue>
+
+
+</LanguageData>

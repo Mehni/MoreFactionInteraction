@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Ransom demand -->
+  <MFI_ExtortionDemandTitle>{0} から迷惑料の要求</MFI_ExtortionDemandTitle>
+  <MFI_ExtortionDemand>{2} の{0} に所属する{1} が、あなたに連絡をしてきました。彼らの{3} の{4} の付近にあなたのコロニーが近すぎる事で、[PAWN_pronoun] は彼らの領土を侵略していると感じていると主張しています。\n\n[PAWN_pronoun] は、「寛大な[PAWN_pronoun] はこの罪をたった{5} シルバーを支払う事で許してやる」と言ってきました。さらに[PAWN_pronoun] は、もし「支払わなければお前たちのコロニーは襲われることになるだろう」と付け加えましたが、[PAWN_pronoun] はあなたに支払い期日を喜んで教えてくれました。</MFI_ExtortionDemand>
+
+  <!-- Reverse Trade Request -->
+  <MFI_ReverseTradeRequest_Pyro>{2} の{0} に所属する{1} は私たちにメッセージを送ってきました。付近にある彼らの入植地{3} で起きた放火魔事件によって{4} が絶望的に足りない状況だとのことです。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりがあるが、買取りに来るキャラバン隊を派遣してもらう依頼するには{5} シルバーの費用が必要です。\n\n{0} は、問題となった放火魔は彼らの入植地に留まることを保証します。\n\n\n{4} を高額で買い取ってくれるトレーダーを派遣してもらうために派遣費用として{5}シルバーを支払いますか？</MFI_ReverseTradeRequest_Pyro>
+  <MFI_ReverseTradeRequest_Mechs>{2} の{0} に所属する{1} からの少し慌てた様子で書かれたメッセージが私たちに届きました。付近にある彼らの入植地{3} は、メカノイドによる襲撃を危ういところで何とか撃退に成功しました！彼らはコロニーの再建を始めましたが、私たちの助けを必要としています。具体的には、{4} がまったく足りません。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりであり、彼らの入植地には派遣できるほどの人が残っておらず、アイテムの買取りに派遣するキャラバン隊を雇うには{5} シルバーが必要になるようです。\n\n\n{4} を高額で買い取ってくれるトレーダーを雇うために派遣費用として{5}シルバーを支払ってあげますか？</MFI_ReverseTradeRequest_Mechs>
+  <MFI_ReverseTradeRequest_Caravan>私たちは、{2} の{0} に所属する{1} から謙虚なメッセージを受け取りました。話によると、付近にある彼らの入植地{3} は、管理に失敗して現在{4} がまったく足りなくなってしまった。との事です。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりがあるが、買取りに来るキャラバン隊を派遣してもらう依頼するには{5} シルバーの費用が必要です。\n\n\n{4} を高額で買い取ってくれるトレーダーを派遣してもらうために派遣費用として{5}シルバーを支払いますか？</MFI_ReverseTradeRequest_Caravan>
+  <MFI_ReverseTradeRequest_Pirates>{2} の{0} に所属する{1} からの少し慌てた様子で書かれたメッセージが私たちに届きました。付近にある彼らの入植地{3} は、最近宙賊に略奪を受けて、{4} がまったく足りていないそうです。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりであり、アイテムの買取りに派遣するキャラバン隊を雇うには{5} シルバーが必要になるようです。\n\n\n{4} を高額で買い取ってくれるトレーダーを雇うために派遣費用として{5}シルバーを支払ってあげますか？</MFI_ReverseTradeRequest_Pirates>
+  <MFI_ReverseTradeRequest_Hardship>匿名の仲買人があなたに連絡してきました。彼は既に{2} と連絡をして、{4} を買い取る契約を打ち切りました。彼はこの分野のアイテムを購入するために他のトレーダーと買取りを派遣する交渉が完了しているが、彼は、その買取りのキャラバン隊を送る前に、仲介手数料としてシルバーを要求しています。\n\n\n{4} を高額で買い取ってくれるトレーダーを派遣してもらうために派遣費用として{5}シルバーを支払いますか？</MFI_ReverseTradeRequest_Hardship>
+  <MFI_ReverseTradeRequest_Blight>{0} は付近にある入植地{3} を代表して、丁寧なお願いのメッセージを送ってきました。彼の話では、彼らの作物が病気で枯れてしまい、{4} の備蓄食糧がなければ今年の冬は生き残れないかもしれないとの事です。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりですが、すぐに食べ物かお金がなければ、彼らは飢え死にしてしまいます。アイテムの買取りに派遣するキャラバン隊を雇うには{5} シルバーが必要になるようです。\n\n\n{4} を高額で買い取ってくれるトレーダーを雇うために派遣費用として{5}シルバーを支払ってあげますか？</MFI_ReverseTradeRequest_Blight>
+  <MFI_ReverseTradeRequestTitle>{0}と取引のチャンス</MFI_ReverseTradeRequestTitle>
+
+  <MFI_LetterLabel_HarvestRequest>収穫作業員求む</MFI_LetterLabel_HarvestRequest>
+  <MFI_LetterHarvestRequest>近くの入植地の{0} は特別な要請についてあなたに連絡してきました。彼らの畑では予想よりもはるかに豊作で収穫が追いついておらず、真剣に収穫をあなた方に手伝ってもらいたいようです。\n\nこの要請の期限：残り{1} 日\n\nあなたがそれを手助けしたいなら、有能な栽培スキルか収穫スキルを持つ入植者でキャラバン隊を編成して送ってあげてください。この要請を確認するには、ワールドマップ上で{0} の派閥拠点を選択します。</MFI_LetterHarvestRequest>
+  <MFI_CommandFulfillBumperCropHarvestConfirm>ここでの収穫に手伝いを派遣しますか？\n{0}はしばらくここで時間を費やすことになります。</MFI_CommandFulfillBumperCropHarvestConfirm>
+  <MFI_MessageBumperCropNoGrower>栽培作業ができて、意識がある者が居ません。</MFI_MessageBumperCropNoGrower>
+  <MFI_HarvestRequestInfo>収穫の手助けを求めています。（残り {0}日）</MFI_HarvestRequestInfo>
+  <MFI_CommandHelpOutHarvesting>収穫の手伝い</MFI_CommandHelpOutHarvesting>
+  <MFI_Harvest_Triumph>収穫は圧倒的な大成功でした。\n収穫作業の間、あなたの入植者たちは{1}の{0}とおしゃべりをして、友好的な関係を築きました。\n\n{1} との関係は{2} 改善しました。\n\nあなたのキャラバン隊が出発する際、{0} の人々はあなたに餞別を渡してくれました：{3}</MFI_Harvest_Triumph>
+  <MFI_LetterLabelHarvest_Triumph>大豊作の収穫</MFI_LetterLabelHarvest_Triumph>
+  <MFI_BumperCropXPGain>あなたの栽培者{0} は栽培スキルの経験が{1} 増えました。</MFI_BumperCropXPGain>
+
+  <MFI_DiplomaticMarriage>{1} の魅力的な申し出が{0} に届いて、彼らはあなたに{1} との政略結婚の約束を求めてきました。この政略結婚の提案を受け入れることで、お互いの関係と派閥との友好関係が強化され、{1} があなたの派閥との同盟に参加することになります。</MFI_DiplomaticMarriage>
+  <MFI_DiplomaticMarriageLabel>政略結婚</MFI_DiplomaticMarriageLabel>
+  <MFI_AcceptedProposal>[PAWN_nameDef] は大喜びしています。[PAWN_pronoun] は彼らが{0} で幸せな生活を送ることができると信じています。\n\n{1} との友好関係が改善されました。</MFI_AcceptedProposal>
+  <MFI_DejectedProposal>[PAWN_nameDef] は[PAWN_possessive] が拒絶されないように最善を尽くしました。\n\n{1} との友好関係は少し悪化しました。</MFI_DejectedProposal>
+
+</LanguageData>

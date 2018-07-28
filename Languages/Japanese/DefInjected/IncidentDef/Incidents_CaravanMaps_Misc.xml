@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>群れの移動</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>{0} の群れがこのエリアを通過中です。\n\n狩りの時間だ。</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>動物の移動：{0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>
