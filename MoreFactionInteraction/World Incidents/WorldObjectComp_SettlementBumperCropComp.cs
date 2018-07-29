@@ -11,8 +11,6 @@ namespace MoreFactionInteraction.World_Incidents
     public class WorldObjectComp_SettlementBumperCropComp : WorldObjectComp
     {
         //attentive readers may find similarities between this and the Peacetalks quest. 
-        public ThingDef bumperCrop;
-
         public int expiration = -1;
         private const int basereward = 20;
         public int workLeft;
@@ -74,7 +72,7 @@ namespace MoreFactionInteraction.World_Incidents
             float totalreward = basereward * totalYieldPowerForCaravan * allMembersCapableOfGrowing.Count 
                               * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level));
 
-            Thing reward = ThingMaker.MakeThing(def: this.bumperCrop);
+            Thing reward = ThingMaker.MakeThing(def: RandomRawFood());
             reward.stackCount = Mathf.RoundToInt(f: totalreward);
             CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
@@ -87,8 +85,18 @@ namespace MoreFactionInteraction.World_Incidents
             allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
 
+        private static ThingDef RandomRawFood()
+        {
+            //a long list of things to excluse stuff like milk and kibble. In retrospect, it may have been easier to get all plants and get their harvestables.
+            return (from x in ThingSetMakerUtility.allGeneratableItems
+                     where x.IsNutritionGivingIngestible && !x.IsCorpse                               && x.ingestible.HumanEdible && !x.IsMeat
+                        && !x.IsDrug                     && !x.HasComp(compType: typeof(CompHatcher)) && !x.HasComp(compType: typeof(CompIngredients))
+                        && x.BaseMarketValue < 3         && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
+                     select x).RandomElementWithFallback(ThingDefOf.RawPotatoes);
+        }
+
         private static float CalculateYieldForCaravan(IEnumerable<Pawn> caravanMembersCapableOfGrowing)
-        {           
+        {
             return caravanMembersCapableOfGrowing.Select(selector: x => x.GetStatValue(stat: StatDefOf.PlantHarvestYield)).Sum();
         }
 

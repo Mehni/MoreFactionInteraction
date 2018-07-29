@@ -33,6 +33,9 @@ namespace MoreFactionInteraction.World_Incidents
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             TryGetRandomAvailableTargetMap(map: out Map map);
+            if (map == null)
+                return false;
+
             Settlement settlement = RandomNearbyGrowerSettlement(originTile: map.Tile);
 
             if (settlement == null)
@@ -58,19 +61,8 @@ namespace MoreFactionInteraction.World_Incidents
             {
                 return false;
             }
-            target.bumperCrop = RandomRawFood() ?? ThingDefOf.RawPotatoes;
             target.expiration = Find.TickManager.TicksGame + num;
             return true;
-        }
-
-        private static ThingDef RandomRawFood()
-        {
-            //a long list of things to excluse stuff like milk and kibble. In retrospect, it may have been easier to get all plants and get their harvestables.
-            return !(from x in ThingSetMakerUtility.allGeneratableItems
-                     where x.IsNutritionGivingIngestible && !x.IsCorpse                               && x.ingestible.HumanEdible && !x.IsMeat 
-                        && !x.IsDrug                     && !x.HasComp(compType: typeof(CompHatcher)) && !x.HasComp(compType: typeof(CompIngredients)) 
-                        && x.BaseMarketValue <3          && (x.ingestible.preferability == FoodPreferability.RawBad || x.ingestible.preferability == FoodPreferability.RawTasty)
-                     select x).TryRandomElement(result: out ThingDef thingDef) ? null : thingDef;
         }
 
         public static Settlement RandomNearbyGrowerSettlement(int originTile)
