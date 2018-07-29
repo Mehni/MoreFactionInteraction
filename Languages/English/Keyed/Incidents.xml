@@ -16,7 +16,7 @@
 
     <MFI_LetterLabel_HarvestRequest>Help wanted</MFI_LetterLabel_HarvestRequest>
     <MFI_LetterHarvestRequest>A nearby settlement, {0}, contacts you with a special request. Their fields have yielded far more than originally expected, and they could really use your help with the harvest.\n\nThis request expires after: {1}\n\nIf you want to help them, send a caravan with capable growers. You can review this offer by selecting {0} on the world map.</MFI_LetterHarvestRequest>
-    <MFI_CommandFulfillBumperCropHarvestConfirm>Offer your help in harvesting? {0} will spend some time here.</MFI_CommandFulfillBumperCropHarvestConfirm>
+    <MFI_CommandFulfillBumperCropHarvestConfirm>Offer your help in harvesting? {0} will temporarily be unable to move while harvesting takes place.</MFI_CommandFulfillBumperCropHarvestConfirm>
     <MFI_MessageBumperCropNoGrower>No conscious, capable grower.</MFI_MessageBumperCropNoGrower>
     <MFI_HarvestRequestInfo>Requesting help with harvesting. ({0} left)</MFI_HarvestRequestInfo>
     <MFI_CommandHelpOutHarvesting>Help harvest</MFI_CommandHelpOutHarvesting>
@@ -32,7 +32,7 @@
     <MFI_MysticalShamanLetter>Someone who claims to be a representative of {0} contacts us with a tall tale of a mystical shaman who has mastered the &quot;healer's hand&quot; to cure any injury or missing part. They'll tell us the location of this mysterious and normally reclusive person for a small fee of {1} silver.</MFI_MysticalShamanLetter>
     <MFI_MysticalShamanTitle>Mystical Shaman</MFI_MysticalShamanTitle>
 
-    <MFI_MysticalShamanFoundNoSickPawn>The Shaman emerges from his polyester teepee just before your caravan announces their presence. He judges you silently with one crossed eye that penetrates through each of your caravan members deepest vitae and one eye that quivers more and more as he assesses your groups health. He orders you to wait a respectable distance while he retreats back in his teepee. Moments later you hear the rustling of fabric and the sound of a muffalo being spurred on.\n\nIt seems the mystical shaman packed up and left.</MFI_MysticalShamanFoundNoSickPawn>
-    <MFI_MysticalShamanDoesHisMagic>The Shaman seems to have been expecting you, and with great practice regales you the tale of his &quot;healer's hands&quot;. When he's down he invites {0} in to his teepee. There is a brief shake of the screen before {0} re-emerges, feeling much better.</MFI_MysticalShamanDoesHisMagic>
+    <MFI_MysticalShamanFoundNoSickPawn>The Shaman emerges from his polyester teepee just before your caravan announces their presence. He judges your group silently, passing one quivering eye over your decidedly healthy group, the other eye crossed in apparent meditation. Visibly sweating, he orders you to wait a respectable distance while he retreats back in his teepee. Moments later you hear the rustling of fabric and the sound of a muffalo being spurred on.\n\nIt seems the mystical shaman packed up and left.</MFI_MysticalShamanFoundNoSickPawn>
+    <MFI_MysticalShamanDoesHisMagic>The Shaman seems to have been expecting you, and with great practice regales you the tale of his &quot;healer's hands&quot;. Once finished, he invites {0} into his teepee. There is a brief shake of the screen before {0} re-emerges, feeling much better.</MFI_MysticalShamanDoesHisMagic>
 
 </LanguageData>

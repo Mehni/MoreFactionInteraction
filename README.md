@@ -45,18 +45,24 @@ Adds more interaction with and between factions, bringing the world to life.
 - erdelf, erdelf.
 - ShotgunFrenzy, art.
 - Halno, art.
+- Ian, text revisions.
 - My testers. You know who you are. Thanks to [Eviltrick](https://twitch.tv/Eviltrick) in particular, check 'em out on twitch.
 
 Shoutout to [Albion of Sparkling Worlds](https://steamcommunity.com/sharedfiles/filedetails/?id=1123043922), for the inspiration and support.
 
+## Language
+
+- Japanese, courtesy of Proxyer
+
 ## Links
 
-- Steam: https://steamcommunity.com/sharedfiles/filedetails/?id=1454024362
-- GitHub: https://github.com/Mehni/MoreFactionInteraction/releases
-- Ludeon: https://ludeon.com/forums/index.php?topic=35832
+- Steam: [https://steamcommunity.com/sharedfiles/filedetails/?id=1454024362](https://steamcommunity.com/sharedfiles/filedetails/?id=1454024362)
+- GitHub: [https://github.com/Mehni/MoreFactionInteraction/releases](https://github.com/Mehni/MoreFactionInteraction/releases)
+- Ludeon: [https://ludeon.com/forums/index.php?topic=35832](https://ludeon.com/forums/index.php?topic=35832)
 
+&nbsp;
 
-
+&nbsp;
 
 If you like this mod, please considering buying me a coffee.
 

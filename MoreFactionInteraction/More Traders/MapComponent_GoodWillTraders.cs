@@ -55,7 +55,7 @@ namespace MoreFactionInteraction
                 }
                 //if a faction became hostile, remove
                 //TODO: remove priorly scheduled incidents involving said faction
-                //nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
+                nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
@@ -90,7 +90,7 @@ namespace MoreFactionInteraction
                         incidentParms.forced = true;
                         
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncidentDef(), 
+                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(), 
                                                            fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), 
                                                            parms: incidentParms);
 
@@ -106,27 +106,30 @@ namespace MoreFactionInteraction
             }
         }
 
-        private static IncidentDef IncidentDef()
+        private static IncidentDef IncomingIncidentDef()
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))
             {
                 case int n when n <= 6:
                     return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
 
-                case int n when n <= 10:
-                    return MFI_DefOf.MFI_ReverseTradeRequest;
-
-                case int n when n <= 20:
-                    return MFI_DefOf.MFI_BumperCropRequest;
-
-                case int n when n <= 24:
-                    return MFI_DefOf.MFI_HuntersLodge;
-
-                case int n when n <= 26:
+                case int n when n <= 8:
                     return MFI_DefOf.MFI_DiplomaticMarriage;
 
-                case int n when n <= 30:
-                    return RimWorld.IncidentDef.Named("Quest_ItemStash");
+                case int n when n <= 17:
+                    return MFI_DefOf.MFI_ReverseTradeRequest;
+
+                case int n when n <= 25:
+                    return MFI_DefOf.MFI_BumperCropRequest;
+
+                case int n when n <= 29:
+                    return MFI_DefOf.MFI_HuntersLodge;
+
+                case int n when n <= 31:
+                    return IncidentDef.Named("MFI_MysticalShaman");
+
+                case int n when n <= 35:
+                    return IncidentDef.Named("Quest_ItemStash");
 
                 case int n when n <= 40:
                     return IncidentDefOf.Quest_TradeRequest;
@@ -140,10 +143,10 @@ namespace MoreFactionInteraction
 
 
         //working lists for ExposeData.
-        List<Faction> factionsListforInteraction = new List<Faction>();
-        List<Faction> factionsListforTimesTraded = new List<Faction>();
-        List<int> intListForInteraction = new List<int>();
-        List<int> intListforTimesTraded = new List<int>();
+        private List<Faction> factionsListforInteraction = new List<Faction>();
+        private List<Faction> factionsListforTimesTraded = new List<Faction>();
+        private List<int> intListForInteraction = new List<int>();
+        private List<int> intListforTimesTraded = new List<int>();
 
         public override void ExposeData()
         {

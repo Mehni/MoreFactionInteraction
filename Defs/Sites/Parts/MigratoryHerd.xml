@@ -33,7 +33,7 @@
     <linkWithSite>MFI_HuntersLodgePart</linkWithSite>
     <order>451</order>
     <genStep Class="GenStep_Power">
-    <canSpawnPowerGenerators>false</canSpawnPowerGenerators>
+    <canSpawnPowerGenerators>true</canSpawnPowerGenerators>
     </genStep>
   </GenStepDef>
 

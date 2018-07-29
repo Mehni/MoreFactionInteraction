@@ -62,7 +62,11 @@ namespace MoreFactionInteraction.More_Flavour
         public static Pawn FindSickestPawn(Caravan caravan)
         {
             tempPawns.Clear();
-            foreach (Pawn pawn in caravan.PawnsListForReading) tempPawns.Add(key: pawn, value: CalcHealthThreatenedScore(usedBy: pawn));
+            //Muffalo 1 deserves a chance to get healed too.
+            foreach (Pawn pawn in caravan.PawnsListForReading)
+                tempPawns.Add(key: pawn, 
+                              value: CalcHealthThreatenedScore(usedBy: pawn) / ( pawn.RaceProps.Humanlike ? 1 : 2 ));
+
             tempPawns.RemoveAll(predicate: x => x.Value == 0);
             return tempPawns.FirstOrDefault(predicate: x => x.Value.Equals(obj: tempPawns.Values.Max())).Key;
         }

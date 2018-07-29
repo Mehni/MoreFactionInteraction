@@ -33,6 +33,7 @@ namespace MoreFactionInteraction
             if (!TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile)) return false;
             Site site = SiteMaker.MakeSite(core: SiteCoreDefOf.Nothing, sitePart: SitePartDefOf.Outpost, tile: tile, faction: this.faction);
             site.Tile = tile;
+            site.sitePartsKnown = true;
             Find.WorldObjects.Add(o: site);
             this.SendStandardLetter(lookTargets: site, relatedFaction: this.faction, textArgs: new string[]
             {

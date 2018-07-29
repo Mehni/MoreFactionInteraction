@@ -42,8 +42,8 @@ namespace MoreFactionInteraction
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
-                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            //harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
+            //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
                           transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
@@ -65,13 +65,13 @@ namespace MoreFactionInteraction
             }
         }
 
-        //thx Brrainz
-        private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
-        {
-            ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
-            ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
-            return instructions.MethodReplacer(from: from, to: to);
-        }
+        ////thx Brrainz
+        //private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
+        //{
+        //    ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
+        //    ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
+        //    return instructions.MethodReplacer(from: from, to: to);
+        //}
 
         #region MoreTraders
         private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ThingSetMakerParams parms)

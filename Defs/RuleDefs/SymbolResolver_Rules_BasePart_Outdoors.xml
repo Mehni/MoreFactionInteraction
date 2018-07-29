@@ -72,6 +72,9 @@
       <li Class="SymbolResolver_BasePart_Outdoors_Leaf_Empty">
         <selectionWeight>0.01</selectionWeight>
       </li>
+      <!-- <li Class="SymbolResolver_BasePart_Outdoors_Leaf_PowerPlant">
+        <selectionWeight>0.3</selectionWeight>
+      </li> Still handled by GenStep_Power -->
       <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Leaf_Farm">
         <selectionWeight>0.65</selectionWeight>
       </li>
