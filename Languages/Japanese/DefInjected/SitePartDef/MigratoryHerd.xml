@@ -5,5 +5,9 @@
   <MFI_HuntersLodgePart.description>小さな監視キャンプです。狩りの拠点として友軍の派閥が利用しています。</MFI_HuntersLodgePart.description>
   <MFI_HuntersLodgePart.descriptionDialogue>例年なら、この時期には{0} の大きな群れが通過する時期です。</MFI_HuntersLodgePart.descriptionDialogue>
 
+  <MFI_HuntersLodgePart.approachingReportString>{0} を訪れました</MFI_HuntersLodgePart.approachingReportString>
+  <MFI_HuntersLodgePart.approachOrderString>{0} に向かいます</MFI_HuntersLodgePart.approachOrderString>
+  <MFI_HuntersLodgePart.arrivedLetter>あなたのキャラバン隊は狩猟小屋に到着しました。誰も来ていないと様子でしたが、あなたが予想した通り獲物たちが待っていました、狩りの成果も期待できそうです。</MFI_HuntersLodgePart.arrivedLetter>
+  <MFI_HuntersLodgePart.arrivedLetterLabel>Hunter's lodge</MFI_HuntersLodgePart.arrivedLetterLabel>
 
 </LanguageData>
