@@ -12,7 +12,7 @@
   <MFI_TraderSent>{0}はあなたに感謝しています。彼らのトレードキャラバン隊は約{1}日後に到着するでしょう。</MFI_TraderSent>
   <MFI_Trader>トレーダー</MFI_Trader>
 
-  <MFI_CaravanWorking>キャラバン隊は準備中です。</MFI_CaravanWorking>
+  <MFI_CaravanWorking>キャラバン隊は収穫作業中に移動できません。</MFI_CaravanWorking>
 
   <MFI_FactionWarPeaceTalksIntroduction>対立する2つの派閥指導者である{0} と{1} はそれぞれ関係改善の為の会談キャンプの反対側の角に陣地を作りました。あなたの交渉者{2}が会場に歩いていくと緊張が高まります。過去数日間は出席しているすべての関係者に対して厄介な事になっており、あなたの交渉者は、彼らの交渉次第で大きな影響を及ぼしかねないことを知っています。\n\n{2}の判断には次の選択肢があります：</MFI_FactionWarPeaceTalksIntroduction>
 
@@ -21,18 +21,18 @@
   <MFI_FactionWarPeaceTalksBrokerPeace>2つの派閥どうしの和平を仲介</MFI_FactionWarPeaceTalksBrokerPeace>
 
   <!-- Faction war, favour one faction over the other -->
-  <MFI_FactionWarFavourFactionDisaster>会談は大失敗だった。\n{1} の派閥は、あなたの交渉者が{0} にお世辞を言って会談を勧めようとしたことを認めず、「この争いの勝利者を決める行為は我々{1}  に対する敵対行為である」とみなされた。結果として和平交渉は崩壊した。\n\n{0} との友好関係は多少悪化しました。\n\n{1} との友好関係は大幅に悪化しています。</MFI_FactionWarFavourFactionDisaster>
+  <MFI_FactionWarFavourFactionDisaster>会談は大失敗だった。\nどちらの派閥も、あなたの交渉者{0} にお世辞を言って会談を勧めようとしたことを認めず、「この争いの勝利者を決める行為は我々双方に対する敵対行為である」とみなされた。その結果、和平交渉は崩壊した。\n\n{0} との友好関係は多少悪化しました。\n\n{1} との友好関係は大幅に悪化しています。</MFI_FactionWarFavourFactionDisaster>
   <MFI_FactionWarFavourFactionBackFire>会談は不利な状況にある。\n{0} と{1} の両派閥の代表者が主な争点について議論している間、あなたの交渉担当者が目標に向かって非協力的であると見なされて、会談はすぐに解散されました。\n\n{0} との友好関係が悪化しました。\n\n{1} の関係は大幅に悪化しています。</MFI_FactionWarFavourFactionBackFire>
-  <MFI_FactionWarFavourFactionFlounder>会談は紛糾した。\n派閥の代表者が最も重要な問題について明確に交渉できるように、あなたの交渉者は平和協議において意義のある貢献をすることができませんでした。\n\n{0}との友好関係は多少改善しました。\n\n{1} との友好関係はかなり悪化しました。</MFI_FactionWarFavourFactionFlounder>
+  <MFI_FactionWarFavourFactionFlounder>会談は紛糾した。\n派閥の代表者が最も重要な問題についてはっきりとした交渉を行ったが、あなたの交渉者は平和協議において意義のある貢献をすることができませんでした。\n\n{0}との友好関係は多少改善しました。\n\n{1} との友好関係はかなり悪化しました。</MFI_FactionWarFavourFactionFlounder>
   <MFI_FactionWarFavourFactionSuccess>会談は成功した。\n両派閥の代表は基本的な条約を妥結した。あなたの交渉者は協議を大きく動かして、{1} に{0} への賠償を確約させました。\n\n{0} との友好関係がかなり改善しました。\n\n{1} との友好関係は多少悪化しました。</MFI_FactionWarFavourFactionSuccess>
   <MFI_FactionWarFavourFactionTriumph>会談は大成功だった！\nあなたの交渉担当者は{1} が過ちを認めさせて、過去の攻撃に対して賠償金を支払うよう説得するのに大きな役割を果たしました。\n\n{0} との友好関係が大きく改善しました。\n\n{1} との友好関係が悪化しました。</MFI_FactionWarFavourFactionTriumph>
 
   <!-- Faction war, sabotage to benefit colony -->
   <MFI_FactionWarSabotageDisaster>会談の妨害は大失敗でした。\n参加者はあなたの交渉担当者の妨害する意図をすぐに明確にして、両方の派閥があなたに反発しました！あなたのキャラバン隊が急いで出発すると、両方の派閥の戦士が追いついて攻撃しました！\n\n{0} との友好関係は崩壊しました。彼らはあなたと敵対しています。\n\n{1} との友好関係は崩壊しました。彼らはあなたと敵対しています。</MFI_FactionWarSabotageDisaster>
-  <MFI_FactionWarSabotageBackFire>会談の妨害は逆効果でした。\n代表者たちは友好的に冗談を交わし合い、その後は真剣に交渉に取り組んだので、すぐにあなたの交渉者の建設的ではない態度を理解して、会談から追い出しました。\n\n{0} との友好関係は大幅に悪化した。\n\n{1} との友好関係は大幅に悪化した。</MFI_FactionWarSabotageBackFire>
+  <MFI_FactionWarSabotageBackFire>会談の妨害は逆効果でした。\n代表者たちは友好的に冗談を交わし合い、その後は真剣に交渉に取り組んだので、すぐにあなたの交渉者の建設的ではない態度を察して、会談から追い出しました。\n\n{0} との友好関係は大幅に悪化した。\n\n{1} との友好関係は大幅に悪化した。</MFI_FactionWarSabotageBackFire>
   <MFI_FactionWarSabotageFlounder>会談の妨害は不振に終わった。\nあなたの交渉者は、言質を取ったり、平和協議に意味のある貢献を片側だけに与えて不和にする事に失敗して、無能だったと証明しました。\n\n{0} と{1}、両派閥との友好関係に変化はありません。</MFI_FactionWarSabotageFlounder>
   <MFI_FactionWarSabotageSuccess>会談の妨害はどうにか成功しました。\n代表者たちは重要な問題について意見を交わしたが、我々の交渉者は政治的な地雷原をうまく回避して、まったく実際には進展が何もないことを確認しながら両派閥に友好的な印象を残しました。\n\n{0} との関係はかなり改善しました。\n\n{1} との関係はかなり改善しました。</MFI_FactionWarSabotageSuccess>
-  <MFI_FactionWarSabotageTriumph>会談の妨害は大成功だった！\n両方の派閥の代表者同士が互いにらみ合いをしており、最初の挨拶の後、会議は侮辱と非難の応酬によってバラバラに瓦解したが、どちらの派閥代表者もあなたの派閥に対して非常に有利な印象を植え付けました。\n\n{0} との関係が大幅に改善しました。\n\n{1} との関係が大幅に改善しました。</MFI_FactionWarSabotageTriumph>
+  <MFI_FactionWarSabotageTriumph>会談の妨害は大成功だった！\n両方の派閥の代表者同士が互いにらみ合いをしており、最初の挨拶の後、会議は侮辱と非難の応酬によってバラバラに瓦解したが、どちらの派閥代表者にもあなたの派閥に対して非常に有利な印象を植え付けました。\n\n{0} との関係が大幅に改善しました。\n\n{1} との関係が大幅に改善しました。</MFI_FactionWarSabotageTriumph>
 
   <!-- Faction war, broker peace -->
   <MFI_FactionWarBrokerPeaceDisaster>会談は大失敗だった。\n代表者たちは、辛うじて最初の挨拶を交わしたあと、討論は侮辱と批難の応酬となって何も成果を上げられませんでした。あなたの交渉者が提案したことは何ひとつ承認されなかったし、両方の派閥との友好関係は以前よりも悪くなりました。\n\n{0} との友好関係が悪化しました。\n\n{1} との友好関係が悪化しました。</MFI_FactionWarBrokerPeaceDisaster>
