@@ -8,6 +8,6 @@
   <MFI_HuntersLodgePart.approachingReportString>{0} を訪れました</MFI_HuntersLodgePart.approachingReportString>
   <MFI_HuntersLodgePart.approachOrderString>{0} に向かいます</MFI_HuntersLodgePart.approachOrderString>
   <MFI_HuntersLodgePart.arrivedLetter>あなたのキャラバン隊は狩猟小屋に到着しました。誰も来ていないと様子でしたが、あなたが予想した通り獲物たちが待っていました、狩りの成果も期待できそうです。</MFI_HuntersLodgePart.arrivedLetter>
-  <MFI_HuntersLodgePart.arrivedLetterLabel>Hunter's lodge</MFI_HuntersLodgePart.arrivedLetterLabel>
+  <MFI_HuntersLodgePart.arrivedLetterLabel>狩猟小屋</MFI_HuntersLodgePart.arrivedLetterLabel>
 
 </LanguageData>
