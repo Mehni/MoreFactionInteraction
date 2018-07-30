@@ -4,6 +4,9 @@
   <MFI_DiplomaticMarriage.label>政略結婚</MFI_DiplomaticMarriage.label>
   <MFI_DiplomaticMarriage.letterLabel>政治的な結婚</MFI_DiplomaticMarriage.letterLabel>
 
+  <MFI_MysticalShaman.label>神秘的な呪術師</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.letterLabel>神秘的な呪術師</MFI_MysticalShaman.letterLabel>
+
   <MFI_HuntersLodge.label>狩猟小屋</MFI_HuntersLodge.label>
   <MFI_HuntersLodge.letterText>あなたは{0} の{1} から避暑地に招待されています。{2}。敷地内には食事の準備に必要な設備がすべて整っています。彼らはあなたへ胸襟を開いて誘ってきました。この申し出は{3} 日以内に有効期限が切れます。</MFI_HuntersLodge.letterText>
   <MFI_HuntersLodge.letterLabel>狩猟への招待</MFI_HuntersLodge.letterLabel>
