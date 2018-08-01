@@ -3,6 +3,7 @@
 
   <!--settings -->
   <MFI_ticksToUpgrade>宙賊がキャンプを拠点に変更するまでの時間</MFI_ticksToUpgrade>
+  <MFI_pirateBaseUpgraderModifier>宙賊の拠点化頻度の補正率</MFI_pirateBaseUpgraderModifier>
   <MFI_timeModifierBetweenFactionInteraction>時間による派閥友好関係の影響補正</MFI_timeModifierBetweenFactionInteraction>
   <MFI_traderWealthOffsetFromTimesTraded>トレーダーにより支払われたシルバーに対する補正（対話頻度）</MFI_traderWealthOffsetFromTimesTraded>
 
