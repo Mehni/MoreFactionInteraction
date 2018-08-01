@@ -42,7 +42,7 @@ namespace MoreFactionInteraction
                                     where (worldObject is SettlementBase || worldObject is Site)
                                             && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
                                             && worldObject.Faction.def.permanentEnemy
-                                            && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 15f
+                                            && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 20f
                                             && (Find.WorldReachability.CanReach(startTile: forTile, destTile: worldObject.Tile) || forTile == -1)
                                     select worldObject;
         }

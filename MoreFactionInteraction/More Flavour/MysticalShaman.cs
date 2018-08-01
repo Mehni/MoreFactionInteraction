@@ -3,11 +3,15 @@ using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
+using System;
 using Verse;
+using Harmony;
+using System.Reflection;
 
 namespace MoreFactionInteraction.More_Flavour
 {
-    internal class MysticalShaman : WorldObject
+
+    public class MysticalShaman : WorldObject
     {
         private Material cachedMat;
 

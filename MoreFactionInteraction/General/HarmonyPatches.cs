@@ -7,11 +7,10 @@ using Harmony;
 using UnityEngine;
 using RimWorld.Planet;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
-    using System.Reflection.Emit;
-
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
@@ -32,46 +31,69 @@ namespace MoreFactionInteraction
 
             harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
-            #endregion
 
-            #region WorldIncidents
-            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
+			harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
+						transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+
+			#endregion
+
+			#region WorldIncidents
+			harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
-            //harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
-            //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
+                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
-                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
         }
 
-        private static IEnumerable<CodeInstruction> ErrorSuppressionSssh(IEnumerable<CodeInstruction> instructions)
+		//[HarmonyPatch]
+		//public static class MyPatch
+		//{
+		//	public static MethodInfo match       = typeof(Plant).GetMethod("YieldNow");
+		//	public static MethodInfo replaceWith = typeof(MyPatch).GetMethod("YieldNowPatch");
+		//	public static MethodInfo TargetMethod()
+		//	{
+		//		Type mainType = typeof(JobDriver_PlantWork);
+		//		Log.Message("TargetMethod: Main Type Found");
+		//		Type iteratorType = mainType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First(t => t.FullName.Contains("c_Iterator"));
+		//		Log.Message("TargetMethod: Iterator Type Resolved");
+		//		Type anonStoreyType = iteratorType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First(t => t.FullName.Contains("c_AnonStorey"));
+		//		Log.Message("TargetMethod: AnonStorey Type Resolved");
+		//		return anonStoreyType.GetMethods().First(m => m.ReturnType == typeof(void));
+		//	}
+		//	public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr)
+		//	{
+		//		foreach (CodeInstruction i in instr)
+		//		{
+		//			if (i.operand == match)
+		//			{
+		//				Log.Message("Instruction insertion complete!");
+		//				yield return new CodeInstruction(OpCodes.Ldloc_0);
+		//				yield return new CodeInstruction(OpCodes.Call, replaceWith);
+		//			}
+		//			else
+		//			{
+		//				yield return i;
+		//			}
+		//		}
+		//	}
+		//	public static int YieldNowPatch(Plant p, Pawn actor)
+		//	{
+		//		return GenMath.RoundRandom(p.YieldNow() * actor.GetStatValue(StatDefOf.PlantHarvestYield, true)); // Whatever you want to do here
+		//	}
+		//}
+
+        //thx Brrainz
+        private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
         {
-            List<CodeInstruction> instructionList = instructions.ToList();
-            for (int i = 0; i < instructionList.Count; i++)
-            {
-                if (instructionList[i].opcode == OpCodes.Ldstr)
-                {
-                    for (int j = 0; j < 7; j++)
-                    {
-                        instructionList[i + j].opcode = OpCodes.Nop;
-                    }
-                }
-                yield return instructionList[i];
-            }
+            ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
+            ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
+            return instructions.MethodReplacer(from: from, to: to);
         }
-
-        ////thx Brrainz
-        //private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
-        //{
-        //    ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
-        //    ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
-        //    return instructions.MethodReplacer(from: from, to: to);
-        //}
 
         #region MoreTraders
         private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ThingSetMakerParams parms)
@@ -157,8 +179,24 @@ namespace MoreFactionInteraction
             return QualityUtility.GenerateQualityTraderItem();
         }
 
-        #region SimpleCurves
-        private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
+		private static IEnumerable<CodeInstruction> ErrorSuppressionSssh(IEnumerable<CodeInstruction> instructions)
+		{
+			List<CodeInstruction> instructionList = instructions.ToList();
+			for (int i = 0; i < instructionList.Count; i++)
+			{
+				if (instructionList[i].opcode == OpCodes.Ldstr)
+				{
+					for (int j = 0; j < 7; j++)
+					{
+						instructionList[i + j].opcode = OpCodes.Nop;
+					}
+				}
+				yield return instructionList[i];
+			}
+		}
+
+		#region SimpleCurves
+		private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
         {
             new CurvePoint(x: 0, y: 1),
             new CurvePoint(x: 10000, y: 1.5f),

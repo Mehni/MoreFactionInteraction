@@ -14,7 +14,9 @@ namespace MoreFactionInteraction
         private Faction faction;
         private static List<Map> tmpAvailableMaps = new List<Map>();
 
-        protected override bool CanFireNowSub(IncidentParms parms)
+		public override float AdjustedChance => base.AdjustedChance * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
+
+		protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) 
                                                     && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30) 

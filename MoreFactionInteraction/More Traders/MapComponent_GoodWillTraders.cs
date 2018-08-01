@@ -90,7 +90,7 @@ namespace MoreFactionInteraction
                         incidentParms.forced = true;
                         
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(), 
+                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef() ?? IncomingIncidentDef(), // overly-cautious "try again" null-check after strange bugreport.
                                                            fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), 
                                                            parms: incidentParms);
 

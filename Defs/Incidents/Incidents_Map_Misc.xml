@@ -5,9 +5,9 @@
 		<defName>MFI_PirateExtortion</defName>
 		<label>pirate extortion</label>
 		<category>Misc</category>
-    <targetTags>
-      <li>Map_PlayerHome</li>
-    </targetTags>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
 		<letterLabel>Pirate fee demand</letterLabel>
 		<letterDef>ExtortionDemand</letterDef>
@@ -20,6 +20,19 @@
 				<li>(7,1)</li>
 			</points>
 		</chanceFactorByPopulationCurve>
+	</IncidentDef>
+
+	<IncidentDef>
+		<defName>MFI_WoundedCombatants</defName>
+		<label>wounded combatants</label>
+		<category>Misc</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>MoreFactionInteraction.MoreFactionWar.IncidentWorker_WoundedCombatants</workerClass>
+		<baseChance>0.5</baseChance>
+		<minRefireDays>8</minRefireDays>
+		<earliestDay>30</earliestDay>
 	</IncidentDef>
 
 	<!-- <IncidentDef>

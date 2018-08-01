@@ -26,5 +26,11 @@ namespace MoreFactionInteraction.General
             //
             // which is a nested ternary and just awful to read. Be happy I spared you.
         }
+
+        public static bool IsPartOfFactionWar(this Faction faction)
+        {
+            return faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne ||
+                   faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+        }
     }
 }

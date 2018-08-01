@@ -3,6 +3,8 @@ using Verse;
 using RimWorld.Planet;
 using System.Linq;
 using MoreFactionInteraction.MoreFactionWar;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MoreFactionInteraction
 {
@@ -15,6 +17,21 @@ namespace MoreFactionInteraction
         
         private int    factionOneBattlesWon = 1;
         private int    factionTwoBattlesWon = 1;
+
+        private readonly List<Faction> allFactionsInVolvedInWar = new List<Faction>();
+
+        public List<Faction> AllFactionsInVolvedInWar
+        {
+            get
+            {
+                if (this.allFactionsInVolvedInWar.Count == 0)
+                {
+                    this.allFactionsInVolvedInWar.Add(WarringFactionOne);
+                    this.allFactionsInVolvedInWar.Add(WarringFactionTwo);
+                }
+                return this.allFactionsInVolvedInWar;
+            }
+        }
 
 
         public Faction WarringFactionOne
