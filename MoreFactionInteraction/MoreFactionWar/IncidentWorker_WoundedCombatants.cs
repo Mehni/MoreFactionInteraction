@@ -67,7 +67,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 				{
 					usedWeaponDef = null;
 				}
-				FactionWarHealthUtility.DamageUntilDownedWithSpecialOptions(p: woundedCombatant, allowBleedingWounds: true, damageDef: damageDef, weapon: usedWeaponDef);
+				CustomFaction_HealthUtility.DamageUntilDownedWithSpecialOptions(p: woundedCombatant, allowBleedingWounds: true, damageDef: damageDef, weapon: usedWeaponDef);
 				//todo: maybe add some storylogging.
 				pawnlist.Add(item: woundedCombatant);
 			}

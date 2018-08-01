@@ -64,7 +64,7 @@
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\Dialogue_FactionWarNegotiation.cs" />
     <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />
-    <Compile Include="MoreFactionWar\FactionWarHealthUtility.cs" />
+    <Compile Include="MoreFactionWar\CustomFaction_HealthUtility.cs" />
     <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_WoundedCombatants.cs" />

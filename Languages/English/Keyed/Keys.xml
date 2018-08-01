@@ -3,6 +3,7 @@
 
     <!--settings -->
     <MFI_ticksToUpgrade>Time until pirates upgrade their outposts to bases</MFI_ticksToUpgrade>
+    <MFI_pirateBaseUpgraderModifier>Modifier to how often pirates spread</MFI_pirateBaseUpgraderModifier>
     <MFI_timeModifierBetweenFactionInteraction>Time modifier between faction interaction</MFI_timeModifierBetweenFactionInteraction>
     <MFI_traderWealthOffsetFromTimesTraded>Modifier to silver brought by traders (scales with interaction frequency)</MFI_traderWealthOffsetFromTimesTraded>
 
