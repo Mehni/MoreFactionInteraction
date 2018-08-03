@@ -84,9 +84,9 @@ namespace MoreFactionInteraction
             //We don't need to run all that often
             if (Find.TickManager.TicksGame % 531 == 0 && GenDate.DaysPassed > 8)
             {
+
                 foreach (KeyValuePair<Faction, int> kvp in this.NextFactionInteraction)
                 {
-                    Log.Message("map comp ran" + kvp.Key + kvp.Value);
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
@@ -105,7 +105,6 @@ namespace MoreFactionInteraction
                               + (int)(FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill)
                                     * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
 
-                        Log.Message("next interaction: " + (int) FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill) * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
 
                         //kids, you shouldn't change values you iterate over.
                         break;
