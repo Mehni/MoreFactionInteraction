@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>Миграция стада</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>Несколько {0} проходят мимо.\n\nПришло время поохотиться.</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>Миграция животных：{0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>

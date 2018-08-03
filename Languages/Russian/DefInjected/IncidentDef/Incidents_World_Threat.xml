@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_QuestSpreadingPirateCamp.label>Лагерь бандитов увеличивается</MFI_QuestSpreadingPirateCamp.label>
+  <MFI_QuestSpreadingPirateCamp.letterText>{0}, {1} {2}, решил отправить нам насмешливое письмо\n\nВ нем говорится, что они поставили еще один лагерь.</MFI_QuestSpreadingPirateCamp.letterText>
+  <MFI_QuestSpreadingPirateCamp.letterLabel>Бандиты увеличивают свою сферу влияния</MFI_QuestSpreadingPirateCamp.letterLabel>
+
+
+</LanguageData>

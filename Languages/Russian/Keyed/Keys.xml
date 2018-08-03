@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+    <!--settings -->
+    <MFI_ticksToUpgrade>Время до того, как аванпост бандитов станет полноценной базой</MFI_ticksToUpgrade>
+    <MFI_pirateBaseUpgraderModifier>Частота распределения пиратов</MFI_pirateBaseUpgraderModifier>
+    <MFI_timeModifierBetweenFactionInteraction>Время между взаимодействиями фракций</MFI_timeModifierBetweenFactionInteraction>
+    <MFI_traderWealthOffsetFromTimesTraded>Количество серебра, переносимое торговцами (шкала с частотой появления)</MFI_traderWealthOffsetFromTimesTraded>
+
+    <MFI_LetterLabelBanditOutpostUpgraded>Аванпост бандитов увеличился</MFI_LetterLabelBanditOutpostUpgraded>
+    <MFI_LetterBanditOutpostUpgraded>Пираты из фракции {0} перестроили ближайший аванпост в базу!\n\nИногда они будут отправлять бойцов, которые проверят Вашу обороноспособность или оснуют новый авонпост, который вскоре может стать новой базой.</MFI_LetterBanditOutpostUpgraded>
+    <MFI_DesperateTrader>Отчаявшийся торговец</MFI_DesperateTrader>
+    <MFI_TraderSent>Спасибо, {0}. Их караван прибудет через {1}.</MFI_TraderSent>
+    <MFI_Trader>Торговец</MFI_Trader>
+
+    <MFI_CaravanWorking>Караван не может передвигаться, пока происходит уборка урожая.</MFI_CaravanWorking>
+
+    <MFI_FactionWarPeaceTalksIntroduction>Лидеры двух противостоящих фракций {0} и {1} соорудили аванпосты в разных углах временного лагеря. Напряжение между ними увеличилось после того, как Ваш переговорщик {2} пришел. Ваш переговорщик знает, что все его слова приведут к неизбежным последствиям.\n\n{2} может сказать следующее:</MFI_FactionWarPeaceTalksIntroduction>
+
+    <MFI_FactionWarPeaceTalksCurryFavour>Встреча с {0}</MFI_FactionWarPeaceTalksCurryFavour>
+    <MFI_FactionWarPeaceTalksSabotage>Подорвать мирные переговоры для улучшения колонии</MFI_FactionWarPeaceTalksSabotage>
+    <MFI_FactionWarPeaceTalksBrokerPeace>Мионый посредник между двумя фракциями</MFI_FactionWarPeaceTalksBrokerPeace>
+
+    <!-- Faction war, favour one faction over the other -->
+    <MFI_FactionWarFavourFactionDisaster>Переговоры прошли ужасно. Ни одна фракция не оценила стремление Вашего переговорщика уладить проблемы {0}. Попытки найти виновного расценились как признаки агрессии и, как результат, мирные переговоры сорвались.\n\nОношение с фракцией {0} немного ухудшилось.\n\nОтношение с фракцией {1} сильно ухудшились.</MFI_FactionWarFavourFactionDisaster>
+    <MFI_FactionWarFavourFactionBackFire>Переговоры привели к необратимым последствиям. Пока делегации фракций обменивались словами, Ваш переговорщик не смог найти правильный подход  ним, что вскоре привело к окончанию переговоров.\n\nОтношение с фракцией {0} ухудшились.\n\nОтношение с фракцией {1} сильно ухудшились.</MFI_FactionWarFavourFactionBackFire>
+    <MFI_FactionWarFavourFactionFlounder>Переговоры были запутанными. Делегации фракций довольно таки просто выразили свои претензии к друг другу, Но Ваш переговорщик не смог внести значимый вклад в решение этих проблем.\n\nОтношение с {0} немного улучшилось.\n\nОтношение с {1} значительно ухудшилось.</MFI_FactionWarFavourFactionFlounder>
+    <MFI_FactionWarFavourFactionSuccess>Переговоры прошли успешно. Вашему переговорщику удалось убедить {1} выплатить компенсацию {0}, и их делегации заключили соглашение.\n\nОтнношение с {0} сильно улучшилось.\n\nОтношение с {1} немного ухудшилось.</MFI_FactionWarFavourFactionSuccess>
+    <MFI_FactionWarFavourFactionTriumph>Переговоры прошли великолепно! Ваш переговорщик внес значительный вклад в решение этой проблемы. Он вынудил {1} выплачивать репарации за свою агрессию, на что {0} сильно обрадовались.\n\nОтношение {0} значительно улучшилось.\n\nОтношение с {1} ухудшилось.</MFI_FactionWarFavourFactionTriumph>
+
+    <!-- Faction war, sabotage to benefit colony -->
+    <MFI_FactionWarSabotageDisaster>Диверсия провалился. Делегации быстро расскрыли планы Вашего переговорщика и сплотились против Вас! Ваш караван быстро ретироввался, Но воины фракций не медлили, догнали караван и атаковали его!\n\nОтношение с {0} испорчено. Теперь они для Вас враги.\n\nОтношение с {1} испорчено. Теперь они Вам враги.</MFI_FactionWarSabotageDisaster>
+    <MFI_FactionWarSabotageBackFire>Диверсия привел к необратимым последствиям. После того, как делегации обменялись пожеланиями они обратили внимание на не ествественное поведение Вашего переговорщика и удалили его с переговоров.\n\nОтношение с {0} значительно ухудшилось.\n\nОтношение с {1} значительно ухудшилось.</MFI_FactionWarSabotageBackFire>
+    <MFI_FactionWarSabotageFlounder>Диверсия была никакой. Ваш переговорщик показал свою неспособность высказаться или, так или иначе, внести значительные последствия в переговоры .\n\nОтношение с {0} и {1} не изменились.</MFI_FactionWarSabotageFlounder>
+    <MFI_FactionWarSabotageSuccess>Диверсия прошел с сомнительным успехом. Пока делегации решали важные вопросы, Ваш переговорщик направил переговоры в нужное политическое русло и произвел хорошее впечатление на обе фракции.\n\nОтношение с {0} сильно улучшилось.\n\nОтношение с {1} сильно улучшилось.</MFI_FactionWarSabotageSuccess>
+    <MFI_FactionWarSabotageTriumph>Диверсия прошла великолепно! Делегации ожидаемо выступили против друг друга, вскоре после первого приветствия, Вместо дисскусии они начали оскорблять и обвинять друг друга после чего ушли с хорошими впечатлениями о Вашей фракции.\n\nОтношение с {0} значительно улучшилось.\n\nОтношение с {1} значительно улучшилось.</MFI_FactionWarSabotageTriumph>
+
+    <!-- Faction war, broker peace -->
+    <MFI_FactionWarBrokerPeaceDisaster>Переговоры прошли ужасно. Делегации не успели поздороваться, как переговоры перешли во взаимные оскорбления и обвинения. На любые слова Вашего переговорщика не обращали внимания, и отношение с этими фракциями только ухудшилась.\n\nОтношение с {0} ухудшилось.\n\nОтношение с {1} ухудшилось.</MFI_FactionWarBrokerPeaceDisaster>
+    <MFI_FactionWarBrokerPeaceBackFire>Переговоры привели к необратимым последствиям. Не смотря на то, что делегации обменивались любезностями, они не продвинулись в решении своей проблемы, а только увеличили количество вопросов и претензий друг к другу. TОни решили пересмотреть и продолжить переговоры в другое время.\n\nОтношение с {0} и {1} не изменились.</MFI_FactionWarBrokerPeaceBackFire>
+    <MFI_FactionWarBrokerPeaceFlounder>Переговоры были запутанными. Хоть делегации и смогли найти общий язык и они даже старались быть уважительными, но они были не в состоянии решить свою проблему до тех пор, пока не явился переговорщик. Но не смотря на это решать эту проблему, в большей степени им пришлось самим.\n\nОтношение с {0} немного  улучшилось.\n\nОтношение с {1} немного  улучшилось</MFI_FactionWarBrokerPeaceFlounder>
+    <MFI_FactionWarBrokerPeaceSuccess>Переговоры прошли удачно. Благодоря большому взносу Вашего переговорщика делегации достигли новых соглашений по нескольким важным вопросам.\n\nОтношение с {0} сильно улучшилось.\n\nОтношение с {1} сильно улучшилось.</MFI_FactionWarBrokerPeaceSuccess>
+    <MFI_FactionWarBrokerPeaceTriumph>Переговоры прошли великолепно! Ваш переговорщик быстро нашел общий язык с делегациями и нашел решения их важнейших на сей день проблем, которые устраивали обе стороны.\n\nОтншение с {0} значительно улучшилось.\n\nОтншение с {1} значительно улучшилось.</MFI_FactionWarBrokerPeaceTriumph>
+
+    <MFI_FactionWarProgress>Прогресс фракционной войны</MFI_FactionWarProgress>
+    <MFI_UnrestIsBrewing>назревают фракционные волнения</MFI_UnrestIsBrewing>
+
+    <MFI_FactionWarBaseBattleTookPlaceLabel>База фракции атакована</MFI_FactionWarBaseBattleTookPlaceLabel>
+    <MFI_FactionWarBaseAttacked>База, принадлежащая {0} атакована {1}!</MFI_FactionWarBaseAttacked>
+    <MFI_FactionWarBaseDefeated>Они были не в состоянии защитить себя от нападающих и получили существенный урон.</MFI_FactionWarBaseDefeated>
+    <MFI_FactionWarBaseTakenOver>После эвакуации {0}, фракция {1} захватила территорию и получила единоличное управление над сдавшейся территорией.</MFI_FactionWarBaseTakenOver>
+    <MFI_FactionWarBaseDestroyed>Атакующие из {1} разграбили базу и сожгли её до тла. Это тяжелейший удар для {0}.</MFI_FactionWarBaseDestroyed>
+    <MFI_FactionWarBaseSuccessfullyDefended>Защитники браво сдержали набег атакующих и контр атаковали их. {0} провозгласили себя победителями в этой фракционной войне.</MFI_FactionWarBaseSuccessfullyDefended>
+
+    <MFI_FactionWarStarted>Фракционная война началась</MFI_FactionWarStarted>
+    <MFI_FactionWarExplanation>Разгорелась война между {0} и {1}. Они одназначно начнут наступательные действия против друг друга. Если Вы предпочитаете одну из фракций, то вы можете вступиться за нее, когда Вас призовут.\n\nВы можете следить за процессом войны в разделе "фракции".</MFI_FactionWarExplanation>
+    <MFI_FactionWarOverLabel>Война окончена</MFI_FactionWarOverLabel>
+    <MFI_FactionWarOver>Спустя множество битв и больших потерь, война между {0} и {1} окончилась.</MFI_FactionWarOver>
+
+    <MFI_FactionWarLeaderDecidedLabel>Итоги мирных переговоров</MFI_FactionWarLeaderDecidedLabel>
+    <MFI_FactionWarLeaderDecidedOnWar>Мирные переговоры не дали результатов, и между {0} и {1} началась война.  Они одназначно начнут наступательные действия против друг друга. Если Вы предпочитаете одну из фракций, то вы можете вступиться за нее, когда Вас призовут.\n\nВы можете следить за процессом войны в разделе "фракции".</MFI_FactionWarLeaderDecidedOnWar>
+    <MFI_FactionWarLeaderDecidedAgainstWar>Мирные переговоры окончились. Напряженность между фракциями {0} и {1} спала и были достигнуты первоначальные договоренности.</MFI_FactionWarLeaderDecidedAgainstWar>
+
+    <MFI_WoundedCombatant>Высокопоставленный военный офицер из {0} отправил сигнал бедствия. Нескольким бойцам из его поселения получили серьезные ранения и им требуется немедленный врачебный уход. Их погрузили в транспортные капсулы, но ближайший медицинский аванпост находится слишком далеко, чтобы эти мужчины и женщины остались в живых, поэтому он написал Вам, как своему союзнику. Ответите ли Вы на его призыв о спасении и выхаживании его воинов??</MFI_WoundedCombatant>
+    <MFI_WoundedCombatantRejected>То, как хорошо Вы слышите ругательства офицера, не смотря на разрывы минометных снарядов, поражает, Он явно не желает ничего хорошего Вашей колонии и обвиняет Вас за смерть своих людей.\n\n Отношение {0} ухудшено по {1}.</MFI_WoundedCombatantRejected>
+    <MFI_WoundedCombatantTitle>Союзный сигнал бедствия {0}</MFI_WoundedCombatantTitle>
+    <MFI_WoundedCombatantAmbush>Это ловушка! Врагам {0} как то удалось испортить Вашу связь и они использовали это в войне. {1}</MFI_WoundedCombatantAmbush>
+    <MFI_WoundedCombatantGratitude>Офицер искренне и сердечно отдал Вам честь. Но для Вас это не имеет никакого значения, так как Вы не видите этого через радио, поэтому Вы окончили разговор.</MFI_WoundedCombatantGratitude>
+    <MFI_WoundedCombatantAmbushAvoided>На фоне вы слышите голос, который спрашивает: &quot;Они уже повелись?&quot;. Вы быстро повешали трубку и находитесь в шоке от того, что только что предотвратили потенциальную угрозу.</MFI_WoundedCombatantAmbushAvoided>
+
+</LanguageData>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>Торговый запрос</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>Торговый запрос</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_BumperCropRequest.label>Запрос на сбор урожая</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>Война у нас на пороге?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterLabel>Фракционные беспорядки</MFI_Quest_PeaceTalks.letterLabel>
+  <MFI_Quest_PeaceTalks.letterText>Вы получили сообщение от[PAWN_nameDef], {0} лидера фракции {1}. Их фракция повздорила с {2} и они призывают вас для переговоров с ними. Они встречаются на нейтральной территории недалеко от сюда и призывают Вас для решения их проблемы.\n\nЭто отличная возможность для того, чтобы улучшить отношения с этими фракциями. Но осерегайтесь, так как плохие переговоры могут принести больше вреда, чем пользы или даже озлобить их.\n\nПредложение истечет через {3} дня, после чего [PAWN_nameDef] ждет худшего.</MFI_Quest_PeaceTalks.letterText>
+
+
+
+</LanguageData>

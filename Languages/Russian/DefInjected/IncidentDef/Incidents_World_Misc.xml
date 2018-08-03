@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_DiplomaticMarriage.label>Дипломатический брак</MFI_DiplomaticMarriage.label>
+  <MFI_DiplomaticMarriage.letterLabel>Дипломатический брак</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>Таинственный колдун</MFI_MysticalShaman.label>
+
+  <MFI_HuntersLodge.label>Хижина охотника</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterLabel>Хижина охотника</MFI_HuntersLodge.letterLabel>
+  <MFI_HuntersLodge.letterText>{1}({0}) приглашает Вас на своё летнее место отдыха.{2}.На месте стоит аванпост со всем необходимым оборудованием для приготовления пищи, и они расширяют свое гостеприимство для вас. Предложение истечет через {3} дня.</MFI_HuntersLodge.letterText>
+
+  <MFI_SettlementBaseAttack.label>База вашей фракции атакована.</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>
