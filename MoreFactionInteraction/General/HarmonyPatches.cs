@@ -50,43 +50,6 @@ namespace MoreFactionInteraction
 
         }
 
-		//[HarmonyPatch]
-		//public static class MyPatch
-		//{
-		//	public static MethodInfo match       = typeof(Plant).GetMethod("YieldNow");
-		//	public static MethodInfo replaceWith = typeof(MyPatch).GetMethod("YieldNowPatch");
-		//	public static MethodInfo TargetMethod()
-		//	{
-		//		Type mainType = typeof(JobDriver_PlantWork);
-		//		Log.Message("TargetMethod: Main Type Found");
-		//		Type iteratorType = mainType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First(t => t.FullName.Contains("c_Iterator"));
-		//		Log.Message("TargetMethod: Iterator Type Resolved");
-		//		Type anonStoreyType = iteratorType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First(t => t.FullName.Contains("c_AnonStorey"));
-		//		Log.Message("TargetMethod: AnonStorey Type Resolved");
-		//		return anonStoreyType.GetMethods().First(m => m.ReturnType == typeof(void));
-		//	}
-		//	public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr)
-		//	{
-		//		foreach (CodeInstruction i in instr)
-		//		{
-		//			if (i.operand == match)
-		//			{
-		//				Log.Message("Instruction insertion complete!");
-		//				yield return new CodeInstruction(OpCodes.Ldloc_0);
-		//				yield return new CodeInstruction(OpCodes.Call, replaceWith);
-		//			}
-		//			else
-		//			{
-		//				yield return i;
-		//			}
-		//		}
-		//	}
-		//	public static int YieldNowPatch(Plant p, Pawn actor)
-		//	{
-		//		return GenMath.RoundRandom(p.YieldNow() * actor.GetStatValue(StatDefOf.PlantHarvestYield, true)); // Whatever you want to do here
-		//	}
-		//}
-
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
         {

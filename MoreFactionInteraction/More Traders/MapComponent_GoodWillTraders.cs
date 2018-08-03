@@ -45,8 +45,8 @@ namespace MoreFactionInteraction
                 if (this.nextFactionInteraction.Count == 0)
                 {
                     IEnumerable<Faction> friendlyFactions = from faction in Find.FactionManager.AllFactionsVisible
-                                                        where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(other: faction)
-                                                        select faction;
+                                                            where !faction.IsPlayer && faction != Faction.OfPlayerSilentFail && !Faction.OfPlayer.HostileTo(other: faction)
+                                                            select faction;
 
                     foreach (Faction faction in friendlyFactions)
                     {
@@ -56,9 +56,11 @@ namespace MoreFactionInteraction
                     }
                 }
 
-				List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
-				queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && this.allowedIncidentDefs.Contains(qi.FiringIncident.def));
-				nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
+                if (nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail)) > 0)
+                {
+                    List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
+                    queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && this.allowedIncidentDefs.Contains(qi.FiringIncident.def));
+                }
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
@@ -84,6 +86,7 @@ namespace MoreFactionInteraction
             {
                 foreach (KeyValuePair<Faction, int> kvp in this.NextFactionInteraction)
                 {
+                    Log.Message("map comp ran" + kvp.Key + kvp.Value);
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
@@ -91,16 +94,18 @@ namespace MoreFactionInteraction
                         incidentParms.faction = faction;
                         //forced, because half the time game doesn't feel like firing events.
                         incidentParms.forced = true;
-                        
+
                         //trigger incident somewhere between half a day and 3 days from now
                         Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef() ?? IncomingIncidentDef(), // overly-cautious "try again" null-check after strange bugreport.
-                                                           fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3), 
+                                                           fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3),
                                                            parms: incidentParms);
 
                         this.NextFactionInteraction[key: faction] =
-                            Find.TickManager.TicksGame 
-                              + (int)(FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill) 
+                            Find.TickManager.TicksGame
+                              + (int)(FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill)
                                     * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
+
+                        Log.Message("next interaction: " + (int) FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill) * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
 
                         //kids, you shouldn't change values you iterate over.
                         break;
@@ -136,7 +141,7 @@ namespace MoreFactionInteraction
 
                 case int n when n <= 40:
                     return IncidentDefOf.Quest_TradeRequest;
-                
+
                 case int n when n <= 50:
                     return IncidentDefOf.TraderCaravanArrival;
 
@@ -144,19 +149,19 @@ namespace MoreFactionInteraction
             }
         }
 
-		private readonly List<IncidentDef> allowedIncidentDefs = 
-			new List<IncidentDef>()
-			{
-				MFI_DefOf.MFI_QuestSpreadingPirateCamp,
-				MFI_DefOf.MFI_DiplomaticMarriage,
-				MFI_DefOf.MFI_ReverseTradeRequest,
-				MFI_DefOf.MFI_BumperCropRequest,
-				MFI_DefOf.MFI_HuntersLodge,
-				IncidentDef.Named("MFI_MysticalShaman"),
-				IncidentDef.Named("Quest_ItemStash"),
-				IncidentDefOf.Quest_TradeRequest,
-				IncidentDefOf.TraderCaravanArrival
-			};
+        private readonly List<IncidentDef> allowedIncidentDefs =
+            new List<IncidentDef>()
+            {
+                MFI_DefOf.MFI_QuestSpreadingPirateCamp,
+                MFI_DefOf.MFI_DiplomaticMarriage,
+                MFI_DefOf.MFI_ReverseTradeRequest,
+                MFI_DefOf.MFI_BumperCropRequest,
+                MFI_DefOf.MFI_HuntersLodge,
+                IncidentDef.Named("MFI_MysticalShaman"),
+                IncidentDef.Named("Quest_ItemStash"),
+                IncidentDefOf.Quest_TradeRequest,
+                IncidentDefOf.TraderCaravanArrival
+            };
 
         //working lists for ExposeData.
         private List<Faction> factionsListforInteraction = new List<Faction>();
