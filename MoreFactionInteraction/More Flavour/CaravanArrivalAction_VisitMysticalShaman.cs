@@ -31,13 +31,12 @@ namespace MoreFactionInteraction.More_Flavour
 
         public static IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan, MysticalShaman mysticalShaman)
         {
-            return CaravanArrivalActionUtility.GetFloatMenuOptions(acceptanceReportGetter:
-                                                                   () => CanVisit(caravan: caravan, mysticalShaman: mysticalShaman), arrivalActionGetter:
-                                                                   () => new CaravanArrivalAction_VisitMysticalShaman(mysticalShaman: mysticalShaman),
-                                                                   label: "VisitPeaceTalks".Translate(mysticalShaman.Label),
-                                                                   caravan: caravan, pathDestination: mysticalShaman.Tile,
-                                                                   revalidateWorldClickTarget: mysticalShaman);
-        }
+            return CaravanArrivalActionUtility.GetFloatMenuOptions(acceptanceReportGetter: () => CanVisit(caravan: caravan, mysticalShaman: mysticalShaman), 
+																	arrivalActionGetter: () => new CaravanArrivalAction_VisitMysticalShaman(mysticalShaman: mysticalShaman),
+																	label: "VisitPeaceTalks".Translate(mysticalShaman.Label),
+																	caravan: caravan, pathDestination: mysticalShaman.Tile,
+																	revalidateWorldClickTarget: mysticalShaman);
+		}
 
         public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, MysticalShaman mysticalShaman)
         {

@@ -2,6 +2,8 @@
 using System.Linq;
 using RimWorld;
 using Verse;
+using Harmony;
+using System.Reflection;
 
 namespace MoreFactionInteraction
 {
@@ -53,9 +55,10 @@ namespace MoreFactionInteraction
                         Rand.PopState();
                     }
                 }
-                //if a faction became hostile, remove
-                //TODO: remove priorly scheduled incidents involving said faction
-                nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
+
+				List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
+				queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && this.allowedIncidentDefs.Contains(qi.FiringIncident.def));
+				nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail));
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
@@ -141,6 +144,19 @@ namespace MoreFactionInteraction
             }
         }
 
+		private readonly List<IncidentDef> allowedIncidentDefs = 
+			new List<IncidentDef>()
+			{
+				MFI_DefOf.MFI_QuestSpreadingPirateCamp,
+				MFI_DefOf.MFI_DiplomaticMarriage,
+				MFI_DefOf.MFI_ReverseTradeRequest,
+				MFI_DefOf.MFI_BumperCropRequest,
+				MFI_DefOf.MFI_HuntersLodge,
+				IncidentDef.Named("MFI_MysticalShaman"),
+				IncidentDef.Named("Quest_ItemStash"),
+				IncidentDefOf.Quest_TradeRequest,
+				IncidentDefOf.TraderCaravanArrival
+			};
 
         //working lists for ExposeData.
         private List<Faction> factionsListforInteraction = new List<Faction>();

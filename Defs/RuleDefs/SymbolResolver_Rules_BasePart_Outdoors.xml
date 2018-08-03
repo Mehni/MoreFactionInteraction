@@ -39,7 +39,7 @@
         <minRectSize>(12, 12)</minRectSize>
       </li>
       <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Division_Split">
-        <minRectSize>(3, 3)</minRectSize> 
+        <minRectSize>(3, 3)</minRectSize>
       </li>
     </resolvers>
   </RuleDef>
@@ -76,14 +76,14 @@
         <selectionWeight>0.3</selectionWeight>
       </li> Still handled by GenStep_Power -->
       <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Leaf_Farm">
-        <selectionWeight>0.65</selectionWeight>
       </li>
       <li Class="MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_SymbolResolver_BasePart_Outdoors_Leaf_Building">
         <minRectSize>(4, 4)</minRectSize>
+        <selectionWeight>0.65</selectionWeight>
       </li>
     </resolvers>
   </RuleDef>
 
-<!--MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_ -->
+  <!--MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver.MFI_ -->
 
 </Defs>

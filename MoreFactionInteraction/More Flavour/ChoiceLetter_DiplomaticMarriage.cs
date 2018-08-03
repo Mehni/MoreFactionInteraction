@@ -34,11 +34,12 @@ namespace MoreFactionInteraction
                     DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
                     {
                         action = () =>
-                            {
-                                this.goodWillGainedFromMarriage = (int)FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
-                                    //(int)Mathf.Clamp(value: this.betrothed.MarketValue / 20, min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-                                this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
-                                this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
+                        {
+                            this.goodWillGainedFromMarriage = (int)FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
+                            //(int)Mathf.Clamp(value: this.betrothed.MarketValue / 20, min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
+                            this.marriageSeeker.Faction.TrySetRelationKind(Faction.OfPlayer, this.marriageSeeker.Faction.PlayerRelationKind + 1, true, "LetterLabelAcceptedProposal".Translate());
+                            this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: false, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
+                            this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 
                                 if (this.betrothed.GetCaravan() is Caravan caravan)
                                 {
@@ -46,13 +47,13 @@ namespace MoreFactionInteraction
                                     HealIfPossible(p: this.betrothed);
                                     caravan.RemovePawn(p: this.betrothed);
                                 }
-                                DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
-                                Find.LetterStack.RemoveLetter(this);
+                            DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
+                            Find.LetterStack.RemoveLetter(this);
                         }
                     };
                     DiaNode dialogueNodeAccept = new DiaNode(text: "MFI_AcceptedProposal".Translate(this.betrothed, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
-                            dialogueNodeAccept.options.Add(item: this.Option_Close);
-                            accept.link = dialogueNodeAccept;
+                    dialogueNodeAccept.options.Add(item: this.Option_Close);
+                    accept.link = dialogueNodeAccept;
 
                     DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
                     {
@@ -64,8 +65,8 @@ namespace MoreFactionInteraction
                         }
                     };
                     DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate(this.marriageSeeker.Name, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
-                            dialogueNodeReject.options.Add(item: this.Option_Close);
-                            reject.link = dialogueNodeReject;
+                    dialogueNodeReject.options.Add(item: this.Option_Close);
+                    reject.link = dialogueNodeReject;
 
                     yield return accept;
                     yield return reject;
@@ -82,16 +83,7 @@ namespace MoreFactionInteraction
                                                  ? marriageSeeker.Faction
                                                  : null);
 
-            //GenSpawn.Spawn(marriageSeeker, DropCellFinder.TradeDropSpot(betrothed.Map), betrothed.Map);
-            //Lord PARTYHARD = LordMaker.MakeNewLord(betrothed.Faction, new LordJob_NonVoluntaryJoinable_MarriageCeremony(marriageSeeker, betrothed, DropCellFinder.TradeDropSpot(betrothed.Map)), betrothed.Map, null);
-            //foreach (Pawn lazybum in betrothed.Map.mapPawns.FreeColonistsSpawned)
-            //{
-            //    PARTYHARD.AddPawn(lazybum);
-            //} 
-            ////betrothed.Map.lordsStarter.TryStartMarriageCeremony(betrothed, marriageSeeker);
-            //IncidentParms parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.FactionArrival, marriageSeeker.Map);
-            //parms.faction = marriageSeeker.Faction;
-            //MFI_DefOf.MFI_WeddingGuestsArrival.Worker.TryExecute(parms);
+            //todo: maybe plan visit, deliver dowry, do wedding.
         }
 
         private static void HealIfPossible(Pawn p)
