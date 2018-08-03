@@ -59,7 +59,7 @@ namespace MoreFactionInteraction
         }
 
         #region MoreTraders
-        private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ref ThingSetMakerParams parms)
+        private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ThingSetMakerParams parms)
         {
             if (parms.traderDef != null)
             {
@@ -116,6 +116,16 @@ namespace MoreFactionInteraction
         /// <returns>QualityCategory depending on wealth or goodwill. Fallsback to vanilla when fails.</returns>
         private static QualityCategory FactionAndGoodWillDependantQuality(Faction faction, Map map, TraderKindDef trader)
         {
+            if ((trader.orbital || trader.defName.Contains(value: "_Base")) && map != null)
+            {
+                if (Rand.Value < 0.25f)
+                {
+                    return QualityCategory.Normal;
+                }
+                float num = Rand.Gaussian(centerX: WealthQualityDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal), widthFactor: WealthQualitySpreadDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal));
+                num = Mathf.Clamp(value: num, min: 0f, max: QualityUtility.AllQualityCategories.Count - 0.5f);
+                return (QualityCategory)((int)num);
+            }
             if (map != null && faction != null)
             {
                 float qualityIncreaseFromTimesTradedWithFaction = Mathf.Clamp01(value: (float)map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: faction] / 100);
@@ -126,16 +136,6 @@ namespace MoreFactionInteraction
                     return QualityCategory.Normal;
                 }
                 float num = Rand.Gaussian(centerX: 2.5f + qualityIncreaseFactorFromPlayerGoodWill, widthFactor: 0.84f + qualityIncreaseFromTimesTradedWithFaction);
-                num = Mathf.Clamp(value: num, min: 0f, max: QualityUtility.AllQualityCategories.Count - 0.5f);
-                return (QualityCategory)((int)num);
-            }
-            if ((trader.orbital || trader.defName.Contains(value: "_Base")) && map != null)
-            {
-                if (Rand.Value < 0.25f)
-                {
-                    return QualityCategory.Normal;
-                }
-                float num = Rand.Gaussian(centerX: WealthQualityDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal), widthFactor: WealthQualitySpreadDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal));
                 num = Mathf.Clamp(value: num, min: 0f, max: QualityUtility.AllQualityCategories.Count - 0.5f);
                 return (QualityCategory)((int)num);
             }
