@@ -61,4 +61,7 @@
   <MFI_FactionWarLeaderDecidedOnWar>和平会議は失敗に終わり、{0} と{1} の間で派閥間戦争が勃発しました。\n時々彼らは互いの拠点に対して攻撃を開始するでしょう。戦争の当事者である派閥に対して敵対している派閥よりも支援した場合、彼らはあなたに援助を求めるかもしれません。\n\nメインメニューの派閥タブで派閥間戦争り進展を追跡することができます。</MFI_FactionWarLeaderDecidedOnWar>
   <MFI_FactionWarLeaderDecidedAgainstWar>和平会議は無事に終わりました。派閥間の緊張が緩和され、{0} と{1} の派閥は当初予定された和平合意に達しました。</MFI_FactionWarLeaderDecidedAgainstWar>
 
+  <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+  <MFI_SellingWarBondsNeedSteelLaunchable>貿易用ビーコンの近くにスチールが{0}必要です</MFI_SellingWarBondsNeedSteelLaunchable>
+
 </LanguageData>
