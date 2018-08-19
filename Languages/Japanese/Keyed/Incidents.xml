@@ -24,7 +24,7 @@
   <MFI_LetterLabelHarvest_Triumph>大豊作の収穫</MFI_LetterLabelHarvest_Triumph>
   <MFI_BumperCropXPGain>あなたの栽培者{0} は栽培スキルの経験が{1} 増えました。</MFI_BumperCropXPGain>
 
-  <MFI_DiplomaticMarriage>{1} の魅力的な申し出が{0} に届いて、彼らはあなたに{1} との政略結婚の約束を求めてきました。この政略結婚の提案を受け入れることで、お互いの関係と派閥との友好関係が強化されますが、{1}はあなたの派閥を離れて{2}に参加することになります。</MFI_DiplomaticMarriage>
+  <MFI_DiplomaticMarriage>{0} の魅力的な申し出が{1} に届いて、彼らはあなたに{1} との政略結婚の約束を求めてきました。この政略結婚の提案を受け入れることで、お互いの関係と派閥との友好関係が強化されますが、{1}はあなたの派閥を離れて{2}に参加することになります。</MFI_DiplomaticMarriage>
   <MFI_DiplomaticMarriageLabel>政略結婚</MFI_DiplomaticMarriageLabel>
   <MFI_AcceptedProposal>[PAWN_nameDef] は大喜びしています。[PAWN_pronoun] は彼らが{0} で幸せな生活を送ることができると信じています。\n\n{1} との友好関係が改善されました。</MFI_AcceptedProposal>
   <MFI_DejectedProposal>[PAWN_nameDef] は[PAWN_possessive] が拒絶されないように最善を尽くしました。\n\n{1} との友好関係は少し悪化しました。</MFI_DejectedProposal>
