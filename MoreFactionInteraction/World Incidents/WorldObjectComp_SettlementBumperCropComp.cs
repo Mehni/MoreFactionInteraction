@@ -105,11 +105,7 @@ namespace MoreFactionInteraction.World_Incidents
             text.Append(value: baseText + "\n");
             foreach (Pawn pawn in AllCaravanMembersCapableOfGrowing(caravan: caravan))
             {
-                text.Append(value: "\n" + "MFI_BumperCropXPGain".Translate(args: new object[]
-                {
-                    pawn.LabelShort,
-                    expGain
-                }));
+                text.Append(value: "\n" + "MFI_BumperCropXPGain".Translate( pawn.LabelShort, expGain ));
             }
             return text.ToString();
         }

@@ -42,7 +42,7 @@ namespace MoreFactionInteraction
             {
                 this.betrothed.LabelShort
             }).CapitalizeFirst();
-            choiceLetterDiplomaticMarriage.radioMode = true;
+            choiceLetterDiplomaticMarriage.radioMode = false;
             choiceLetterDiplomaticMarriage.marriageSeeker = this.marriageSeeker;
             choiceLetterDiplomaticMarriage.betrothed = this.betrothed;
             choiceLetterDiplomaticMarriage.StartTimeout(duration: TimeoutTicks);

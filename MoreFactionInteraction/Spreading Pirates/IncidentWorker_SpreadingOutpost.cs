@@ -14,12 +14,12 @@ namespace MoreFactionInteraction
         private Faction faction;
         private static List<Map> tmpAvailableMaps = new List<Map>();
 
-		public override float AdjustedChance => base.AdjustedChance * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
+        public override float AdjustedChance => base.AdjustedChance * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
 
-		protected override bool CanFireNowSub(IncidentParms parms)
+        protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction) 
-                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30) 
+            return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction)
+                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30)
                                                     && this.TryGetRandomAvailableTargetMap(out Map map);
         }
 
@@ -47,7 +47,7 @@ namespace MoreFactionInteraction
         private SettlementBase RandomNearbyHostileSettlement(int originTile)
         {
             return (from settlement in Find.WorldObjects.SettlementBases
-                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f 
+                    where settlement.Attackable && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f
                     && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile) && settlement.Faction == this.faction
                     select settlement).RandomElementWithFallback();
         }

@@ -53,12 +53,12 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static Faction TryFindFactions(out Faction instigatingFaction)
         {
             IEnumerable<Faction> factions = Find.FactionManager.AllFactions
-                                                .Where(predicate: x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy);
+                                                .Where(predicate: x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy && x.leader != null);
 
             Faction alliedFaction = factions.RandomElement();
 
             IEnumerable<Faction> factionsPartTwo = Find.FactionManager.AllFactions
-                                                       .Where(predicate: x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy && x != alliedFaction);
+                                                       .Where(predicate: x => !x.def.hidden && !x.defeated && !x.IsPlayer && !x.def.permanentEnemy && x != alliedFaction && x.leader != null);
 
             return factionsPartTwo.TryRandomElement(result: out instigatingFaction) ? alliedFaction : null;
         }

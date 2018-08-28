@@ -117,10 +117,14 @@ namespace MoreFactionInteraction
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))
             {
-                case int n when n <= 6:
+                //kinda dirty hack that also means if you set the modifier to 2 you get fewer of the other quests. Oh well.
+                case int n when n <= 6 * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier:
                     return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
 
-                case int n when n <= 8:
+                case int n when n <= 7:
+                    return IncidentDef.Named("Quest_BanditCamp");
+
+                case int n when n <= 9:
                     return MFI_DefOf.MFI_DiplomaticMarriage;
 
                 case int n when n <= 17:
@@ -152,6 +156,7 @@ namespace MoreFactionInteraction
             new List<IncidentDef>()
             {
                 MFI_DefOf.MFI_QuestSpreadingPirateCamp,
+                IncidentDef.Named("Quest_BanditCamp"),
                 MFI_DefOf.MFI_DiplomaticMarriage,
                 MFI_DefOf.MFI_ReverseTradeRequest,
                 MFI_DefOf.MFI_BumperCropRequest,

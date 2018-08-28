@@ -11,6 +11,7 @@ using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
+
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
@@ -27,18 +28,17 @@ namespace MoreFactionInteraction
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
-                prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)), postfix: null);
+                 prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
 
-			harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
-						transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
+             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+            #endregion
 
-			#endregion
-
-			#region WorldIncidents
-			harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
+            #region WorldIncidents
+            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
@@ -46,9 +46,29 @@ namespace MoreFactionInteraction
             #endregion
 
             harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
-                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+
+            //harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
+            //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
         }
+
+        //private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
+        //{
+        //    MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
+
+        //    foreach (CodeInstruction codeInstruction in instructions)
+        //    {
+        //        if (codeInstruction.opcode == OpCodes.Ldc_R4)
+        //        {
+        //            codeInstruction.opcode = OpCodes.Call;
+        //            codeInstruction.operand = helperMethod;
+        //        }
+        //        yield return codeInstruction;
+        //    }
+        //}
+
+        //private static float SootheTranspilerHelperMethod() => Find.World?.GetComponent<WorldComponent_MFI_AnnualExpo>()?.BuffedEmanator ?? false ? 20f : 15f;
 
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
@@ -65,12 +85,11 @@ namespace MoreFactionInteraction
             {
                 Map map = null;
 
-                //much elegant. Such wow ;-;
-                if (parms.tile.HasValue && parms.tile != -1 && Current.Game.FindMap(tile: parms.tile.Value) != null && Current.Game.FindMap(tile: parms.tile.Value).IsPlayerHome)
+                if (parms.tile != null && parms.tile != -1 && (Current.Game.FindMap(tile: parms.tile.Value)?.IsPlayerHome ?? false))
                     map = Current.Game.FindMap(tile: parms.tile.Value);
 
                 else if (Find.AnyPlayerHomeMap != null)
-                    map = Find.AnyPlayerHomeMap; 
+                    map = Find.AnyPlayerHomeMap;
 
                 else if (Find.CurrentMap != null)
                     map = Find.CurrentMap;
@@ -142,24 +161,24 @@ namespace MoreFactionInteraction
             return QualityUtility.GenerateQualityTraderItem();
         }
 
-		private static IEnumerable<CodeInstruction> ErrorSuppressionSssh(IEnumerable<CodeInstruction> instructions)
-		{
-			List<CodeInstruction> instructionList = instructions.ToList();
-			for (int i = 0; i < instructionList.Count; i++)
-			{
-				if (instructionList[i].opcode == OpCodes.Ldstr)
-				{
-					for (int j = 0; j < 7; j++)
-					{
-						instructionList[i + j].opcode = OpCodes.Nop;
-					}
-				}
-				yield return instructionList[i];
-			}
-		}
+        private static IEnumerable<CodeInstruction> ErrorSuppressionSssh(IEnumerable<CodeInstruction> instructions)
+        {
+            List<CodeInstruction> instructionList = instructions.ToList();
+            for (int i = 0; i < instructionList.Count; i++)
+            {
+                if (instructionList[index: i].opcode == OpCodes.Ldstr)
+                {
+                    for (int j = 0; j < 7; j++)
+                    {
+                        instructionList[index: i + j].opcode = OpCodes.Nop;
+                    }
+                }
+                yield return instructionList[index: i];
+            }
+        }
 
-		#region SimpleCurves
-		private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
+        #region SimpleCurves
+        private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
         {
             new CurvePoint(x: 0, y: 1),
             new CurvePoint(x: 10000, y: 1.5f),
@@ -218,7 +237,7 @@ namespace MoreFactionInteraction
                 Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
                 Caravan localCaravan = caravan;
 
-                Command_Action command_Action = new Command_Action
+                Command_Action commandAction = new Command_Action
                 {
                     defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
                     defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
@@ -238,7 +257,7 @@ namespace MoreFactionInteraction
                                 Messages.Message(text: "MFI_MessageBumperCropNoGrower".Translate(), lookTargets: localCaravan, def: MessageTypeDefOf.NegativeEvent);
                                 return;
                             }
-                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate( localCaravan.LabelCap ),
+                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(localCaravan.LabelCap),
                             confirmedAct: delegate
                             {
                                 bumperCrop.NotifyCaravanArrived(caravan: localCaravan);
@@ -250,9 +269,9 @@ namespace MoreFactionInteraction
 
                 if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
                 {
-                    command_Action.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());
+                    commandAction.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());
                 }
-                __result = __result.Add(item: command_Action);
+                __result = __result.Add(item: commandAction);
             }
         }
 
@@ -267,7 +286,5 @@ namespace MoreFactionInteraction
             }
         }
         #endregion
-
-
     }
 }

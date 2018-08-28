@@ -9,7 +9,7 @@ namespace MoreFactionInteraction
     public class IncidentWorker_ReverseTradeRequest : IncidentWorker
     {
         private const int TimeoutTicks = GenDate.TicksPerDay;
-        private static List<Map> tmpAvailableMaps = new List<Map>();
+        private static readonly List<Map> tmpAvailableMaps = new List<Map>();
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -30,29 +30,25 @@ namespace MoreFactionInteraction
                 string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
                 int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                ChoiceLetter_ReverseTradeRequest choiceLetter_ReverseTradingRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(args: new object[]
-                {
+                ChoiceLetter_ReverseTradeRequest choiceLetterReverseTradeRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(
                     settlement.Faction.leader.LabelShort,
                     settlement.Faction.def.leaderTitle,
                     settlement.Faction.Name,
                     settlement.Label,
                     categorylabel,
-                    feeRequest,
-                }).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
-                choiceLetter_ReverseTradingRequest.title = "MFI_ReverseTradeRequestTitle".Translate(args: new object[]
-                {
-                    map.info.parent.Label
-                }).CapitalizeFirst();
+                    feeRequest
+                ).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
 
-                choiceLetter_ReverseTradingRequest.thingCategoryDef = thingCategoryDef;
-                choiceLetter_ReverseTradingRequest.map = map;
+                choiceLetterReverseTradeRequest.title = "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst();
+                choiceLetterReverseTradeRequest.thingCategoryDef = thingCategoryDef;
+                choiceLetterReverseTradeRequest.map = map;
                 parms.target = map;
-                choiceLetter_ReverseTradingRequest.incidentParms = parms;
-                choiceLetter_ReverseTradingRequest.faction = settlement.Faction;
-                choiceLetter_ReverseTradingRequest.fee = feeRequest;
-                choiceLetter_ReverseTradingRequest.StartTimeout(duration: TimeoutTicks);
-                choiceLetter_ReverseTradingRequest.tile = settlement.Tile;
-                Find.LetterStack.ReceiveLetter(@let: choiceLetter_ReverseTradingRequest);
+                choiceLetterReverseTradeRequest.incidentParms = parms;
+                choiceLetterReverseTradeRequest.faction = settlement.Faction;
+                choiceLetterReverseTradeRequest.fee = feeRequest;
+                choiceLetterReverseTradeRequest.StartTimeout(duration: TimeoutTicks);
+                choiceLetterReverseTradeRequest.tile = settlement.Tile;
+                Find.LetterStack.ReceiveLetter(let: choiceLetterReverseTradeRequest);
                 return true;
             }
             return false;

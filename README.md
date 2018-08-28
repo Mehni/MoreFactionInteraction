@@ -53,7 +53,7 @@ Shoutout to [Albion of Sparkling Worlds](https://steamcommunity.com/sharedfiles/
 ## Language
 
 - Japanese, courtesy of Proxyer
-- Russian, courtsey of Djeban74/Reasonable Max
+- Russian, courtesy of Djeban74/Reasonable Max
 
 ## Links
 

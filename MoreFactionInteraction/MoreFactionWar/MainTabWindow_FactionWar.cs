@@ -7,7 +7,7 @@ namespace MoreFactionInteraction.MoreFactionWar
     public class MainTabWindow_FactionWar : MainTabWindow_Factions
     {
         private const float TitleHeight = 70f;
-        private const float InfoHeight  = 60f;
+        private const float InfoHeight = 60f;
 
         private Texture2D factionOneColorTexture;
         private Texture2D factionTwoColorTexture;
@@ -36,8 +36,8 @@ namespace MoreFactionInteraction.MoreFactionWar
             }
         }
 
-		readonly Faction factionOne        = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
-		readonly Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+        readonly Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+        readonly Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
 
 
 
@@ -59,12 +59,12 @@ namespace MoreFactionInteraction.MoreFactionWar
                 base.DoWindowContents(fillRect);
             }
             else
-            {   
+            {
                 this.DrawFactionWarBar(fillRect);
 
                 // scooch down original. amount of offset depends on devmode or not (because of devmode "show all" button)
                 Rect baseRect = fillRect;
-                baseRect.y = (Prefs.DevMode) ? fillRect.y + 120f: fillRect.y + 75f ;
+                baseRect.y = (Prefs.DevMode) ? fillRect.y + 120f : fillRect.y + 75f;
                 baseRect.yMax = fillRect.yMax + yMaxOffset;
 
                 GUI.BeginGroup(baseRect);

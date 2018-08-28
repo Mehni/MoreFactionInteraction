@@ -7,6 +7,8 @@ using MoreFactionInteraction.MoreFactionWar;
 
 namespace MoreFactionInteraction
 {
+    using System;
+
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
         private int goodWillGainedFromMarriage;
@@ -36,8 +38,7 @@ namespace MoreFactionInteraction
                         action = () =>
                         {
                             this.goodWillGainedFromMarriage = (int)FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
-                            //(int)Mathf.Clamp(value: this.betrothed.MarketValue / 20, min: DiplomacyTuning.Goodwill_MemberExitedMapHealthy_LeaderBonus, max: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-                            this.marriageSeeker.Faction.TrySetRelationKind(Faction.OfPlayer, this.marriageSeeker.Faction.PlayerRelationKind + 1, true, "LetterLabelAcceptedProposal".Translate());
+                            this.marriageSeeker.Faction.TrySetRelationKind(Faction.OfPlayer, (FactionRelationKind)Math.Min((int)marriageSeeker.Faction.PlayerRelationKind + 1, 2), true, "LetterLabelAcceptedProposal".Translate());
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: false, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
                             this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 

@@ -49,7 +49,7 @@ namespace MoreFactionInteraction
                     };
                     DiaNode diaNode = new DiaNode(text: "MFI_TraderSent".Translate(args: new object[]
                     {
-                        this.faction.leader.LabelShort,
+                        this.faction.leader?.LabelShort,
                         traveltime.ToStringTicksToPeriodVague(vagueMin: false)
                     }).CapitalizeFirst());
                     diaNode.options.Add(item: this.Option_Close);

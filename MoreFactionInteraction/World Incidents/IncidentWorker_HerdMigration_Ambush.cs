@@ -21,7 +21,8 @@ namespace MoreFactionInteraction.World_Incidents
         {
             Map map = parms.target as Map;
             TryFindEndCell(map: map, generatedPawns: generatedPawns, end: out IntVec3 end);
-            if (!end.IsValid && CellFinder.TryFindRandomPawnExitCell(searcher: generatedPawns[index: 0], result: out IntVec3 intVec3)) end = intVec3;
+            if (!end.IsValid && CellFinder.TryFindRandomPawnExitCell(searcher: generatedPawns[index: 0], result: out IntVec3 intVec3))
+                end = intVec3;
             return new LordJob_ExitMapNear(near: end, locomotion: LocomotionUrgency.Walk);
         }
 
