@@ -3,6 +3,7 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using Verse;
+using System.Linq;
 
 namespace MoreFactionInteraction
 {
@@ -14,14 +15,14 @@ namespace MoreFactionInteraction
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms)  && TryGetRandomAvailableTargetMap(map: out Map map) 
-                                                     && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile) != null 
+                                                     && RandomNearbyTradeableSettlement(originTile: map.Tile) != null 
                                                      && CommsConsoleUtility.PlayerHasPoweredCommsConsole(map);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             if (!TryGetRandomAvailableTargetMap(map: out Map map)) return false;
-            SettlementBase settlement = IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: map.Tile);
+            SettlementBase settlement = RandomNearbyTradeableSettlement(originTile: map.Tile);
             if (settlement != null)
             {
                 //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
@@ -89,13 +90,24 @@ namespace MoreFactionInteraction
             }
         }
 
+        public static SettlementBase RandomNearbyTradeableSettlement(int originTile)
+		{
+			return (from settlement in Find.WorldObjects.SettlementBases
+			where settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null 
+                    && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                    && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
+                    && Find.WorldReachability.CanReach(originTile, settlement.Tile)
+                    && settlement.Faction.leader != null
+			select settlement).RandomElementWithFallback(null);
+		}
+
         private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
             tmpAvailableMaps.Clear();
             List<Map> maps = Find.Maps;
             foreach (Map potentialTargetMap in maps)
             {
-                if (potentialTargetMap.IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: potentialTargetMap.Tile) != null)
+                if (potentialTargetMap.IsPlayerHome && RandomNearbyTradeableSettlement(originTile: potentialTargetMap.Tile) != null)
                 {
                     tmpAvailableMaps.Add(item: potentialTargetMap);
                 }

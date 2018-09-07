@@ -5,7 +5,6 @@ using RimWorld.Planet;
 using UnityEngine;
 using System;
 using Verse;
-using Harmony;
 using System.Reflection;
 
 namespace MoreFactionInteraction.More_Flavour

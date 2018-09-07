@@ -96,9 +96,10 @@ namespace MoreFactionInteraction
                         incidentParms.forced = true;
 
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef() ?? IncomingIncidentDef(), // overly-cautious "try again" null-check after strange bugreport.
+                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(faction) ?? IncomingIncidentDef(faction), // overly-cautious "try again" null-check after strange bugreport.
                                                            fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3),
-                                                           parms: incidentParms);
+                                                           parms: incidentParms,
+                                                           retryDurationTicks: 2500);
 
                         this.NextFactionInteraction[key: faction] =
                             Find.TickManager.TicksGame
@@ -113,7 +114,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        private static IncidentDef IncomingIncidentDef()
+        private static IncidentDef IncomingIncidentDef(Faction faction)
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))
             {
@@ -128,19 +129,19 @@ namespace MoreFactionInteraction
                     return MFI_DefOf.MFI_DiplomaticMarriage;
 
                 case int n when n <= 17:
-                    return MFI_DefOf.MFI_ReverseTradeRequest;
+                    return faction.leader != null ? MFI_DefOf.MFI_ReverseTradeRequest : IncomingIncidentDef(faction);
 
                 case int n when n <= 25:
                     return MFI_DefOf.MFI_BumperCropRequest;
 
                 case int n when n <= 29:
-                    return MFI_DefOf.MFI_HuntersLodge;
+                    return faction.leader != null ? MFI_DefOf.MFI_HuntersLodge : IncomingIncidentDef(faction);
 
                 case int n when n <= 31:
                     return IncidentDef.Named("MFI_MysticalShaman");
 
                 case int n when n <= 35:
-                    return IncidentDef.Named("Quest_ItemStash");
+                    return faction.leader != null ? IncidentDef.Named("Quest_ItemStash") : IncomingIncidentDef(faction);
 
                 case int n when n <= 40:
                     return IncidentDefOf.Quest_TradeRequest;

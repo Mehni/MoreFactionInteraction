@@ -46,11 +46,10 @@ namespace MoreFactionInteraction.World_Incidents
             if (!TryGenerateBumperCrop(target: component, map: map))
                 return false;
             
-            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabel_HarvestRequest".Translate(), text: "MFI_LetterHarvestRequest".Translate(args: new object[]
-            {
+            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabel_HarvestRequest".Translate(), text: "MFI_LetterHarvestRequest".Translate(
                 settlement.Label,
                 (component.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F0")
-            }), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement, relatedFaction: settlement.Faction);
+            ), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: settlement, relatedFaction: settlement.Faction);
             return true;
         }
 
