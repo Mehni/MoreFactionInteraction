@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>prośba handlowa</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>Prośba handlowa</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_BumperCropRequest.label>żądanie zbioru</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>nadchodzi wojna?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterText>Otrzymałeś wiadomość od [PAWN_nameDef], {0} z {1}. Ich frakcja ostatnio miała dyplomatyczne problemy z inną frakcją i wzywała cię do negocjacji między nimi a {2}. Wybrali neutralną lokalizację w pobliżu i zapraszają do negocjacji.\n\nJest to świetna okazja, aby poprawić relacje z ich frakcją, ale uważaj - słaby negocjator może spowodować więcej szkód niż dobrych, a nawet wywołać gniew.\n\nOferta wygasa po {3} dniach, po czym [PAWN_nameDef] będzie się obiawać najgorszego.</MFI_Quest_PeaceTalks.letterText>
+  <MFI_Quest_PeaceTalks.letterLabel>Frakcja niepokojów</MFI_Quest_PeaceTalks.letterLabel>
+
+
+</LanguageData>

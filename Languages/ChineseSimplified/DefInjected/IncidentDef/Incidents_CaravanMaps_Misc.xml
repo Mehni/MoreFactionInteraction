@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>兽群迁移</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>一群 {0} 正在通过这片.\n\n狩猎时间到！.</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>动物迁徙: {0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>

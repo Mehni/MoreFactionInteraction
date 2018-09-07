@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>交易请求</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>交易请求</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_BumperCropRequest.label>收割帮助请求</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>要变天了?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterText>你收到一份来自 [PAWN_nameDef], {0} of {1} 的消息. 他们的派系最近与另一个派系 {2} 发生外交纠纷并要求你在他们之间进行谈判. 他们在附近选择了一个中立的地点，邀请你来谈判。\n\nIt could be a great opportunity to improve relations with their faction, but beware - a poor negotiator can cause more harm than good and even anger them.\n\nThe offer will expire after {3} days, after which [PAWN_nameDef] fears the worst.</MFI_Quest_PeaceTalks.letterText>
+  <MFI_Quest_PeaceTalks.letterLabel>派系动荡</MFI_Quest_PeaceTalks.letterLabel>
+
+
+</LanguageData>

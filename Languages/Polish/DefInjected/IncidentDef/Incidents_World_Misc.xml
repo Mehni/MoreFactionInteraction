@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_DiplomaticMarriage.label>dyplomatyczne małżeństwoe</MFI_DiplomaticMarriage.label>
+  <MFI_DiplomaticMarriage.letterLabel>Dyplomatyczne małżeństwo</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>mistyczny szaman</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.letterLabel>Mistyczny szaman</MFI_MysticalShaman.letterLabel>
+
+  <MFI_HuntersLodge.label>hunters lodge</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterText>You are invited to {0}'s {1} summer retreat. {2}. There is an outpost at the site with all the required facilities to make meals, and they've extended their hospitality to you. This offer expires in {3} days.</MFI_HuntersLodge.letterText>
+  <MFI_HuntersLodge.letterLabel>Hunter's lodge</MFI_HuntersLodge.letterLabel>
+
+  <MFI_SettlementBaseAttack.label>Zaatakowana baza Frakcji</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>

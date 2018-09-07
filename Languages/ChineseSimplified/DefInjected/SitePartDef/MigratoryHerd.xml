@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>猎人小屋</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>一个小的前哨，被友好的派别用作狩猎基地。</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>每年的这个时候，通常会有一大群 {0} 的人来这里</MFI_HuntersLodgePart.descriptionDialogue>
+
+
+</LanguageData>

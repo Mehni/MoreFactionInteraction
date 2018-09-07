@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_DiplomaticMarriage.label>外交婚姻</MFI_DiplomaticMarriage.label>
+  <MFI_DiplomaticMarriage.letterLabel>外交婚姻</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>神秘的萨满巫师</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.letterLabel>神秘的萨满巫师</MFI_MysticalShaman.letterLabel>
+
+  <MFI_HuntersLodge.label>猎人小屋</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterText>你被邀请至 {0}'s {1} 避暑地 {2}. 在这个地方有一个前哨站有所有需要的设施来做饭，他们想要热情地款待你.这份邀请在 {3} 天后过期.</MFI_HuntersLodge.letterText>
+  <MFI_HuntersLodge.letterLabel>猎人小屋</MFI_HuntersLodge.letterLabel>
+
+  <MFI_SettlementBaseAttack.label>派系基地袭击</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>

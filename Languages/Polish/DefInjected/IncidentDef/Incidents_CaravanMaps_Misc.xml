@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>migracja stada</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>Grupa {0} przechodzi przez obszar.\n\nTo czas polowań.</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>Migracja zwierząt: {0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>

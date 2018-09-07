@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--settings -->
+  <MFI_ticksToUpgrade>海盗把他们的前哨基地升级到基地的时间</MFI_ticksToUpgrade>
+  <MFI_pirateBaseUpgraderModifier>海盗传播的频率</MFI_pirateBaseUpgraderModifier>
+  <MFI_timeModifierBetweenFactionInteraction>派系间相互作用的时间</MFI_timeModifierBetweenFactionInteraction>
+  <MFI_traderWealthOffsetFromTimesTraded>交易员带来的白银 (数量与互动频率)</MFI_traderWealthOffsetFromTimesTraded>
+
+  <MFI_LetterLabelBanditOutpostUpgraded>海盗前哨升级</MFI_LetterLabelBanditOutpostUpgraded>
+  <MFI_LetterBanditOutpostUpgraded>来自{0} 的海盗将附近的一个前哨基地升级为基地!\n\n他们会偶尔派出突袭队来测试你的防御能力,并解决可能成为基地的新定居点.</MFI_LetterBanditOutpostUpgraded>
+  <MFI_DesperateTrader>急迫的交易员</MFI_DesperateTrader>
+  <MFI_TraderSent>{0} 非常感谢你. 他们的贸易商队将会在 {1}到达.</MFI_TraderSent>
+  <MFI_Trader>商人</MFI_Trader>
+
+  <MFI_CaravanWorking>在收割的时候，商队不能移动.</MFI_CaravanWorking>
+
+  <MFI_FactionWarPeaceTalksIntroduction>两个对立的派别领导人 {0} 和 {1} 在临时营地的对角坐着. 当你方谈判者 {2} 走进来时，营地的气氛瞬间紧张起来.过去的几天对所有相关方都是一种负担,你的小人十分清楚他接下来的话将产生深远的影响.\n\n{2} 有以下选择:</MFI_FactionWarPeaceTalksIntroduction>
+
+  <MFI_FactionWarPeaceTalksCurryFavour>巴结 {0}</MFI_FactionWarPeaceTalksCurryFavour>
+  <MFI_FactionWarPeaceTalksSabotage>破坏和平谈判以改善殖民地</MFI_FactionWarPeaceTalksSabotage>
+  <MFI_FactionWarPeaceTalksBrokerPeace>两派之间的调解</MFI_FactionWarPeaceTalksBrokerPeace>
+
+  <!-- Faction war, favour one faction over the other -->
+  <MFI_FactionWarFavourFactionDisaster>会谈是一场灾难. 两派对你谈判代表试图巴结 {0} 的行为十分厌恶. 在冲突中寻找胜利者的努力被认为是一种侵略行为，和平谈判因此破裂。\n\n和 {0} 的关系有所恶化 \n\n和 {1} 的关系严重恶化.</MFI_FactionWarFavourFactionDisaster>
+  <MFI_FactionWarFavourFactionBackFire>会谈适得其反.在各派系代表讨论主要分歧时,你的谈判代表被认为对目标不具建设性，谈判很快就破裂了。\n\n和 {0} 关系恶化了.\n\n和{1} 关系严重恶化.</MFI_FactionWarFavourFactionBackFire>
+  <MFI_FactionWarFavourFactionFlounder>谈判举步维艰.派系代表清楚地表达了他们的关键问题,但是你的谈判代表没能对和平谈判做出任何有意义的贡献。\n\n和 {0} 的关系有所恶化.\n\n和 {1} 的关系发生了相当程度的恶化.</MFI_FactionWarFavourFactionFlounder>
+  <MFI_FactionWarFavourFactionSuccess>会谈是成功的. 你的代表设法说服了 {1} 给 {0} 赔偿, 他们的代表敲定了一项基本条约.\n\n和 {0} 的关系大大提高了.\n\n和 {1} 有所恶化.</MFI_FactionWarFavourFactionSuccess>
+  <MFI_FactionWarFavourFactionTriumph>这次会谈是一次伟大的胜利! 你的谈判者在说服 {1} 为过去的侵略行为支付赔偿方面发挥了很大的作用, 令 {0} 十分高兴.\n\n和 {0} 的关系大量提高了.\n\n和 {1} 关系恶化了.</MFI_FactionWarFavourFactionTriumph>
+
+  <!-- Faction war, sabotage to benefit colony -->
+  <MFI_FactionWarSabotageDisaster>破坏行动是一个巨大的失败. 代表们很快发现了你谈判代表的意图，两派都反对你! 你的队伍匆匆离去,但是两个派系的战士都追上去并攻击了你的队伍！\n\n和 {0} 的关系破裂. 他们现在对你怀有敌意.\n\和 {1} 的关系破裂.他们现在对你怀有敌意.</MFI_FactionWarSabotageDisaster>
+  <MFI_FactionWarSabotageBackFire>破坏适得其反.在代表们互相寒暄之后不久,他们抓住了你的谈判人员的发表的毫无建设性言论的本质，并排除在谈判之外.\n\n和 {0} 的关系严重恶化.\n\n和 {1} 的关系严重恶化.</MFI_FactionWarSabotageBackFire>
+  <MFI_FactionWarSabotageFlounder>破坏举步维艰.事实证明，你的谈判代表无法对和平谈判做出任何承诺或为和平谈判提供有意义的贡献.\n\n和 {0} 、 {1} 的关系保持不变.</MFI_FactionWarSabotageFlounder>
+  <MFI_FactionWarSabotageSuccess>破坏获得了可疑的成功.当代表们在重要问题上争吵时, 你的谈判代表在政治雷区中走了出来，给两派留下了友好的印象，同时确保谈判没有取得实际的进展。\n\n和 {0} 的关系大大增加了.\n\n和 {1} 的关系大大增加了.</MFI_FactionWarSabotageSuccess>
+  <MFI_FactionWarSabotageTriumph>破坏-大成功！代表们被巧妙地拱火,在最初的问候之后不久,讨论变成了侮辱和指责，而侵略者对你的派系留下了非常好的印象。.\n\n和 {0} 的关系极大的增加了.\n\nRelations with {1} 的关系极大的增加了.</MFI_FactionWarSabotageTriumph>
+
+  <!-- Faction war, broker peace -->
+  <MFI_FactionWarBrokerPeaceDisaster>会谈是一场灾难. 代表们在讨论结束之前，几乎没有任何礼貌的问候，就变成了侮辱和指责。你的谈判代表说什么都没有得到任何人的认可,与之前的敌对派系的关系也比以前更糟了.\n\n和 {0} 关系恶化.\n\n和 {1} 关系恶化.</MFI_FactionWarBrokerPeaceDisaster>
+  <MFI_FactionWarBrokerPeaceBackFire>会谈适得其反. 尽管交换了一些传统问题,代表们在实质性问题上没有取得进展,很多陈述被解读为侮辱.他们决定重新安排和平谈判的时间。\n\n和 {0} 关系保持不变.\n\n和 {1} 关系保持不变.</MFI_FactionWarBrokerPeaceBackFire>
+  <MFI_FactionWarBrokerPeaceFlounder>谈判举步维艰. 代表们成功地进行了清晰的沟通和基本的尊重,但是在你的谈判代表到来之前,派系领导们无法在真正的问题上取得任何进展.你的代表在缓解恐惧和抚慰情绪上起到了很大的作用. \n\n和 {0} 关系有所上升.\n\n和  {1} 关系有所上升.</MFI_FactionWarBrokerPeaceFlounder>
+  <MFI_FactionWarBrokerPeaceSuccess>会谈是成功的. 谢谢你的谈判代表,代表们就几个重大问题达成了新的共识。\n\n和 {0} 关系大大增加。.\n\n和 {1} 关系大大增加.</MFI_FactionWarBrokerPeaceSuccess>
+  <MFI_FactionWarBrokerPeaceTriumph>这次会谈是一次巨大的成功! 你的谈判者迅速地将代表们联系在一起，为真正看到彼此对当今最困难的问题的看法铺平了道路.\n\n和 {0} 关系极大的增加了.\n\n和 {1} 关系极大的增加了</MFI_FactionWarBrokerPeaceTriumph>
+
+  <MFI_FactionWarProgress>派系战争进展</MFI_FactionWarProgress>
+  <MFI_UnrestIsBrewing>派系动荡正在酝酿之中</MFI_UnrestIsBrewing>
+
+  <MFI_FactionWarBaseBattleTookPlaceLabel>派系基地袭击</MFI_FactionWarBaseBattleTookPlaceLabel>
+  <MFI_FactionWarBaseAttacked>一个属于 {0} 的基地被 {1} 袭击了!</MFI_FactionWarBaseAttacked>
+  <MFI_FactionWarBaseDefeated>他们无法抵御猛攻，并遭受了沉重的打击.</MFI_FactionWarBaseDefeated>
+  <MFI_FactionWarBaseTakenOver>在驱赶 {0} 之后, 派系  {1} 现在已经占领了基地并宣称对周围地区拥有所有权.</MFI_FactionWarBaseTakenOver>
+  <MFI_FactionWarBaseDestroyed>{1} 对基地进行掠夺，然后将其烧毁. 这对 {0} 说是一个沉重的打击.</MFI_FactionWarBaseDestroyed>
+  <MFI_FactionWarBaseSuccessfullyDefended>防御者成功地抵挡住了攻击，并迅速击退了他们。 {0} 认为这是派系战争的胜利.</MFI_FactionWarBaseSuccessfullyDefended>
+
+  <MFI_FactionWarStarted>派系战争开始</MFI_FactionWarStarted>
+  <MFI_FactionWarExplanation> {0} 和 {1} 之间的部落战争开始了.他们偶尔会对彼此的基地发动攻击. 如果你偏爱其中一个派别,他们可能会找你帮忙.\n\n你可以在派系面板中追踪派系战争.</MFI_FactionWarExplanation>
+  <MFI_FactionWarOverLabel>派系战争解决</MFI_FactionWarOverLabel>
+  <MFI_FactionWarOver>经过多次战争和巨大的损失, 这场 {0} 和 {1} 的战争结束了.</MFI_FactionWarOver>
+
+  <MFI_FactionWarLeaderDecidedLabel>和平谈判的结果</MFI_FactionWarLeaderDecidedLabel>
+  <MFI_FactionWarLeaderDecidedOnWar>和平谈判以失败告终, 一场战争在 {0} 与 {1} 之间爆发了. 他们偶尔会对彼此的基地发动攻击. 如果你偏爱其中一个派别,他们可能会找你帮忙.\n\n你可以在派系面板中追踪派系战争.</MFI_FactionWarLeaderDecidedOnWar>
+  <MFI_FactionWarLeaderDecidedAgainstWar>和谈已经结束. 紧张局势得到缓解，派系 {0} 和 {1} 已经达成了初步协议.</MFI_FactionWarLeaderDecidedAgainstWar>
+
+  <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+  <MFI_SellingWarBondsNeedSteelLaunchable>需要 {0} 钢铁 在轨道交易信标附近</MFI_SellingWarBondsNeedSteelLaunchable>
+
+
+</LanguageData>

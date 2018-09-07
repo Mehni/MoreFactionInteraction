@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_FactionWarPeaceTalks.label>rozmowy pokojowe</MFI_FactionWarPeaceTalks.label>
+  <MFI_FactionWarPeaceTalks.description>Strona wyznaczona do rozmów pokojowych.</MFI_FactionWarPeaceTalks.description>
+
+  <MFI_MysticalShaman.label>mistyczny szaman</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.description>Namiot, w którym pojawia się mistyczny szaman.</MFI_MysticalShaman.description>
+
+</LanguageData>

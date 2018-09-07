@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Ransom demand -->
+  <MFI_ExtortionDemandTitle>勒索： {0}</MFI_ExtortionDemandTitle>
+  <MFI_ExtortionDemand>{0}, {1} of {2}, 在通讯台上联系你.基于你接近他们的  {3} {4}, [PAWN_pronoun] 感觉你在侵犯他们的领地.\n\n[PAWN_pronoun] 表示 [PAWN_pronoun] 愿意以 {5} 白银的价格来忽视这一违法行为. [PAWN_pronoun] 还说，如果不支付，你就会受到攻击, 但是 [PAWN_pronoun] 愿意大方的给你一天的时间来支付它.</MFI_ExtortionDemand>
+
+  <!-- Reverse Trade Request -->
+  <MFI_ReverseTradeRequest_Pyro>{0}, {1} of {2}, 给我们发来了消息. 他们附近的定居点 {3} 的居民与纵火狂发生了冲突 ,现在他们迫切需要 {4}.他们愿意为这一类的任何物品支付额外的费用,但你还需要 {5} 白银来支付商队的费用.\n\n{0} 确保我们的纵火犯会呆在家里.\n\n\n花费 {5} 白银来呼叫这个愿意为了 {4} 支付额外费用的商队?</MFI_ReverseTradeRequest_Pyro>
+  <MFI_ReverseTradeRequest_Mechs>这是一个有点仓促和写得很差的信息, 来自 {0}, {1} of {2},上面说:他们附近定居点 {3} 的居民侥幸从与机械族的致命接触中逃脱了!他们已经开始了重建,但是他们希望得到我们的帮助. 具体来说，他们非常需要 {4}. 他们愿意为这一类的任何物品支付额外的费用,但这需要 {5} 白银来雇佣一支商队，因为这些居民不能分散他们的人力.\n\n\n花费{5} 白银来呼叫这个愿意为了 {4} 支付额外费用的商队?</MFI_ReverseTradeRequest_Mechs>
+  <MFI_ReverseTradeRequest_Caravan>我们收到了一个谦卑的请求,来自 {0}, {1} of {2}. 他们附近的定居点 {3} 的居民对他们的时间管理不善，现在急需 {4} .他们愿意为这一类的任何物品支付额外的费用, 但这需要 {5} 白银来雇佣一支商队.\n\n\n花费 {5} 白银来呼叫这个愿意为了 {4} 支付额外费用的商队?</MFI_ReverseTradeRequest_Caravan>
+  <MFI_ReverseTradeRequest_Pirates>{0}, {1} of {2},给我们发来了消息.他们附近的定居点 {3} 的居民最近被海盗蹂躏了,现在他们迫切需要 {4}.他们愿意为这一类的任何物品支付额外的费用,但这需要{5}白银来雇佣一支商队.\n\n\n花费 {5}白银来呼叫这个愿意为了 {4}支付额外费用的商队?</MFI_ReverseTradeRequest_Pirates>
+  <MFI_ReverseTradeRequest_Hardship>一个匿名经纪人在通讯台联系你.他一直在和 {2} 联系, 并成功地 为 {4}拟定了一份协议.他已经设法让一名交易员为这类的任何物品支付额外费用,但他要求 {5}白银 作为经纪费才会把这支商队派过来.\n\n\n支付 {5} 白银 来呼叫这个愿意为了 {4} 付更多钱的商队吗?</MFI_ReverseTradeRequest_Hardship>
+  <MFI_ReverseTradeRequest_Blight>{0} 代表附近的定居点 {3}向我们发送信息. 他们的庄稼受到了枯萎病的侵袭，如果没有额外的 {4}的供应，他们可能无法熬过冬天. 他们愿意为这一类的任何物品支付额外的费用,但是如果没有直接的食物和金钱他们就会挨饿. 他们要求{5} 白银 然后才会打包他们的商队并出发.\n\n\n支付 {5} 白银 来呼叫这个愿意为了 {4}付更多钱的商队吗?</MFI_ReverseTradeRequest_Blight>
+  <MFI_ReverseTradeRequestTitle>商队请求: {0}</MFI_ReverseTradeRequestTitle>
+
+  <MFI_LetterLabel_HarvestRequest>请求帮助</MFI_LetterLabel_HarvestRequest>
+  <MFI_LetterHarvestRequest>"今天是个好日子啊~" 附近的一个定居点, {0},带着一个特殊请求联系了你. 他们的田地获得了大丰收!他们需要你的帮助来收获作物.\n\n这个请求在{1} 后过期\n\n如果你想帮助他们,派出一支队伍，带着能种地的小人的那种. 你可以在地图上选择 {0} 来回顾这个消息.</MFI_LetterHarvestRequest>
+  <MFI_CommandFulfillBumperCropHarvestConfirm>在收割时提供帮助? {0} 在收获的过程中暂时无法移动.</MFI_CommandFulfillBumperCropHarvestConfirm>
+  <MFI_MessageBumperCropNoGrower>没有清醒着的，能种地的小人.</MFI_MessageBumperCropNoGrower>
+  <MFI_HarvestRequestInfo>请求帮忙收割. (剩余 {0} )</MFI_HarvestRequestInfo>
+  <MFI_CommandHelpOutHarvesting>帮助收割</MFI_CommandHelpOutHarvesting>
+  <MFI_Harvest_Triumph>收获获得了巨大的成功.收割时,你的小人和 {0} of {1}交流并拉近了关系.\n\n和 {1} 的关系增加了 {2}.\n\n当你的队伍离开时, {0} 提供了这些礼物: {3}.</MFI_Harvest_Triumph>
+  <MFI_LetterLabelHarvest_Triumph>收获大丰收</MFI_LetterLabelHarvest_Triumph>
+  <MFI_BumperCropXPGain>你负责种植的小人 {0} 获得了 {1} 种植经验.</MFI_BumperCropXPGain>
+
+  <MFI_DiplomaticMarriage>{1}'s 魅力影响到了 {0} ,他们现在愿意给你殖民地里的 {1} 提供一个风华正茂的小人作为配偶. 接受这一婚约将巩固联系，加强派系间的关系,但 {1} 将离开你的派系而加入 {2}.</MFI_DiplomaticMarriage>
+  <MFI_DiplomaticMarriageLabel>外交婚姻</MFI_DiplomaticMarriageLabel>
+  <MFI_AcceptedProposal>[PAWN_nameDef] 喜出望外. [PAWN_pronoun] 相信他们会从此和 {0}过上幸福的生活.\n\n和 {1} 的关系提升了.</MFI_AcceptedProposal>
+  <MFI_DejectedProposal>[PAWN_nameDef] 尝试着 [PAWN_possessive] 不希望被拒绝.\n\n和 {1} 的关系有所恶化.</MFI_DejectedProposal>
+
+  <MFI_MysticalShamanLetter>一个声称来自 {0} 的满口胡言的人联系了我们,他说他知道一个精通“治疗师之术”,能治愈任何伤口和身体部位缺失的萨满巫师 . 他将告诉我们这个神秘的隐居者的位置,不过要我们施舍他 {1} 白银.</MFI_MysticalShamanLetter>
+  <MFI_MysticalShamanTitle>神秘的萨满巫师</MFI_MysticalShamanTitle>
+
+  <MFI_MysticalShamanFoundNoSickPawn>在你的队伍刚刚到达的时候，萨满从他的圆锥形帐篷里出来了.他默默地审视着你的团队,看着你这支毫无问题,十分健康的团队时,他的一只眼睛颤抖着,另一只眼睛闪现出了明显的冥想.而且明显出汗了，他命令你在他进入圆锥形帐篷里时往后退一段相当长的距离.过了一会儿，你听到了织物的沙沙声和一声消失的声音.\n\n似乎萨满卷铺盖跑路了.</MFI_MysticalShamanFoundNoSickPawn>
+  <MFI_MysticalShamanDoesHisMagic>萨满似乎一直在等着你,通过伟大的实践，你可以看到他的“治疗师之术”的故事.结束之后, 他邀请{0} 进入他的帐篷. 在 {0} 重新出现之前屏幕有一个短暂的震动, {0} 感觉好多了.</MFI_MysticalShamanDoesHisMagic>
+
+  <MFI_WoundedCombatant>一个来自 {0} 的高级军事官员发来了呼救信号.他的多名战士受了严重的伤，需要立即就医. 它们被装在运输舱里但是最近的医疗站太远了无法挽救这些男人和女人的生命,所以他呼叫你作为他们的盟友来帮助他们. 你要回应他的请求帮助他的军队恢复健康吗?</MFI_WoundedCombatant>
+  <MFI_WoundedCombatantRejected>令人惊讶的是，你能听到指挥官在猛烈的迫击炮声中咒骂的声音, 他希望你的殖民地发生些坏的事情，并让你对他的手下的死负责。.\n\n 和 {0} 的关系恶化了 {1}.</MFI_WoundedCombatantRejected>
+  <MFI_WoundedCombatantTitle>盟友遇险信号: {0}</MFI_WoundedCombatantTitle>
+  <MFI_WoundedCombatantAmbush>这是一个陷阱! {0}'s 敌人以某种方式设法侵入你的通讯并利用它在战争中取得成功. {1}</MFI_WoundedCombatantAmbush>
+  <MFI_WoundedCombatantGratitude>指挥官给你诚恳而真诚的问候. 它失去了很多的影响和意义因为你不能通过通讯台看到这个手势,所以你挂断了.</MFI_WoundedCombatantGratitude>
+  <MFI_WoundedCombatantAmbushAvoided>你听到一个声音在背景中大喊, 询问 "他们上钩了吗？".你迅速的挂断了, 你有些困惑，也有点松了一口气，你躲过了潜在的灾难。.</MFI_WoundedCombatantAmbushAvoided>
+
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>Domek myśliwski</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>Mała placówka, używana przez przyjazne frakcje jako baza myśliwska.</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>Zwykle nadchodzi duże stado {0} w tym okresie roku.</MFI_HuntersLodgePart.descriptionDialogue>
+
+  <MFI_HuntersLodgePart.approachingReportString>Odwiedzanie {0}</MFI_HuntersLodgePart.approachingReportString>
+  <MFI_HuntersLodgePart.approachOrderString>Odwiedź {0}</MFI_HuntersLodgePart.approachOrderString>
+  <MFI_HuntersLodgePart.arrivedLetter>Twoja karawana przybyła do loży myśliwych. Wydaje się, że nikogo tu nie ma, ale najwyraźniej oczekiwali cię i sprawili, że było to miejsce gościnne.</MFI_HuntersLodgePart.arrivedLetter>
+  <MFI_HuntersLodgePart.arrivedLetterLabel>Domek myśliwski</MFI_HuntersLodgePart.arrivedLetterLabel>
+
+</LanguageData>

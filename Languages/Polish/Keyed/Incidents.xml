@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <!-- Ransom demand -->
+    <MFI_ExtortionDemandTitle>wymuszenie zapłaty na {0}</MFI_ExtortionDemandTitle>
+    <MFI_ExtortionDemand>{0}, {1} z {2}, kontaktuje się z tobą przez konsolę łączności. Na podstawie odległości do {3} {4}, [PAWN_pronoun] czuje, że wkraczasz na ich teren.\n\n[PAWN_pronoun] mówi [PAWN_pronoun] jest skłonny zapomnieć o tym incydencie za skromną zapłatą w wysokości {5} srebra. [PAWN_pronoun] dodaje, że brak opłaty będzie skutkowało agresją, ale [PAWN_pronoun] chce dać ci dzień do zapłaty </MFI_ExtortionDemand>
+
+    <!-- Reverse Trade Request -->
+    <MFI_ReverseTradeRequest_Pyro>{0}, {1} of {2}, wysłał nam wiadomość. Ich pobliska kolonia {3} miała incydent z piromanem i teraz potrzebują {4}. Są gotowi zapłacić dodatkowo za wszelkie przedmioty z tej kategorii, ale będą potrzebować {5} srebra na pokrycie kosztów karawany.\n\n{0} zapewnia nas, że piroman zostanie w domu.\n\n\nPay {5} srebla dla handlowca, który chce zapłacić dodatkowo  {4}?</MFI_ReverseTradeRequest_Pyro>
+    <MFI_ReverseTradeRequest_Mechs>Otrzymaliśmy nieco pospiesznie i źle napisaną wiadomość od {0}, {1} z {2}. Ich pobliska osada {3} z ledwością uniknęła śmiercionośnego spotkania z mechanoidami! Zaczęli się odbudowywać, ale chcieliby naszej pomocy. W szczególności potrzebują {4}. Są gotowi zapłacić dodatkowo za wszelkie przedmioty z tej kategorii, ale będą potrzebować {5} srebra, aby wynająć karawanę, ponieważ ich osada muis cały czas pracować.\n\n\nPay {5} srebra dla handlowca gotowego zapłacić dodatkowo dla {4}?</MFI_ReverseTradeRequest_Mechs>
+    <MFI_ReverseTradeRequest_Caravan>Otrzymaliśmy skromne żądanie od {0}, {1} z {2}. Ich pobliska osada {3} źle zarządza swoim czasem i desperacko potrzebuje {4}. Są gotowi zapłacić dodatkowo za wszystkie elementy tej kategorii, ale będą potrzebować {5} srebra na pokrycie kosztów karawany.\n\n\nPay {5} srebra dla handlowca, który chce zapłacić dodatkowo za {4}?</MFI_ReverseTradeRequest_Caravan>
+    <MFI_ReverseTradeRequest_Pirates>{0}, {1} of {2}, wysłał nam wiadomość. Ich pobliska osada {3} została ostatnio spustoszona przez piratów i teraz desperacko potrzebuje {4}. Są gotowi zapłacić dodatkowo za wszelkie przedmioty z tej kategorii, ale będą potrzebować {5} srebra na pokrycie kosztów karawany.\n\n\nPay {5} srebra dla handlowca, który chce zapłacić dodatkowo za {4}?</MFI_ReverseTradeRequest_Pirates>
+    <MFI_ReverseTradeRequest_Hardship>Anonimowa osoba kontaktuje się z Tobą przez konsolę łączności. On był w kontakcie z {2} i chce nawiązać wymianę z {4}. Udało mu się wynegocjować, aby handlowiec zapłacił dodatkowo za wszelkie przedmioty z tej kategorii, ale żąda {5} srebra jako opłaty którą odda po wysłaniu karawany.\n\n\nPay {5} srebra dla handlowca, który chce zapłacić dodatkowo za {4}?</MFI_ReverseTradeRequest_Hardship>
+    <MFI_ReverseTradeRequest_Blight>{0} wysyła nam wiadomość w imieniu pobliskiej osady {3}. Ich plony dostały zakażenia i mogą nie przetrwać zimy bez dodatkowych dostaw {4}. Są gotowi zapłacić dodatkowo za wszelkie przedmioty z tej kategorii, ale bez natychmiastowego jedzenia i pieniędzy będą głodować. Pytają o {5} srebra, zanim wyślą karawanę do ciebie z prośbą o jedzenie.\n\n\nPay {5} srebra dla handlowca, który chce zapłacić dodatkowo za {4}?</MFI_ReverseTradeRequest_Blight>
+    <MFI_ReverseTradeRequestTitle>Handel z {0}</MFI_ReverseTradeRequestTitle>
+
+    <MFI_LetterLabel_HarvestRequest>Potrzebna pomoc</MFI_LetterLabel_HarvestRequest>
+    <MFI_LetterHarvestRequest>Pobliska kolonia, {0}, kontaktuje się z tobą ze specjalną prośbą. Ich pola przyniosły znacznie więcej, niż pierwotnie oczekiwano, i proszą o twoją pomoc przy zbieraniu żniw.\n\nTa prośba wygaśnie za: {1}\n\nJeżeli zamierzasz im pomóc, wyślij karawanę z osobami zdolnymi do zbierania plonów. Możesz przejrzeć ich prośbę {0} na mapie świata.</MFI_LetterHarvestRequest>
+    <MFI_CommandFulfillBumperCropHarvestConfirm>Zaoferować swoją pomoc w żniwach? {0} tymczasowo nie będzie w stanie się poruszyć podczas zbierania plonów.</MFI_CommandFulfillBumperCropHarvestConfirm>
+    <MFI_MessageBumperCropNoGrower>Brak zdolnych rolników.</MFI_MessageBumperCropNoGrower>
+    <MFI_HarvestRequestInfo>Prośba o pomoc przy zbiorach. ({0} pozostało)</MFI_HarvestRequestInfo>
+    <MFI_CommandHelpOutHarvesting>Pomóż zebrać</MFI_CommandHelpOutHarvesting>
+    <MFI_Harvest_Triumph>Zbiory były sukcesem. Podczas zbiorów twoi koloniści rozmawiali i polepszyli relacje {0} z {1}.\n\nRelacje z {1} poprawiły sie o {2}.\n\nPonieważ im pomogłeś, {0} oferują ci prezent: {3}.</MFI_Harvest_Triumph>
+    <MFI_LetterLabelHarvest_Triumph>Zebrano plony</MFI_LetterLabelHarvest_Triumph>
+    <MFI_BumperCropXPGain>Twój rolnik {0} uzyskał {1} punktów doświadczenia.</MFI_BumperCropXPGain>
+
+    <MFI_DiplomaticMarriage>Słowo {1} zadziałało na {0} i pytają się {1} czy poślubi kolonistkę. Przyjęcie tej propozycji małżeństwa umocni relacje i wzmocni związki frakcji, ale {1} opuści twoją frakcję, aby dołączyć {2}.</MFI_DiplomaticMarriage>
+    <MFI_DiplomaticMarriageLabel>Małżeństwo</MFI_DiplomaticMarriageLabel>
+    <MFI_AcceptedProposal>[PAWN_nameDef] jest rozradowany/a. [PAWN_pronoun] jest przekonany, że będą żyli długo i szczęśliwie.\n\nRelacje z {1} polepszyły się.</MFI_AcceptedProposal>
+    <MFI_DejectedProposal>[PAWN_nameDef] próbuje [PAWN_possessive] najlepiej, aby nie wydawać się odrzuconym.\n\nRelacje z {1} trochę się pogorszyły.</MFI_DejectedProposal>
+
+    <MFI_MysticalShamanLetter>Ktoś, kto twierdzi, że jest przedstawicielem {0}, kontaktuje nas z opowieścią o mistycznym szamanie, który posiada &quot;rękę uzdrowiciela&quot;. Leczy ona obrażenia lub brakujące części ciała. Powiedzą nam, gdzie znajduje się ta tajemnicza i samotna osoba za niewielką opłatą w wysokości {1} srebra.</MFI_MysticalShamanLetter>
+    <MFI_MysticalShamanTitle>Mistyczny Szaman</MFI_MysticalShamanTitle>
+
+    <MFI_MysticalShamanFoundNoSickPawn>Szaman wynurza się ze swojej poliestrowej tipi tuż przed ogłoszeniem przez twoją karawanę obecności. Ocenia twoją grupę po cichu, przerzucając drżące oko nad zdecydowanie zdrową grupą, drugie oko przeszło przez pozorną medytację. Widząc, że szaman się poci, nakazuje ci, byś poczekał, podczas gdy on wchodzi do swojego namiotu. Chwilę później słychać szelest materiału i dźwięk paproci.\n\nWydaje się, że mistyczny szaman spakował się i opuścił.</MFI_MysticalShamanFoundNoSickPawn>
+    <MFI_MysticalShamanDoesHisMagic>Wygląda na to, że Szaman spodziewał się ciebie i z wielką powagą opowiada ci o swoich &quot;rękach uzdrowiciela&quot;. Po zakończeniu zaprasza {0} do swojej tipi. Zanim {0} pojawi się ponownie, poczuje się znacznie lepiej.</MFI_MysticalShamanDoesHisMagic>
+
+    <MFI_WoundedCombatant>Wysoki rangą przedstawiciel wojskowy z {0} wysyła sygnał o niebezpieczeństwie. Wielu jego żołnierzy odniosło poważne obrażenia i wymagają natychmiastowej pomocy lekarskiej. Zostali załadowani do kapsuły transportowej, ale najbliższa placówka medyczna jest zbyt daleko, aby uratować życie tych mężczyzn i kobiet, więc wzywa cię jako swojego sprzymierzeńca do pomocy. Czy odpowiesz na jego prośbę o pomoc i uleczysz jego żołnierzy?</MFI_WoundedCombatant>
+    <MFI_WoundedCombatantRejected>To niesamowite, jak dobrze słyszysz przekleństwa dowódcy na dźwięk ciężkiego ognia moździerzowego. Życzy on złych rzeczy dla twojej kolonii i utrzymuje cię odpowiedzialną za śmierć swoich ludzi.\n\n Relacje z {0} pogorszyły się {1}.</MFI_WoundedCombatantRejected>
+    <MFI_WoundedCombatantTitle>Sojusznik wysyła sygnał zagrożenia z {0}</MFI_WoundedCombatantTitle>
+    <MFI_WoundedCombatantAmbush>To pułapka! Wróg {0} zdołał jakoś zhackować twoją komunikację i wykorzystał ją, by uzyskać przewagę wojnę. {1}</MFI_WoundedCombatantAmbush>
+    <MFI_WoundedCombatantGratitude>Dowódca daje ci szczere i serdeczne pozdrowienie. Bardzo się cieszy. Ponieważ nie możesz zobaczyć gestu przez radio, rozłączasz.</MFI_WoundedCombatantGratitude>
+    <MFI_WoundedCombatantAmbushAvoided>Słyszysz jak głos w tle krzyczy, pytając, czy "połknęli przynęte". Szybko się rozłączasz, zdezorientowany i nieco ulżyło ci z powodu ucieczki przed potencjalną katastrofą.</MFI_WoundedCombatantAmbushAvoided>
+    
+</LanguageData>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+    <!--settings -->
+    <MFI_ticksToUpgrade>Czas, aż piraci ulepszą swoje placówki do baz</MFI_ticksToUpgrade>
+    <MFI_pirateBaseUpgraderModifier>Modyfikator, jak często rozprzestrzeniają się piraci</MFI_pirateBaseUpgraderModifier>
+    <MFI_timeModifierBetweenFactionInteraction>Modyfikator czasu między interakcją frakcji</MFI_timeModifierBetweenFactionInteraction>
+    <MFI_traderWealthOffsetFromTimesTraded>Modyfikator na srebro dostarczany przez handlowców (skala z częstotliwością interakcji)</MFI_traderWealthOffsetFromTimesTraded>
+
+    <MFI_LetterLabelBanditOutpostUpgraded>Ulepszenie placówki bandytów</MFI_LetterLabelBanditOutpostUpgraded>
+    <MFI_LetterBanditOutpostUpgraded>Piraci z {0} ulepszyli pobliską placówkę do bazy!\n\nWyślą oni od czasu do czasu najazdy, aby przetestować twoją obronę i ustalić nowe placówki, które mogą stać się podstawami.</MFI_LetterBanditOutpostUpgraded>
+    <MFI_DesperateTrader>Zdesperowany kupiec</MFI_DesperateTrader>
+    <MFI_TraderSent>{0} dziękuję. Ich karawana handlowa przybędzie około {1}.</MFI_TraderSent>
+    <MFI_Trader>kupiec</MFI_Trader>
+
+    <MFI_CaravanWorking>Karawana nie może się poruszać podczas prac żniwnych.</MFI_CaravanWorking>
+
+    <MFI_FactionWarPeaceTalksIntroduction>Dwóch przeciwnych liderów frakcji {0} i {1} zrobiło kwaterę w przeciwległych rogach obozu. Napięcie jest wysokie, gdy wchodzi negocjator {2}. W ciągu ostatnich kilku dni obciążono wszystkie zaangażowane strony, a negocjator wie, że to, co powiedzą, może mieć daleko idące konsekwencje.\n\n {2} ma następujące opcje:</MFI_FactionWarPeaceTalksIntroduction>
+
+    <MFI_FactionWarPeaceTalksCurryFavour>Przysługa z {0}</MFI_FactionWarPeaceTalksCurryFavour>
+    <MFI_FactionWarPeaceTalksSabotage>Sabotażuj pokojowe rozmowy dla dobra kolonii</MFI_FactionWarPeaceTalksSabotage>
+    <MFI_FactionWarPeaceTalksBrokerPeace>Pośrednik między dwiema frakcjami</MFI_FactionWarPeaceTalksBrokerPeace>
+
+    <!-- Faction war, favour one faction over the other -->
+    <MFI_FactionWarFavourFactionDisaster>Rozmowy były katastrofą. Żadna z frakcji nie doceniła twojej próby wynegocjowania przez negocjatora {0}. Starania o znalezienie zwycięzcy w sporze były uważane za akt agresji, a rozmowy pokojowe załamały się.\n\nZwiązki z {0} nieco się pogorszyły.\n\nZwiązki z {1} znacznie się pogorszyły.</MFI_FactionWarFavourFactionDisaster>
+    <MFI_FactionWarFavourFactionBackFire>Rozmowy zakończyły się niepowodzeniem. Podczas gdy delegaci frakcji dyskutowali o najważniejszych różnicach, zniechęcenia do twoich negocjatorów były postrzegane jako niekonstruktywne w stosunku do celów, a rozmowy wkrótce się zakończyły.\n\nZwroty z {0} pogorszyły się.\n\nZwiązki z {1} znacznie się pogorszyły.</MFI_FactionWarFavourFactionBackFire>
+    <MFI_FactionWarFavourFactionFlounder>Rozmowy się jakoś potoczyły. Delegaci frakcji jasno wyrazili swoje kluczowe kwestie, ale negocjator nie był w stanie wnieść znaczącego wkładu w rozmowy pokojowe.\n\nOdniesienia z {0} nieco wzrosły.\n\nZwiązki z {1} znacznie się pogorszyły.</MFI_FactionWarFavourFactionFlounder>
+    <MFI_FactionWarFavourFactionSuccess>Rozmowy zakończyły się sukcesem. Twój negocjator zdołał przekonać {1}, aby przyznał rację {0}, a ich delegaci wymyślili podstawową umowę.\n\nZwiązki z {0} znacznie się zwiększyły.\n\nOznaczenia z {1} nieco się pogorszyły.</MFI_FactionWarFavourFactionSuccess>
+    <MFI_FactionWarFavourFactionTriumph>Rozmowy były wielkim triumfem! Twój negocjator odegrał dużą rolę w przekonaniu {1}, aby wypłacić odszkodowanie za wcześniejsze agresje, ku uciesze {0}.\n\nZwiązki z {0} wzrosły masowo.\n\nZwiązek z {1} pogorszył się.</MFI_FactionWarFavourFactionTriumph>
+
+    <!-- Faction war, sabotage to benefit colony -->
+    <MFI_FactionWarSabotageDisaster>Sabotaż był ogromną porażką. Delegaci szybko odkryli zamiar negocjatora i obie frakcje zwróciły się przeciwko tobie! Twoja karawana pospiesznie odstąpiła, ale wojownicy z obu frakcji dogonili ją i zaatakowali!\n\nRelacje z {0} się zepsuły. Są teraz wrogo nastawieni do ciebie.\n\nRelacje z {1} zostały zerwane. Są teraz wrogo nastawieni do ciebie.</MFI_FactionWarSabotageDisaster>
+    <MFI_FactionWarSabotageBackFire>Sabotaż się nie poprawił. Niedługo po tym, jak delegaci wymienili się uprzejmościami, przyłapali się na niekonstruktywnej naturze negocjatora i wykluczyli go z rozmów.\n\nZwiązki z {0} znacznie się pogorszyły.\n\nZwiązki z {1} znacznie się pogorszyły.</MFI_FactionWarSabotageBackFire>
+    <MFI_FactionWarSabotageFlounder>Sabotaż nie wypalił. Twój negocjator okazał się niezdolny do otrzymania słowa lub wniesienia znaczącego wkładu do rozmów pokojowych w ten czy inny sposób.\n\nZwiązki z {0} i {1} pozostają niezmienione.</MFI_FactionWarSabotageFlounder>
+    <MFI_FactionWarSabotageSuccess>Sabotaż był wątpliwym sukcesem. Podczas gdy delegaci sprzeczali się o ważne kwestie, twój negocjator poruszał się po politycznym polu minowym i pozostawiał polubowne wrażenie na obu frakcjach, jednocześnie nie zapewniając faktycznego postępu.\n\nZwiązki z {0} znacznie się zwiększyły.\n\nZwiązki z {1} znacznie się zwiększyły.</MFI_FactionWarSabotageSuccess>
+    <MFI_FactionWarSabotageTriumph>Sabotaż był wielkim triumfem! Delegaci fachowo rozegrali przeciwko sobie i niedługo po wstępnych powitaniach dyskusja rozpadła się na obelgi i oskarżenia, podczas gdy obaj agresorzy pozostali z bardzo pozytywnym wrażeniem twojej frakcji.\n\nZwiązki z {0} ogromnie wzrosły.\n\nRelacje z {1} znacznie się zwiększyły.</MFI_FactionWarSabotageTriumph>
+
+    <!-- Faction war, broker peace -->
+    <MFI_FactionWarBrokerPeaceDisaster>Rozmowy były katastrofą. Delegaci ledwie przejrzeli swoje pierwsze pozdrowienia, zanim dyskusja rozpadła się na obelgi i oskarżenia. Nic, co powiedział twój negocjator, nie spotkało się z żadną aprobatą, a relacje z przeciwnymi frakcjami są gorsze niż poprzednio.\n\nRelacje z {0} pogorszyły się.\n\nRelacje z {1} pogorszyły się.</MFI_FactionWarBrokerPeaceDisaster>
+    <MFI_FactionWarBrokerPeaceBackFire>Rozmowy zakończyły się niepowodzeniem. Pomimo wymiany uprzejmości delegaci nie poczynili żadnych postępów w kwestiach merytorycznych, a liczne oświadczenia zostały zinterpretowane jako obelgi. Zdecydowali się wznowić i zmienić termin rozmów pokojowych na późniejszy termin.\n\nRelacje z {0} pozostają niezmienione.\n\nRelacje z {1} pozostają niezmienione.</MFI_FactionWarBrokerPeaceBackFire>
+    <MFI_FactionWarBrokerPeaceFlounder>Rozmowy się potoczyły. Delegaci zdołali porozumieć się jasno i z podstawowym szacunkiem, ale nie byli w stanie zrobić postępu w żadnych kwestiach, dopóki nie pojawił się twój negocjator. Odegrał on dużą rolę w uśmierzaniu lęków i wygładzaniu nad potarganymi piórami.\n\nRelacje z {0} nieco wzrosły.\n\nRelacje z {1} nieco wzrosły.</MFI_FactionWarBrokerPeaceFlounder>
+    <MFI_FactionWarBrokerPeaceSuccess>Rozmowy zakończyły się sukcesem. Dzięki w dużej części negocjatorowi, delegaci osiągnęli nowe wzajemne zrozumienie w kilku istotnych kwestiach.\n\nRelacje z {0} znacznie wzrosły.\n\nRelacje z {1} znacznie się zwiększyły</MFI_FactionWarBrokerPeaceSuccess>
+    <MFI_FactionWarBrokerPeaceTriumph>Rozmowy były wielkim triumfem! Twój negocjator szybko połączył delegatów i utorował drogę, aby naprawdę zobaczyć nawzajem swoją perspektywę na najtrudniejsze problemy dnia.\n\nRelacje z {0} ogromnie wzrosły.\n\nRelacje z {1} wzrosły niezmiernie.</MFI_FactionWarBrokerPeaceTriumph>
+
+    <MFI_FactionWarProgress>Postęp wojenny frakcji</MFI_FactionWarProgress>
+    <MFI_UnrestIsBrewing>Niepokój frakcji rośnie</MFI_UnrestIsBrewing>
+
+    <MFI_FactionWarBaseBattleTookPlaceLabel>Baza frakcji została zaatakowana</MFI_FactionWarBaseBattleTookPlaceLabel>
+    <MFI_FactionWarBaseAttacked>Baza należąca do {0} została zaatakowana przez {1}!</MFI_FactionWarBaseAttacked>
+    <MFI_FactionWarBaseDefeated>Nie byli w stanie się bronić przed atakiem i przyjęli ciężkie uderzenie.</MFI_FactionWarBaseDefeated>
+    <MFI_FactionWarBaseTakenOver>Po wyrzuceniu {0} frakcja {1} przejęła teraz bazę i zgłosiła prawa własności do otaczającego obszaru.</MFI_FactionWarBaseTakenOver>
+    <MFI_FactionWarBaseDestroyed>Atakujący z {1} splądrowali bazę, a następnie ją spalili. To jest ciężki cios dla {0}.</MFI_FactionWarBaseDestroyed>
+    <MFI_FactionWarBaseSuccessfullyDefended>Obrońcy skutecznie powstrzymali atak i szybko go odepchali. {0} uważa to za zwycięstwo w wielkiej wojnie frakcyjnej.</MFI_FactionWarBaseSuccessfullyDefended>
+
+    <MFI_FactionWarStarted>Rozpoczęła się wojna frakcyjna</MFI_FactionWarStarted>
+    <MFI_FactionWarExplanation>Rozpętała się wojna między {0} i {1}. Od czasu do czasu będą przeprowadzać ataki na siebie nawzajem. Jeśli faworyzujesz jedną frakcję nad drugą, mogą poprosić cię o pomoc.\n\nMożesz śledzić wojnę frakcji na karcie Frakcje.</MFI_FactionWarExplanation>
+    <MFI_FactionWarOverLabel>Frakcja wojenna rozwiązana</MFI_FactionWarOverLabel>
+    <MFI_FactionWarOver>Po wielu bitwach i wielkich stratach wojna między {0} i {1} się skończyła.</MFI_FactionWarOver>
+
+    <MFI_FactionWarLeaderDecidedLabel>Wyniki rozmów pokojowych</MFI_FactionWarLeaderDecidedLabel>
+    <MFI_FactionWarLeaderDecidedOnWar>Wyniki rozmów pokojowych Rozmowy pokojowe zakończyły się porażką i wybuchła wojna między {0} a {1}. Od czasu do czasu będą przeprowadzać ataki na siebie nawzajem. Jeśli faworyzujesz jedną frakcję nad drugą, mogą poprosić cię o pomoc.\n\nMożesz śledzić wojnę frakcji na karcie Frakcje.</MFI_FactionWarLeaderDecidedOnWar>
+    <MFI_FactionWarLeaderDecidedAgainstWar>Rozmowy pokojowe się skończyły. Napięcia zostały złagodzone, a frakcje {0} i {1} osiągnęły wstępne porozumienie.</MFI_FactionWarLeaderDecidedAgainstWar>
+
+    <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+    <MFI_SellingWarBondsNeedSteelLaunchable>potrzebujesz {0} metalu blisko nadajników handlowych</MFI_SellingWarBondsNeedSteelLaunchable>
+    
+
+</LanguageData>
