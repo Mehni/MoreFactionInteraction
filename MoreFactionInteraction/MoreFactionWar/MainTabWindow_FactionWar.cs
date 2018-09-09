@@ -1,6 +1,8 @@
 ﻿using RimWorld;
 using Verse;
 using UnityEngine;
+using System.Linq;
+using System;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
@@ -56,7 +58,20 @@ namespace MoreFactionInteraction.MoreFactionWar
             //regular faction tab if no war/unrest. Fancy tab otherwise.
             if (!Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing)
             {
-                base.DoWindowContents(fillRect);
+                if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+                {
+                    try
+                    {
+                        ((Action)(() =>
+                        {
+                            new Fluffy_Relations.MainTabWindow_Relations();
+                        }))();
+                    }
+                    catch (TypeLoadException) { }
+                }
+                else
+                    base.DoWindowContents(fillRect);
+
             }
             else
             {
@@ -68,7 +83,19 @@ namespace MoreFactionInteraction.MoreFactionWar
                 baseRect.yMax = fillRect.yMax + yMaxOffset;
 
                 GUI.BeginGroup(baseRect);
-                base.DoWindowContents(baseRect);
+                if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+                {
+                    try
+                    {
+                        ((Action)(() =>
+                        {
+                            new Fluffy_Relations.MainTabWindow_Relations();
+                        }))();
+                    }
+                    catch (TypeLoadException) { }
+                }                
+                else
+                    base.DoWindowContents(baseRect);
                 GUI.EndGroup();
             }
         }
