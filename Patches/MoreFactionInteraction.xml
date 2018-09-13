@@ -4,27 +4,33 @@
 
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
-            <value>
-                <li Class="MoreFactionInteraction.World_Incidents.WorldObjectCompProperties_BumperCrop" />
-            </value>
+        <value>
+            <li Class="MoreFactionInteraction.World_Incidents.WorldObjectCompProperties_BumperCrop" />
+        </value>
     </Operation>
 
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
-            <value>
-                <comps>
-                    <li>
-                        <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
-                    </li>
-                </comps>
-            </value>
+        <value>
+            <comps>
+                <li>
+                    <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
+                </li>
+            </comps>
+        </value>
     </Operation>
 
-    <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/MainButtonDef[defName="Factions"]/tabWindowClass</xpath>
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Relations Tab</li>
+        </mods>
+        <nomatch Class="PatchOperationReplace">
+            <xpath>/Defs/MainButtonDef[defName="Factions"]/tabWindowClass</xpath>
             <value>
                 <tabWindowClass>MoreFactionInteraction.MoreFactionWar.MainTabWindow_FactionWar</tabWindowClass>
             </value>
+        </nomatch>
+
     </Operation>
 
 </Patch>

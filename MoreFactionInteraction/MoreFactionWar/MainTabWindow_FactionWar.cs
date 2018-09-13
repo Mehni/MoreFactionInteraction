@@ -11,35 +11,35 @@ namespace MoreFactionInteraction.MoreFactionWar
         private const float TitleHeight = 70f;
         private const float InfoHeight = 60f;
 
-        private Texture2D factionOneColorTexture;
-        private Texture2D factionTwoColorTexture;
+        private static Texture2D factionOneColorTexture;
+        private static Texture2D factionTwoColorTexture;
 
-        public Texture2D FactionOneColorTexture
+        public static Texture2D FactionOneColorTexture
         {
             get
             {
-                if (this.factionOneColorTexture == null)
+                if (factionOneColorTexture == null)
                 {
-                    this.factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
+                    factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
                 }
-                return this.factionOneColorTexture;
+                return factionOneColorTexture;
             }
         }
 
-        public Texture2D FactionTwoColorTexture
+        public static Texture2D FactionTwoColorTexture
         {
             get
             {
-                if (this.factionTwoColorTexture == null)
+                if (factionTwoColorTexture == null)
                 {
-                    this.factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
+                    factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
                 }
-                return this.factionTwoColorTexture;
+                return factionTwoColorTexture;
             }
         }
 
-        readonly Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
-        readonly Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+        static readonly Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+        static readonly Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
 
 
 
@@ -58,24 +58,11 @@ namespace MoreFactionInteraction.MoreFactionWar
             //regular faction tab if no war/unrest. Fancy tab otherwise.
             if (!Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing)
             {
-                if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
-                {
-                    try
-                    {
-                        ((Action)(() =>
-                        {
-                            new Fluffy_Relations.MainTabWindow_Relations();
-                        }))();
-                    }
-                    catch (TypeLoadException) { }
-                }
-                else
-                    base.DoWindowContents(fillRect);
-
+                base.DoWindowContents(fillRect);
             }
             else
             {
-                this.DrawFactionWarBar(fillRect);
+                DrawFactionWarBar(fillRect);
 
                 // scooch down original. amount of offset depends on devmode or not (because of devmode "show all" button)
                 Rect baseRect = fillRect;
@@ -83,24 +70,12 @@ namespace MoreFactionInteraction.MoreFactionWar
                 baseRect.yMax = fillRect.yMax + yMaxOffset;
 
                 GUI.BeginGroup(baseRect);
-                if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
-                {
-                    try
-                    {
-                        ((Action)(() =>
-                        {
-                            new Fluffy_Relations.MainTabWindow_Relations();
-                        }))();
-                    }
-                    catch (TypeLoadException) { }
-                }                
-                else
-                    base.DoWindowContents(baseRect);
+                base.DoWindowContents(baseRect);
                 GUI.EndGroup();
             }
         }
 
-        private void DrawFactionWarBar(Rect fillRect)
+        public static void DrawFactionWarBar(Rect fillRect)
         {
             Rect position = new Rect(0f, 0f, fillRect.width, fillRect.height);
             GUI.BeginGroup(position);
@@ -127,9 +102,9 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             //"score card" bar
             Rect leftFactionOneScoreBox = new Rect(0f, yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), barHeight);
-            GUI.DrawTexture(leftFactionOneScoreBox, this.FactionOneColorTexture);
-            Rect rightFactionTwoScoreBox = new Rect(position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(this.factionInstigator), barHeight);
-            GUI.DrawTexture(rightFactionTwoScoreBox, this.FactionTwoColorTexture);
+            GUI.DrawTexture(leftFactionOneScoreBox, FactionOneColorTexture);
+            Rect rightFactionTwoScoreBox = new Rect(position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionInstigator), barHeight);
+            GUI.DrawTexture(rightFactionTwoScoreBox, FactionTwoColorTexture);
 
             //stuff that fills up and does the faction name and call label boxes.
             Text.Font = GameFont.Medium;
