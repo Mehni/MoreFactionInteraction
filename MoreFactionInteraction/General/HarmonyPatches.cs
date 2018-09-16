@@ -58,17 +58,22 @@ namespace MoreFactionInteraction
                 {
                     ((Action)(() =>
                     {
-                        harmony.Patch(AccessTools.Method(typeof(Fluffy_Relations.MainTabWindow_Relations), nameof(Fluffy_Relations.MainTabWindow_Relations.DrawDetails), new Type[] { typeof(Rect), typeof(Faction)} ), null,
-                        new HarmonyMethod(typeof(HarmonyPatches), nameof(FriggingFluffyRelations)));
+                        harmony.Patch(AccessTools.Method(typeof(Fluffy_Relations.MainTabWindow_Relations), nameof(Fluffy_Relations.MainTabWindow_Relations.DrawFactionInformation)), null,
+                        new HarmonyMethod(typeof(HarmonyPatches), nameof(WonderfullyFluffyRelations)));
                     }))();
                 }
                 catch (TypeLoadException) { }
             }
         }
 
-        private static void FriggingFluffyRelations (Rect canvas, Faction faction)
+        private static void WonderfullyFluffyRelations(ref float __result, Faction faction, Vector2 pos, float width)
         {
-            MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+            if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+            {
+                Rect canvas = new Rect(pos.x, pos.y + 5, width, 125f);
+                MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+                __result += 125f;
+            }
         }
 
         //private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)

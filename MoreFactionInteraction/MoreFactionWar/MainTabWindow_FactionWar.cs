@@ -18,7 +18,9 @@ namespace MoreFactionInteraction.MoreFactionWar
         {
             get
             {
-                if (factionOneColorTexture == null)
+                Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+                
+                if (factionOneColorTexture == null && factionOne != null)
                 {
                     factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
                 }
@@ -30,17 +32,15 @@ namespace MoreFactionInteraction.MoreFactionWar
         {
             get
             {
-                if (factionTwoColorTexture == null)
+                Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+
+                if (factionTwoColorTexture == null && factionInstigator != null)
                 {
                     factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
                 }
                 return factionTwoColorTexture;
             }
         }
-
-        static readonly Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
-        static readonly Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
-
 
 
         //[TweakValue("MainTabWindow_FactionWar", -100f, 150f)]
@@ -77,7 +77,13 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         public static void DrawFactionWarBar(Rect fillRect)
         {
-            Rect position = new Rect(0f, 0f, fillRect.width, fillRect.height);
+            if (!Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+                return;
+
+            Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
+            Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+
+            Rect position = new Rect(fillRect.x, fillRect.y, fillRect.width, fillRect.height);
             GUI.BeginGroup(position);
             Text.Font = GameFont.Small;
             GUI.color = Color.white;
