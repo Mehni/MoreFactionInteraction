@@ -52,6 +52,7 @@ namespace MoreFactionInteraction
 
         public bool WarIsOngoing => this.warIsOngoing;
         public bool UnrestIsBrewing => this.unrestIsBrewing;
+        public bool StuffIsGoingDown => this.unrestIsBrewing || this.warIsOngoing;
 
         private void SetFirstWarringFaction(Faction faction)
         {

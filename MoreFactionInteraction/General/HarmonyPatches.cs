@@ -6,6 +6,7 @@ using Verse;
 using Harmony;
 using UnityEngine;
 using RimWorld.Planet;
+using MoreFactionInteraction.MoreFactionWar;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -51,6 +52,28 @@ namespace MoreFactionInteraction
             //harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
             //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
+            if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+            {
+                try
+                {
+                    ((Action)(() =>
+                    {
+                        harmony.Patch(AccessTools.Method(typeof(Fluffy_Relations.MainTabWindow_Relations), nameof(Fluffy_Relations.MainTabWindow_Relations.DrawFactionInformation)), null,
+                        new HarmonyMethod(typeof(HarmonyPatches), nameof(WonderfullyFluffyRelations)));
+                    }))();
+                }
+                catch (TypeLoadException) { }
+            }
+        }
+
+        private static void WonderfullyFluffyRelations(ref float __result, Faction faction, Vector2 pos, float width)
+        {
+            if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+            {
+                Rect canvas = new Rect(pos.x, pos.y + 5, width, 125f);
+                MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+                __result += 125f;
+            }
         }
 
         //private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
