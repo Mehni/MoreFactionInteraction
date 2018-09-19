@@ -3,7 +3,7 @@
 
   <!-- Ransom demand -->
   <MFI_ExtortionDemandTitle>{0}から迷惑料の要求</MFI_ExtortionDemandTitle>
-  <MFI_ExtortionDemand>{2}の{0}に所属する{1}が、あなたに連絡をしてきました。彼らの{3}の{4}の付近にあなたのコロニーが近すぎる事で、[PAWN_pronoun] は彼らの領土を侵略していると感じていると主張しています。\n\n[PAWN_pronoun] は、「寛大な[PAWN_pronoun] はこの罪をたった{5}シルバーを支払う事で許してやる」と言ってきました。さらに[PAWN_pronoun] は、もし「支払わなければお前たちのコロニーは襲われることになるだろう」と付け加えましたが、[PAWN_pronoun] はあなたに支払い期日を喜んで教えてくれました。</MFI_ExtortionDemand>
+  <MFI_ExtortionDemand>{2}の{0}に所属する{1}が、あなたに連絡をしてきました。彼らの{3}の{4}の付近にあなたのコロニーが近すぎる事で、[PAWN_pronoun]は彼らの領土を侵略していると感じていると主張しています。\n\n[PAWN_pronoun]は、「寛大な[PAWN_pronoun]はこの罪をたった{5}シルバーを支払う事で許してやる」と言ってきました。さらに[PAWN_pronoun]は、もし「支払わなければお前たちのコロニーは襲われることになるだろう」と付け加えましたが、[PAWN_pronoun]はあなたに支払い期日を喜んで教えてくれました。</MFI_ExtortionDemand>
 
   <!-- Reverse Trade Request -->
   <MFI_ReverseTradeRequest_Pyro>{2}の{0}に所属する{1}は私たちにメッセージを送ってきました。付近にある彼らの入植地{3}で起きた放火魔事件によって{4}が絶望的に足りない状況だとのことです。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりがあるが、買取りに来るキャラバン隊を派遣してもらう依頼するには{5}シルバーの費用が必要です。\n\n{0}は、問題となった放火魔は彼らの入植地に留まることを保証します。\n\n\n{4}を高額で買い取ってくれるトレーダーを派遣してもらうために派遣費用として{5}シルバーを支払いますか？</MFI_ReverseTradeRequest_Pyro>
@@ -26,8 +26,8 @@
 
   <MFI_DiplomaticMarriage>{0}の魅力的な申し出が{1}に届いて、彼らはあなたに{1}との政略結婚の約束を求めてきました。この政略結婚の提案を受け入れることで、お互いの関係と派閥との友好関係が強化されますが、{1}はあなたの派閥を離れて{2}に参加することになります。</MFI_DiplomaticMarriage>
   <MFI_DiplomaticMarriageLabel>政略結婚</MFI_DiplomaticMarriageLabel>
-  <MFI_AcceptedProposal>[PAWN_nameDef] は大喜びしています。[PAWN_pronoun] は彼らが{0}で幸せな生活を送ることができると信じています。\n\n{1}との友好関係が改善されました。</MFI_AcceptedProposal>
-  <MFI_DejectedProposal>[PAWN_nameDef] は[PAWN_possessive] が拒絶されないように最善を尽くしました。\n\n{1}との友好関係は少し悪化しました。</MFI_DejectedProposal>
+  <MFI_AcceptedProposal>[PAWN_nameDef]は大喜びしています。[PAWN_pronoun]は彼らが{0}で幸せな生活を送ることができると信じています。\n\n{1}との友好関係が改善されました。</MFI_AcceptedProposal>
+  <MFI_DejectedProposal>[PAWN_nameDef]は[PAWN_possessive]が拒絶されないように最善を尽くしました。\n\n{1}との友好関係は少し悪化しました。</MFI_DejectedProposal>
 
   <MFI_MysticalShamanLetter>{0}の代表者だと主張する人物が、古傷や欠損している肉体部分を治療することが出来る「ヒーラーの手」を習得した、神秘的なシャーマンのホラ話について連絡してきました。彼はほんの少しの手数料({1}シルバー)で、私たちに、この神秘的で常に隠れ住んでいる人物の場所を教えてくれるでしょう。</MFI_MysticalShamanLetter>
   <MFI_MysticalShamanTitle>神秘的な呪術師</MFI_MysticalShamanTitle>
