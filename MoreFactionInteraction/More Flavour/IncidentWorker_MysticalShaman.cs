@@ -56,6 +56,7 @@ namespace MoreFactionInteraction
             choiceLetterMysticalShaman.fee = fee;
             choiceLetterMysticalShaman.StartTimeout(duration: TimeoutTicks);
             Find.LetterStack.ReceiveLetter(let: choiceLetterMysticalShaman);
+            Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterMysticalShaman);
             return true;
         }
 

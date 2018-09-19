@@ -33,20 +33,17 @@ namespace MoreFactionInteraction
                 return false;
             }
 
-            ChoiceLetter_DiplomaticMarriage choiceLetterDiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_DiplomaticMarriage".Translate(args: new object[]
-            {
+            ChoiceLetter_DiplomaticMarriage choiceLetterDiplomaticMarriage = (ChoiceLetter_DiplomaticMarriage)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_DiplomaticMarriage".Translate(
                 this.marriageSeeker.LabelShort, this.betrothed.LabelShort, this.marriageSeeker.Faction.Name
-            }).AdjustedFor(p: this.marriageSeeker), def: this.def.letterDef);
+            ).AdjustedFor(p: this.marriageSeeker), def: this.def.letterDef);
 
-            choiceLetterDiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(args: new object[]
-            {
-                this.betrothed.LabelShort
-            }).CapitalizeFirst();
+            choiceLetterDiplomaticMarriage.title = "MFI_DiplomaticMarriageLabel".Translate(this.betrothed.LabelShort).CapitalizeFirst();
             choiceLetterDiplomaticMarriage.radioMode = false;
             choiceLetterDiplomaticMarriage.marriageSeeker = this.marriageSeeker;
             choiceLetterDiplomaticMarriage.betrothed = this.betrothed;
             choiceLetterDiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
             Find.LetterStack.ReceiveLetter(@let: choiceLetterDiplomaticMarriage);
+            Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
             return true;
         }
 

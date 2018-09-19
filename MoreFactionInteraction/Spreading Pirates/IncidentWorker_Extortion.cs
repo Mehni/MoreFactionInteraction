@@ -81,6 +81,7 @@ namespace MoreFactionInteraction
                 choiceLetterExtortionDemand.fee = extorsionDemand;
                 choiceLetterExtortionDemand.StartTimeout(duration: TimeoutTicks);
                 Find.LetterStack.ReceiveLetter(@let: choiceLetterExtortionDemand);
+                Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterExtortionDemand);
                 return true;
             }
             return false;

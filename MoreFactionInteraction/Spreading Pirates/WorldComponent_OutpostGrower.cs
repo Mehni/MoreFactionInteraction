@@ -8,6 +8,8 @@ namespace MoreFactionInteraction
 {
     class WorldComponent_OutpostGrower : WorldComponent
     {
+        private List<ChoiceLetter> choiceLetters = new List<ChoiceLetter>();
+
         public WorldComponent_OutpostGrower(World world) : base(world: world)
         {
         }
@@ -17,12 +19,11 @@ namespace MoreFactionInteraction
             base.WorldComponentUpdate();
             if (Find.TickManager.TicksGame % 100 == 0)
             {
-                bool alsoRemoveWorldObject;
                 //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
                 //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
                 IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
                                           where site.Faction.HostileTo(other: Faction.OfPlayer) && site.Faction.def.permanentEnemy && !site.Faction.def.hidden && !site.Faction.defeated
-                                          && site.ShouldRemoveMapNow(out alsoRemoveWorldObject)
+                                          && site.ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
                                           && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost) && !site.GetComponent<TimeoutComp>().Active
                                           select site;
 
@@ -49,7 +50,28 @@ namespace MoreFactionInteraction
                             factionBase.Faction.Name,
                     }), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase, relatedFaction: toUpgrade.Faction);
                 }
+
+                foreach (ChoiceLetter letter in choiceLetters)
+                {
+                    if (Find.TickManager.TicksGame > letter.disappearAtTick)
+                    {
+                        choiceLetters.Remove(letter);
+                        break;
+                    }                        
+                }
             }
+        }
+
+        public void Registerletter(ChoiceLetter choiceLetter)
+        {
+            choiceLetters.Add(choiceLetter);
+        }
+
+        public override void ExposeData()
+        {
+            //this is where I store letters, because RimWorld just goes and deletes them.
+            base.ExposeData();
+            Scribe_Collections.Look<ChoiceLetter>(ref choiceLetters, "MFI_ChoiceLetters", LookMode.Reference);
         }
     }
 }

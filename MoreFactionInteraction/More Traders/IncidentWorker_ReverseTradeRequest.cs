@@ -50,6 +50,7 @@ namespace MoreFactionInteraction
                 choiceLetterReverseTradeRequest.StartTimeout(duration: TimeoutTicks);
                 choiceLetterReverseTradeRequest.tile = settlement.Tile;
                 Find.LetterStack.ReceiveLetter(let: choiceLetterReverseTradeRequest);
+                Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterReverseTradeRequest);
                 return true;
             }
             return false;

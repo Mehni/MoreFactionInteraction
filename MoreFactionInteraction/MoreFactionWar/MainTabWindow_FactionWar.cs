@@ -27,7 +27,7 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
             }
-            return factionOneColorTexture;            
+            return factionOneColorTexture;
         }
 
         public static Texture2D FactionTwoColorTexture(Faction factionInstigator)
