@@ -6,6 +6,7 @@ using System;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
+    [StaticConstructorOnStartup]
     public class MainTabWindow_FactionWar : MainTabWindow_Factions
     {
         private const float TitleHeight = 70f;
@@ -14,32 +15,28 @@ namespace MoreFactionInteraction.MoreFactionWar
         private static Texture2D factionOneColorTexture;
         private static Texture2D factionTwoColorTexture;
 
-        public static Texture2D FactionOneColorTexture
+        public static void ResetBars()
         {
-            get
-            {
-                Faction factionOne = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne;
-                
-                if (factionOneColorTexture == null && factionOne != null)
-                {
-                    factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
-                }
-                return factionOneColorTexture;
-            }
+            factionOneColorTexture = null;
+            factionTwoColorTexture = null;
         }
 
-        public static Texture2D FactionTwoColorTexture
+        public static Texture2D FactionOneColorTexture(Faction factionOne)
         {
-            get
+            if (factionOneColorTexture == null && factionOne != null)
             {
-                Faction factionInstigator = Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
-
-                if (factionTwoColorTexture == null && factionInstigator != null)
-                {
-                    factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
-                }
-                return factionTwoColorTexture;
+                factionOneColorTexture = SolidColorMaterials.NewSolidColorTexture(factionOne.Color);
             }
+            return factionOneColorTexture;            
+        }
+
+        public static Texture2D FactionTwoColorTexture(Faction factionInstigator)
+        {
+            if (factionTwoColorTexture == null && factionInstigator != null)
+            {
+                factionTwoColorTexture = SolidColorMaterials.NewSolidColorTexture(factionInstigator.Color);
+            }
+            return factionTwoColorTexture;
         }
 
 
@@ -108,9 +105,9 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             //"score card" bar
             Rect leftFactionOneScoreBox = new Rect(0f, yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), barHeight);
-            GUI.DrawTexture(leftFactionOneScoreBox, FactionOneColorTexture);
+            GUI.DrawTexture(leftFactionOneScoreBox, FactionOneColorTexture(factionOne));
             Rect rightFactionTwoScoreBox = new Rect(position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionOne), yPositionBar, position.width * Find.World.GetComponent<WorldComponent_MFI_FactionWar>().ScoreForFaction(factionInstigator), barHeight);
-            GUI.DrawTexture(rightFactionTwoScoreBox, FactionTwoColorTexture);
+            GUI.DrawTexture(rightFactionTwoScoreBox, FactionTwoColorTexture(factionInstigator));
 
             //stuff that fills up and does the faction name and call label boxes.
             Text.Font = GameFont.Medium;

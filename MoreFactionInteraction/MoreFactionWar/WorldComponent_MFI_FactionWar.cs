@@ -110,6 +110,7 @@ namespace MoreFactionInteraction
             this.warIsOngoing = false;
             this.SetFirstWarringFaction(null);
             this.SetSecondWarringFaction(null);
+            MainTabWindow_FactionWar.ResetBars();
         }
 
         public void AllOuttaFactionSettlements()
