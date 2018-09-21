@@ -18,7 +18,7 @@ namespace MoreFactionInteraction
     {
         static HarmonyPatches()
         {
-            HarmonyInstance harmony = HarmonyInstance.Create(id: "Mehni.RimWorld.MFI.main");
+            HarmonyInstance harmony = HarmonyInstance.Create(id: "mehni.rimworld.MFI.main");
             //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders

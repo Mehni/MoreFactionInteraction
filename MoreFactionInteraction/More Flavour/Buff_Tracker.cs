@@ -9,7 +9,7 @@
 //{
 //    public class Buff_Tracker : IExposable
 //    {
-//        private List<int> allBuffs = new List<int>();
+//        private List<> allBuffs = new List<>();
 
 //        //public List<Buff> AllBuffsForReading => this.allBuffs;
 
@@ -45,7 +45,6 @@
 
 //        public void Buff_Emanator()
 //        {
-
 //            ThoughtDef.Named("PsychicEmanatorSoothe").stages.First().baseMoodEffect = 6f;
 //            ThingDefOf.PsychicEmanator.specialDisplayRadius = 20f;
 //            CompProperties_Power power = (CompProperties_Power)ThingDefOf.PsychicEmanator.comps.First(x => x is CompProperties_Power);
@@ -54,9 +53,7 @@
 //                power.basePowerConsumption *= 1.5f;
 
 //            this.active = true;
-
 //            Scribe_Values.Look(ref this.active, "MFI_buffedEmanator");
-
 //        }
 
 //        public void Buff_PsychTea()
@@ -67,11 +64,7 @@
 //                giveHediff.severity = 1f;
 
 //            this.active = true;
-
-
-
 //            Scribe_Values.Look(ref this.active, "MFI_buffedPsychTea");
-
 //        }
 
 //        public void Buff_ChemFuel()
@@ -82,10 +75,7 @@
 //                spawner.spawnIntervalRange.min = (int)(spawner.spawnIntervalRange.min * 0.9f);
 
 //            this.active = true;
-
-
 //            Scribe_Values.Look(ref this.active, "MFI_buffedChemFuel");
-
 //        }
 
 //        public void ExposeData()

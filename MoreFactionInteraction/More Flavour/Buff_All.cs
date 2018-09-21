@@ -7,5 +7,109 @@ using Verse;
 
 namespace MoreFactionInteraction.More_Flavour
 {
+    public abstract class Buff : IExposable
+    {
+        public bool Active;
 
+        public virtual TechLevel MinTechLevel() => TechLevel.Undefined;
+
+        public abstract void Apply();
+        public abstract void ExposeData();
+    }
+
+    public class Buff_Pemmican : Buff
+    {
+        public override void Apply()
+        {
+            this.Active = true;
+            ThingDefOf.Pemmican.comps.RemoveAll(x => x is CompProperties_Rottable);
+        }
+
+        public static void Register()
+        {
+            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_Pemmican());
+        }
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref Active, "MFI_Buff_Pemmican");
+        }
+    }
+
+    public class Buff_Emanator : Buff
+    {
+        public override void Apply()
+        {
+            ThoughtDef.Named("PsychicEmanatorSoothe").stages.First().baseMoodEffect = 6f;
+            ThingDefOf.PsychicEmanator.specialDisplayRadius = 20f;
+            CompProperties_Power power = (CompProperties_Power)ThingDefOf.PsychicEmanator.comps.First(x => x is CompProperties_Power);
+
+            if (power != null)
+                power.basePowerConsumption *= 1.5f;
+            this.Active = true;
+        }
+
+        public override TechLevel MinTechLevel() => TechLevel.Industrial;
+        
+
+        public static void Register()
+        {
+            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_Emanator());
+        }
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref Active, "MFI_Buff_Emanator");
+        }
+    }
+
+    public class Buff_PsychTea : Buff
+    {
+        public override void Apply()
+        {
+            IngestionOutcomeDoer_GiveHediff giveHediff = (IngestionOutcomeDoer_GiveHediff)ThingDef.Named("PsychiteTea").ingestible.outcomeDoers.First(x => x is IngestionOutcomeDoer_GiveHediff);
+            if (giveHediff != null)
+                giveHediff.severity = 1f;
+
+            this.Active = true;
+        }
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref Active, "MFI_Buff_PsychTea");
+        }
+
+        public static void Register()
+        {
+            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_PsychTea());
+        }
+    }
+
+    public class Buff_Chemfuel : Buff
+    {
+        public override void Apply()
+        {
+            CompProperties_Spawner spawner = (CompProperties_Spawner)ThingDefOf.InfiniteChemreactor.comps.First(x => x is CompProperties_Spawner);
+
+            if (spawner != null)
+                spawner.spawnIntervalRange.min = (int)(spawner.spawnIntervalRange.min * 0.9f);
+
+            this.Active = true;
+        }
+
+        public override TechLevel MinTechLevel()
+        {
+            return TechLevel.Industrial;
+        }
+
+        public static void Register()
+        {
+            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_Chemfuel());
+        }
+
+        public override void ExposeData()
+        {
+            Scribe_Values.Look(ref this.Active, "MFI_Buff_ChemFuel");
+        }
+    }
 }

@@ -61,8 +61,54 @@
     <MFI_FactionWarLeaderDecidedOnWar>The peace talks have ended in failure, and a war between {0} and {1} has broken out. They will occasionally launch attacks on each others bases. If you favoured one faction over the other, they may call upon you for help.\n\nYou can keep track of the faction war in the Factions tab.</MFI_FactionWarLeaderDecidedOnWar>
     <MFI_FactionWarLeaderDecidedAgainstWar>The peace talks have ended. Tensions have been alleviated and the factions of {0} and {1} have reached an initial agreement.</MFI_FactionWarLeaderDecidedAgainstWar>
 
-    <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+    <!-- equivalent to NeedSilverLaunchable, just with steel. (currently unused) -->
     <MFI_SellingWarBondsNeedSteelLaunchable>need {0} steel near trade beacons</MFI_SellingWarBondsNeedSteelLaunchable>
-    
+
+<!-- Annual Expo start -->
+    <MFI_AnnualExpoFirstOption>Let's get started!</MFI_AnnualExpoFirstOption>
+    <MFI_AnnualExpoDialogueIntroduction>Your caravan has arrived at the annual exposition. As this year's theme is {0}, there are many experts on that topic here. Most of them are preparing, while others have already started showing off their skills.\n\nThe expo is a hodge-podge of stalls, some modest and made of locally sourced materials while others are high-tech pre-fabs from Urb worlds. They form a circle around the main stage, where {1}\n\nSurely it'll be used for something more useful later.</MFI_AnnualExpoDialogueIntroduction>
+    <!-- it is time for the {ORDINALNUMBER} annual {WORLDNAME}. This year's theme is {MFI_gameOfUrComp / MFI_shootingComp / MFI_culturalSwap / etc} {MFI_explanation_of_theme} -->
+    <MFI_AnnualExpoLetterText>It is time for the {0} annual {1} exposition, and your faction has been invited. This year's theme is {1}. {2}\n\nThe annual exposition is a highly respected peaceful gathering. It has historically been used by almost all factions as an opportunity to exchange culture, experiences, and to show off.</MFI_AnnualExpoLetterText>
+        
+    <MFI_gameOfUrComp>the Royal Game-of-Ur</MFI_gameOfUrComp>
+    <MFI_shootingComp>a shooting competition</MFI_shootingComp>
+    <MFI_culturalSwap>culture and art</MFI_culturalSwap>
+    <MFI_scienceFaire>exchanging scientific discoveries</MFI_scienceFaire>
+    <MFI_acousticShow>an acoustic show</MFI_acousticShow>
+
+    <MFI_gameOfUrCompExpl>Send your best gamer.</MFI_gameOfUrCompExpl>
+    <MFI_shootingCompExpl>Send your best shot.</MFI_shootingCompExpl>
+    <MFI_culturalSwapExpl>There may be an opportunity for trade.</MFI_culturalSwapExpl>
+    <MFI_scienceFaireExpl>Exciting!</MFI_scienceFaireExpl>
+    <MFI_acousticShowExpl>You wonder whether to bring earplugs.</MFI_acousticShowExpl>
+
+    <MFI_buffPemmican>Pemmican no longer rots.</MFI_buffPemmican>
+    <MFI_buffEmanator>The {0} has an increased range and effect, at the cost of an increased power consumption.</MFI_buffEmanator>
+    <MFI_buffChemfuel>The {0} now produces {1} more often.</MFI_buffChemfuel>
+    <MFI_buffPsychite>By seeping it longer, {0} is now more potent. Truly a marvel of modern engineering.</MFI_buffPsychite>
+
+    <MFI_SinceYouSuckAndDidntHaveIt>Since you didn't have it yet, they also gave you {0}!</MFI_SinceYouSuckAndDidntHaveIt>
+
+    <MFI_gameOfUrCompOutcomeFirstPlace></MFI_gameOfUrCompOutcomeFirstPlace>
+    <MFI_gameOfUrCompOutcomeFirstLoser></MFI_gameOfUrCompOutcomeFirstLoser>
+    <MFI_gameOfUrCompOutcomeFirstOther>During the second inning of the fifth round, {0} played a move which confused their opponent and astounded referees. Understandably, a massive brawl ensued. Your reward for participating is {1}</MFI_gameOfUrCompOutcomeFirstOther>
+
+    <MFI_shootingCompOutcomeFirstPlace></MFI_shootingCompOutcomeFirstPlace>
+    <MFI_shootingCompOutcomeFirstLoser></MFI_shootingCompOutcomeFirstLoser>
+    <MFI_shootingCompOutcomeFirstOther></MFI_shootingCompOutcomeFirstOther>
+
+    <MFI_culturalSwapOutcomeFirstPlace></MFI_culturalSwapOutcomeFirstPlace>
+    <MFI_culturalSwapOutcomeFirstLoser></MFI_culturalSwapOutcomeFirstLoser>
+    <MFI_culturalSwapOutcomeFirstOther></MFI_culturalSwapOutcomeFirstOther>
+
+    <MFI_scienceFaireOutcomeFirstPlace></MFI_scienceFaireOutcomeFirstPlace>
+    <MFI_scienceFaireOutcomeFirstLoser></MFI_scienceFaireOutcomeFirstLoser>
+    <MFI_scienceFaireOutcomeFirstOther></MFI_scienceFaireOutcomeFirstOther>
+
+    <MFI_acousticShowOutcomeFirstPlace></MFI_acousticShowOutcomeFirstPlace>
+    <MFI_acousticShowOutcomeFirstLoser></MFI_acousticShowOutcomeFirstLoser>
+    <MFI_acousticShowOutcomeFirstOther></MFI_acousticShowOutcomeFirstOther>
+<!-- Annual Expo end -->
+
 
 </LanguageData>

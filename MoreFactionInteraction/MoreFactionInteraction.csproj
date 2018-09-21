@@ -59,11 +59,15 @@
   <ItemGroup>
     <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
     <Compile Include="General\MFI_Utilities.cs" />
+    <Compile Include="More Flavour\AnnualExpo.cs" />
+    <Compile Include="More Flavour\AnnualExpoDialogue.cs" />
     <Compile Include="More Flavour\Buff_All.cs" />
     <Compile Include="More Flavour\Buff_Tracker.cs" />
+    <Compile Include="More Flavour\CaravanArrivalAction_VisitAnnualExpo.cs" />
     <Compile Include="More Flavour\CaravanArrivalAction_VisitMysticalShaman.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\ChoiceLetter_MysticalShaman.cs" />
+    <Compile Include="More Flavour\IncidentWorker_AnnualExpo.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />
     <Compile Include="More Flavour\MysticalShaman.cs" />
