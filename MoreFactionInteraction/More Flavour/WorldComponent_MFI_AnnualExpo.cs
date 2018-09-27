@@ -38,7 +38,7 @@ namespace MoreFactionInteraction.More_Flavour
             { "shootingComp", 0 },
             { "culturalSwap", 0 },
             { "scienceFaire", 0 },
-            { "acousticShow", 0 }
+            { "acousticShow", 0 },
         };
 
         public WorldComponent_MFI_AnnualExpo(World world) : base(world)

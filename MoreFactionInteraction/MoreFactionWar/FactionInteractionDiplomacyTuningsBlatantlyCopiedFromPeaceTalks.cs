@@ -5,7 +5,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 {
     public class FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
     {
-        public static readonly SimpleCurve BadOutcomeFactorAtDiplomacyPower = new SimpleCurve
+        public static readonly SimpleCurve BadOutcomeFactorAtStatPower = new SimpleCurve
         {
             new CurvePoint(x: 0f, y: 4f),
             new CurvePoint(x: 1f, y: 1f),
