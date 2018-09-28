@@ -11,6 +11,7 @@ namespace MoreFactionInteraction.More_Flavour
     public class AnnualExpo : WorldObject
     {
         public string Event;
+        public Faction host;
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
@@ -21,7 +22,7 @@ namespace MoreFactionInteraction.More_Flavour
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
-                Find.WindowStack.Add(window: new Dialog_NodeTree(AnnualExpoDialogue.AnnualExpoDialogueNode(pawn, caravan, Event)));
+                Find.WindowStack.Add(window: new Dialog_NodeTree(AnnualExpoDialogue.AnnualExpoDialogueNode(pawn, caravan, Event, host)));
                 Find.WorldObjects.Remove(this);
             }
         }

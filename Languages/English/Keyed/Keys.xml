@@ -111,9 +111,9 @@
     <MFI_scienceFaireOutcomeFirstLoser>Your caravan nestles in between members of a group called "appreciators of science". They bestow upon you a gift of knowledge:\n\n{0}</MFI_scienceFaireOutcomeFirstLoser>
     <MFI_scienceFaireOutcomeFirstOther>Weary from the long journey, your caravan members have trouble staying awake during the long and tenuous lecture by a famous professor. As a departure gift, you get:\n\n{0}</MFI_scienceFaireOutcomeFirstOther>
 
-    <MFI_acousticShowOutcomeFirstPlace>Placeholder, don't translate.</MFI_acousticShowOutcomeFirstPlace>
-    <MFI_acousticShowOutcomeFirstLoser>Placeholder, don't translate.</MFI_acousticShowOutcomeFirstLoser>
-    <MFI_acousticShowOutcomeFirstOther>Placeholder, don't translate.</MFI_acousticShowOutcomeFirstOther>
+    <MFI_acousticShowOutcomeFirstPlace>Your caravan spent the day gallivanting through the stalls and admiring the wide array of eclectic non-electric musical instruments from all over this world and beyond. As dusk fell and people gathered their instruments an intimate concert was held on the main-stage. It lifted the spirits of your caravan members. Your reward for coming is:\n\n{2}</MFI_acousticShowOutcomeFirstPlace>
+    <MFI_acousticShowOutcomeFirstLoser>The expo turned out to be a very cosy get-together, spent jamming on guitars. Someone played Wonderwall but other than that it was a pretty chill evening that put everybody in a good mood. Your reward for coming is:\n\n{2}</MFI_acousticShowOutcomeFirstLoser>
+    <MFI_acousticShowOutcomeFirstOther>One of your caravan members picked up an instrument they shouldn't have and, not being musically gifted, broke a string while fingering a minor. Apologies were made but it wasn't sufficient: your klutzy caravan member was to work as a stage-hand on the night of the performance. After the after-party clean-up they were given leftovers:\n\n{2}</MFI_acousticShowOutcomeFirstOther>
 
     <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
     <MFI_AnnualExpoXPGain>{0} has gained {1} {2} experience.</MFI_AnnualExpoXPGain>

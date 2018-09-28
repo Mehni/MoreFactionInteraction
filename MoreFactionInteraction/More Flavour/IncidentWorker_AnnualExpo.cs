@@ -38,6 +38,7 @@ namespace MoreFactionInteraction.More_Flavour
             annualExpo.GetComponent<TimeoutComp>().StartTimeout(TimeoutDaysRange.RandomInRange * GenDate.TicksPerDay);
             Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<string, int> result);
             annualExpo.Event = result.Key;
+            annualExpo.host = Find.FactionManager.AllFactionsVisible.Where(x => !x.defeated && !x.def.permanentEnemy).RandomElement();
 
             Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld++;
 

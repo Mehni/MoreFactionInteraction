@@ -18,6 +18,8 @@ namespace MoreFactionInteraction.More_Flavour
         public int timesHeld = 0;
         private List<Buff> activeBuffList = new List<Buff>();
 
+        public List<Buff> ActiveBuffsList => activeBuffList;
+
         public int TimesHeld => timesHeld + Math.Abs((int)Rand.ValueSeeded(Find.World.ConstantRandSeed)) % 1000;
 
         public bool BuffedEmanator => (this.activeBuffList.Find(x => x is Buff_Emanator)?.Active) ?? false; //used by patches.
