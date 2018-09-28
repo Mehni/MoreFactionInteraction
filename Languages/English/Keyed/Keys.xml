@@ -100,8 +100,10 @@
     <MFI_shootingCompOutcomeFirstLoser>There was a strong field of contenders this year, with many faction representatives having lived as a hunter or just plain decked out in (archotech) bionics. [PAWN_nameDef] stranded somewhere in the quarter finals. Your reward for participating is:\n\n{0}</MFI_shootingCompOutcomeFirstLoser>
     <MFI_shootingCompOutcomeFirstOther>[PAWN_nameDef] did not proceed past the first round, which consisted of "hit the broad side of a barn". They added that part as a gag years ago. [PAWN_nameDef] is the first since its introduction not to progress to the second round. Your reward for participating is:\n\n{0}</MFI_shootingCompOutcomeFirstOther>
 
+    <!-- {0 = childhood backstory label} -->
     <MFI_culturalSwapOutcomeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_objective] upbringing as a {0}. This simple story and more importantly the atmosphere [PAWN_objective] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{1}</MFI_culturalSwapOutcomeFirstPlace>
     <MFI_culturalSwapOutcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{0}</MFI_culturalSwapOutcomeFirstLoser>
+    <!-- {0 = factionName} {1 = TerrainFeatureLabel, e.g. White Rabbit Mountain Range} -->
     <MFI_culturalSwapOutcomeFirstOther>The faction of {0} moved the audience to tears with their dazzling display; a dramatic reenactment of their ancestor's discovery of {1}. It was a touching piece of theatre that transcended language barriers, and reached the hearts of young and old alike.\n\nAnd then there was your troupe. Your reward for participating is:\n\n{2}</MFI_culturalSwapOutcomeFirstOther>
     <MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>The artwork your caravan brought along to the expo took second place at the judging competition, but it was a favourite with the audience. One pundit approached your caravan after the show and offered to buy {0} for {1}, which the judges estimated the market value to be at {2}.</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
 
@@ -113,7 +115,12 @@
     <MFI_acousticShowOutcomeFirstLoser>Placeholder, don't translate.</MFI_acousticShowOutcomeFirstLoser>
     <MFI_acousticShowOutcomeFirstOther>Placeholder, don't translate.</MFI_acousticShowOutcomeFirstOther>
 
-    <MFI_AnnualExpoXPGain>{0} has gained {1} melee experience.</MFI_AnnualExpoXPGain>
+    <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
+    <MFI_AnnualExpoXPGain>{0} has gained {1} {2} experience.</MFI_AnnualExpoXPGain>
+    <MFI_AnnualExpoMedicalEmergency>A few bruises, a minor concussion, and a couple of dented egos.</MFI_AnnualExpoMedicalEmergency>
+    <MFI_AnnualExpoMedicalEmergencySerious>A sprained ankle, sore muscles, and an embarrassing wardrobe malfunction.</MFI_AnnualExpoMedicalEmergencySerious>
+
+    <MFI_AnnualExpoMessageNoRepresentative>No conscious, capable representative.</MFI_AnnualExpoMessageNoRepresentative>
 <!-- Annual Expo end -->
 
 </LanguageData>

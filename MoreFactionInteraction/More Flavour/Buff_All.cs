@@ -15,6 +15,7 @@ namespace MoreFactionInteraction.More_Flavour
 
         public abstract void Apply();
         public abstract void ExposeData();
+        public abstract string Description();
     }
 
     public class Buff_Pemmican : Buff
@@ -34,6 +35,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Scribe_Values.Look(ref Active, "MFI_Buff_Pemmican");
         }
+
+        public override string Description() => "MFI_buffPemmican".Translate();
     }
 
     public class Buff_Emanator : Buff
@@ -50,7 +53,6 @@ namespace MoreFactionInteraction.More_Flavour
         }
 
         public override TechLevel MinTechLevel() => TechLevel.Industrial;
-        
 
         public static void Register()
         {
@@ -61,6 +63,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Scribe_Values.Look(ref Active, "MFI_Buff_Emanator");
         }
+
+        public override string Description() => "MFI_buffEmanator".Translate(ThingDefOf.PsychicEmanator.label);
     }
 
     public class Buff_PsychTea : Buff
@@ -83,6 +87,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_PsychTea());
         }
+
+        public override string Description() => "MFI_buffPsychite".Translate(ThingDef.Named("PsychiteTea").label);
     }
 
     public class Buff_Chemfuel : Buff
@@ -111,5 +117,7 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Scribe_Values.Look(ref this.Active, "MFI_Buff_ChemFuel");
         }
+
+        public override string Description() => "MFI_buffChemfuel".Translate(ThingDefOf.InfiniteChemreactor.label, ThingDefOf.InfiniteChemreactor.GetCompProperties<CompProperties_Spawner>().thingToSpawn.label);
     }
 }

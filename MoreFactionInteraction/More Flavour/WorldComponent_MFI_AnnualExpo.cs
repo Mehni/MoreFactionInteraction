@@ -28,6 +28,15 @@ namespace MoreFactionInteraction.More_Flavour
                 this.activeBuffList.Add(buff);
         }
 
+        public readonly Dictionary<string, StatDef> relevantXpForEvent = new Dictionary<string, StatDef>
+        {
+            { "gameOfUrComp", StatDefOf.PsychicSensitivity },
+            { "shootingComp", StatDefOf.ShootingAccuracyPawn },
+            { "culturalSwap", StatDefOf.SocialImpact },
+            { "scienceFaire", StatDefOf.ResearchSpeed },
+            { "acousticShow", StatDefOf.TradePriceImprovement },
+        };
+
         public readonly Dictionary<string, int> Events = new Dictionary<string, int>
         {
             //{ "buffChemfuel", 0 },
@@ -45,10 +54,12 @@ namespace MoreFactionInteraction.More_Flavour
         {
         }
 
-        public void ApplyRandomBuff(Predicate<Buff> validator = null)
+        public Buff ApplyRandomBuff(Predicate<Buff> validator = null)
         {
             if (this.activeBuffList.Where(x => validator(x)).TryRandomElement(out Buff result))
                 result.Apply();
+
+            return result;
         }
 
         public override void FinalizeInit()

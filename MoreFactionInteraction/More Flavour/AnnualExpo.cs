@@ -14,9 +14,9 @@ namespace MoreFactionInteraction.More_Flavour
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
-            Pawn pawn = BestCaravanPawnUtility.FindBestDiplomat(caravan: caravan);
+            Pawn pawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[Event]);
             if (pawn == null)
-                Messages.Message(text: "MessagePeaceTalksNoDiplomat".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent, historical: false);
+                Messages.Message(text: "MFI_AnnualExpoMessageNoRepresentative".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent, historical: false);
 
             else
             {
