@@ -34,7 +34,7 @@ namespace MoreFactionInteraction.World_Incidents
                 this.pawnKindDef = PawnKindDefOf.Thrumbo; //something went really wrong. Let's uh.. brush it under the rug.
 
             else if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
-                this.pawnKindDef = site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).parms.animalKind;
+                this.pawnKindDef = site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart)?.parms?.animalKind ?? PawnKindDefOf.Thrumbo;
 
             int num = new IntRange(min: 30, max: 50).RandomInRange;
 
