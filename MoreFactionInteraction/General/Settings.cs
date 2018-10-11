@@ -9,7 +9,7 @@ namespace MoreFactionInteraction
 
     public class MoreFactionInteraction_Settings : ModSettings
     {
-        public static int ticksToUpgrade = 3 * GenDate.DaysPerQuadrum * GenDate.TicksPerDay;
+        public static int ticksToUpgrade = 3 * GenDate.DaysPerQuadrum * GenDate.TicksPerDay; //3 * 15 * 60000 = 2700000
         public static float timeModifierBetweenFactionInteraction = 1f;
         public static float traderWealthOffsetFromTimesTraded = 0.7f;
         public static float pirateBaseUpgraderModifier = 0.8f;
@@ -19,11 +19,11 @@ namespace MoreFactionInteraction
             Listing_Standard options = new Listing_Standard();
             options.Begin(rect: rect);
             options.Gap();
-            options.SliderLabeled(label: "MFI_ticksToUpgrade".Translate(), val: ref ticksToUpgrade, format: ticksToUpgrade.ToStringTicksToPeriodVague(vagueMin: false), min: 0, max: GenDate.TicksPerYear);
+            options.SliderLabeled(label: "MFI_ticksToUpgrade".Translate(), val: ref ticksToUpgrade, format: ticksToUpgrade.ToStringTicksToPeriodVague(vagueMin: false), min: 0, max: GenDate.TicksPerYear, "MFI_ticksToUpgradeDesc".Translate());
             options.Gap();
-            options.SliderLabeled(label: "MFI_pirateBaseUpgraderModifier".Translate(), val: ref pirateBaseUpgraderModifier, format: pirateBaseUpgraderModifier.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.1f, max: 2f);
+            options.SliderLabeled(label: "MFI_pirateBaseUpgraderModifier".Translate(), val: ref pirateBaseUpgraderModifier, format: pirateBaseUpgraderModifier.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.1f, max: 2f, "MFI_pirateBaseUpgraderModifierDesc".Translate());
             options.GapLine();
-            options.SliderLabeled(label: "MFI_timeModifierBetweenFactionInteraction".Translate(), val: ref timeModifierBetweenFactionInteraction, format: timeModifierBetweenFactionInteraction.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.5f, max: 3f);
+            options.SliderLabeled(label: "MFI_timeModifierBetweenFactionInteraction".Translate(), val: ref timeModifierBetweenFactionInteraction, format: timeModifierBetweenFactionInteraction.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.5f, max: 3f, "MFI_timeModifierBetweenFactionInteractionDesc".Translate());
             options.Gap();
             options.SliderLabeled(label: "MFI_traderWealthOffsetFromTimesTraded".Translate(), val: ref traderWealthOffsetFromTimesTraded, format: traderWealthOffsetFromTimesTraded.ToStringByStyle(style: ToStringStyle.FloatOne), min: 0.5f, max: 3f);
             options.End();

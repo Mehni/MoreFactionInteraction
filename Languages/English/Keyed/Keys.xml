@@ -3,8 +3,11 @@
 
     <!--settings -->
     <MFI_ticksToUpgrade>Time until pirates upgrade their outposts to bases</MFI_ticksToUpgrade>
-    <MFI_pirateBaseUpgraderModifier>Modifier to how often pirates spread</MFI_pirateBaseUpgraderModifier>
+    <MFI_ticksToUpgradeDesc>Larger values means that pirates take longer to change outposts into bases.</MFI_ticksToUpgradeDesc>
+    <MFI_pirateBaseUpgraderModifier>Pirate outpost spawn rate</MFI_pirateBaseUpgraderModifier>
+    <MFI_pirateBaseUpgraderModifierDesc>Higher values means an increased chance of pirates spreading. Low values = lazy pirates.</MFI_pirateBaseUpgraderModifierDesc>
     <MFI_timeModifierBetweenFactionInteraction>Time modifier between faction interaction</MFI_timeModifierBetweenFactionInteraction>
+    <MFI_timeModifierBetweenFactionInteractionDesc>Higher values means more time between friendly faction interactions. Scales positively with Goodwill (more goodwil = more visits) and negatively with amount of friendly factions (lots of friends = fewer visits per friend, total roughly the same. For those that have dozens of faction mods installed).</MFI_timeModifierBetweenFactionInteractionDesc>
     <MFI_traderWealthOffsetFromTimesTraded>Modifier to silver brought by traders (scales with interaction frequency)</MFI_traderWealthOffsetFromTimesTraded>
 
     <MFI_LetterLabelBanditOutpostUpgraded>Bandit outpost upgraded</MFI_LetterLabelBanditOutpostUpgraded>
