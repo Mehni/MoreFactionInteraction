@@ -63,6 +63,7 @@
     <Compile Include="More Flavour\Buff_Tracker.cs" />
     <Compile Include="More Flavour\CaravanArrivalAction_VisitMysticalShaman.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
+    <Compile Include="More Flavour\ChoiceLetter_DiplomaticWeddingShotgunEdition.cs" />
     <Compile Include="More Flavour\ChoiceLetter_MysticalShaman.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />

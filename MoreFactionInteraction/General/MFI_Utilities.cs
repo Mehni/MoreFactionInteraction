@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using Verse;
+using System.Linq;
 
 namespace MoreFactionInteraction.General
 {
@@ -25,6 +26,12 @@ namespace MoreFactionInteraction.General
             //          : null);
             //
             // which is a nested ternary and just awful to read. Be happy I spared you.
+        }
+
+        public static bool IsScenarioBlocked(this IncidentWorker incidentWorker)
+        {
+            return Find.Scenario.AllParts.Any(x => x is ScenPart_DisableIncident scenPart 
+                                                && scenPart.Incident == incidentWorker.def);
         }
 
         public static bool IsPartOfFactionWar(this Faction faction) => faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne ||

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -7,8 +8,6 @@ using MoreFactionInteraction.MoreFactionWar;
 
 namespace MoreFactionInteraction
 {
-    using System;
-
     public class ChoiceLetter_DiplomaticMarriage : ChoiceLetter
     {
         private int goodWillGainedFromMarriage;
@@ -27,12 +26,6 @@ namespace MoreFactionInteraction
                 }
                 else
                 {
-                    //possible outcomes: 
-                    //dowry
-                    //goodwill based on pawn value
-                    //wedding (doable)
-                    //bring us the betrothed? (complicated.)
-                    //betrothed picks a transport pod (meh)
                     DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
                     {
                         action = () =>

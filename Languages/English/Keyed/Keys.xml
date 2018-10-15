@@ -64,8 +64,7 @@
     <MFI_FactionWarLeaderDecidedOnWar>The peace talks have ended in failure, and a war between {0} and {1} has broken out. They will occasionally launch attacks on each others bases. If you favoured one faction over the other, they may call upon you for help.\n\nYou can keep track of the faction war in the Factions tab.</MFI_FactionWarLeaderDecidedOnWar>
     <MFI_FactionWarLeaderDecidedAgainstWar>The peace talks have ended. Tensions have been alleviated and the factions of {0} and {1} have reached an initial agreement.</MFI_FactionWarLeaderDecidedAgainstWar>
 
-    <!-- equivalent to NeedSilverLaunchable, just with steel. -->
-    <MFI_SellingWarBondsNeedSteelLaunchable>need {0} steel near trade beacons</MFI_SellingWarBondsNeedSteelLaunchable>
-    
+    <!-- equivalent to NeedSilverLaunchable, just with a list of items. -->
+    <MFI_NeedLaunchablesNearTradeBeacon>need {0} near trade beacon</MFI_NeedLaunchablesNearTradeBeacon>
 
 </LanguageData>

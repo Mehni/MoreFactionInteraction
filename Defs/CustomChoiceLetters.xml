@@ -17,6 +17,11 @@
   </LetterDef>
 
   <LetterDef ParentName="CustomChoiceLetterBase">
+  	<defName>DiplomaticMarriageShotGunEdition</defName>
+  	<letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticWeddingShotgunEdition</letterClass>
+  </LetterDef>
+
+  <LetterDef ParentName="CustomChoiceLetterBase">
     <defName>MysticalShaman</defName>
     <letterClass>MoreFactionInteraction.ChoiceLetter_MysticalShaman</letterClass>
   </LetterDef>
