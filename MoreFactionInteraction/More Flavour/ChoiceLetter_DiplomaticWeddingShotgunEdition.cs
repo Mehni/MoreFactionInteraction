@@ -123,8 +123,8 @@ namespace MoreFactionInteraction
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Pawn>(refee: ref this.betrothedInternal, label: "betrothed");
-            Scribe_References.Look<Pawn>(refee: ref this.marriageSeekerInternal, label: "marriageSeeker");
+            Scribe_References.Look<Pawn>(refee: ref this.betrothedInternal, label: "betrothedInternal");
+            Scribe_References.Look<Pawn>(refee: ref this.marriageSeekerInternal, label: "marriageSeekerInternal");
         }
     }
 }

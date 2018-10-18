@@ -61,7 +61,7 @@ namespace MoreFactionInteraction
                 choiceLetterDiplomaticMarriage.marriageSeeker = this.marriageSeeker;
                 choiceLetterDiplomaticMarriage.betrothed = this.betrothed;
                 choiceLetterDiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
-                Find.LetterStack.ReceiveLetter(@let: choiceLetterDiplomaticMarriage);
+                Find.LetterStack.ReceiveLetter(choiceLetterDiplomaticMarriage);
                 Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
 
                 this.ClearWeddingCandidates();
@@ -72,7 +72,7 @@ namespace MoreFactionInteraction
                 return false; //CommsConsole required because of launching dowry
 
             //skewing pawn value because I can.
-            if (this.betrothedInternal.GetStatValue(StatDefOf.MarketValue) < 800)
+            if (this.betrothedInternal.GetStatValue(StatDefOf.MarketValue) < 800 || Rand.Chance(0.1f))
                 GenerateTechHediffsFor(this.betrothedInternal);
 
             List<ThingCount> dowry = this.GenerateSomeFairPriceFor(this.betrothedInternal);

@@ -35,12 +35,13 @@ namespace MoreFactionInteraction
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: false, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
                             this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
 
-                                if (this.betrothed.GetCaravan() is Caravan caravan)
-                                {
-                                    CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(from: this.betrothed, candidates: caravan.PawnsListForReading);
-                                    HealIfPossible(p: this.betrothed);
-                                    caravan.RemovePawn(p: this.betrothed);
-                                }
+                            if (this.betrothed.GetCaravan() is Caravan caravan)
+                            {
+                                CaravanInventoryUtility.MoveAllInventoryToSomeoneElse(from: this.betrothed, candidates: caravan.PawnsListForReading);
+                                HealIfPossible(p: this.betrothed);
+                                caravan.RemovePawn(p: this.betrothed);
+                            }
+
                             DetermineAndDoOutcome(marriageSeeker: this.marriageSeeker, betrothed: this.betrothed);
                             Find.LetterStack.RemoveLetter(this);
                         }
@@ -71,7 +72,8 @@ namespace MoreFactionInteraction
 
         private static void DetermineAndDoOutcome(Pawn marriageSeeker, Pawn betrothed)
         {
-            if (Prefs.LogVerbose) Log.Warning(text: "Determine and do outcome after marriage.");
+            if (Prefs.LogVerbose)
+                Log.Warning(text: "Determine and do outcome after marriage.");
 
             betrothed.SetFaction(newFaction: !marriageSeeker.HostileTo(fac: Faction.OfPlayer)
                                                  ? marriageSeeker.Faction
