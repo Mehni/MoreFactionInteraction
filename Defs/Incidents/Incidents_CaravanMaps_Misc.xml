@@ -10,7 +10,7 @@
     </targetTags>
     <workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HerdMigration_Ambush</workerClass>
     <pointsScaleable>true</pointsScaleable>
-    <minRefireDays>0.17</minRefireDays>
+    <minRefireDays>200</minRefireDays>
     <letterText>A group of {0} is passing through the area.\n\nIt's hunting time.</letterText>
     <letterLabel>Animal migration: {0}</letterLabel>
     <letterDef>NeutralEvent</letterDef>
