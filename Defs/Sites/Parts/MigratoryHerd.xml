@@ -14,7 +14,6 @@
     <approachOrderString>Visit {0}</approachOrderString>
     <approachingReportString>Visiting {0}</approachingReportString>
     <arrivedLetter>Your caravan has arrived at the hunter's lodge. It seems nobody is here, but they've obviously been expecting you and have made the place hospitable.</arrivedLetter>
-    <arrivedLetterLabel>Hunter's lodge</arrivedLetterLabel>
     <arrivedLetterDef>PositiveEvent</arrivedLetterDef>
     <tags>
       <li>MigratoryHerd</li>
