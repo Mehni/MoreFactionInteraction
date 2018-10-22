@@ -32,10 +32,7 @@ namespace MoreFactionInteraction
                     };
                     if (!TradeUtility.ColonyHasEnoughSilver(map: this.map, fee: this.fee))
                     {
-                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(args: new object[]
-                        {
-                            this.fee.ToString()
-                        }));
+                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(this.fee.ToString()));
                     }
                     yield return accept;
 
