@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_ticksToUpgrade>Tiempo hasta que los piratas actualicen sus puestos de avanzada a bases</MFI_ticksToUpgrade>
+	<MFI_ticksToUpgradeDesc>Valores más altos significa que los piratas tardan más en actualizar los puestos de avanzada.</MFI_ticksToUpgradeDesc>
+    	<MFI_pirateBaseUpgraderModifier>Tasa de aparición de puestos avanzados piratas</MFI_pirateBaseUpgraderModifier>
+	<MFI_pirateBaseUpgraderModifierDesc>Valores más altos significa una mayor probabilidad de propagación de piratas. Valores bajos=pocos piratas.</MFI_pirateBaseUpgraderModifierDesc>
+	<MFI_timeModifierBetweenFactionInteraction>Modificador de tiempo entre la interacción de facción</MFI_timeModifierBetweenFactionInteraction>
+	<MFI_timeModifierBetweenFactionInteractionDesc>Valores más altos significa más tiempo entre las interacciones de faccines amigas. Escala positivamente con la buena voluntad (más buena voluntad=más visitas) y negativamente con la cantidad de facciones amigables (muchos amigos=menos visitas por amigo). Aproximadamente lo mismo, para aquellos que tienen docenas de mods de facción instalados.</MFI_timeModifierBetweenFactionInteractionDesc>
+	<MFI_traderWealthOffsetFromTimesTraded>Modificador a la cantidad de plata traída por los comerciantes</MFI_traderWealthOffsetFromTimesTraded>
+
+	<MFI_LetterLabelBanditOutpostUpgraded>Puesto de avanzada de los bandido mejorado</MFI_LetterLabelBanditOutpostUpgraded>
+	<MFI_LetterBanditOutpostUpgraded>Los piratas de {0} han actualizado un puesto de avanzada cercano a nuestra base.\n\nEnviarán grupos de asalto ocasionales para probar nuestras defensas y para situar nuevos puestos de avanzada que pueden convertirse en bases a futuro.</MFI_LetterBanditOutpostUpgraded>
+	<MFI_DesperateTrader>Comerciante desesperado</MFI_DesperateTrader>
+	<MFI_TraderSent>{0} te da las gracias. Su caravana comercial llegará apróximadamente en {1} días.</MFI_TraderSent>
+	<MFI_Trader>Comerciante</MFI_Trader>
+
+	<MFI_CaravanWorking>La caravana no puede moverse durante la cosecha.</MFI_CaravanWorking>
+
+	<MFI_FactionWarPeaceTalksIntroduction>Los dos líderes de las facciones, {0} y {1}, acamparon cada uno en esquinas opuestas del lugar. Las tensiones son cada vez más altas cuando tu negociador ingresa. Los últimos días han estado afectando a las partes involucradas, y el negociador sabe que lo que dirá puede tener consecuencias a gran escala.</MFI_FactionWarPeaceTalksIntroduction>
+
+	<MFI_FactionWarPeaceTalksCurryFavour>Aliarse con {0}.</MFI_FactionWarPeaceTalksCurryFavour>
+	<MFI_FactionWarPeaceTalksSabotage>Sabotear las conversaciones de paz para beneficio de la colonia.</MFI_FactionWarPeaceTalksSabotage>
+	<MFI_FactionWarPeaceTalksBrokerPeace>Romper la paz entre las facciones.</MFI_FactionWarPeaceTalksBrokerPeace>
+
+	<MFI_FactionWarFavourFactionDisaster>Las conversaciones fueron un desastre. Ninguna de las dos facciones apreció el intento de tu negociador de poner un límite a {0}. Los esfuerzos para buscar paz en la lucha se consideraron un acto de agresión y, como resultado, las conversaciones de paz se rompieron.\n\nLas relaciones con {0} se han deteriorado un poco.\n\nLas relaciones con {1} se han deteriorado masivamente.</MFI_FactionWarFavourFactionDisaster>
+	<MFI_FactionWarFavourFactionBackFire>Las conversaciones han fracasado. Mientras que los diplomáticos de las facciones discutieron las diferencias clave, las disuasiones que hizo tu negociador se consideraron poco constructivas hacia los objetivos y las conversaciones pronto se terminaron.\n\nLas relaciones con {0} se han deteriorado.\n\nLas relaciones con {1} se han deteriorado masivamente.</MFI_FactionWarFavourFactionBackFire>
+	<MFI_FactionWarFavourFactionFlounder>Las conversaciones han fracasado. Los diplomáticos de las facciones expresaron claramente sus problemas, pero tu negociador no pudo hacer ninguna contribución significativa a las conversaciones.\n\nLas relaciones con {0} han aumentado un poco.\n\nLas relaciones con {1} se han deteriorado considerablemente.</MFI_FactionWarFavourFactionFlounder>
+	<MFI_FactionWarFavourFactionSuccess>Las conversaciones fueron un éxito. Tu negociador logró convencer a {1} para compensar a {0}, y sus diplomáticos elaboraron un tratado.\n\nLas relaciones con {0} aumentaron considerablemente.\n\nLas relaciones con {1} se deterioraron un poco.</MFI_FactionWarFavourFactionSuccess>
+	<MFI_FactionWarFavourFactionTriumph>¡Las conversaciones fueron un gran triunfo! Tu negociador desempeñó un papel importante al convencer a {1} de pagar reparaciones por agresiones pasadas, para deleite de {0}.\n\nLas relaciones con {0} aumentaron enormemente.\n\nLas relaciones con {1} se han deteriorado.</MFI_FactionWarFavourFactionTriumph>
+
+	<MFI_FactionWarSabotageDisaster>El sabotaje fue un desastre. Los diplomáticos descubrieron rápidamente la intención de tu negociador y ambas facciones se volvieron en su contra. Tu caravana hizo un escape apresurado, pero los guerreros de ambas facciones la alcanzaran y atacaran.\n\nLas relaciones con {0} se han roto. Ahora son hostiles.\n\nLas relaciones con {1} se han roto. Ahora son hostiles.</MFI_FactionWarSabotageDisaster>
+	<MFI_FactionWarSabotageBackFire>El sabotaje ha fracasado. No mucho después de que los diplomáticos intercambiaron bromas, se dieron cuenta de la naturaleza no constructiva de tu negociador y lo excluyeron de las conversaciones.\n\nLas relaciones con {0} se deterioraron masivamente.\n\nLas relaciones con {1} se deterioraron masivamente.</MFI_FactionWarSabotageBackFire>
+	<MFI_FactionWarSabotageFlounder>El sabotaje fracasó. Tu negociador demostró ser incapaz de decir una palabra o aportar contribuciones significativas a las conversaciones de paz de una forma u otra.\n\nLas relaciones con {0} y {1} permanecen sin cambios.</MFI_FactionWarSabotageFlounder>
+	<MFI_FactionWarSabotageSuccess>El sabotaje fue un éxito parcial. Mientras los diplomáticos discutían temas importantes, tu negociador atravesó el campo minado político y dejó una buena impresión en ambas facciones mientras se aseguraba de que no se realizaran progresos reales.\n\nLas relaciones con {0} aumentaron considerablemente.\n\nLas relaciones con {1} aumentaron considerablemente.</MFI_FactionWarSabotageSuccess>
+	<MFI_FactionWarSabotageTriumph>¡El sabotaje fue un gran triunfo! Los diplomáticos se enfrentaron de manera experta entre sí, y poco después de los saludos iniciales, la discusión se dividió entre insultos y reproches, mientras que a ambos agresores les quedó una impresión muy favorable de tu facción.\n\nLas relaciones con {0} han aumentado enormemente.\n\nLas relaciones con {1} han aumentado enormemente.</MFI_FactionWarSabotageTriumph>
+
+	<MFI_FactionWarBrokerPeaceDisaster>Las conversaciones fueron un desastre. Los diplomáticos apenas superaron sus saludos iniciales antes de que la discusión se dividiera en insultos y reproches. Nada de lo que tu el negociador recibió aprobación alguna, y las relaciones con ambas facciones son peores que antes.\n\nLas relaciones con {0} se deterioraron.\n\nLas relaciones con {1} se deterioraron.</MFI_FactionWarBrokerPeaceDisaster>
+	<MFI_FactionWarBrokerPeaceBackFire>Las conversaciones han fracasado. A pesar de intercambiar algunas simpatías, los diplomáticos no hicieron ningún progreso en cuestiones importantes, y varias declaraciones fueron interpretadas como insultos. Decidieron reprogramar y reanudar las conversaciones para una fecha posterior.\n\nLas relaciones con {0} permanecen sin cambios.\n\nLas relaciones con {1} permanecen sin cambios.</MFI_FactionWarBrokerPeaceBackFire>
+	<MFI_FactionWarBrokerPeaceFlounder>Las conversaciones fracasaron. Los diplomáticos lograron comunicarse con claridad y con respeto, pero no pudieron avanzar en ningún problema genuino hasta que llegó tu negociador. Jugaron un papel importante para mitigar los temores y calmar las tensiones.\n\nLas relaciones con {0} han aumentado un poco.\n\nLas relaciones con {1} han aumentado un poco.</MFI_FactionWarBrokerPeaceFlounder>
+	<MFI_FactionWarBrokerPeaceSuccess>Las conversaciones fueron un éxito. Gracias en gran parte a tu negociador, los diplomáticos alcanzaron un nuevo entendimiento mutuo sobre varios problemas sustanciales.\n\nLas relaciones con {0} han aumentado considerablemente.\N\nLas relaciones con {1} han aumentado considerablemente.</MFI_FactionWarBrokerPeaceSuccess>
+	<MFI_FactionWarBrokerPeaceTriumph>¡Las conversaciones fueron un gran triunfo! Tu negociador conectó rápidamente a los otros diplomáticos y allanó el camino para ver realmente la perspectiva de los demás sobre los asuntos más difíciles del día.\n\nLas relaciones con {0} han aumentado enormemente.\n\nLas relaciones con {1} han aumentado enormemente.</MFI_FactionWarBrokerPeaceTriumph>
+
+	<MFI_FactionWarProgress>Progreso de la guerra de facciones</MFI_FactionWarProgress>
+	<MFI_UnrestIsBrewing>El malestar de las facciones se está gestando</MFI_UnrestIsBrewing>
+
+	<MFI_FactionWarBaseBattleTookPlaceLabel>Base de facción atacada</MFI_FactionWarBaseBattleTookPlaceLabel>
+	<MFI_FactionWarBaseAttacked>¡Una base perteneciente a {0} fue atacada por {1}!</MFI_FactionWarBaseAttacked>
+	<MFI_FactionWarBaseDefeated>No pudieron defenderse contra el ataque y han recibido un fuerte golpe.</MFI_FactionWarBaseDefeated>
+	<MFI_FactionWarBaseTakenOver>Después de expulsar a los enemigos de {0}, la facción de {1} ahora se ha hecho cargo de la base y ha reclamado la propiedad del área circundante.</MFI_FactionWarBaseTakenOver>
+	<MFI_FactionWarBaseDestroyed>Los atacantes de {1} saquearon la base y luego la quemaron. Este es un duro golpe para {0}.</MFI_FactionWarBaseDestroyed>
+	<MFI_FactionWarBaseSuccessfullyDefended>Los defensores lograron resistir el ataque y rápidamente los rechazaron. {0} considera que esto es una victoria en guerra.</MFI_FactionWarBaseSuccessfullyDefended>
+
+	<MFI_FactionWarStarted>La guerra de facciones ha comenzado</MFI_FactionWarStarted>
+	<MFI_FactionWarExplanation>Una guerra entre {0} y {1} ha estallado. De vez en cuando lanzarán ataques sobre las bases de los demás. Si estás aliado con una facción, pueden pedirte ayuda.\n\nPuedes seguir la guerra en la pestaña Facciones.</MFI_FactionWarExplanation>
+	<MFI_FactionWarOverLabel>La guerra de facciones ha terminado</MFI_FactionWarOverLabel>
+	<MFI_FactionWarOver>Después de muchas batallas y grandes pérdidas, la guerra entre {0} y {1} ha terminado.</MFI_FactionWarOver>
+
+	<MFI_FactionWarLeaderDecidedLabel>Resultado de las conversaciones de paz</MFI_FactionWarLeaderDecidedLabel>
+	<MFI_FactionWarLeaderDecidedOnWar>Las conversaciones de paz han terminado en fracaso, y ha estallado una guerra entre {0} y {1}. De vez en cuando lanzarán ataques sobre las bases de los demás. Si estás aliado con una facción, pueden pedirte ayuda.\n\nPuedes seguir la guerra en la pestaña Facciones.</MFI_FactionWarLeaderDecidedOnWar>
+	<MFI_FactionWarLeaderDecidedAgainstWar>Las conversaciones de paz han terminado. Las tensiones se han aliviado y las facciones de {0} y {1} han alcanzado un acuerdo mutuo.</MFI_FactionWarLeaderDecidedAgainstWar>
+
+	<MFI_SellingWarBondsNeedSteelLaunchable>necesitas {0} de acero cerca de una baliza de comercio</MFI_SellingWarBondsNeedSteelLaunchable>
+
+</LanguageData>
