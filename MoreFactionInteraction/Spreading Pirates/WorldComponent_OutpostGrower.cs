@@ -56,11 +56,11 @@ namespace MoreFactionInteraction
 
                 foreach (ChoiceLetter letter in choiceLetters)
                 {
-                    if (Find.TickManager.TicksGame > letter.disappearAtTick)
+                    if (letter == null || Find.TickManager.TicksGame > letter.disappearAtTick)
                     {
                         choiceLetters.Remove(letter);
                         break;
-                    }                        
+                    }
                 }
             }
         }
