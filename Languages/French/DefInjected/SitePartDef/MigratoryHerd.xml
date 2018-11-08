@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>Pavillon de chasse</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>Petite installation, utilisée par des factions amies comme site de chasse.</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>Habituellement, de gros troupeaux arrivent {0} pendant cette période de l'année.</MFI_HuntersLodgePart.descriptionDialogue>
+
+  <MFI_HuntersLodgePart.approachingReportString>Visiter {0}</MFI_HuntersLodgePart.approachingReportString>
+  <MFI_HuntersLodgePart.approachOrderString>En route pour {0}</MFI_HuntersLodgePart.approachOrderString>
+  <MFI_HuntersLodgePart.arrivedLetter>Votre caravane est arrivée au pavillon des chasseurs. Il semble qu'il n'y ait personne ici, mais apparemment ils vous ont attendu et en ont fait un endroit accueillant..</MFI_HuntersLodgePart.arrivedLetter>
+  <MFI_HuntersLodgePart.arrivedLetterLabel>Pavillon de chasse</MFI_HuntersLodgePart.arrivedLetterLabel>
+
+</LanguageData>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_QuestSpreadingPirateCamp.label>la propagation du camp de pirates</MFI_QuestSpreadingPirateCamp.label>
+  <MFI_QuestSpreadingPirateCamp.letterText>{0}, {1} z {2}, ressent le besoin de nous envoyer un message ironique.\n\n
+Ils affirment qu'ils ont établi un autre avant-poste.</MFI_QuestSpreadingPirateCamp.letterText>
+  <MFI_QuestSpreadingPirateCamp.letterLabel>Prolifération du camp des pirates</MFI_QuestSpreadingPirateCamp.letterLabel>
+
+
+</LanguageData>
