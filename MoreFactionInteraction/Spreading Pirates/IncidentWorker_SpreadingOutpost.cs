@@ -27,6 +27,7 @@ namespace MoreFactionInteraction
         {
             if (!TryFindFaction(enemyFaction: out this.faction)) return false;
             if (!this.TryGetRandomAvailableTargetMap(map: out Map map)) return false;
+            if (faction.leader == null) return false;
 
             int pirateTile = this.RandomNearbyHostileSettlement(map.Tile)?.Tile ?? Tile.Invalid;
 

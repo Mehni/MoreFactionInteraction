@@ -65,8 +65,7 @@ namespace MoreFactionInteraction
                             Find.LetterStack.RemoveLetter(this);
                         }
                     };
-                    DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate(this.marriageSeeker.Name,
-                        this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
+                    DiaNode dialogueNodeReject = new DiaNode(text: "MFI_DejectedProposal".Translate(this.marriageSeeker.LabelCap, this.marriageSeeker.Faction).CapitalizeFirst().AdjustedFor(this.marriageSeeker));
                     dialogueNodeReject.options.Add(item: this.Option_Close);
                     reject.link = dialogueNodeReject;
 
