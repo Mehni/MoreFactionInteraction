@@ -41,10 +41,6 @@
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Fluffy_Relations">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\workshop\content\294100\709317151\Assemblies\Fluffy_Relations.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +64,13 @@
     <Compile Include="More Flavour\CaravanArrivalAction_VisitMysticalShaman.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\ChoiceLetter_MysticalShaman.cs" />
+    <Compile Include="More Flavour\EventDef.cs" />
+    <Compile Include="More Flavour\EventRewardWorker.cs" />
+    <Compile Include="More Flavour\EventRewardWorker_AcousticShow.cs" />
+    <Compile Include="More Flavour\EventRewardWorker_CulturalSwap.cs" />
+    <Compile Include="More Flavour\EventRewardWorker_GameOfUrComp.cs" />
+    <Compile Include="More Flavour\EventRewardWorker_ScienceFaire.cs" />
+    <Compile Include="More Flavour\EventRewardWorker_ShootingComp.cs" />
     <Compile Include="More Flavour\IncidentWorker_AnnualExpo.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />

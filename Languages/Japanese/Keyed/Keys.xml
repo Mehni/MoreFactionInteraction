@@ -3,8 +3,11 @@
 
   <!--settings -->
   <MFI_ticksToUpgrade>宙賊がキャンプを拠点に変更するまでの時間</MFI_ticksToUpgrade>
+  <MFI_ticksToUpgradeDesc>この値が大きいほど、宙賊がキャンプを拠点に変えるのに時間がかかることを意味します。</MFI_ticksToUpgradeDesc>
   <MFI_pirateBaseUpgraderModifier>宙賊の拠点化頻度の補正率</MFI_pirateBaseUpgraderModifier>
+  <MFI_pirateBaseUpgraderModifierDesc>この値が高いほど、宙賊の拡散率が高くなることを意味します。 低い値=怠け者な宙賊です。</MFI_pirateBaseUpgraderModifierDesc>
   <MFI_timeModifierBetweenFactionInteraction>時間による派閥友好関係の影響補正</MFI_timeModifierBetweenFactionInteraction>
+  <MFI_timeModifierBetweenFactionInteractionDesc>この値が高いほど、友好的な派閥間の交渉にかかる時間が長くなります。積極的に友好度（友好度が高いと訪問回数が増加）と、友好的な派閥の数（多くの友人=友人一人あたりの訪問回数はだいたい同じになります。派閥Modを数多くインストールしている人向けです）が増えすぎると、友好関係にマイナスの影響を与えるようになります。</MFI_timeModifierBetweenFactionInteractionDesc>
   <MFI_traderWealthOffsetFromTimesTraded>トレーダーにより支払われたシルバーに対する補正（対話頻度）</MFI_traderWealthOffsetFromTimesTraded>
 
   <MFI_LetterLabelBanditOutpostUpgraded>山賊キャンプがアップグレードした</MFI_LetterLabelBanditOutpostUpgraded>

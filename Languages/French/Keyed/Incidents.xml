@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <!-- Ransom demand -->
+    <MFI_ExtortionDemandTitle>contrainte de payer {0}</MFI_ExtortionDemandTitle>
+    <MFI_ExtortionDemand>La personne de contact de {0}, {1} avec {2}, vous contacte via la console de communication. D'après la distance jusqu'à {3} {4},[PAWN_pronoun] pense que vous empiétez sur leur territoire.\n\n[PAWN_pronoun] dit que [PAWN_pronoun]est prêt à oublier cet incident pour un modeste paiement d'un montant de {5} argent. [PAWN_pronoun] ajoute que l'absence de paiement entraînera une agression, mais que [PAWN_pronoun]vous accordait néanmoins un jour de paiement. </MFI_ExtortionDemand>
+
+    <!-- Reverse Trade Request -->
+    <MFI_ReverseTradeRequest_Pyro>{0}, {1} de {2}, nous a envoyé un message. Leur colonie voisine {3} a eu un incident pyromaniaque et a maintenant besoin de {4}. Ils sont prêts à payer un supplément pour tous les articles de cette catégorie, mais ils auront besoin {5} d'argent pour couvrir les frais de la caravane.\n\n{0} nous assure que le pyromane restera à la maison.\n\n\n Voulez-vous payer {5} d'argent en frais d'expédition pour qu'un commerçant achète une quantité importante de {4} envoi?</MFI_ReverseTradeRequest_Pyro>
+    <MFI_ReverseTradeRequest_Mechs>Nous avons reçu un message légèrement précipité et mal écrit de {0}, {1} ou {2}. Leur village voisin {3} a à peine évité une rencontre mortelle avec des méchanoïdes ! Ils ont commencé à reconstruire, mais ils aimeraient notre aide. En particulier, ils ont besoin de {4}. Ils sont prêts à payer un supplément pour n'importe quel article de cette catégorie, mais ils auront besoin de {5} d'argent pour louer une caravane.\n\n\nVoulez-vous payer {5} l'argent en tant que frais d'envoi pour engager un commerçant qui achètera {4} à un prix élevé?</MFI_ReverseTradeRequest_Mechs>
+    <MFI_ReverseTradeRequest_Caravan>Nous avons reçu une demande modeste de {0}, {1} {2}. Leur village {3} n’a pas bien réparti le temps de travail et il leur faut maintenant {4}. Ils sont disposés à payer plus que d’habitude pour les objets de cette catégorie, mais ils ont besoin de {5} pièces d’argent pour couvrir le coût d'envoi d’une caravane.\n\n nVoulez-vous donner {5} pièces d’argent pour vendre {4} plus cher?</MFI_ReverseTradeRequest_Caravan>
+    <MFI_ReverseTradeRequest_Pirates>{0}, {1} de {2}, nous a envoyé un message. Leur village voisin {3} a récemment été dévasté par les pirates et a maintenant désespérément besoin {4}. Ils sont prêts à payer un supplément pour n'importe quel article de cette catégorie, mais ils auront besoin {5} d'argent pour couvrir les frais de la caravane.Voulez-vous donner {5} pièces d’argent pour vendre {4} plus cher?</MFI_ReverseTradeRequest_Pirates>
+    <MFI_ReverseTradeRequest_Hardship>Une personne anonyme vous contacte via la console de communication. Il était en contact avec {2} et veut échanger avec {4}. Il a réussi à négocier pour que le marchand paie un supplément pour tous les articles de cette catégorie, mais demande {5} d'argent comme frais qu'il paiera après avoir envoyé la caravane.</MFI_ReverseTradeRequest_Hardship>
+    <MFI_ReverseTradeRequest_Blight>{0} nous envoie un message de la part d'une colonie voisine {3}. Leurs cultures ont été infectées et pourraient ne pas survivre à l'hiver sans approvisionnement supplémentaire {4}. Ils sont prêts à payer un supplément pour n'importe quel article de cette catégorie, mais sans nourriture immédiate et sans argent, ils mourront de faim.Allez-vous payer {5} l'argent en tant que frais d'envoi pour envoyer un commerçant qui l'achète à un prix élevé?</MFI_ReverseTradeRequest_Blight>
+    <MFI_ReverseTradeRequestTitle>possibilité d'échanger avec {0}</MFI_ReverseTradeRequestTitle>
+
+    <MFI_LetterLabel_HarvestRequest>Assistance nécessaire</MFI_LetterLabel_HarvestRequest>
+    <MFI_LetterHarvestRequest>Une colonie voisine, {0}, vous contactera pour une demande spéciale. Leurs champs ont apporté beaucoup plus que prévu, et nous demandons votre aide pour la récolte, votre demande expirera : Si vous avez l'intention de les aider, envoyez une caravane avec des gens capables de récolter. Vous pouvez voir leur demande {0} sur la carte du monde.</MFI_LetterHarvestRequest>
+    <MFI_CommandFulfillBumperCropHarvestConfirm>Offrir votre aide pour la récolte ? {0} ne pourra pas se déplacer temporairement pendant le temps de la récolte..</MFI_CommandFulfillBumperCropHarvestConfirm>
+    <MFI_MessageBumperCropNoGrower>Manque d'agriculteurs en bonne santé.</MFI_MessageBumperCropNoGrower>
+    <MFI_HarvestRequestInfo>Demande d'aide à la récolte. ({0} jour restant))</MFI_HarvestRequestInfo>
+    <MFI_CommandHelpOutHarvesting>Aide à la collecte</MFI_CommandHelpOutHarvesting>
+    <MFI_Harvest_Triumph>La récolte était bonne. Pendant que vos colons travaillaient, ils ont réussi à bavarder et à se lier d'amitié avec {0} {1}.\n\n La relation avec {1} s'est améliorée {2}.\n\n Avant le départ de votre caravane {0}, vous avez offert un cadeau. {3}</MFI_Harvest_Triumph>
+    <MFI_LetterLabelHarvest_Triumph>Récolte réussie</MFI_LetterLabelHarvest_Triumph>
+    <MFI_BumperCropXPGain>Votre fermier {0} a gagné {1} points d'expérience.</MFI_BumperCropXPGain>
+
+    <MFI_DiplomaticMarriage>Une offre intéressante de {0} est arrivée à {1} et ils vous ont demandé de vous promettre un mariage de politique avec {1}. En acceptant cette proposition de mariage, l’amitié entre les relations et les factions sera renforcée, mais {1} quittera votre faction et rejoindra {2}.</MFI_DiplomaticMarriage>
+    <MFI_DiplomaticMarriageLabel>Mariage</MFI_DiplomaticMarriageLabel>
+    <MFI_AcceptedProposal>[PAWN_nameDef] est ravi. [PAWN_pronoun] pense qu'ils peuvent vivre une vie heureuse en {0}.\n\n La relation amicale avec {1} a été améliorée. </MFI_AcceptedProposal>
+    <MFI_DejectedProposal>[PAWN_nameDef] a fait de son mieux pour empêcher le rejet de [PAWN_possessive].\n\n La relation amicale avec {1} s'est quelque peu détériorée.</MFI_DejectedProposal>
+
+    <MFI_MysticalShamanLetter>Une personne qui prétend être un représentant de {0} m'a contactée au sujet des histoires du mystérieux chaman au sujet de ses "mains de guérisseur" qui peuvent traiter les vieilles blessures et les parties de corps manquantes. Il nous dira l'emplacement de cette personne vivante mystérieuse et toujours cachée moyennant une somme modique ({1} Argent).</MFI_MysticalShamanLetter>
+    <MFI_MysticalShamanTitle>Chaman mystique</MFI_MysticalShamanTitle>
+
+    <MFI_MysticalShamanFoundNoSickPawn>Un chaman émerge de son tipi en polyester juste avant que votre caravane n'annonce sa présence. Il examine silencieusement votre groupe avec ses yeux tremblants. Voyant que le chaman transpire, il vous dit d'attendre pendant qu'il entre dans sa tente. Quelques instants plus tard, vous pouvez entendre le bruissement du matériel et le son de la fougère.\n\n Le chaman mystique semble avoir remballé ses affaires et est reparti.</MFI_MysticalShamanFoundNoSickPawn>
+    <MFI_MysticalShamanDoesHisMagic>Il semble que le sorcier vous attendait et vous raconte avec plaisir une histoire sur ses "mains magiques". Ayant terminé son récit, il invite {0} à son tipi. Tout a tremblé autour de lui puis tout s'est apaisé. {0} se sent beaucoup mieux</MFI_MysticalShamanDoesHisMagic>
+
+    <MFI_WoundedCombatant>Un représentant militaire de haut rang de {0} envoie un signal de danger. Beaucoup de ses soldats ont été grièvement blessés et ont besoin de soins médicaux immédiats. Ils ont été chargés dans une capsule de transport, mais le centre médical le plus proche est trop éloigné pour sauver la vie de ces hommes et de ces femmes, alors il fait appel à vous comme allié pour aider. Allez-vous répondre à sa demande d'aide et guérir ses soldats ?</MFI_WoundedCombatant>
+    <MFI_WoundedCombatantRejected>C'est incroyable comme vous entendez la malédiction du commandant sur le bruit d'un feu de mortier. Il veut de mauvaises choses pour votre colonie et vous tient responsable de la mort de votre peuple.\n\nLa relation avec {0} s'est détériorée {1}.</MFI_WoundedCombatantRejected>
+    <MFI_WoundedCombatantTitle>Un allié envoie un signal de sauvetage depuis {0}.</MFI_WoundedCombatantTitle>
+    <MFI_WoundedCombatantAmbush>C'est un piège ! L'ennemi {0} a réussi à pirater votre communication et l'a utilisée pour gagner l'avantage de la guerre. {1}</MFI_WoundedCombatantAmbush>
+    <MFI_WoundedCombatantGratitude>Le commandant vous salue sincèrement et sincèrement. Il est très heureux. Parce que vous ne pouvez pas voir son geste à la radio, vous vous déconnectez.</MFI_WoundedCombatantGratitude>
+    <MFI_WoundedCombatantAmbushAvoided>On entend une voix dans le fond crier, demandant s'ils ont "avalé les leurres". Vous êtes rapidement déconnecté, confus et quelque peu soulagé d'avoir évité une catastrophe potentielle..</MFI_WoundedCombatantAmbushAvoided>
+    
+</LanguageData>

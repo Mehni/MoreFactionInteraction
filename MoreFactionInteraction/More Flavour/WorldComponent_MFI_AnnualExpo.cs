@@ -30,33 +30,20 @@ namespace MoreFactionInteraction.More_Flavour
                 this.activeBuffList.Add(buff);
         }
 
-        public readonly Dictionary<string, StatDef> relevantXpForEvent = new Dictionary<string, StatDef>
+        public readonly Dictionary<EventDef, int> Events = new Dictionary<EventDef, int>
         {
-            { "gameOfUrComp", StatDefOf.PsychicSensitivity },
-            { "shootingComp", StatDefOf.ShootingAccuracyPawn },
-            { "culturalSwap", StatDefOf.SocialImpact },
-            { "scienceFaire", StatDefOf.ResearchSpeed },
-            { "acousticShow", StatDefOf.TradePriceImprovement },
-        };
-
-        public readonly Dictionary<string, int> Events = new Dictionary<string, int>
-        {
-            //{ "buffChemfuel", 0 },
-            //{ "buffPemmican", 0 },
-            //{ "buffEmanator", 0 },
-            //{ "buffPsychite", 0 },
-            { "gameOfUrComp", 0 },
-            { "shootingComp", 0 },
-            { "culturalSwap", 0 },
-            { "scienceFaire", 0 },
-            { "acousticShow", 0 },
+            { MFI_DefOf.MFI_GameOfUrComp, 0 },
+            { MFI_DefOf.MFI_ShootingComp, 0 },
+            { MFI_DefOf.MFI_CulturalSwap, 0 },
+            { MFI_DefOf.MFI_ScienceFaire, 0 },
+            { MFI_DefOf.MFI_AcousticShow, 0 },
         };
 
         public WorldComponent_MFI_AnnualExpo(World world) : base(world)
         {
         }
 
-        public Buff ApplyRandomBuff(Predicate<Buff> validator = null)
+        public Buff ApplyRandomBuff(Predicate<Buff> validator)
         {
             if (this.activeBuffList.Where(x => validator(x)).TryRandomElement(out Buff result))
                 result.Apply();

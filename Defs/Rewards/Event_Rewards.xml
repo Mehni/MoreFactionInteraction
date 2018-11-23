@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <MoreFactionInteraction.RewardDef>
+        <defName>Reward_gameOfUrCompFirstPlace</defName>
+        <event>gameOfUrComp</event>
+        <thingSetMakerDef>MapGen_AncientTempleContents</thingSetMakerDef>
+        <fixedParams>
+            <totalMarketValueRange>
+                <min>500</min>
+                <max>1200</max>
+            </totalMarketValueRange>
+            <qualityGenerator>Reward</qualityGenerator>
+        </fixedParams>
+        <flavourText>MFI_gameOfUrCompOutcomeFirstPlace</flavourText>
+    </MoreFactionInteraction.RewardDef>
+
+    <MoreFactionInteraction.RewardDef>
+        <defName>Reward_gameOfUrCompOutcomeFirstLoser</defName>
+        <event>gameOfUrComp</event>
+        <thingSetMakerDef>MapGen_AncientPodContents</thingSetMakerDef>
+        <fixedParams>
+            <totalMarketValueRange>
+                <min>500</min>
+                <max>1200</max>
+            </totalMarketValueRange>
+            <qualityGenerator>Reward</qualityGenerator>
+        </fixedParams>
+        <flavourText>MFI_gameOfUrCompOutcomeFirstLoser</flavourText>
+    </MoreFactionInteraction.RewardDef>
+
+    <MoreFactionInteraction.RewardDef>
+        <defName>Reward_gameOfUrCompOutcomeFirstOther</defName>
+        <event>gameOfUrComp</event>
+        <thingSetMakerDef/>
+        <flavourText>MFI_gameOfUrCompOutcomeFirstOther</flavourText>
+    </MoreFactionInteraction.RewardDef>
+
+        <MoreFactionInteraction.RewardDef>
+        <defName>Reward_shootingCompFirstPlace</defName>
+        <event>shootingComp</event>
+        <thingSetMakerDef>Reward_ItemStashQuestContents</thingSetMakerDef>
+        <fixedParams>
+            <totalMarketValueRange>
+                <min>500</min>
+                <max>1200</max>
+            </totalMarketValueRange>
+            <qualityGenerator>Reward</qualityGenerator>
+            <techLevel>Industrial</techLevel>
+            <validator></validator>
+        </fixedParams>
+        <flavourText>MFI_shootingCompOutcomeFirstPlace</flavourText>
+    </MoreFactionInteraction.RewardDef>
+
+    <MoreFactionInteraction.RewardDef>
+        <defName>Reward_shootingCompFirstOther</defName>
+        <event>shootingComp</event>
+        <thingSetMakerDef>MapGen_AncientTempleContents</thingSetMakerDef>
+        <fixedParams>
+            <totalMarketValueRange>
+                <min>500</min>
+                <max>3500</max>
+            </totalMarketValueRange>
+            <qualityGenerator>Reward</qualityGenerator>
+            <techLevel>Industrial</techLevel>
+        </fixedParams>
+        <flavourText>MFI_shootingCompOutcomeFirstOther</flavourText>
+    </MoreFactionInteraction.RewardDef>
+
+</Defs>

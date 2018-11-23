@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_FactionWarPeaceTalks.label>Conversaciones de paz</MFI_FactionWarPeaceTalks.label>
+	<MFI_FactionWarPeaceTalks.description>Un lugar designado para conversaciones de paz.</MFI_FactionWarPeaceTalks.description>
+
+	<MFI_MysticalShaman.label>chamán místico</MFI_MysticalShaman.label>
+	<MFI_MysticalShaman.description>La tienda donde se encuentra un chamán místico.</MFI_MysticalShaman.description>
+
+</LanguageData>

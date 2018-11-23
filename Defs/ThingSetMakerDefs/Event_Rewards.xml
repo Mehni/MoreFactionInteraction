@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+    <ThingSetMakerDef>
+        <defName>Reward_gameOfUrCompFirstPlace</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>8</min>
+                                <max>26</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Artifacts</li>
+                                </categories>
+                            </filter>
+                            <countRange>
+                                <min>2</min>
+                                <max>3</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_gameOfUrCompFirstLoser</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>5</min>
+                                <max>20</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Artifacts</li>
+                                </categories>
+                            </filter>
+                            <countRange>
+                                <min>1</min>
+                                <max>2</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_gameOfUrCompFirstOther</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>1</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Silver</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>100</min>
+                                <max>500</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_shootingCompFirstPlace</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>Gun_ChargeRifle</li>
+                                    <li>Gun_ChargeLance</li>
+                                    <li>Gun_AssaultRifle</li>
+                                    <li>Shell_AntigrainWarhead</li>
+                                </thingDefs>
+                                <thingSetMakerTagsToAllow>
+                                    <li>SingleUseWeapon</li>
+                                </thingSetMakerTagsToAllow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                        <li>
+          <weight>1</weight>
+          <thingSetMaker Class="ThingSetMaker_MarketValue">
+            <fixedParams>
+              <maxThingMarketValue>2300</maxThingMarketValue>
+              <filter>
+                <categories>
+                  <li>WeaponsRanged</li>
+                </categories>
+                <thingSetMakerTagsToDisallow>
+                  <li>RewardSpecial</li>
+                </thingSetMakerTagsToDisallow>
+              </filter>
+            </fixedParams>
+          </thingSetMaker>
+        </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_shootingCompFirstLoser</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>ArchotechEye</li>
+                                    <li>ArchotechArm</li>
+                                    <li>ArchotechLeg</li>
+                                    <li>PowerClaw</li>
+                                    <li>BionicEye</li>
+                                    <li>BionicArm</li>
+                                    <li>BionicLeg</li>
+                                    <li>BionicSpine</li>
+                                    <li>BionicHeart</li>
+                                    <li>Joywire</li>
+                                    <li>Painstopper</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>BionicEye</li>
+                                    <li>BionicArm</li>
+                                    <li>BionicLeg</li>
+                                    <li>BionicSpine</li>
+                                    <li>BionicHeart</li>
+                                    <li>Joywire</li>
+                                    <li>Painstopper</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_shootingCompFirstOther</defName>
+        <fixedParams>
+            <totalMarketValueRange>
+                <min>1500</min>
+                <max>3500</max>
+            </totalMarketValueRange>
+            <qualityGenerator>Reward</qualityGenerator>
+            <techLevel>Industrial</techLevel>
+        </fixedParams>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_scienceFaireFirstPlace</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <techLevel>Industrial</techLevel>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>5</min>
+                                <max>20</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.4</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <techLevel>Industrial</techLevel>
+                            <filter>
+                                <thingDefs>
+                                    <li>ComponentSpacer</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>1</min>
+                                <max>4</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.4</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <techLevel>Industrial</techLevel>
+                            <filter>
+                                <thingDefs>
+                                    <li>MedicineUltratech</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>2</min>
+                                <max>8</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <techLevel>Industrial</techLevel>
+                            <filter>
+                                <categories>
+                                    <li>Artifacts</li>
+                                </categories>
+                            </filter>
+                            <countRange>
+                                <min>1</min>
+                                <max>2</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_scienceFaireFirstLoser</defName>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>
+        <defName>Reward_scienceFaireFirstOther</defName>
+    </ThingSetMakerDef>
+
+
+//.root.fixedParams.techLevel.GetValueOrDefaul
+</Defs>

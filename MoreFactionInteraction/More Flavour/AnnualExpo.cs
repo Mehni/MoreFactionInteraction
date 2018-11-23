@@ -10,19 +10,19 @@ namespace MoreFactionInteraction.More_Flavour
 {
     public class AnnualExpo : WorldObject
     {
-        public string Event;
+        public EventDef eventDef;
         public Faction host;
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
-            Pawn pawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[Event]);
+            Pawn pawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, eventDef.relevantStat);
             if (pawn == null)
-                Messages.Message(text: "MFI_AnnualExpoMessageNoRepresentative".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent, historical: false);
+                Messages.Message(text: "MFI_AnnualExpoMessageNoRepresentative".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent);
 
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
-                Find.WindowStack.Add(window: new Dialog_NodeTree(AnnualExpoDialogue.AnnualExpoDialogueNode(pawn, caravan, Event, host)));
+                Find.WindowStack.Add(window: new Dialog_NodeTree(new AnnualExpoDialogue().AnnualExpoDialogueNode(pawn, caravan, eventDef, host)));
                 Find.WorldObjects.Remove(this);
             }
         }

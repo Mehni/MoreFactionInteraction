@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_PirateExtortion.label>Extorsión pirata</MFI_PirateExtortion.label>
+	<MFI_PirateExtortion.letterLabel>Los piratas demandan un tributo.</MFI_PirateExtortion.letterLabel>
+
+	<MFI_WoundedCombatants.label>Combatientes heridos</MFI_WoundedCombatants.label>
+
+	<MFI_WeddingGuestsArrival.label>Los invitados a la boda llegaron</MFI_WeddingGuestsArrival.label>
+	<MFI_WeddingGuestsArrival.letterLabel>Los invitados a la boda han llegado.</MFI_WeddingGuestsArrival.letterLabel>
+
+</LanguageData>

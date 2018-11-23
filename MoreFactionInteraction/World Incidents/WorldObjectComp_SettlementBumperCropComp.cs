@@ -31,10 +31,7 @@ namespace MoreFactionInteraction.World_Incidents
         {
             if (this.ActiveRequest)
             {
-                return "MFI_HarvestRequestInfo".Translate(args: new object[]
-                {
-                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays()
-                });
+                return "MFI_HarvestRequestInfo".Translate((this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays());
             }
             return null;
         }

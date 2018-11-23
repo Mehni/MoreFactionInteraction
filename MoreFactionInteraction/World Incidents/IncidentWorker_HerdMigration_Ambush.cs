@@ -10,11 +10,13 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class IncidentWorker_HerdMigration_Ambush : IncidentWorker_Ambush
     {
-        PawnKindDef pawnKindDef;
+        PawnKindDef pawnKindDef = PawnKindDefOf.Thrumbo;
+
+        public override float AdjustedChance => 0f;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms) && Current.Game.Maps.Any(predicate: x => x.Tile == parms.target.Tile);
+            return base.CanFireNowSub(parms: parms) && Current.Game.Maps.Any(predicate: x => x.Tile == parms.target.Tile) && parms.forced;
         }
 
         protected override LordJob CreateLordJob(List<Pawn> generatedPawns, IncidentParms parms)
@@ -23,18 +25,17 @@ namespace MoreFactionInteraction.World_Incidents
             TryFindEndCell(map: map, generatedPawns: generatedPawns, end: out IntVec3 end);
             if (!end.IsValid && CellFinder.TryFindRandomPawnExitCell(searcher: generatedPawns[index: 0], result: out IntVec3 intVec3))
                 end = intVec3;
+
             return new LordJob_ExitMapNear(near: end, locomotion: LocomotionUrgency.Walk);
         }
 
         protected override List<Pawn> GeneratePawns(IncidentParms parms)
         {
-            Map map = parms.target as Map;
-
-            if (map == null)
+            if (!(parms.target is Map map))
                 this.pawnKindDef = PawnKindDefOf.Thrumbo; //something went really wrong. Let's uh.. brush it under the rug.
 
             else if (Find.WorldObjects.SiteAt(map.Tile) is Site site)
-                this.pawnKindDef = site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).parms.animalKind;
+                this.pawnKindDef = site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart)?.parms?.animalKind ?? PawnKindDefOf.Thrumbo;
 
             int num = new IntRange(min: 30, max: 50).RandomInRange;
 

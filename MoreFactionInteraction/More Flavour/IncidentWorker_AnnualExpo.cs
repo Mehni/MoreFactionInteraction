@@ -5,9 +5,12 @@ using System.Text;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using MoreFactionInteraction.General;
+
 
 namespace MoreFactionInteraction.More_Flavour
 {
+
     public class IncidentWorker_AnnualExpo : IncidentWorker
     {
         private static readonly List<Map> tmpAvailableMaps = new List<Map>();
@@ -33,12 +36,16 @@ namespace MoreFactionInteraction.More_Flavour
             if (!TryFindTile(tile: out int tile))
                 return false;
 
+            if (!TryGetFactionHost(out Faction faction))
+                return false;
+
+
             AnnualExpo annualExpo = (AnnualExpo)WorldObjectMaker.MakeWorldObject(def: MFI_DefOf.MFI_AnnualExpoObject);
-            annualExpo.Tile = tile;            
+            annualExpo.Tile = tile;
             annualExpo.GetComponent<TimeoutComp>().StartTimeout(TimeoutDaysRange.RandomInRange * GenDate.TicksPerDay);
-            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<string, int> result);
-            annualExpo.Event = result.Key;
-            annualExpo.host = Find.FactionManager.AllFactionsVisible.Where(x => !x.defeated && !x.def.permanentEnemy).RandomElement();
+            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
+            annualExpo.eventDef = result.Key;
+            annualExpo.host = faction;
 
             Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld++;
 
@@ -46,14 +53,19 @@ namespace MoreFactionInteraction.More_Flavour
             Find.LetterStack.ReceiveLetter(label: this.def.letterLabel,
                                             text: "MFI_AnnualExpoLetterText".Translate(
                                                 Find.ActiveLanguageWorker.OrdinalNumber(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().TimesHeld), 
-                                                Find.World.info.name, 
-                                                $"MFI_{result.Key}".Translate(), 
-                                                $"MFI_{result.Key}Expl".Translate() ),
+                                                Find.World.info.name,
+                                                annualExpo.host.Name,
+                                                annualExpo.eventDef.theme.Translate(),
+                                                annualExpo.eventDef.themeDesc.Translate() ),
                                             textLetterDef: this.def.letterDef,
                                             lookTargets: annualExpo);
-            
+
             return true;
         }
+
+        private static bool TryGetFactionHost(out Faction faction) => Find
+                                                     .FactionManager.AllFactionsVisible
+                                                     .Where(x => !x.defeated && !x.def.permanentEnemy).TryRandomElement(out faction);
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
