@@ -9,14 +9,30 @@
         </value>
     </Operation>
 
+<!-- test for the existence of /comps. If not there, add. Done defensively to prevent adding it twice if some other mod got there first. -->
+    <Operation Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+            <li Class="PatchOperationTest">
+                <xpath>Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+                <success>Invert</success>
+            </li>
+            <li Class="PatchOperationAdd">
+                <xpath>Defs/WorldObjectDef[defName="Caravan"]</xpath>
+                <value>
+                    <comps/>
+                </value>
+            </li>
+        </operations>
+    </Operation>
+
+<!-- add our Comp to the (previously added by us or some other mod) /comps -->
     <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
+        <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
         <value>
-            <comps>
-                <li>
-                    <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
-                </li>
-            </comps>
+            <li>
+                <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
+            </li>
         </value>
     </Operation>
 

@@ -13,8 +13,10 @@ namespace MoreFactionInteraction
                                                     && x.equipmentType == EquipmentType.Primary 
                                                     && x.GetStatValueAbstract(StatDefOf.MarketValue, GenStuff.DefaultStuffFor(x)) >= 100f;
 
-        public override Predicate<ThingDef> ValidatorFirstLoser => (ThingDef x) => base.ValidatorFirstLoser(x);
+        public override Predicate<ThingDef> ValidatorFirstLoser => (ThingDef x) => base.ValidatorFirstLoser(x)
+                                                    && x.techLevel >= TechLevel.Spacer; //*bionics*, not wooden feet tyvm.
 
-        public override Predicate<ThingDef> ValidatorFirstOther => (ThingDef x) => base.ValidatorFirstOther(x);
+        public override Predicate<ThingDef> ValidatorFirstOther => (ThingDef x) => base.ValidatorFirstOther(x)
+                                                    && x == ThingDefOf.RawPotatoes; //how nice, a representation of your shooting skills.
     }
 }
