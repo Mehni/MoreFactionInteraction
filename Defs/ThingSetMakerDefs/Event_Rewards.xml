@@ -345,18 +345,20 @@
     <ThingSetMakerDef>        <!-- one TechProfSubPersonaCore -->
         <defName>Reward_scienceFaireFirstOther</defName>
         <root Class="ThingSetMaker_RandomOption">
-            <li>
-                <weight>1.4</weight>
-                <thingSetMaker Class="ThingSetMaker_MarketValue">
-                    <fixedParams>
-                        <filter>
-                            <thingDefs>
-                                <li>TechprofSubpersonaCore</li>
-                            </thingDefs>
-                        </filter>
-                    </fixedParams>
-                </thingSetMaker>
-            </li>
+            <options>
+                <li>
+                    <weight>1.4</weight>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>TechprofSubpersonaCore</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
         </root>
     </ThingSetMakerDef>
 
@@ -366,9 +368,6 @@
             <fixedParams>
                 <maxThingMarketValue>5000</maxThingMarketValue>
                 <filter>
-                    <stuffCategoriesToAllow>
-                        <li>Metallic</li>
-                    </stuffCategoriesToAllow>
                     <allowedQualities>
                         <min>Excellent</min>
                         <max>Legendary</max>

@@ -29,7 +29,7 @@ namespace MoreFactionInteraction
                 return string.Empty;
             }
 
-            string rewards = base.GenerateRewards(pawn, caravan, globalValidator, thingSetMakerDef);
+            string rewards = string.Empty;
 
             if (thingSetMakerDef == eventDef.rewardFirstLoser)
             {
@@ -41,10 +41,10 @@ namespace MoreFactionInteraction
                         TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Artistic, eventDef.xPGainFirstLoser);
                     }
                 }
-                return string.Concat(rewards + "\n\n---\n\n" + (Rand.Bool ? string.Empty : Rand.Bool ? "MFI_AnnualExpoMedicalEmergency".Translate() : "MFI_AnnualExpoMedicalEmergencySerious".Translate()));
+                return Rand.Bool ? string.Empty : 
+                       Rand.Bool ? "\n\n---\n\n" + "MFI_AnnualExpoMedicalEmergency".Translate() : "\n\n---\n\n" + "MFI_AnnualExpoMedicalEmergencySerious".Translate();
             }
-
-            return rewards;
+            return base.GenerateRewards(pawn, caravan, globalValidator, thingSetMakerDef);
         }
 
         private static DiaNode DialogueResolverArtOffer(string textResult, Thing broughtSculpture, Caravan caravan)

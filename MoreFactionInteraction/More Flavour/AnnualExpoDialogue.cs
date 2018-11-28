@@ -21,7 +21,7 @@ namespace MoreFactionInteraction.More_Flavour
             //TaleReference taleRef = new TaleReference(tale);
             string flavourText = "fat accountants sing songs.";// taleRef.GenerateText(TextGenerationPurpose.ArtDescription, RulePackDefOf.ArtDescriptionRoot_Taleless);
 
-            DiaNode dialogueGreeting = new DiaNode(text: "MFI_AnnualExpoDialogueIntroduction".Translate(("MFI_" + eventDef.theme).Translate(), flavourText));
+            DiaNode dialogueGreeting = new DiaNode(text: "MFI_AnnualExpoDialogueIntroduction".Translate(eventDef.theme, flavourText));
 
             foreach (DiaOption option in DialogueOptions(pawn: pawn, caravan, eventDef, host))
             {
@@ -86,21 +86,21 @@ namespace MoreFactionInteraction.More_Flavour
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstPlace, eventDef.rewardFirstPlace);
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstPlace, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstPlace);
-                    annualExpoDialogueOutcome = eventDef.outComeFirstPlace.Translate(rewards).AdjustedFor(pawn);
+                    annualExpoDialogueOutcome = eventDef.outComeFirstPlace.Formatted(rewards).AdjustedFor(pawn);
                     break;
 
                 case 2:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstLoser, eventDef.rewardFirstLoser);
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstLoser, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstLoser);
-                    annualExpoDialogueOutcome = eventDef.outcomeFirstLoser.Translate(rewards).AdjustedFor(pawn);
+                    annualExpoDialogueOutcome = eventDef.outcomeFirstLoser.Formatted(rewards).AdjustedFor(pawn);
                     break;
 
                 case 3:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstOther, eventDef.rewardFirstOther);
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstOther, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstOther);
-                    annualExpoDialogueOutcome = eventDef.outComeFirstOther.Translate(rewards).AdjustedFor(pawn);
+                    annualExpoDialogueOutcome = eventDef.outComeFirstOther.Formatted(rewards).AdjustedFor(pawn);
                     break;
 
                 default:

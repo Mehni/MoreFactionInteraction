@@ -33,5 +33,12 @@ namespace MoreFactionInteraction.More_Flavour
             foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan)) yield return o;
             foreach (FloatMenuOption f in CaravanArrivalAction_VisitAnnualExpo.GetFloatMenuOptions(caravan: caravan, annualExpo: this)) yield return f;
         }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Defs.Look(ref this.eventDef, "MFI_EventDef");
+            Scribe_References.Look(ref this.host, "MFI_ExpoHost");
+        }
     }
 }

@@ -8,7 +8,7 @@ using Verse;
 
 namespace MoreFactionInteraction
 {
-    public class EventRewardWorker_GameOfUr : EventRewardWorker
+    public class EventRewardWorker_GameOfUrComp : EventRewardWorker
     {
         private readonly EventDef eventDef = MFI_DefOf.MFI_GameOfUrComp;
 

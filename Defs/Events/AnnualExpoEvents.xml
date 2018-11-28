@@ -14,7 +14,7 @@
         <xPGainFirstOther>0</xPGainFirstOther>
         <outComeFirstPlace>Through skill, nerves of steel and a good amount of luck, [PAWN_nameDef] won the tournament! Your reward for participating is:\n\n{0}</outComeFirstPlace>
         <outcomeFirstLoser>For the tense final round, [PAWN_nameDef] went head to head with the five-year reigning champion and lost. Your reward for participating is:\n\n{0}</outcomeFirstLoser>
-        <outComeFirstOther>During the second inning of the fifth round, [PAWN_nameDef] played a move which confused [PAWN_objective] opponent and astounded referees. Understandably, a massive brawl ensued. Your reward for participating is:\n\n{1}</outComeFirstOther>
+        <outComeFirstOther>During the second inning of the fifth round, [PAWN_nameDef] played a move which confused [PAWN_objective] opponent and astounded referees. Understandably, a massive brawl ensued. Your reward for participating is:\n\n{0}</outComeFirstOther>
         <rewardFirstPlace>Reward_gameOfUrCompFirstPlace</rewardFirstPlace>
         <rewardFirstLoser>Reward_gameOfUrCompFirstLoser</rewardFirstLoser>
         <rewardFirstOther>Reward_gameOfUrCompFirstOther</rewardFirstOther>
@@ -49,10 +49,9 @@
         <relevantStat>SocialImpact</relevantStat>
         <workerClass>MoreFactionInteraction.EventRewardWorker_CulturalSwap</workerClass>
         <!-- {0 = childhood backstory label} -->
-        <outComeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_objective] upbringing as a {0}. This simple story and more importantly the atmosphere [PAWN_objective] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{1}</outComeFirstPlace>
-        <outcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine with {0} taking centre stage. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{1}</outcomeFirstLoser>
-        <!-- {0 = factionName} {1 = TerrainFeatureLabel, e.g. White Rabbit Mountain Range} -->
-        <outComeFirstOther>The faction of {0} moved the audience to tears with their dazzling display; a dramatic reenactment of their ancestor's discovery of {1}. It was a touching piece of theatre that transcended language barriers, and reached the hearts of young and old alike.\n\nAnd then there was your troupe. Your reward for participating is:\n\n{2}</outComeFirstOther>
+        <outComeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_objective] upbringing as a [PAWN_title]. This simple story and more importantly the atmosphere [PAWN_objective] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{0}</outComeFirstPlace>
+        <outcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine with [PAWN_nameDef] taking centre stage. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{0}</outcomeFirstLoser>
+        <outComeFirstOther>The host faction moved the audience to tears with their dazzling display; a dramatic reenactment of their ancestor's discovery of White Rabbit Mountain Range. It was a touching piece of theatre that transcended language barriers, and reached the hearts of young and old alike.\n\nAnd then there was your troupe. Your reward for participating is:\n\n{0}</outComeFirstOther>
         <rewardFirstPlace>Reward_culturalSwapFirstPlace</rewardFirstPlace>
         <rewardFirstLoser>Reward_culturalSwapFirstLoser</rewardFirstLoser>
         <rewardFirstOther>Reward_culturalSwapFirstOther</rewardFirstOther>
@@ -84,9 +83,9 @@
         </learnedSkills>
         <relevantStat>TradePriceImprovement</relevantStat>
         <workerClass>MoreFactionInteraction.EventRewardWorker_AcousticShow</workerClass>
-        <outComeFirstPlace>Your caravan spent the day gallivanting through the stalls and admiring the wide array of eclectic non-electric musical instruments from all over this world and beyond. As dusk fell and people gathered their instruments an intimate concert was held on the main-stage. It lifted the spirits of your caravan members. Your reward for coming is:\n\n{2}</outComeFirstPlace>
-        <outcomeFirstLoser>The expo turned out to be a very cosy get-together, spent jamming on guitars. Someone played Wonderwall but other than that it was a pretty chill evening that put everybody in a good mood. Your reward for coming is:\n\n{2}</outcomeFirstLoser>
-        <outComeFirstOther>One of your caravan members picked up an instrument they shouldn't have and, not being musically gifted, broke a string while fingering a minor. Apologies were made but it wasn't sufficient: your klutzy caravan member was to work as a stage-hand on the night of the performance. Since a good time was still had by all, they were given the after-party leftovers:\n\n{2}</outComeFirstOther>
+        <outComeFirstPlace>Your caravan spent the day gallivanting through the stalls and admiring the wide array of eclectic non-electric musical instruments from all over this world and beyond. As dusk fell and people gathered their instruments an intimate concert was held on the main-stage. It lifted the spirits of your caravan members. Your reward for coming is:\n\n{0}</outComeFirstPlace>
+        <outcomeFirstLoser>The expo turned out to be a very cosy get-together, spent jamming on guitars. Someone played Wonderwall but other than that it was a pretty chill evening that put everybody in a good mood. Your reward for coming is:\n\n{0}</outcomeFirstLoser>
+        <outComeFirstOther>One of your caravan members picked up an instrument they shouldn't have and, not being musically gifted, broke a string while fingering a minor. Apologies were made but it wasn't sufficient: your klutzy caravan member was to work as a stage-hand on the night of the performance. Since a good time was still had by all, they were given the after-party leftovers:\n\n{0}</outComeFirstOther>
         <rewardFirstPlace>Reward_acousticShowFirstPlace</rewardFirstPlace>
         <rewardFirstLoser>Reward_acousticShowFirstLoser</rewardFirstLoser>
         <rewardFirstOther>Reward_acousticShowFirstOther</rewardFirstOther>

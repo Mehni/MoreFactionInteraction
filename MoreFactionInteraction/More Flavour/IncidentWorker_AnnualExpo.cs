@@ -60,8 +60,8 @@ namespace MoreFactionInteraction.More_Flavour
                                                 Find.ActiveLanguageWorker.OrdinalNumber(worldComp.TimesHeld), 
                                                 Find.World.info.name,
                                                 annualExpo.host.Name,
-                                                annualExpo.eventDef.theme.Translate(),
-                                                annualExpo.eventDef.themeDesc.Translate() ),
+                                                annualExpo.eventDef.theme,
+                                                annualExpo.eventDef.themeDesc ),
                                             textLetterDef: this.def.letterDef,
                                             lookTargets: annualExpo);
 

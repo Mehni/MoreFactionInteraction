@@ -16,6 +16,20 @@
   </WorldObjectDef>
 
   <WorldObjectDef>
+    <defName>MFI_AnnualExpoObject</defName>
+    <label>annual expo</label>
+    <description>A site designated for PARTY HARD.</description>
+    <worldObjectClass>MoreFactionInteraction.More_Flavour.AnnualExpo</worldObjectClass>
+    <texture>FactionPeaceTalks</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>Expanding/FactionPeaceTalks</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+    <comps>
+      <li Class="WorldObjectCompProperties_Timeout" />
+    </comps>
+  </WorldObjectDef>
+
+  <WorldObjectDef>
     <defName>MFI_MysticalShaman</defName>
     <label>mystical shaman</label>
     <description>The tent where a mystical shaman recides.</description>
