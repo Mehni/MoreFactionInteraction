@@ -18,7 +18,7 @@ namespace MoreFactionInteraction
 
         public override Predicate<ThingDef> ValidatorFirstOther => base.ValidatorFirstOther;
 
-        public override string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator = null, ThingSetMakerDef thingSetMakerDef = null)
+        public override string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator, ThingSetMakerDef thingSetMakerDef)
         {
             if (thingSetMakerDef == eventDef.rewardFirstOther)
             {

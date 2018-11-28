@@ -27,15 +27,25 @@ namespace MoreFactionInteraction.More_Flavour
             {
                 dialogueGreeting.options.Add(item: option);
             }
+            //if (Prefs.DevMode)
+            //{
+            //    foreach (Buff item in Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ActiveBuffsList)
+            //    {
+            //        dialogueGreeting.options.Add(item: new DiaOption(text: $"(Dev: Get {item} buff)")
+            //        {
+            //            action = () => Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ApplyRandomBuff(x => x == item),
+            //            linkLateBind = () => DialogueResolver(textResult: $"It is done.\n\n{item.Description()}")
+            //        });
+            //    }
+            //}
             if (Prefs.DevMode)
             {
-                foreach (Buff item in Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ActiveBuffsList)
+                foreach (EventDef eventDefdef in DefDatabase<EventDef>.AllDefsListForReading)
                 {
-                    dialogueGreeting.options.Add(item: new DiaOption(text: $"(Dev: Get {item} buff)")
+                    foreach (DiaOption option in DialogueOptions(pawn: pawn, caravan, eventDefdef, host))
                     {
-                        action = () => Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ApplyRandomBuff(x => x == item),
-                        linkLateBind = () => DialogueResolver(textResult: $"It is done.\n\n{item.Description()}")
-                    });
+                        dialogueGreeting.options.Add(item: option);
+                    }
                 }
             }
             return dialogueGreeting;
@@ -45,7 +55,7 @@ namespace MoreFactionInteraction.More_Flavour
         {
             string annualExpoDialogueOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            yield return new DiaOption(text: "MFI_AnnualExpoFirstOption".Translate())
+            yield return new DiaOption(text: Prefs.DevMode ? eventDef.theme : "MFI_AnnualExpoFirstOption".Translate())
             {
                 action = () => DetermineOutcome(pawn: pawn, caravan: caravan, eventDef: eventDef, annualExpoDialogueOutcome: out annualExpoDialogueOutcome, host),
                 linkLateBind = () => DialogueResolver(textResult: annualExpoDialogueOutcome),
@@ -54,7 +64,7 @@ namespace MoreFactionInteraction.More_Flavour
 
         private void DetermineOutcome(Pawn pawn, Caravan caravan, EventDef eventDef, out string annualExpoDialogueOutcome, Faction host)
         {
-            string rewards = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme.";
+            string rewards = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log(press CTRL + F12 now), you get a cookie.";
             SkillDef thisYearsRelevantSkill = eventDef.learnedSkills.RandomElement();
 
             const float BaseWeight_FirstPlace = 0.2f;
@@ -95,144 +105,11 @@ namespace MoreFactionInteraction.More_Flavour
 
                 default:
                     annualExpoDialogueOutcome = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL+F12 now), you get a cookie.";
+                    Log.Error("default case");
+
                     break;
             }
         }
-
-        private void PopulateDictionary(Pawn pawn, Caravan caravan, EventDef eventTheme, Faction host)
-        {
-            foreach (KeyValuePair<string, List<Pair<Tuple<Action, float>, string>>> kvp in eventsChancesAndOutcomes)
-            {
-                string rewards = "reward list";
-                if (kvp.Key == "gameOfUrComp")
-                {
-
-                }
-                else if (kvp.Key == "shootingComp")
-                {
-                }
-                else if (kvp.Key == "culturalSwap")
-                {
-                    //if (MFI_Utilities.TryGetBestArt(caravan, out Thing art, out Pawn owner))
-                    //{
-                    //    //kvp.Value.Add(new Pair<Tuple<Action, float>, string>(new Tuple<Action, float>(
-                    //    //                                                        () => {
-                    //    Dialog_NodeTree tree = (Dialog_NodeTree)Find.WindowStack.Windows.First(x => x is Dialog_NodeTree);
-                    //    tree.GotoNode(DialogueResolverArtOffer("MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt", art, caravan));
-                    //    //                                                             },
-                    //    //                                                       100f), "hey"));
-                    //    return;
-                    //}
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards,
-                    //                                                                    (ThingDef x) => x.IsApparel && x.BaseMarketValue > 100f, ThingSetMakerDefOf.Reward_TradeRequest);
-                    //                                                                    pawn.skills.Learn(sDef: SkillDefOf.Social, xp: xPGainFirstPlace, direct: true);
-                    //                                                                    TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Social, xPGainFirstPlace);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstPlace * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstPlace".Translate(pawn.story.childhood.titleShort, rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, (ThingDef x) => x == ThingDefOf.Silver, ThingSetMakerDefOf.Reward_TradeRequest);
-                    //                                                                    foreach (Pawn performer in caravan.PlayerPawnsForStoryteller)
-                    //                                                                    {
-                    //                                                                        if (!performer.story?.WorkTagIsDisabled(WorkTags.Artistic) ?? false)
-                    //                                                                        {
-                    //                                                                            pawn.skills.Learn(sDef: SkillDefOf.Artistic, xp: xPGainFirstLoser, direct: true);
-                    //                                                                            TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Artistic, xPGainFirstLoser);
-                    //                                                                        }
-                    //                                                                    }
-                    //                                                                },
-                    //                                                                BaseWeight_FirstLoser * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstLoser".Translate(rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, /*(ThingDef x) => x == ThingDef.Named("Meat_Megaspider"),*/ thingSetMakerDef: ThingSetMakerDefOf.MapGen_PrisonCellStockpile);
-                    //                                                                    rewards = string.Concat(rewards + "\n\n---\n\n" + (Rand.Bool ? string.Empty : Rand.Bool ? "MFI_AnnualExpoMedicalEmergency".Translate() : "MFI_AnnualExpoMedicalEmergencySerious".Translate()));
-                    //                                                                    pawn.skills.Learn(sDef: SkillDefOf.Artistic, xp: xPGainFirstOther, direct: true);
-                    //                                                                    TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Artistic, xPGainFirstOther);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstOther * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstOther".Translate(host.GetCallLabel(), Find.WorldFeatures.features.RandomElement().name, rewards).AdjustedFor(pawn)));
-                }
-                else if (kvp.Key == "scienceFaire")
-                {
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateBuff(TechLevel.Industrial, ref rewards, pawn, caravan);
-                    //                                                                    pawn.skills.Learn(sDef: SkillDefOf.Intellectual, xp: xPGainFirstPlace, direct: true);
-                    //                                                                    TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Intellectual, xPGainFirstPlace);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstPlace * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstPlace".Translate(rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateBuff(TechLevel.Undefined, ref rewards, pawn, caravan);
-                    //                                                                    pawn.skills.Learn(SkillDefOf.Intellectual, xPGainFirstLoser, true);
-                    //                                                                    TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Intellectual, xPGainFirstLoser);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstLoser * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstLoser".Translate(rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, (ThingDef x) => x == ThingDefOf.TechprofSubpersonaCore, ThingSetMakerDefOf.MapGen_AncientTempleContents);
-                    //                                                                    pawn.skills.Learn(SkillDefOf.Intellectual, xPGainFirstOther, true);
-                    //                                                                    TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Intellectual, xPGainFirstOther);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstOther * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstOther".Translate(rewards).AdjustedFor(pawn)));
-                }
-                else if (kvp.Key == "acousticShow")
-                {
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, null, ThingSetMakerDefOf.MapGen_AncientTempleContents);
-                    //                                                                    GiveHappyThoughtsToCaravan(caravan, 20);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstPlace * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstPlace".Translate(rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, (ThingDef x) => x.equipmentType == EquipmentType.None, ThingSetMakerDefOf.MapGen_DefaultStockpile);
-                    //                                                                    GiveHappyThoughtsToCaravan(caravan, 15);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstLoser * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstLoser".Translate(rewards).AdjustedFor(pawn)));
-
-                    //kvp.Value.Add(item: new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                () =>
-                    //                                                                {
-                    //                                                                    GenerateRewards(pawn, caravan, ref rewards, null, ThingSetMakerDefOf.MapGen_PrisonCellStockpile);
-                    //                                                                    GiveHappyThoughtsToCaravan(caravan, 10);
-                    //                                                                },
-                    //                                                                BaseWeight_FirstOther * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().relevantXpForEvent[kvp.Key]))),
-                    //                                                            second: $"MFI_{kvp.Key}OutcomeFirstOther".Translate(rewards).AdjustedFor(pawn)));
-                }
-                else
-                {
-                    //kvp.Value.Add(new Pair<Tuple<Action, float>, string>(first: new Tuple<Action, float>(
-                    //                                                                    () => GenerateRewards(pawn, caravan, null, ThingSetMakerDefOf.Reward_PeaceTalksGift),
-                    //                                                                    1f),
-                    //                                                                second: $"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. Rewards: {rewards}"));
-                }
-            }
-        }
-
 
         private static void TryAppendExpGainInfo(ref string rewardsOutcome, Pawn pawn, SkillDef skill, float amount)
         {

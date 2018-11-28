@@ -19,7 +19,7 @@ namespace MoreFactionInteraction
 
         public override Predicate<ThingDef> ValidatorFirstOther => base.ValidatorFirstOther;
 
-        public override string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator = null, ThingSetMakerDef thingSetMakerDef = null)
+        public override string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator, ThingSetMakerDef thingSetMakerDef)
         {
             if (MFI_Utilities.TryGetBestArt(caravan, out Thing art, out Pawn owner))
             {
@@ -41,10 +41,10 @@ namespace MoreFactionInteraction
                         TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Artistic, eventDef.xPGainFirstLoser);
                     }
                 }
-                return rewards;
+                return string.Concat(rewards + "\n\n---\n\n" + (Rand.Bool ? string.Empty : Rand.Bool ? "MFI_AnnualExpoMedicalEmergency".Translate() : "MFI_AnnualExpoMedicalEmergencySerious".Translate()));
             }
 
-            return string.Concat(rewards + "\n\n---\n\n" + (Rand.Bool ? string.Empty : Rand.Bool ? "MFI_AnnualExpoMedicalEmergency".Translate() : "MFI_AnnualExpoMedicalEmergencySerious".Translate()));
+            return rewards;
         }
 
         private static DiaNode DialogueResolverArtOffer(string textResult, Thing broughtSculpture, Caravan caravan)

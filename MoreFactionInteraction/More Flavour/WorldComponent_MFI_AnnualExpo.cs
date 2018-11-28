@@ -30,7 +30,7 @@ namespace MoreFactionInteraction.More_Flavour
                 this.activeBuffList.Add(buff);
         }
 
-        public readonly Dictionary<EventDef, int> Events = new Dictionary<EventDef, int>
+        public Dictionary<EventDef, int> Events = new Dictionary<EventDef, int>
         {
             { MFI_DefOf.MFI_GameOfUrComp, 0 },
             { MFI_DefOf.MFI_ShootingComp, 0 },
@@ -92,6 +92,7 @@ namespace MoreFactionInteraction.More_Flavour
         {
             base.ExposeData();
             Scribe_Values.Look(ref this.occuringTick, "MFI_occuringTick");
+            Scribe_Collections.Look(ref this.Events, "MFI_Events");
             Scribe_Collections.Look(ref this.activeBuffList, "MFI_buffList");
             Scribe_Values.Look(ref this.timesHeld, "MFI_AnnualExpoTimesHeld");
         }

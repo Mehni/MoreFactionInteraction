@@ -16,6 +16,7 @@ namespace MoreFactionInteraction.More_Flavour
         public abstract void Apply();
         public abstract void ExposeData();
         public abstract string Description();
+        public abstract ThingDef RelevantThingDef();
     }
 
     public class Buff_Pemmican : Buff
@@ -35,6 +36,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Scribe_Values.Look(ref Active, "MFI_Buff_Pemmican");
         }
+
+        public override ThingDef RelevantThingDef() => ThingDefOf.Pemmican;
 
         public override string Description() => "MFI_buffPemmican".Translate();
     }
@@ -64,6 +67,8 @@ namespace MoreFactionInteraction.More_Flavour
             Scribe_Values.Look(ref Active, "MFI_Buff_Emanator");
         }
 
+        public override ThingDef RelevantThingDef() => ThingDefOf.PsychicEmanator;
+
         public override string Description() => "MFI_buffEmanator".Translate(ThingDefOf.PsychicEmanator.label);
     }
 
@@ -87,6 +92,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().RegisterBuff(new Buff_PsychTea());
         }
+
+        public override ThingDef RelevantThingDef() => DefDatabase<ThingDef>.GetNamed("PsychiteTea");
 
         public override string Description() => "MFI_buffPsychite".Translate(ThingDef.Named("PsychiteTea").label);
     }
@@ -117,6 +124,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Scribe_Values.Look(ref this.Active, "MFI_Buff_ChemFuel");
         }
+
+        public override ThingDef RelevantThingDef() => ThingDefOf.InfiniteChemreactor;
 
         public override string Description() => "MFI_buffChemfuel".Translate(ThingDefOf.InfiniteChemreactor.label, ThingDefOf.InfiniteChemreactor.GetCompProperties<CompProperties_Spawner>().thingToSpawn.label);
     }

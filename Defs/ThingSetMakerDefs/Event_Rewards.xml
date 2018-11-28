@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-<!-- Nothing to translate in here. -->
-    <ThingSetMakerDef>
+    <!-- Nothing to translate in here. -->
+
+    <ThingSetMakerDef>        <!-- Luci + more artefacts -->
         <defName>Reward_gameOfUrCompFirstPlace</defName>
         <root Class = "ThingSetMaker_Sum">
             <options>
@@ -41,7 +42,7 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>
+    <ThingSetMakerDef>        <!-- Luci + artefacts -->
         <defName>Reward_gameOfUrCompFirstLoser</defName>
         <root Class = "ThingSetMaker_Sum">
             <options>
@@ -81,7 +82,7 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>
+    <ThingSetMakerDef>        <!-- mostly placeholder -->
         <defName>Reward_gameOfUrCompFirstOther</defName>
         <root Class="ThingSetMaker_Sum">
             <options>
@@ -105,7 +106,7 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>
+    <ThingSetMakerDef>        <!-- nice pew pew -->
         <defName>Reward_shootingCompFirstPlace</defName>
         <root Class = "ThingSetMaker_Sum">
             <options>
@@ -163,7 +164,7 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>
+    <ThingSetMakerDef>        <!-- bionics -->
         <defName>Reward_shootingCompFirstLoser</defName>
         <root Class = "ThingSetMaker_Sum">
             <options>
@@ -229,7 +230,7 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>
+    <ThingSetMakerDef>        <!-- a small statue representing you and your shooting skill -->
         <defName>Reward_shootingCompFirstOther</defName>
         <root Class="ThingSetMaker_Sum">
             <options>
@@ -359,24 +360,241 @@
         </root>
     </ThingSetMakerDef>
 
-    <ThingSetMakerDef>        <!-- gold statue. -->
+    <ThingSetMakerDef>        <!-- (gold?) statue. -->
         <defName>Reward_culturalSwapFirstPlace</defName>
+        <root Class="ThingSetMaker_RandomOption">
+            <fixedParams>
+                <maxThingMarketValue>5000</maxThingMarketValue>
+                <filter>
+                    <stuffCategoriesToAllow>
+                        <li>Metallic</li>
+                    </stuffCategoriesToAllow>
+                    <allowedQualities>
+                        <min>Excellent</min>
+                        <max>Legendary</max>
+                    </allowedQualities>
+                </filter>
+            </fixedParams>
+            <options>
+                <li>
+                    <weight>6</weight>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>BuildingsArt</li>
+                                </categories>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- piles of silver/ healer serum -->
         <defName>Reward_culturalSwapFirstOther</defName>
+        <root Class="ThingSetMaker_Sum">
+            <fixedParams>
+                <totalMarketValueRange>2500</totalMarketValueRange>
+            </fixedParams>
+            <options>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Silver</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>800</min>
+                                <max>2500</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.3</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>MechSerumHealer</li>
+                                    <li>MechSerumResurrector</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- the equivalent of Rotten tomatoes -->
         <defName>Reward_culturalSwapFirstLoser</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <thingSetMaker Class="ThingSetMaker_Nutrition">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Foods</li>
+                                </categories>
+                                <disallowedThingDefs>
+                                    <li>InsectJelly</li>
+                                </disallowedThingDefs>
+                                <disallowWorsePreferability>RawBad</disallowWorsePreferability>
+                                <disallowWithComp>CompHatcher</disallowWithComp>
+                                <disallowInedibleByHuman>true</disallowInedibleByHuman>
+                            </filter>
+                            <totalNutritionRange>
+                                <min>4</min>
+                                <max>8</max>
+                            </totalNutritionRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
 
     <ThingSetMakerDef>        <!-- Drugs and a big TV -->
         <defName>Reward_acousticShowFirstPlace</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class = "ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>500</min>
+                                <max>1500</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>BuildingsJoy</li>
+                                </categories>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>600</min>
+                                <max>1800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- Drugs and some cheap joy items -->
         <defName>Reward_acousticShowFirstLoser</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class = "ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>350</min>
+                                <max>800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>BuildingsJoy</li>
+                                </categories>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>600</min>
+                                <max>1400</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- the equivalent of Rotten tomatoes, and more drugs. -->
         <defName>Reward_acousticShowFirstOther</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Nutrition">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Foods</li>
+                                </categories>
+                                <disallowedThingDefs>
+                                    <li>InsectJelly</li>
+                                </disallowedThingDefs>
+                                <disallowWorsePreferability>RawBad</disallowWorsePreferability>
+                                <disallowWithComp>CompHatcher</disallowWithComp>
+                                <disallowInedibleByHuman>true</disallowInedibleByHuman>
+                            </filter>
+                            <totalNutritionRange>
+                                <min>4</min>
+                                <max>8</max>
+                            </totalNutritionRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>100</min>
+                                <max>400</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
     </ThingSetMakerDef>
 
 </Defs>

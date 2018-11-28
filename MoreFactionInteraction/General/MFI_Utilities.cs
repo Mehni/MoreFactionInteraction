@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace MoreFactionInteraction.General
@@ -50,5 +51,52 @@ namespace MoreFactionInteraction.General
             owner = null;
             return false;
         }
+
+        public static bool CaravanOrRichestColonyHasAnyOf(ThingDef thingdef, Caravan caravan, out Thing thing)
+        {
+            if (CaravanInventoryUtility.TryGetThingOfDef(caravan, thingdef, out thing, out Pawn owner))
+                return true;
+
+            List<Map> maps = Find.Maps.FindAll(x => x.IsPlayerHome);
+
+            if (maps.NullOrEmpty())
+                return false;
+
+            maps.SortBy(x => x.PlayerWealthForStoryteller);
+            Map richestMap = maps.First();
+
+            if (thingdef.IsBuildingArtificial)
+            {
+
+
+                return FindBuildingOrMinifiedVersionThereOf(thingdef, richestMap, out thing);
+            }
+            var thingsOfDef = richestMap.listerThings.ThingsOfDef(thingdef);
+
+            thing = thingsOfDef.FirstOrDefault();
+            return thingsOfDef.Any();
+        }
+
+        public static bool FindBuildingOrMinifiedVersionThereOf(ThingDef thingdef, Map map, out Thing thing)
+        {
+            IEnumerable<Building> buildingsOfDef = map.listerBuildings.AllBuildingsColonistOfDef(thingdef);
+            if (buildingsOfDef.Any())
+            {
+                thing = buildingsOfDef.First();
+                return true;
+            }
+            var minifiedBuilds = map.listerThings.ThingsInGroup(ThingRequestGroup.MinifiedThing);
+            for (int i = 0; i < minifiedBuilds.Count; i++)
+            {
+                if (minifiedBuilds[i].GetInnerIfMinified().def == thingdef)
+                {
+                    thing = minifiedBuilds[i];
+                    return true;
+                }
+            }
+            thing = null;
+            return false;
+        }
+
     }
 }

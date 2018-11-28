@@ -14,7 +14,7 @@ namespace MoreFactionInteraction
 
         public virtual Predicate<ThingDef> ValidatorFirstOther => (ThingDef x) => true;
 
-        public virtual string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator = null, ThingSetMakerDef thingSetMakerDef = null)
+        public virtual string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator, ThingSetMakerDef thingSetMakerDef)
         {
             List<Thing> rewards = new List<Thing>();
             if (thingSetMakerDef != null)

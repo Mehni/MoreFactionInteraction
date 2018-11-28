@@ -27,6 +27,11 @@ namespace MoreFactionInteraction.More_Flavour
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
+            WorldComponent_MFI_AnnualExpo worldComp = Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>();
+
+            if (worldComp == null)
+                return false;
+
             if (!TryGetRandomAvailableTargetMap(map: out Map map))
                 return false;
 
@@ -39,20 +44,20 @@ namespace MoreFactionInteraction.More_Flavour
             if (!TryGetFactionHost(out Faction faction))
                 return false;
 
-
             AnnualExpo annualExpo = (AnnualExpo)WorldObjectMaker.MakeWorldObject(def: MFI_DefOf.MFI_AnnualExpoObject);
             annualExpo.Tile = tile;
             annualExpo.GetComponent<TimeoutComp>().StartTimeout(TimeoutDaysRange.RandomInRange * GenDate.TicksPerDay);
-            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
+            worldComp.Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
             annualExpo.eventDef = result.Key;
             annualExpo.host = faction;
 
-            Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld++;
+            worldComp.timesHeld++;
+            worldComp.Events[result.Key]++;
 
             Find.WorldObjects.Add(o: annualExpo);
             Find.LetterStack.ReceiveLetter(label: this.def.letterLabel,
                                             text: "MFI_AnnualExpoLetterText".Translate(
-                                                Find.ActiveLanguageWorker.OrdinalNumber(Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().TimesHeld), 
+                                                Find.ActiveLanguageWorker.OrdinalNumber(worldComp.TimesHeld), 
                                                 Find.World.info.name,
                                                 annualExpo.host.Name,
                                                 annualExpo.eventDef.theme.Translate(),
