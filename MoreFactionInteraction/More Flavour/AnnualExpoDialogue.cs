@@ -84,6 +84,8 @@ namespace MoreFactionInteraction.More_Flavour
             {
                 case 1:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstPlace, eventDef.rewardFirstPlace);
+                    for (int i = 0; i < 100; i++)
+                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstPlace, eventDef.rewardFirstPlace));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstPlace, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstPlace);
                     annualExpoDialogueOutcome = eventDef.outComeFirstPlace.Formatted(rewards).AdjustedFor(pawn);
@@ -91,6 +93,8 @@ namespace MoreFactionInteraction.More_Flavour
 
                 case 2:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstLoser, eventDef.rewardFirstLoser);
+                    for (int i = 0; i < 100; i++)
+                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstLoser, eventDef.rewardFirstLoser));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstLoser, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstLoser);
                     annualExpoDialogueOutcome = eventDef.outcomeFirstLoser.Formatted(rewards).AdjustedFor(pawn);
@@ -98,6 +102,8 @@ namespace MoreFactionInteraction.More_Flavour
 
                 case 3:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstOther, eventDef.rewardFirstOther);
+                    for (int i = 0; i < 100; i++)
+                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstOther, eventDef.rewardFirstOther));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstOther, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstOther);
                     annualExpoDialogueOutcome = eventDef.outComeFirstOther.Formatted(rewards).AdjustedFor(pawn);
@@ -129,7 +135,6 @@ namespace MoreFactionInteraction.More_Flavour
             return resolver;
         }
 
-        private static float GetOutcomeWeightFactor(float statPower) =>
-            MoreFactionWar.FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: statPower);
+        private static float GetOutcomeWeightFactor(float statPower) => MoreFactionWar.FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: statPower);
     }
 }

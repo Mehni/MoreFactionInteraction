@@ -17,7 +17,23 @@
                             </filter>
                             <countRange>
                                 <min>8</min>
-                                <max>26</max>
+                                <max>21</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>5</min>
+                                <max>10</max>
                             </countRange>
                         </fixedParams>
                     </thingSetMaker>
@@ -29,11 +45,29 @@
                             <filter>
                                 <categories>
                                     <li>Artifacts</li>
+                                    <li>Items</li>
                                 </categories>
                             </filter>
                             <countRange>
-                                <min>2</min>
-                                <max>3</max>
+                                <min>1</min>
+                                <max>2</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Artifacts</li>
+                                    <li>Items</li>
+                                </categories>
+                            </filter>
+                            <countRange>
+                                <min>1</min>
+                                <max>2</max>
                             </countRange>
                         </fixedParams>
                     </thingSetMaker>
@@ -57,7 +91,23 @@
                             </filter>
                             <countRange>
                                 <min>5</min>
-                                <max>20</max>
+                                <max>10</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>5</min>
+                                <max>10</max>
                             </countRange>
                         </fixedParams>
                     </thingSetMaker>
@@ -69,10 +119,28 @@
                             <filter>
                                 <categories>
                                     <li>Artifacts</li>
+                                    <li>Items</li>
                                 </categories>
                             </filter>
                             <countRange>
-                                <min>1</min>
+                                <min>0</min>
+                                <max>2</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Artifacts</li>
+                                    <li>Items</li>
+                                </categories>
+                            </filter>
+                            <countRange>
+                                <min>0</min>
                                 <max>2</max>
                             </countRange>
                         </fixedParams>
@@ -137,7 +205,6 @@
                                     <li>WeaponsRanged</li>
                                 </categories>
                                 <thingSetMakerTagsToDisallow>
-                                    <li>RewardSpecial</li>
                                     <li>SingleUseWeapon</li>
                                 </thingSetMakerTagsToDisallow>
                             </filter>
@@ -192,7 +259,7 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
                             <qualityGenerator>Reward</qualityGenerator>
@@ -367,12 +434,6 @@
         <root Class="ThingSetMaker_RandomOption">
             <fixedParams>
                 <maxThingMarketValue>5000</maxThingMarketValue>
-                <filter>
-                    <allowedQualities>
-                        <min>Excellent</min>
-                        <max>Legendary</max>
-                    </allowedQualities>
-                </filter>
             </fixedParams>
             <options>
                 <li>
@@ -486,8 +547,8 @@
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
-                                <min>600</min>
-                                <max>1800</max>
+                                <min>300</min>
+                                <max>800</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>
@@ -496,6 +557,31 @@
                                 <thingSetMakerTagsToDisallow>
                                     <li>RewardSpecial</li>
                                 </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>300</min>
+                                <max>800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
                             </filter>
                         </fixedParams>
                     </thingSetMaker>
@@ -525,12 +611,12 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
-                                <min>600</min>
-                                <max>1400</max>
+                                <min>200</min>
+                                <max>400</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>
@@ -539,6 +625,31 @@
                                 <thingSetMakerTagsToDisallow>
                                     <li>RewardSpecial</li>
                                 </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.7</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>200</min>
+                                <max>400</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
                             </filter>
                         </fixedParams>
                     </thingSetMaker>
@@ -552,7 +663,7 @@
         <root Class="ThingSetMaker_Sum">
             <options>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_Nutrition">
                         <fixedParams>
                             <filter>
@@ -574,12 +685,31 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
                                 <min>100</min>
-                                <max>400</max>
+                                <max>200</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>100</min>
+                                <max>200</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>

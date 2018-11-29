@@ -86,12 +86,12 @@
     <MFI_scienceFaireExpl>Exciting!</MFI_scienceFaireExpl>
     <MFI_acousticShowExpl>You wonder whether to bring earplugs.</MFI_acousticShowExpl>
 
-    <MFI_buffPemmican>A new way of preservering Pemmican so it no longer rots.</MFI_buffPemmican>
+    <MFI_buffPemmican>A new way of preserving Pemmican so it no longer rots.</MFI_buffPemmican>
     <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
     <MFI_buffEmanator>You learn about overclocking; getting more performance by tweaking the millivoltage coursing through the half-moon coil windings on the reed switches. The {0} now has an increased range and effect, at the cost of an increased power consumption and longevity.</MFI_buffEmanator>
     <!-- like the emanator above, only for the infinite chemfuel reactor generator doodad thing. -->
     <MFI_buffChemfuel>Through removal of Panel A labelled 'Service Latch' and activation of now-exposed Rockerswitch type 2-A labelled 'GO FASTER' the {0} now produces {1} more often.</MFI_buffChemfuel>
-    <MFI_buffPsychite>By seeping it longer, {0} is now more potent. Truly a marvel of modern engineering.</MFI_buffPsychite>
+    <MFI_buffPsychite>By steeping it longer, {0} is now more potent. Truly a marvel of modern engineering.</MFI_buffPsychite>
 
     <MFI_SinceYouSuckAndDidntHaveIt>Since you didn't have it yet, they gave you {0}!</MFI_SinceYouSuckAndDidntHaveIt>
 

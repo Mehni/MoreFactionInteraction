@@ -59,7 +59,7 @@ namespace MoreFactionInteraction.More_Flavour
             Buff_Emanator.Register();
             Buff_Pemmican.Register();
             Buff_PsychTea.Register();
-            
+
             foreach (Buff item in activeBuffList.Where(x => x.Active))
             {
                 item.Apply();

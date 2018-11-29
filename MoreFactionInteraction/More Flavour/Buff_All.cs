@@ -17,6 +17,11 @@ namespace MoreFactionInteraction.More_Flavour
         public abstract void ExposeData();
         public abstract string Description();
         public abstract ThingDef RelevantThingDef();
+
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj.GetType() == this.GetType();
+        }
     }
 
     public class Buff_Pemmican : Buff
@@ -48,7 +53,7 @@ namespace MoreFactionInteraction.More_Flavour
         {
             ThoughtDef.Named("PsychicEmanatorSoothe").stages.First().baseMoodEffect = 6f;
             ThingDefOf.PsychicEmanator.specialDisplayRadius = 20f;
-            CompProperties_Power power = (CompProperties_Power)ThingDefOf.PsychicEmanator.comps.First(x => x is CompProperties_Power);
+            CompProperties_Power power = (CompProperties_Power)ThingDefOf.PsychicEmanator.comps.FirstOrDefault(x => x is CompProperties_Power);
 
             if (power != null)
                 power.basePowerConsumption *= 1.5f;
@@ -76,7 +81,7 @@ namespace MoreFactionInteraction.More_Flavour
     {
         public override void Apply()
         {
-            IngestionOutcomeDoer_GiveHediff giveHediff = (IngestionOutcomeDoer_GiveHediff)ThingDef.Named("PsychiteTea").ingestible.outcomeDoers.First(x => x is IngestionOutcomeDoer_GiveHediff);
+            IngestionOutcomeDoer_GiveHediff giveHediff = (IngestionOutcomeDoer_GiveHediff)ThingDef.Named("PsychiteTea").ingestible.outcomeDoers.FirstOrDefault(x => x is IngestionOutcomeDoer_GiveHediff);
             if (giveHediff != null)
                 giveHediff.severity = 1f;
 
@@ -102,7 +107,7 @@ namespace MoreFactionInteraction.More_Flavour
     {
         public override void Apply()
         {
-            CompProperties_Spawner spawner = (CompProperties_Spawner)ThingDefOf.InfiniteChemreactor.comps.First(x => x is CompProperties_Spawner);
+            CompProperties_Spawner spawner = (CompProperties_Spawner)ThingDefOf.InfiniteChemreactor.comps.FirstOrDefault(x => x is CompProperties_Spawner);
 
             if (spawner != null)
                 spawner.spawnIntervalRange.min = (int)(spawner.spawnIntervalRange.min * 0.9f);

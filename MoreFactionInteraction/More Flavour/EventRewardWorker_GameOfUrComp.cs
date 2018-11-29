@@ -12,9 +12,9 @@ namespace MoreFactionInteraction
     {
         private readonly EventDef eventDef = MFI_DefOf.MFI_GameOfUrComp;
 
-        public override Predicate<ThingDef> ValidatorFirstPlace => base.ValidatorFirstPlace;
+        public override Predicate<ThingDef> ValidatorFirstPlace => x => !x.isTechHediff && base.ValidatorFirstPlace(x);
 
-        public override Predicate<ThingDef> ValidatorFirstLoser => base.ValidatorFirstLoser;
+        public override Predicate<ThingDef> ValidatorFirstLoser => x => !x.isTechHediff && base.ValidatorFirstLoser(x);
 
         public override Predicate<ThingDef> ValidatorFirstOther => base.ValidatorFirstOther;
 

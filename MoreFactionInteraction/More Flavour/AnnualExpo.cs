@@ -30,8 +30,10 @@ namespace MoreFactionInteraction.More_Flavour
 
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
-            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan)) yield return o;
-            foreach (FloatMenuOption f in CaravanArrivalAction_VisitAnnualExpo.GetFloatMenuOptions(caravan: caravan, annualExpo: this)) yield return f;
+            foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan))
+                yield return o;
+            foreach (FloatMenuOption f in CaravanArrivalAction_VisitAnnualExpo.GetFloatMenuOptions(caravan: caravan, annualExpo: this))
+                yield return f;
         }
 
         public override void ExposeData()

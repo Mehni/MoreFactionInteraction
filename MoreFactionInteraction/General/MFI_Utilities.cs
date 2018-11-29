@@ -38,10 +38,10 @@ namespace MoreFactionInteraction.General
             thing = null;
             List<Thing> list = CaravanInventoryUtility.AllInventoryItems(caravan);
             float num = 0f;
-            for (int i = 0; i < list.Count; i++)
+            foreach (Thing current in list)
             {
-                if (list[i].GetInnerIfMinified().GetStatValue(StatDefOf.Beauty) > num)
-                    thing = list[i];
+                if (current.GetInnerIfMinified().GetStatValue(StatDefOf.Beauty) > num && (current.GetInnerIfMinified().TryGetComp<CompArt>()?.Active ?? false))
+                    thing = current;
             }
             if (thing != null)
             {

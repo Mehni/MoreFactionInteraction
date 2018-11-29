@@ -38,7 +38,7 @@ namespace MoreFactionInteraction
                     if (!performer.story?.WorkTagIsDisabled(WorkTags.Artistic) ?? false)
                     {
                         pawn.skills.Learn(sDef: SkillDefOf.Artistic, eventDef.xPGainFirstLoser, direct: true);
-                        TryAppendExpGainInfo(ref rewards, pawn, SkillDefOf.Artistic, eventDef.xPGainFirstLoser);
+                        TryAppendExpGainInfo(ref rewards, performer, SkillDefOf.Artistic, eventDef.xPGainFirstLoser);
                     }
                 }
                 return Rand.Bool ? string.Empty : 

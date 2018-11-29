@@ -15,7 +15,7 @@
     </comps>
   </WorldObjectDef>
 
-  <WorldObjectDef>
+    <WorldObjectDef>
     <defName>MFI_AnnualExpoObject</defName>
     <label>annual expo</label>
     <description>A site designated for PARTY HARD.</description>
