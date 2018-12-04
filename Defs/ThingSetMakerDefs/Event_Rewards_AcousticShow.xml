@@ -23,12 +23,12 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.7</chance>
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
                                 <min>300</min>
-                                <max>800</max>
+                                <max>700</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>
@@ -45,12 +45,12 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.7</chance>
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
-                                <min>300</min>
-                                <max>800</max>
+                                <min>250</min>
+                                <max>700</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>

@@ -8,7 +8,7 @@
             <options>
                 <li>
                     <weight>6</weight>
-                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
                         <fixedParams>
                             <maxThingMarketValue>5000</maxThingMarketValue>
                             <filter>
@@ -31,7 +31,7 @@
             </fixedParams>
             <options>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_StackCount">
                         <fixedParams>
                             <filter>
@@ -40,8 +40,24 @@
                                 </thingDefs>
                             </filter>
                             <countRange>
-                                <min>800</min>
-                                <max>2500</max>
+                                <min>400</min>
+                                <max>1200</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.7</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Silver</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>400</min>
+                                <max>1200</max>
                             </countRange>
                         </fixedParams>
                     </thingSetMaker>

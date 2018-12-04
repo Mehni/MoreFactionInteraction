@@ -36,9 +36,8 @@
         </value>
     </Operation>
 
-    <!-- 
-Add /comps/li/compClass if there are no comps yet.
-Add /li/compClass to /comps if exists (i.e. other mod already added the comps field first) 
+<!-- Add /comps/li/compClass if there are no comps yet. -->
+<!-- Add /li/compClass to /comps if exists (i.e. other mod already added the comps field first) -->
     <Operation Class="PatchOperationConditional">
         <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
         <nomatch Class="PatchOperationAdd">
@@ -61,7 +60,7 @@ Add /li/compClass to /comps if exists (i.e. other mod already added the comps fi
         </match>
     </Operation>
 
--->
+
 
     <Operation Class="PatchOperationFindMod">
         <mods>

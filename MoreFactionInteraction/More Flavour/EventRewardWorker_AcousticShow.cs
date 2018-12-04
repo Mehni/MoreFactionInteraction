@@ -38,8 +38,7 @@ namespace MoreFactionInteraction
             {
                 for (int i = 0; i < amount; i++)
                 {
-                    if (pawn.needs?.mood?.thoughts?.memories != null)
-                        pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.AttendedParty, null);
+                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(ThoughtDefOf.AttendedParty, null);
                 }
             }
         }

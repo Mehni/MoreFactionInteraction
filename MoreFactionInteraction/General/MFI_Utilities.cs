@@ -40,7 +40,7 @@ namespace MoreFactionInteraction.General
             float num = 0f;
             foreach (Thing current in list)
             {
-                if (current.GetInnerIfMinified().GetStatValue(StatDefOf.Beauty) > num && (current.GetInnerIfMinified().TryGetComp<CompArt>()?.Active ?? false))
+                if (current.GetInnerIfMinified().GetStatValue(StatDefOf.Beauty) > num && (current.GetInnerIfMinified().TryGetComp<CompArt>()?.Props?.canBeEnjoyedAsArt ?? false))
                     thing = current;
             }
             if (thing != null)
@@ -67,8 +67,6 @@ namespace MoreFactionInteraction.General
 
             if (thingdef.IsBuildingArtificial)
             {
-
-
                 return FindBuildingOrMinifiedVersionThereOf(thingdef, richestMap, out thing);
             }
             var thingsOfDef = richestMap.listerThings.ThingsOfDef(thingdef);
@@ -97,6 +95,5 @@ namespace MoreFactionInteraction.General
             thing = null;
             return false;
         }
-
     }
 }

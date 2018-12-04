@@ -6,6 +6,8 @@ using RimWorld;
 using Verse;
 using RimWorld.Planet;
 using MoreFactionInteraction.General;
+using Verse.Grammar;
+using UnityEngine;
 
 namespace MoreFactionInteraction.More_Flavour
 {
@@ -17,48 +19,38 @@ namespace MoreFactionInteraction.More_Flavour
 
         public DiaNode AnnualExpoDialogueNode(Pawn pawn, Caravan caravan, EventDef eventDef, Faction host)
         {
-            //Tale tale = null;
-            //TaleReference taleRef = new TaleReference(tale);
-            string flavourText = "fat accountants sing songs.";// taleRef.GenerateText(TextGenerationPurpose.ArtDescription, RulePackDefOf.ArtDescriptionRoot_Taleless);
+            GrammarRequest request = default;
+            request.Includes.Add(RulePackDefOf.ArtDescriptionUtility_Global);
 
-            DiaNode dialogueGreeting = new DiaNode(text: "MFI_AnnualExpoDialogueIntroduction".Translate(eventDef.theme, flavourText));
+            string flavourText = GrammarResolver.Resolve("artextra_clause", request);
+
+            DiaNode dialogueGreeting = new DiaNode(text: "MFI_AnnualExpoDialogueIntroduction".Translate(eventDef.theme, FirstCharacterToLower(flavourText)));
 
             foreach (DiaOption option in DialogueOptions(pawn: pawn, caravan, eventDef, host))
             {
                 dialogueGreeting.options.Add(item: option);
-            }
-            //if (Prefs.DevMode)
-            //{
-            //    foreach (Buff item in Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ActiveBuffsList)
-            //    {
-            //        dialogueGreeting.options.Add(item: new DiaOption(text: $"(Dev: Get {item} buff)")
-            //        {
-            //            action = () => Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().ApplyRandomBuff(x => x == item),
-            //            linkLateBind = () => DialogueResolver(textResult: $"It is done.\n\n{item.Description()}")
-            //        });
-            //    }
-            //}
-            if (Prefs.DevMode)
-            {
-                foreach (EventDef eventDefdef in DefDatabase<EventDef>.AllDefsListForReading)
-                {
-                    foreach (DiaOption option in DialogueOptions(pawn: pawn, caravan, eventDefdef, host))
-                    {
-                        dialogueGreeting.options.Add(item: option);
-                    }
-                }
             }
             return dialogueGreeting;
         }
 
         private IEnumerable<DiaOption> DialogueOptions(Pawn pawn, Caravan caravan, EventDef eventDef, Faction host)
         {
-            string annualExpoDialogueOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
+            string annualExpoDialogueOutcome = $"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL + F12 now), you get a cookie. P: {pawn} C: {caravan} E: {eventDef} H: {host}";
 
-            yield return new DiaOption(text: Prefs.DevMode ? eventDef.theme : "MFI_AnnualExpoFirstOption".Translate())
+            bool broughtArt = (eventDef == MFI_DefOf.MFI_CulturalSwap & MFI_Utilities.TryGetBestArt(caravan, out Thing art, out Pawn owner));
+
+            yield return new DiaOption(text: "MFI_AnnualExpoFirstOption".Translate())
             {
                 action = () => DetermineOutcome(pawn: pawn, caravan: caravan, eventDef: eventDef, annualExpoDialogueOutcome: out annualExpoDialogueOutcome, host),
-                linkLateBind = () => DialogueResolver(textResult: annualExpoDialogueOutcome),
+                linkLateBind = () =>
+                               {
+                                   DiaNode endpoint = DialogueResolver(annualExpoDialogueOutcome, broughtArt);
+
+                                   if (broughtArt)
+                                       endpoint.options.First().linkLateBind = () => EventRewardWorker_CulturalSwap.DialogueResolverArtOffer("MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt", art, caravan);
+
+                                   return endpoint;
+                               }
             };
         }
 
@@ -67,15 +59,18 @@ namespace MoreFactionInteraction.More_Flavour
             string rewards = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log(press CTRL + F12 now), you get a cookie.";
             SkillDef thisYearsRelevantSkill = eventDef.learnedSkills.RandomElement();
 
+            if (pawn.skills.GetSkill(thisYearsRelevantSkill).TotallyDisabled) //fallback
+                thisYearsRelevantSkill = pawn.skills.skills.Where(x => !x.TotallyDisabled).RandomElementByWeight(x => (int)x.passion).def;
+
             const float BaseWeight_FirstPlace = 0.2f;
             const float BaseWeight_FirstLoser = 0.5f;
             const float BaseWeight_FirstOther = 0.3f;
 
             List<KeyValuePair<float, int>> outComeAndChances = new List<KeyValuePair<float, int>>
             {
-                new KeyValuePair<float, int>(BaseWeight_FirstPlace * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat)), 1),
-                new KeyValuePair<float, int>(BaseWeight_FirstLoser * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat)), 2),
-                new KeyValuePair<float, int>(BaseWeight_FirstOther * 1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat)), 3),
+                new KeyValuePair<float, int>(BaseWeight_FirstPlace * (1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat))), 1),
+                new KeyValuePair<float, int>(BaseWeight_FirstLoser * (1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat))), 2),
+                new KeyValuePair<float, int>(BaseWeight_FirstOther * (1 / GetOutcomeWeightFactor(pawn.GetStatValue(eventDef.relevantStat))), 3),
             };
 
             int placement = outComeAndChances.RandomElementByWeight(x => x.Key).Value;
@@ -84,8 +79,6 @@ namespace MoreFactionInteraction.More_Flavour
             {
                 case 1:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstPlace, eventDef.rewardFirstPlace);
-                    for (int i = 0; i < 100; i++)
-                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstPlace, eventDef.rewardFirstPlace));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstPlace, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstPlace);
                     annualExpoDialogueOutcome = eventDef.outComeFirstPlace.Formatted(rewards).AdjustedFor(pawn);
@@ -93,8 +86,6 @@ namespace MoreFactionInteraction.More_Flavour
 
                 case 2:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstLoser, eventDef.rewardFirstLoser);
-                    for (int i = 0; i < 100; i++)
-                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstLoser, eventDef.rewardFirstLoser));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstLoser, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstLoser);
                     annualExpoDialogueOutcome = eventDef.outcomeFirstLoser.Formatted(rewards).AdjustedFor(pawn);
@@ -102,18 +93,14 @@ namespace MoreFactionInteraction.More_Flavour
 
                 case 3:
                     rewards = eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstOther, eventDef.rewardFirstOther);
-                    for (int i = 0; i < 100; i++)
-                        Log.Message(eventDef.Worker.GenerateRewards(pawn, caravan, eventDef.Worker.ValidatorFirstOther, eventDef.rewardFirstOther));
                     pawn.skills.Learn(sDef: thisYearsRelevantSkill, xp: eventDef.xPGainFirstOther, direct: true);
                     TryAppendExpGainInfo(ref rewards, pawn, thisYearsRelevantSkill, eventDef.xPGainFirstOther);
                     annualExpoDialogueOutcome = eventDef.outComeFirstOther.Formatted(rewards).AdjustedFor(pawn);
                     break;
 
                 default:
-                    annualExpoDialogueOutcome = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL+F12 now), you get a cookie.";
-                    Log.Error("default case");
-
-                    break;
+                    Log.Error($"P: {pawn}, C: {caravan}, E: {eventDef}");
+                    throw new Exception($"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL+F12 now), you get a cookie. P: {pawn} C: {caravan} E: {eventDef} H: {host}. C: default.");
             }
         }
 
@@ -124,17 +111,25 @@ namespace MoreFactionInteraction.More_Flavour
                     .Translate(pawn.LabelShort, amount.ToString("F0"), skill.label);
         }
 
-        private static DiaNode DialogueResolver(string textResult)
+        private static DiaNode DialogueResolver(string textResult, bool broughtArt)
         {
             DiaNode resolver = new DiaNode(text: textResult);
             DiaOption diaOption = new DiaOption(text: "OK".Translate())
             {
-                resolveTree = true
+                resolveTree = !broughtArt
             };
             resolver.options.Add(item: diaOption);
             return resolver;
         }
 
         private static float GetOutcomeWeightFactor(float statPower) => MoreFactionWar.FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: statPower);
+
+        private static string FirstCharacterToLower(string str)
+        {
+            if (str.NullOrEmpty() || char.IsLower(str[0]))
+                return str;
+
+            return char.ToLowerInvariant(str[0]) + str.Substring(1);
+        }
     }
 }

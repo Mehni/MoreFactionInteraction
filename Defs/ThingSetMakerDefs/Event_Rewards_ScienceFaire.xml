@@ -10,7 +10,7 @@
             </fixedParams>
             <options>
                 <li>
-                    <chance>0.95</chance>
+                    <chance>1</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
                             <qualityGenerator>Reward</qualityGenerator>
@@ -18,12 +18,12 @@
                                 <thingDefs>
                                     <li>MechSerumHealer</li>
                                     <li>MechSerumResurrector</li>
-                                    <li>MechSerumNeuroTrainer</li>
+                                    <li>MechSerumNeurotrainer</li>
                                     <li>TechprofSubpersonaCore</li>
                                 </thingDefs>
                             </filter>
                             <countRange>
-                                <min>0</min>
+                                <min>1</min>
                                 <max>1</max>
                             </countRange>
                         </fixedParams>
@@ -33,7 +33,6 @@
                     <chance>0.05</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
-                            <techLevel>Industrial</techLevel>
                             <filter>
                                 <categories>
                                     <li>Artifacts</li>
@@ -50,7 +49,6 @@
                     <chance>0.1</chance>
                     <thingSetMaker Class="ThingSetMaker_StackCount">
                         <fixedParams>
-                            <techLevel>Industrial</techLevel>
                             <filter>
                                 <thingDefs>
                                     <li>Luciferium</li>
@@ -75,7 +73,6 @@
                     <chance>0.8</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
-                            <techLevel>Industrial</techLevel>
                             <filter>
                                 <categories>
                                     <li>Artifacts</li>
@@ -97,14 +94,26 @@
                                 <thingDefs>
                                     <li>MechSerumHealer</li>
                                     <li>MechSerumResurrector</li>
-                                    <li>MechSerumNeuroTrainer</li>
+                                    <li>MechSerumNeurotrainer</li>
                                     <li>TechprofSubpersonaCore</li>
                                 </thingDefs>
                             </filter>
                             <countRange>
-                                <min>-1</min>
+                                <min>1</min>
                                 <max>2</max>
                             </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>1.4</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>TechprofSubpersonaCore</li>
+                                </thingDefs>
+                            </filter>
                         </fixedParams>
                     </thingSetMaker>
                 </li>
@@ -118,12 +127,11 @@
             <options>
                 <li>
                     <weight>1.4</weight>
-                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                    <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
-                            <totalMarketValueRange>1500</totalMarketValueRange>
                             <filter>
                                 <thingDefs>
-                                    <li>MechSerumNeuroTrainer</li>
+                                    <li>MechSerumNeurotrainer</li>
                                     <li>TechprofSubpersonaCore</li>
                                 </thingDefs>
                             </filter>

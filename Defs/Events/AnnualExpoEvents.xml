@@ -3,6 +3,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_GameOfUrComp</defName>
+        <label>Game-of-Ur competition</label>
         <theme>the Royal Game-of-Ur</theme>
         <themeDesc>Send your best gamer.</themeDesc>
         <learnedSkills>
@@ -22,6 +23,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_ShootingComp</defName>
+        <label>Shooting competition</label>
         <theme>a shooting competition</theme>
         <themeDesc>Send your best shot.</themeDesc>
         <learnedSkills>
@@ -31,7 +33,7 @@
         <workerClass>MoreFactionInteraction.EventRewardWorker_ShootingComp</workerClass>
         <outComeFirstPlace>With almost robotic accuracy, [PAWN_nameDef] took aim and hit all targets with pinpoint precision. Judges were very impressed and rewarded you with:\n\n{0}</outComeFirstPlace>
         <outcomeFirstLoser>There was a strong field of contenders this year, with many faction representatives having lived as a hunter or just plain decked out in (archotech) bionics. [PAWN_nameDef] stranded somewhere in the quarter finals. Your reward for participating is:\n\n{0}</outcomeFirstLoser>
-        <outComeFirstOther>[PAWN_nameDef] did not proceed past the first round, which consisted of "hit the broad side of a barn". They added that part as a gag years ago. [PAWN_nameDef] is the first since its introduction not to progress to the second round. Your reward for participating is:\n\n{0}</outComeFirstOther>
+        <outComeFirstOther>[PAWN_nameDef] did not proceed past the first round, which consisted of "hit the broad side of a barn". They added that part as a gag years ago. [PAWN_nameDef] is the first since its introduction not to progress to the second round. Your reward for participating is:\n\n{0}\n\n It seems to represent [PAWN_nameDef]'s skill as a shooter.</outComeFirstOther>
         <rewardFirstPlace>Reward_shootingCompFirstPlace</rewardFirstPlace>
         <rewardFirstLoser>Reward_shootingCompFirstLoser</rewardFirstLoser>
         <rewardFirstOther>Reward_shootingCompFirstOther</rewardFirstOther>
@@ -39,6 +41,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_CulturalSwap</defName>
+        <label>cultural swap</label>
         <theme>culture and art</theme>
         <themeDesc>There may be an opportunity for trade.</themeDesc>
         <learnedSkills>
@@ -48,8 +51,8 @@
         </learnedSkills>
         <relevantStat>SocialImpact</relevantStat>
         <workerClass>MoreFactionInteraction.EventRewardWorker_CulturalSwap</workerClass>
-        <!-- {0 = childhood backstory label} -->
-        <outComeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_objective] upbringing as a [PAWN_title]. This simple story and more importantly the atmosphere [PAWN_objective] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{0}</outComeFirstPlace>
+        <xPGainFirstLoser>0</xPGainFirstLoser>
+        <outComeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_possessive] upbringing as a [PAWN_title]. This simple story and more importantly the atmosphere [PAWN_pronoun] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{0}</outComeFirstPlace>
         <outcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine with [PAWN_nameDef] taking centre stage. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{0}</outcomeFirstLoser>
         <outComeFirstOther>The host faction moved the audience to tears with their dazzling display; a dramatic reenactment of their ancestor's discovery of White Rabbit Mountain Range. It was a touching piece of theatre that transcended language barriers, and reached the hearts of young and old alike.\n\nAnd then there was your troupe. Your reward for participating is:\n\n{0}</outComeFirstOther>
         <rewardFirstPlace>Reward_culturalSwapFirstPlace</rewardFirstPlace>
@@ -59,6 +62,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_ScienceFaire</defName>
+        <label>Science Faire</label>
         <theme>exchanging scientific discoveries</theme>
         <themeDesc>Exciting!</themeDesc>
         <learnedSkills>
@@ -76,6 +80,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_AcousticShow</defName>
+        <label>acoustic show</label>
         <theme>an acoustic show</theme>
         <themeDesc>You wonder whether to bring earplugs.</themeDesc>
         <learnedSkills>

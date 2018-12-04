@@ -13,7 +13,6 @@ namespace MoreFactionInteraction.More_Flavour
 
     public class IncidentWorker_AnnualExpo : IncidentWorker
     {
-        private static readonly List<Map> tmpAvailableMaps = new List<Map>();
         private const int MinDistance = 12;
         private const int MaxDistance = 26;
         private static readonly IntRange TimeoutDaysRange = new IntRange(min: 21, max: 23);
@@ -47,12 +46,12 @@ namespace MoreFactionInteraction.More_Flavour
             AnnualExpo annualExpo = (AnnualExpo)WorldObjectMaker.MakeWorldObject(def: MFI_DefOf.MFI_AnnualExpoObject);
             annualExpo.Tile = tile;
             annualExpo.GetComponent<TimeoutComp>().StartTimeout(TimeoutDaysRange.RandomInRange * GenDate.TicksPerDay);
-            worldComp.Events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
+            worldComp.events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
             annualExpo.eventDef = result.Key;
             annualExpo.host = faction;
 
             worldComp.timesHeld++;
-            worldComp.Events[result.Key]++;
+            worldComp.events[result.Key]++;
 
             Find.WorldObjects.Add(o: annualExpo);
             Find.LetterStack.ReceiveLetter(label: this.def.letterLabel,
@@ -70,27 +69,12 @@ namespace MoreFactionInteraction.More_Flavour
 
         private static bool TryGetFactionHost(out Faction faction) => Find
                                                      .FactionManager.AllFactionsVisible
-                                                     .Where(x => !x.defeated && !x.def.permanentEnemy).TryRandomElement(out faction);
+                                                     .Where(x => !x.defeated && !x.def.permanentEnemy && !x.IsPlayer).TryRandomElement(out faction);
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
-        {
-            tmpAvailableMaps.Clear();
-            List<Map> maps = Find.Maps;
-            foreach (Map potentialTargetMap in maps)
-            {
-                if (potentialTargetMap.IsPlayerHome)
-                {
-                    tmpAvailableMaps.Add(item: potentialTargetMap);
-                }
-            }
-            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
-            tmpAvailableMaps.Clear();
-            return result;
-        }
+            => Find.Maps.Where(x => x.IsPlayerHome).TryRandomElement(out map);
 
         private static bool TryFindTile(out int tile)
-        {
-            return TileFinder.TryFindNewSiteTile(tile: out tile, minDist: MinDistance, maxDist: MaxDistance, allowCaravans: true, preferCloserTiles: false);
-        }
+            => TileFinder.TryFindNewSiteTile(out tile, MinDistance, MaxDistance, allowCaravans: true, preferCloserTiles: false);
     }
 }

@@ -46,6 +46,9 @@
                                     <li>Artifacts</li>
                                     <li>Items</li>
                                 </categories>
+                                <disallowedThingDefs>
+                                    <li>AIPersonaCore</li>
+                                </disallowedThingDefs>
                             </filter>
                             <countRange>
                                 <min>1</min>
@@ -63,6 +66,9 @@
                                     <li>Artifacts</li>
                                     <li>Items</li>
                                 </categories>
+                                <disallowedThingDefs>
+                                    <li>AIPersonaCore</li>
+                                </disallowedThingDefs>
                             </filter>
                             <countRange>
                                 <min>1</min>
@@ -74,6 +80,7 @@
             </options>
         </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- Luci + artefacts -->
         <defName>Reward_gameOfUrCompFirstLoser</defName>
         <root Class = "ThingSetMaker_Sum">
@@ -119,6 +126,9 @@
                                     <li>Artifacts</li>
                                     <li>Items</li>
                                 </categories>
+                                <disallowedThingDefs>
+                                    <li>AIPersonaCore</li>
+                                </disallowedThingDefs>
                             </filter>
                             <countRange>
                                 <min>0</min>
@@ -136,6 +146,9 @@
                                     <li>Artifacts</li>
                                     <li>Items</li>
                                 </categories>
+                                <disallowedThingDefs>
+                                    <li>AIPersonaCore</li>
+                                </disallowedThingDefs>
                             </filter>
                             <countRange>
                                 <min>0</min>
@@ -147,6 +160,7 @@
             </options>
         </root>
     </ThingSetMakerDef>
+
     <ThingSetMakerDef>        <!-- mostly placeholder -->
         <defName>Reward_gameOfUrCompFirstOther</defName>
         <root Class="ThingSetMaker_Sum">
