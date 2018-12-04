@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- Nothing to translate in here. -->
+
+    <ThingSetMakerDef>        <!-- Drugs and a big TV -->
+        <defName>Reward_acousticShowFirstPlace</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class = "ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>500</min>
+                                <max>1500</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>BuildingsJoy</li>
+                                </categories>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>300</min>
+                                <max>800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>300</min>
+                                <max>800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>        <!-- Drugs and some cheap joy items -->
+        <defName>Reward_acousticShowFirstLoser</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class = "ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>350</min>
+                                <max>800</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>BuildingsJoy</li>
+                                </categories>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>200</min>
+                                <max>400</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.7</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>200</min>
+                                <max>400</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                                <disallowedThingDefs>
+                                    <li>Luciferium</li>
+                                </disallowedThingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>        <!-- the equivalent of Rotten tomatoes, and more drugs. -->
+        <defName>Reward_acousticShowFirstOther</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_Nutrition">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>Foods</li>
+                                </categories>
+                                <disallowedThingDefs>
+                                    <li>InsectJelly</li>
+                                </disallowedThingDefs>
+                                <disallowWorsePreferability>RawBad</disallowWorsePreferability>
+                                <disallowWithComp>CompHatcher</disallowWithComp>
+                                <disallowInedibleByHuman>true</disallowInedibleByHuman>
+                            </filter>
+                            <totalNutritionRange>
+                                <min>4</min>
+                                <max>8</max>
+                            </totalNutritionRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>100</min>
+                                <max>200</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.8</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <totalMarketValueRange>
+                                <min>100</min>
+                                <max>200</max>
+                            </totalMarketValueRange>
+                            <filter>
+                                <categories>
+                                    <li>Drugs</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>RewardSpecial</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+</Defs>
