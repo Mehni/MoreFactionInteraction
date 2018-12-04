@@ -43,7 +43,7 @@ namespace MoreFactionInteraction
             choiceLetterDiplomaticMarriage.betrothed = this.betrothed;
             choiceLetterDiplomaticMarriage.StartTimeout(duration: TimeoutTicks);
             Find.LetterStack.ReceiveLetter(@let: choiceLetterDiplomaticMarriage);
-            Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
+            //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterDiplomaticMarriage);
             return true;
         }
 

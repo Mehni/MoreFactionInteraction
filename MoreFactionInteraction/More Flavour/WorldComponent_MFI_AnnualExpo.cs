@@ -5,8 +5,6 @@ using System.Text;
 using RimWorld;
 using Verse;
 using RimWorld.Planet;
-using Harmony;
-using System.Reflection;
 
 namespace MoreFactionInteraction.More_Flavour
 {
@@ -20,9 +18,12 @@ namespace MoreFactionInteraction.More_Flavour
 
         public List<Buff> ActiveBuffsList => activeBuffList;
 
-        public int TimesHeld => timesHeld + Math.Abs((int)Rand.ValueSeeded(Find.World.ConstantRandSeed)) % 1000;
+        public int TimesHeld => timesHeld + Rand.RangeInclusiveSeeded(
+            (int)PawnKindDefOf.Muffalo.race.race.lifeExpectancy,
+            (int)PawnKindDefOf.Thrumbo.race.race.lifeExpectancy,
+            (int)(Rand.ValueSeeded(Find.World.ConstantRandSeed) * 1000));
 
-        public bool BuffedEmanator => (this.activeBuffList.Find(x => x is Buff_Emanator)?.Active) ?? false; //used by patches.
+        public bool BuffedEmanator => (this.activeBuffList.Find(x => x is Buff_Emanator)?.Active) ?? false; //used by patches. 
 
         public void RegisterBuff(Buff buff)
         {

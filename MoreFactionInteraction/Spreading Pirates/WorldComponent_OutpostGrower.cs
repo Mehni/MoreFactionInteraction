@@ -56,8 +56,14 @@ namespace MoreFactionInteraction
 
                 foreach (ChoiceLetter letter in choiceLetters)
                 {
-                    if (letter == null || Find.TickManager.TicksGame > letter.disappearAtTick)
+                    if (letter == null)
                     {
+                        choiceLetters.Remove(letter);
+                        break;
+                    }
+                    if (Find.TickManager.TicksGame > letter.disappearAtTick)
+                    {
+                        letter.OpenLetter();
                         choiceLetters.Remove(letter);
                         break;
                     }
@@ -74,7 +80,7 @@ namespace MoreFactionInteraction
         {
             //this is where I store letters, because RimWorld just goes and deletes them.
             base.ExposeData();
-            Scribe_Collections.Look<ChoiceLetter>(ref choiceLetters, "MFI_ChoiceLetters", LookMode.Reference);
+            Scribe_Collections.Look<ChoiceLetter>(ref choiceLetters, "MFI_ChoiceLetters", LookMode.Deep);
         }
     }
 }
