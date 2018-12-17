@@ -27,8 +27,8 @@
                     <thingSetMaker Class="ThingSetMaker_MarketValue">
                         <fixedParams>
                             <totalMarketValueRange>
-                                <min>300</min>
-                                <max>700</max>
+                                <min>200</min>
+                                <max>500</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>
@@ -50,7 +50,7 @@
                         <fixedParams>
                             <totalMarketValueRange>
                                 <min>250</min>
-                                <max>700</max>
+                                <max>500</max>
                             </totalMarketValueRange>
                             <filter>
                                 <categories>

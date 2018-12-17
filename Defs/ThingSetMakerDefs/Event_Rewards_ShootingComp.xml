@@ -68,7 +68,7 @@
         <root Class = "ThingSetMaker_Sum">
             <options>
                 <li>
-                    <chance>0.6</chance>
+                    <chance>0.5</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
                             <qualityGenerator>Reward</qualityGenerator>
@@ -91,7 +91,7 @@
                     </thingSetMaker>
                 </li>
                 <li>
-                    <chance>0.9</chance>
+                    <chance>1</chance>
                     <thingSetMaker Class="ThingSetMaker_Count">
                         <fixedParams>
                             <qualityGenerator>Reward</qualityGenerator>

@@ -23,7 +23,7 @@ namespace MoreFactionInteraction.More_Flavour
             (int)PawnKindDefOf.Thrumbo.race.race.lifeExpectancy,
             (int)(Rand.ValueSeeded(Find.World.ConstantRandSeed) * 1000));
 
-        public bool BuffedEmanator => (this.ActiveBuffsList.Find(x => x is Buff_Emanator)?.Active) ?? false; //used by patches. 
+        public bool BuffedEmanator => (this.ActiveBuffsList.Find(x => x is Buff_Emanator)?.Active) ?? false; //used by patches.
 
         public void RegisterBuff(Buff buff)
         {

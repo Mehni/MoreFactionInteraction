@@ -59,13 +59,13 @@
 
 	<IncidentDef>
 		<defName>MFI_AnnualExpo</defName>
-		<label>the expo</label>
+		<label>the annual expo</label>
 		<category>WorldQuest</category>
 		<targetTags>
 			<li>World</li>
 		</targetTags>
 		<workerClass>MoreFactionInteraction.More_Flavour.IncidentWorker_AnnualExpo</workerClass>
-		<letterLabel>annual expo</letterLabel>
+		<letterLabel>Annual expo</letterLabel>
 		<letterDef>NeutralEvent</letterDef>
 		<baseChance>0.51</baseChance>
 		<minRefireDays>50</minRefireDays>

@@ -21,7 +21,8 @@ namespace MoreFactionInteraction.More_Flavour
         {
             return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null
                                              && TryGetRandomAvailableTargetMap(out Map map)
-                                             && TryFindTile(tile: out int num);
+                                             && TryFindTile(tile: out int num)
+                                             && TryGetFactionHost(out Faction faction);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -67,9 +68,8 @@ namespace MoreFactionInteraction.More_Flavour
             return true;
         }
 
-        private static bool TryGetFactionHost(out Faction faction) => Find
-                                                     .FactionManager.AllFactionsVisible
-                                                     .Where(x => !x.defeated && !x.def.permanentEnemy && !x.IsPlayer).TryRandomElement(out faction);
+        private static bool TryGetFactionHost(out Faction faction)
+            => Find.FactionManager.AllFactionsVisible.Where(x => !x.defeated && !x.def.permanentEnemy && !x.IsPlayer).TryRandomElement(out faction);
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
             => Find.Maps.Where(x => x.IsPlayerHome).TryRandomElement(out map);
