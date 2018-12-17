@@ -74,18 +74,6 @@
     <MFI_AnnualExpoDialogueIntroduction>Your caravan has arrived at the annual exposition. As this year's theme is {0}, there are many experts on that topic here. Most of them are preparing, while others have already started showing off their skills.\n\nThe expo is a hodge-podge of stalls, some modest and made of locally sourced materials while others are high-tech pre-fabs from Urb worlds. They form a circle around the main stage, where {1}.\n\nSurely it'll be used for something more useful later.</MFI_AnnualExpoDialogueIntroduction>
     <MFI_AnnualExpoFirstOption>Let's get started!</MFI_AnnualExpoFirstOption>
 
-    <MFI_gameOfUrComp>the Royal Game-of-Ur</MFI_gameOfUrComp>
-    <MFI_shootingComp>a shooting competition</MFI_shootingComp>
-    <MFI_culturalSwap>culture and art</MFI_culturalSwap>
-    <MFI_scienceFaire>exchanging scientific discoveries</MFI_scienceFaire>
-    <MFI_acousticShow>an acoustic show</MFI_acousticShow>
-
-    <MFI_gameOfUrCompExpl>Send your best gamer.</MFI_gameOfUrCompExpl>
-    <MFI_shootingCompExpl>Send your best shot.</MFI_shootingCompExpl>
-    <MFI_culturalSwapExpl>There may be an opportunity for trade.</MFI_culturalSwapExpl>
-    <MFI_scienceFaireExpl>Exciting!</MFI_scienceFaireExpl>
-    <MFI_acousticShowExpl>You wonder whether to bring earplugs.</MFI_acousticShowExpl>
-
     <MFI_buffPemmican>A new way of preserving Pemmican so it no longer rots.</MFI_buffPemmican>
     <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
     <MFI_buffEmanator>You learn about overclocking; getting more performance by tweaking the millivoltage coursing through the half-moon coil windings on the reed switches. The {0} now has an increased range and effect, at the cost of an increased power consumption and longevity.</MFI_buffEmanator>
