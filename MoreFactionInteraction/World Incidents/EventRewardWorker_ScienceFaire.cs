@@ -51,7 +51,7 @@ namespace MoreFactionInteraction
                 thing = ThingMaker.MakeThing(buff.RelevantThingDef());
                 thing.stackCount = Mathf.Min(thing.def.stackLimit, 75); //suck it, stackXXL users.
                 CaravanInventoryUtility.GiveThing(caravan, thing);
-                return "\n\n" + "MFI_SinceYouSuckAndDidntHaveIt".Translate(thing.Label);
+                return "\n\n" + Find.ActiveLanguageWorker.WithDefiniteArticlePostProcessed("MFI_SinceYouSuckAndDidntHaveIt".Translate(thing.Label));
             }
             return string.Empty;
         }
