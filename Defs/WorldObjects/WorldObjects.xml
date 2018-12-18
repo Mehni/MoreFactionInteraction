@@ -22,7 +22,7 @@
     <worldObjectClass>MoreFactionInteraction.More_Flavour.AnnualExpo</worldObjectClass>
     <texture>FactionPeaceTalks</texture>
     <expandingIcon>true</expandingIcon>
-    <expandingIconTexture>Expanding/FactionPeaceTalks</expandingIconTexture>
+    <expandingIconTexture>Expanding/Expo</expandingIconTexture>
     <expandingIconPriority>70</expandingIconPriority>
     <comps>
       <li Class="WorldObjectCompProperties_Timeout" />
