@@ -15,6 +15,20 @@
     </comps>
   </WorldObjectDef>
 
+    <WorldObjectDef>
+    <defName>MFI_AnnualExpoObject</defName>
+    <label>annual expo</label>
+    <description>A site designated for holding this year's Exposition.</description>
+    <worldObjectClass>MoreFactionInteraction.More_Flavour.AnnualExpo</worldObjectClass>
+    <texture>FactionPeaceTalks</texture>
+    <expandingIcon>true</expandingIcon>
+    <expandingIconTexture>Expanding/Expo</expandingIconTexture>
+    <expandingIconPriority>70</expandingIconPriority>
+    <comps>
+      <li Class="WorldObjectCompProperties_Timeout" />
+    </comps>
+  </WorldObjectDef>
+
   <WorldObjectDef>
     <defName>MFI_MysticalShaman</defName>
     <label>mystical shaman</label>

@@ -12,13 +12,14 @@ using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
+    using More_Flavour;
 
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
         static HarmonyPatches()
         {
-            HarmonyInstance harmony = HarmonyInstance.Create(id: "Mehni.RimWorld.MFI.main");
+            HarmonyInstance harmony = HarmonyInstance.Create(id: "mehni.rimworld.MFI.main");
             //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
@@ -49,30 +50,30 @@ namespace MoreFactionInteraction
             harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 
-            //harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
-            //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
+                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
-            if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
-            {
-                try
-                {
-                    ((Action)(() =>
-                    {
-                        float func(Faction faction, Vector2 pos, float width)
-                        {
-                            if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
-                            {
-                                Rect canvas = new Rect(pos.x, pos.y, width, 125f);
-                                MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
-                                return 125f;
-                            }
-                            return 0;
-                        }
-                        Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
-                    }))();
-                }
-                catch (TypeLoadException) { }
-            }
+            //if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+            //{
+            //    try
+            //    {
+            //        ((Action)(() =>
+            //        {
+            //            float func(Faction faction, Vector2 pos, float width)
+            //            {
+            //                if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+            //                {
+            //                    Rect canvas = new Rect(pos.x, pos.y, width, 125f);
+            //                    MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+            //                    return 125f;
+            //                }
+            //                return 0;
+            //            }
+            //            Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
+            //        }))();
+            //    }
+            //    catch (TypeLoadException) { }
+            //}
         }
 
         //private static void WonderfullyFluffyRelations(ref float __result, Faction faction, Vector2 pos, float width)
@@ -85,22 +86,22 @@ namespace MoreFactionInteraction
         //    }
         //}
 
-        //private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
-        //{
-        //    MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
+        private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
 
-        //    foreach (CodeInstruction codeInstruction in instructions)
-        //    {
-        //        if (codeInstruction.opcode == OpCodes.Ldc_R4)
-        //        {
-        //            codeInstruction.opcode = OpCodes.Call;
-        //            codeInstruction.operand = helperMethod;
-        //        }
-        //        yield return codeInstruction;
-        //    }
-        //}
+            foreach (CodeInstruction codeInstruction in instructions)
+            {
+                if (codeInstruction.opcode == OpCodes.Ldc_R4)
+                {
+                    codeInstruction.opcode = OpCodes.Call;
+                    codeInstruction.operand = helperMethod;
+                }
+                yield return codeInstruction;
+            }
+        }
 
-        //private static float SootheTranspilerHelperMethod() => Find.World?.GetComponent<WorldComponent_MFI_AnnualExpo>()?.BuffedEmanator ?? false ? 20f : 15f;
+        private static float SootheTranspilerHelperMethod() => Find.World?.GetComponent<WorldComponent_MFI_AnnualExpo>()?.BuffedEmanator ?? false ? 20f : 15f;
 
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)

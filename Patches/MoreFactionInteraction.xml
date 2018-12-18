@@ -9,15 +9,56 @@
         </value>
     </Operation>
 
-    <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
+    <!-- test for the existence of /comps. If not there, add. Done defensively to prevent adding it twice if some other mod got there first.-->
+    <!-- <Operation Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+            <li Class="PatchOperationTest">
+                <xpath>Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+                <success>Invert</success>
+            </li>
+            <li Class="PatchOperationAdd">
+                <xpath>Defs/WorldObjectDef[defName="Caravan"]</xpath>
+                <value>
+                    <comps/>
+                </value>
+            </li>
+        </operations>
+    </Operation> -->
+
+
+    <!-- add our Comp to the (previously added by us or some other mod) /comps -->
+    <!-- <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
         <value>
-            <comps>
+            <li>
+                <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
+            </li>
+        </value>
+    </Operation>  -->
+
+<!-- Add /comps/li/compClass if there are no comps yet. -->
+<!-- Add /li/compClass to /comps if exists (i.e. other mod already added the comps field first) -->
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/WorldObjectDef[defName="Caravan"]</xpath>
+            <value>
+                <comps>
+                    <li>
+                        <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
+                    </li>
+                </comps>
+            </value>
+        </nomatch>
+        <match Class="PatchOperationAdd">
+            <xpath>/Defs/WorldObjectDef[defName="Caravan"]/comps</xpath>
+            <value>
                 <li>
                     <compClass>MoreFactionInteraction.World_Incidents.WorldObjectComp_CaravanComp</compClass>
                 </li>
-            </comps>
-        </value>
+            </value>
+        </match>
     </Operation>
 
     <Operation Class="PatchOperationFindMod">
@@ -30,7 +71,21 @@
                 <tabWindowClass>MoreFactionInteraction.MoreFactionWar.MainTabWindow_FactionWar</tabWindowClass>
             </value>
         </nomatch>
+    </Operation>
 
+    <!-- Events that you don't want to show up as a Quest, or would likely error when not triggered naturally.  -->
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>RimQuest</li>
+        </mods>
+        <match Class="PatchOperationAddModExtension">
+            <xpath>Defs/IncidentDef[defName="MFI_DiplomaticMarriage" or defName="MFI_HuntersLodge" or defName="MFI_SettlementBaseAttack" or defName="MFI_Quest_PeaceTalks"]</xpath>
+            <value>
+                <li Class = "RimQuest.RimQuest_ModExtension">
+                    <canBeARimQuest>false</canBeARimQuest>
+                </li>
+            </value>
+        </match>
     </Operation>
 
 </Patch>

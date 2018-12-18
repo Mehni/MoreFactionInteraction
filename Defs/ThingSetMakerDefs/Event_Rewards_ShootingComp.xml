@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <!-- Nothing to translate in here. -->
+
+    <ThingSetMakerDef>        <!-- nice pew pew -->
+        <defName>Reward_shootingCompFirstPlace</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.6</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>Shell_AntigrainWarhead</li>
+                                </thingDefs>
+                                <thingSetMakerTagsToAllow>
+                                    <li>SingleUseWeapon</li>
+                                </thingSetMakerTagsToAllow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>1</chance>
+                    <thingSetMaker Class="ThingSetMaker_MarketValue">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <totalMarketValueRange>
+                                <min>1200</min>
+                                <max>3500</max>
+                            </totalMarketValueRange>
+                            <maxThingMarketValue>2300</maxThingMarketValue>
+                            <filter>
+                                <categories>
+                                    <li>WeaponsRanged</li>
+                                </categories>
+                                <thingSetMakerTagsToDisallow>
+                                    <li>SingleUseWeapon</li>
+                                </thingSetMakerTagsToDisallow>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.2</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>4</min>
+                                <max>12</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>        <!-- bionics -->
+        <defName>Reward_shootingCompFirstLoser</defName>
+        <root Class = "ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <chance>0.5</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>ArchotechEye</li>
+                                    <li>ArchotechArm</li>
+                                    <li>ArchotechLeg</li>
+                                    <li>PowerClaw</li>
+                                    <li>BionicEye</li>
+                                    <li>BionicArm</li>
+                                    <li>BionicLeg</li>
+                                    <li>BionicSpine</li>
+                                    <li>BionicHeart</li>
+                                    <li>Joywire</li>
+                                    <li>Painstopper</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>1</chance>
+                    <thingSetMaker Class="ThingSetMaker_Count">
+                        <fixedParams>
+                            <qualityGenerator>Reward</qualityGenerator>
+                            <filter>
+                                <thingDefs>
+                                    <li>BionicEye</li>
+                                    <li>BionicArm</li>
+                                    <li>BionicLeg</li>
+                                    <li>BionicSpine</li>
+                                    <li>BionicHeart</li>
+                                    <li>Joywire</li>
+                                    <li>Painstopper</li>
+                                </thingDefs>
+                            </filter>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+                <li>
+                    <chance>0.1</chance>
+                    <thingSetMaker Class="ThingSetMaker_StackCount">
+                        <fixedParams>
+                            <filter>
+                                <thingDefs>
+                                    <li>Luciferium</li>
+                                </thingDefs>
+                            </filter>
+                            <countRange>
+                                <min>4</min>
+                                <max>12</max>
+                            </countRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+    <ThingSetMakerDef>        <!-- a small statue representing you and your shooting skill -->
+        <defName>Reward_shootingCompFirstOther</defName>
+        <root Class="ThingSetMaker_Sum">
+            <options>
+                <li>
+                    <thingSetMaker Class="ThingSetMaker_Nutrition">
+                        <fixedParams>
+                            <filter>
+                                <categories>
+                                    <li>PlantFoodRaw</li>
+                                </categories>
+                                <disallowedThingDefs>
+                                    <li>InsectJelly</li>
+                                </disallowedThingDefs>
+                                <disallowWithComp>CompHatcher</disallowWithComp>
+                                <disallowInedibleByHuman>true</disallowInedibleByHuman>
+                            </filter>
+                            <totalNutritionRange>
+                                <min>0.05</min>
+                                <max>0.1</max>
+                            </totalNutritionRange>
+                        </fixedParams>
+                    </thingSetMaker>
+                </li>
+            </options>
+        </root>
+    </ThingSetMakerDef>
+
+</Defs>
