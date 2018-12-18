@@ -41,6 +41,10 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Fluffy_Relations">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\294100\709317151\Assemblies\Fluffy_Relations.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,26 +60,25 @@
     <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
     <Compile Include="General\MFI_Utilities.cs" />
     <Compile Include="General\Tuple.cs" />
-    <Compile Include="More Flavour\AnnualExpo.cs" />
-    <Compile Include="More Flavour\AnnualExpoDialogue.cs" />
-    <Compile Include="More Flavour\Buff_All.cs" />
-    <Compile Include="More Flavour\Buff_Tracker.cs" />
-    <Compile Include="More Flavour\CaravanArrivalAction_VisitAnnualExpo.cs" />
+    <Compile Include="World Incidents\AnnualExpo.cs" />
+    <Compile Include="World Incidents\AnnualExpoDialogue.cs" />
+    <Compile Include="World Incidents\Buff_All.cs" />
+    <Compile Include="World Incidents\CaravanArrivalAction_VisitAnnualExpo.cs" />
     <Compile Include="More Flavour\CaravanArrivalAction_VisitMysticalShaman.cs" />
     <Compile Include="More Flavour\ChoiceLetter_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\ChoiceLetter_MysticalShaman.cs" />
-    <Compile Include="More Flavour\EventDef.cs" />
-    <Compile Include="More Flavour\EventRewardWorker.cs" />
-    <Compile Include="More Flavour\EventRewardWorker_AcousticShow.cs" />
-    <Compile Include="More Flavour\EventRewardWorker_CulturalSwap.cs" />
-    <Compile Include="More Flavour\EventRewardWorker_GameOfUrComp.cs" />
-    <Compile Include="More Flavour\EventRewardWorker_ScienceFaire.cs" />
-    <Compile Include="More Flavour\EventRewardWorker_ShootingComp.cs" />
+    <Compile Include="World Incidents\EventDef.cs" />
+    <Compile Include="World Incidents\EventRewardWorker.cs" />
+    <Compile Include="World Incidents\EventRewardWorker_AcousticShow.cs" />
+    <Compile Include="World Incidents\EventRewardWorker_CulturalSwap.cs" />
+    <Compile Include="World Incidents\EventRewardWorker_GameOfUrComp.cs" />
+    <Compile Include="World Incidents\EventRewardWorker_ScienceFaire.cs" />
+    <Compile Include="World Incidents\EventRewardWorker_ShootingComp.cs" />
     <Compile Include="More Flavour\IncidentWorker_AnnualExpo.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />
     <Compile Include="More Flavour\MysticalShaman.cs" />
-    <Compile Include="More Flavour\WorldComponent_MFI_AnnualExpo.cs" />
+    <Compile Include="World Incidents\WorldComponent_MFI_AnnualExpo.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\ChoiceLetter_SellingWarBonds.cs" />
     <Compile Include="MoreFactionWar\Dialogue_FactionWarNegotiation.cs" />

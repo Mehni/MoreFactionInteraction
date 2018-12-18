@@ -2,7 +2,7 @@
 <LanguageData>
 
     <!--settings -->
-    <MFI_ticksToUpgrade>Time until pirates upgrade their outposts to bases</MFI_ticksToUpgrade>
+    <MFI_ticksToUpgrade>How much time it takes for pirates to upgrade their outposts to bases</MFI_ticksToUpgrade>
     <MFI_ticksToUpgradeDesc>Larger values means that pirates take longer to change outposts into bases.</MFI_ticksToUpgradeDesc>
     <MFI_pirateBaseUpgraderModifier>Pirate outpost spawn rate</MFI_pirateBaseUpgraderModifier>
     <MFI_pirateBaseUpgraderModifierDesc>Higher values means an increased chance of pirates spreading. Low values = lazy pirates.</MFI_pirateBaseUpgraderModifierDesc>

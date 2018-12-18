@@ -11,7 +11,7 @@ namespace MoreFactionInteraction
 {
     public class EventRewardWorker_CulturalSwap : EventRewardWorker
     {
-        private static float OVERPAYINGBY = 3f;
+        private static readonly float OVERPAYINGBY = 3f;
         private readonly EventDef eventDef = MFI_DefOf.MFI_CulturalSwap;
 
         public override Predicate<ThingDef> ValidatorFirstPlace => (x) => /*x.stuffCategories.Contains(StuffCategoryDefOf.Metallic) &&*/ (x.BaseMarketValue > 6 || x.smallVolume) && base.ValidatorFirstPlace(x);

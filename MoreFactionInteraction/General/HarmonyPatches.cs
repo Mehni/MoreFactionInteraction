@@ -53,38 +53,28 @@ namespace MoreFactionInteraction
             harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
                           transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
-            //if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
-            //{
-            //    try
-            //    {
-            //        ((Action)(() =>
-            //        {
-            //            float func(Faction faction, Vector2 pos, float width)
-            //            {
-            //                if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
-            //                {
-            //                    Rect canvas = new Rect(pos.x, pos.y, width, 125f);
-            //                    MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
-            //                    return 125f;
-            //                }
-            //                return 0;
-            //            }
-            //            Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
-            //        }))();
-            //    }
-            //    catch (TypeLoadException) { }
-            //}
+            if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+            {
+                try
+                {
+                    ((Action)(() =>
+                    {
+                        float func(Faction faction, Vector2 pos, float width)
+                        {
+                            if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+                            {
+                                Rect canvas = new Rect(pos.x, pos.y, width, 125f);
+                                MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+                                return 125f;
+                            }
+                            return 0;
+                        }
+                        Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
+                    }))();
+                }
+                catch (TypeLoadException) { }
+            }
         }
-
-        //private static void WonderfullyFluffyRelations(ref float __result, Faction faction, Vector2 pos, float width)
-        //{
-        //    if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
-        //    {
-        //        Rect canvas = new Rect(pos.x, pos.y + 5, width, 125f);
-        //        MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
-        //        __result += 125f;
-        //    }
-        //}
 
         private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
         {

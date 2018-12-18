@@ -13,27 +13,36 @@ namespace MoreFactionInteraction
     {
         private Faction faction;
         private static List<Map> tmpAvailableMaps = new List<Map>();
+        private readonly int minDist = 8;
+        private readonly int maxDist = 30;
+        private readonly int maxSites = 20;
 
         public override float AdjustedChance => base.AdjustedChance * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out this.faction)
-                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 8, maxDist: 30)
-                                                    && this.TryGetRandomAvailableTargetMap(out Map map);
+                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist, maxDist)
+                                                    && this.TryGetRandomAvailableTargetMap(out Map map)
+                                                    && Find.World.worldObjects.Sites.Count() <= maxSites;
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryFindFaction(enemyFaction: out this.faction)) return false;
-            if (!this.TryGetRandomAvailableTargetMap(map: out Map map)) return false;
-            if (faction.leader == null) return false;
+            if (!TryFindFaction(enemyFaction: out this.faction))
+                return false;
+            if (!this.TryGetRandomAvailableTargetMap(map: out Map map))
+                return false;
+            if (faction.leader == null)
+                return false;
 
             int pirateTile = this.RandomNearbyHostileSettlement(map.Tile)?.Tile ?? Tile.Invalid;
 
-            if (pirateTile == Tile.Invalid) return false;
+            if (pirateTile == Tile.Invalid)
+                return false;
 
-            if (!TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile)) return false;
+            if (!TileFinder.TryFindNewSiteTile(tile: out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile))
+                return false;
             Site site = SiteMaker.MakeSite(core: SiteCoreDefOf.Nothing, sitePart: SitePartDefOf.Outpost, tile: tile, faction: this.faction);
             site.Tile = tile;
             site.sitePartsKnown = true;

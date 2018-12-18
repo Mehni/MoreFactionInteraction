@@ -32,16 +32,15 @@ namespace MoreFactionInteraction
         public override int GetHashCode()
         {
             var hc = 0;
-            if (!object.ReferenceEquals(Item1, null))
+            if (Item1 != null)
                 hc = Item1Comparer.GetHashCode(Item1);
-            if (!object.ReferenceEquals(Item2, null))
+            if (Item2 != null)
                 hc = (hc << 3) ^ Item2Comparer.GetHashCode(Item2);
             return hc;
         }
         public override bool Equals(object obj)
         {
-            var other = obj as Tuple<T1, T2>;
-            if (object.ReferenceEquals(other, null))
+            if (!(obj is Tuple<T1, T2> other))
                 return false;
             else
                 return Item1Comparer.Equals(Item1, other.Item1) && Item2Comparer.Equals(Item2, other.Item2);

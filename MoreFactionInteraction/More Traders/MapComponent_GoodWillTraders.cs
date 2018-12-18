@@ -127,7 +127,7 @@ namespace MoreFactionInteraction
                 case int n when n <= 9:
                     return MFI_DefOf.MFI_DiplomaticMarriage;
 
-                case int n when n <= 17:
+                case int n when n <= 19:
                     return faction.leader != null ? MFI_DefOf.MFI_ReverseTradeRequest : IncomingIncidentDef(faction);
 
                 case int n when n <= 25:

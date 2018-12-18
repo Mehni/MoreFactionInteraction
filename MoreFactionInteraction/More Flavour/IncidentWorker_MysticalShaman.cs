@@ -25,7 +25,8 @@ namespace MoreFactionInteraction
                                              && Find.FactionManager.AllFactionsVisible.Where(predicate: f => f.def.techLevel <= TechLevel.Neolithic 
                                                                                                && !f.HostileTo(other: Faction.OfPlayer)).TryRandomElement(result: out Faction result)
                                              && TryFindTile(tile: out int num)
-                                             && TryGetRandomAvailableTargetMap (map: out Map map);
+                                             && TryGetRandomAvailableTargetMap (map: out Map map)
+                                             && CommsConsoleUtility.PlayerHasPoweredCommsConsole();
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

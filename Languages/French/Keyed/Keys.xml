@@ -2,7 +2,7 @@
 <LanguageData>
 
     <!--settings -->
-    <MFI_ticksToUpgrade>Il est temps pour les pirates d'améliorer leurs installations de bases de données</MFI_ticksToUpgrade>
+    <MFI_ticksToUpgrade>Temps avant que les pirates améliorent leurs avant-postes vers les bases</MFI_ticksToUpgrade>
     <MFI_pirateBaseUpgraderModifier>Modifier la fréquence de propagation des pirates</MFI_pirateBaseUpgraderModifier>
     <MFI_timeModifierBetweenFactionInteraction>Modificateur de temps de l'interaction entre fractions </MFI_timeModifierBetweenFactionInteraction>
     <MFI_traderWealthOffsetFromTimesTraded>Modificateur de l'argent donné par les marchands (échelle avec fréquence d'interaction)</MFI_traderWealthOffsetFromTimesTraded>

@@ -7,7 +7,7 @@ using Verse;
 
 namespace MoreFactionInteraction.More_Flavour
 {
-    public abstract class Buff : IExposable
+    public abstract class Buff : IExposable, IEquatable<Buff>
     {
         public bool Active;
 
@@ -18,9 +18,14 @@ namespace MoreFactionInteraction.More_Flavour
         public abstract string Description();
         public abstract ThingDef RelevantThingDef();
 
-        public override bool Equals(object obj)
+        public bool Equals(Buff obj)
         {
             return obj != null && obj.GetType() == this.GetType();
+        }
+
+        public override int GetHashCode() //oof.
+        {
+            return base.GetHashCode();
         }
     }
 
