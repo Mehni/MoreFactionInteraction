@@ -10,5 +10,8 @@
   <MFI_Quest_PeaceTalks.letterText>あなたは{1}の{0}に属する[PAWN_nameDef]から、連絡を受け取りました。彼らの派閥は最近、別の派閥と外交的なトラブルを抱えており、あなた方を交渉人として{2}との交渉を呼びかけている。彼らはどちらの領土でもない中立な場所を選び、あなた方が交渉の仲介役として来てくれるように招待しました。\n\n彼らの派閥との関係を改善する絶好の機会かもしれませんが、注意してください...口下手な交渉者は、良い結果や単に相手を怒らせるだけでなく、より大きな被害(戦争状態)をもたらす事さえあります。\n\nこの申し出は{3}日後に期限が切れ、その後の事を[PAWN_nameDef]は最悪の事態になると恐れています。</MFI_Quest_PeaceTalks.letterText>
   <MFI_Quest_PeaceTalks.letterLabel>派閥間の緊張</MFI_Quest_PeaceTalks.letterLabel>
 
+  <MFI_AnnualExpo.label>万国博覧会</MFI_AnnualExpo.label>
+  <MFI_AnnualExpo.letterLabel>毎年開催される万博</MFI_AnnualExpo.letterLabel>
+
 
 </LanguageData>
