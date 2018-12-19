@@ -64,7 +64,54 @@
   <MFI_FactionWarLeaderDecidedOnWar>和平会議は失敗に終わり、{0}と{1}の間で派閥間戦争が勃発しました。\n時々彼らは互いの拠点に対して攻撃を開始するでしょう。戦争の当事者である派閥に対して敵対している派閥よりも支援した場合、彼らはあなたに援助を求めるかもしれません。\n\nメインメニューの派閥タブで派閥間戦争り進展を追跡することができます。</MFI_FactionWarLeaderDecidedOnWar>
   <MFI_FactionWarLeaderDecidedAgainstWar>和平会議は無事に終わりました。派閥間の緊張が緩和され、{0}と{1}の派閥は当初予定された和平合意に達しました。</MFI_FactionWarLeaderDecidedAgainstWar>
 
-  <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+  <!-- equivalent to NeedSilverLaunchable, just with steel. (currently unused) -->
   <MFI_SellingWarBondsNeedSteelLaunchable>貿易用ビーコンの近くにスチールが{0}必要です</MFI_SellingWarBondsNeedSteelLaunchable>
+
+  <!-- Annual Expo start -->
+  <MFI_AnnualExpoLetterLabel>{0}年次万国博覧会</MFI_AnnualExpoLetterLabel>
+  <!-- it is time for the {ORDINALNUMBER} annual {WORLDNAME}. This year's host is {FACTIONLABEL} and the theme is {MFI_gameOfUrComp / MFI_shootingComp / MFI_culturalSwap / etc} {MFI_gameOfUrCompExpl / MFI_shootingCompExpl / etc} -->
+  <MFI_AnnualExpoLetterText>{0}年次の{1}博覧会に、あなたの派閥が招待されました。今年の開催派閥は{2}で、テーマは{3}です。{4}\n\n毎年開催されるこの展覧会は、大変敬意を集める平和的な集会です。歴史的には、ほぼすべての派閥が文化や経験を交流して、実力を誇示する場として使われてきました。</MFI_AnnualExpoLetterText>
+  <MFI_AnnualExpoDialogueIntroduction>あなたのキャラバン隊は、今年の万博会場に到着しました。 今年のテーマは{0}なので、そのテーマに沿った多くの専門家たちが居ます。ほとんどの人たちはまだ準備をしていますが、何人かはすでに自分たちの技術展示を始めています。\n\nこの万博は、博覧展示物が並ぶお祭りです。いくつかは控えめで地元の部材を利用して作られていますが、大半は星系外の世界から持ち込まれた高度なプレハブ建築です。それらは{1}に設置されたメインステージの周囲に円を描くように建てられています。\n\n終わった後でもそれらは確実に役立つでしょう。</MFI_AnnualExpoDialogueIntroduction>
+  <MFI_AnnualExpoFirstOption>開催します！</MFI_AnnualExpoFirstOption>
+
+  <MFI_buffPemmican>ペミカンの保存する際に腐敗させない新しい方法です。</MFI_buffPemmican>
+  <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
+  <MFI_buffEmanator>あなたはオーバークロックについて学びます。リードスイッチの半月コイル状の巻線を介してミリサイズの電圧を調整することにより、より高い性能を引き出すことができます。{0}は現在、電力消費の増加と長期間の耐久度を犠牲にして、効果範囲とその効果を増強するようになりました。</MFI_buffEmanator>
+  <!-- like the emanator above, only for the infinite chemfuel reactor generator doodad thing. -->
+  <MFI_buffChemfuel>パネルAの「サービスラッチ」と、現在公開されているシーソースイッチタイプ2-Aの起動によって、「より早く」とラベル付けされたことにより、{0}はより多く{1}を生成します。</MFI_buffChemfuel>
+  <MFI_buffPsychite>現在、材料を長時間浸すことで、{0}はより強力になりました。まさに現代工学の驚異です。</MFI_buffPsychite>
+
+  <MFI_SinceYouSuckAndDidntHaveIt>あなたがまだそれを持っていなかったので、彼らはあなたに{0}を供与してくれました！</MFI_SinceYouSuckAndDidntHaveIt>
+
+  <MFI_gameOfUrCompOutcomeFirstPlace>技能と鉄のような度胸、そして運が良かったので、[PAWN_nameDef]が競技会で優勝しました！ 参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstPlace>
+  <MFI_gameOfUrCompOutcomeFirstLoser>緊迫した決勝ラウンドで、[PAWN_nameDef]は5年連続優勝した前年度の優勝者と対戦し、敗北しました。参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstLoser>
+  <MFI_gameOfUrCompOutcomeFirstOther>第5試合の2戦目で、[PAWN_nameDef]は[PAWN_objective]相手を妨害する動きをして審判を驚かせました。当然、これは大規模な喧嘩に発展しました。参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstOther>
+
+  <MFI_shootingCompOutcomeFirstPlace>まるで機械化されたロボットのような精度で、[PAWN_nameDef]は目標を射抜き、正確な命中精度ですべてのターゲットに命中しました。審判は非常に感銘を受け、あなたに優勝賞品を授与しました：\n\n{0}</MFI_shootingCompOutcomeFirstPlace>
+  <MFI_shootingCompOutcomeFirstLoser>今年は多くの派閥代表が歴戦のハンターだったり、または（アーキテック）強化義肢を装備してコマを進めたことで、今年は強力な競争相手が多くいました。[PAWN_nameDef]は準々決勝で敗北しました。参加した報酬は以下の通りです：\n\n{0}</MFI_shootingCompOutcomeFirstLoser>
+  <MFI_shootingCompOutcomeFirstOther>[PAWN_nameDef]は第一試合を通過できなかった。その結果は「的の外に付いている広い面に当たった」という惨憺たるものだった。大会ではその部分を何年も前に冗談として付け加えたものでした。[PAWN_nameDef]が、第2回戦に進めなかったのは参加してから初めてです。参加した報酬は以下の通りです：\n\n{0}</MFI_shootingCompOutcomeFirstOther>
+
+  <!-- {0 = childhood backstory label} -->
+  <MFI_culturalSwapOutcomeFirstPlace>夕日の照らす最後の光がゆっくりとぼやけていき、[PAWN_nameDef]は簡単に花崗岩のスツールに座って、[PAWN_objective]の生い立ちについて{0}のように語りました。このわかりやすい物語、もっと重要なのは、作りあげられた[PAWN_objective]取り巻く雰囲気は、その親密さや、独創性、そして勇気のために審判員によって賞賛されました。参加した報酬は以下の通りです：\n\n{1}</MFI_culturalSwapOutcomeFirstPlace>
+  <MFI_culturalSwapOutcomeFirstLoser>あなたのキャラバン隊は、もっとやるべきだった良い準備などを何も行っていなかったので、型通りの歌とダンスを即興で行いました。演奏はうまくできませんでした。参加していた全ての派閥が即興の見世物に感激するわけではありませんでしたが、それにも関わらずあなたのキャラバン隊はすばらしい努力を見せました。参加した報酬は以下の通りです：\n\n{0}</MFI_culturalSwapOutcomeFirstLoser>
+  <!-- {0 = factionName} {1 = TerrainFeatureLabel, e.g. White Rabbit Mountain Range} -->
+  <MFI_culturalSwapOutcomeFirstOther>派閥{0}は、彼らの祖先が{1}を発見した時を劇的に再現した絢爛豪華な展示によって観客を感動の涙へと誘いました。それは言語の壁を越えて、老若男女の心に響いた感動的な演劇作品でした。\n\n彼らの後にあなたのコロニーによる演劇が行われました。参加した報酬は以下の通りです：\n\n{2}</MFI_culturalSwapOutcomeFirstOther>
+  <MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>あなたのキャラバン隊が博覧会に持って来た芸術品は、審査競技会では2位を獲得しましたが、それは観客たちに大人気でした。ある専門家が展示の後であなたのキャラバン隊に接触して、{0}を{1}で購入することを提案してきました。審査員たちは作品の市場価値を{2}と鑑定しました。</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
+
+  <MFI_scienceFaireOutcomeFirstPlace>簡単に整理すると、強力な雄弁家と偉大な学者はあなたに宇宙の複雑さについては何も説明しませんでした。その代わり、彼らはその単純さを明確にしました：\n\n{0}</MFI_scienceFaireOutcomeFirstPlace>
+  <MFI_scienceFaireOutcomeFirstLoser>あなたのキャラバン隊は、「科学の鑑定家」と呼ばれるグループの鑑定員たちに囲まれています。彼らはあなたに知識の贈り物を贈りました。\n\n{0}</MFI_scienceFaireOutcomeFirstLoser>
+  <MFI_scienceFaireOutcomeFirstOther>これまでの長旅に疲れていた、あなたのキャラバン隊の隊員たちは、有名な教授の長くて退屈な講演の中で目を覚し続けているのには限界がありました。出発する際に贈り物として、あなたは以下を得ました：\n\n{0}</MFI_scienceFaireOutcomeFirstOther>
+
+  <MFI_acousticShowOutcomeFirstPlace>あなたのキャラバン隊は、立ち並ぶ屋台を見て一日を過ごし、この世界のあちこちから集まった多種多様な電気を使わない楽器を堪能しました。夕暮れ終わり、人々が楽器を持って集まると、親睦を深めるコンサートがメインステージで行われました。あなたのキャラバン隊の隊員たちの心情が向上しました。参加した報酬は以下の通りです：\n\n{0}</MFI_acousticShowOutcomeFirstPlace>
+  <MFI_acousticShowOutcomeFirstLoser>今年の博覧会は非常に居心地の良い集まりで、様々な人々と共にギターの演奏を共演しました。そのうち誰かが古い地球の曲「ワンダーウォール(Wonderwall:イギリスのロックバンドOasisのシングル曲)」を演奏しましたが、観客たちの誰もが気分のいい寒い夜でした。参加した報酬は以下の通りです：\n\n{0}</MFI_acousticShowOutcomeFirstLoser>
+  <MFI_acousticShowOutcomeFirstOther>あなたのキャラバン隊の隊員の一人が、弾いてはいけない楽器を使い、音楽的な才能がないだけではなく、未熟な演奏を行って楽器の弦を切ってしまいました。この事態に謝罪がなされましたが、観客たちには全く不十分でした。あなたの不器用なキャラバン隊の隊員は夜の演奏会でステージハンドとして働きました。展示会が終わり清掃を行った後、参加した彼らは残り物を与えられました：\n\n{0}</MFI_acousticShowOutcomeFirstOther>
+
+  <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
+  <MFI_AnnualExpoXPGain>{0}は{2}に経験値を{1}得ました。</MFI_AnnualExpoXPGain>
+  <MFI_AnnualExpoMedicalEmergency>何か所かに打撲傷と、軽度の脳震盪、そしてプライドがいくらか凹みました。</MFI_AnnualExpoMedicalEmergency>
+  <MFI_AnnualExpoMedicalEmergencySerious>足首の捻挫と筋肉の痛み、そして恥ずかしい衣装ダンスの間違い。</MFI_AnnualExpoMedicalEmergencySerious>
+
+  <MFI_AnnualExpoMessageNoRepresentative>意識がある交渉可能な代表者が居ません。</MFI_AnnualExpoMessageNoRepresentative>
+  <!-- Annual Expo end -->
 
 </LanguageData>
