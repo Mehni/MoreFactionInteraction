@@ -22,7 +22,8 @@ namespace MoreFactionInteraction.More_Flavour
             return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null
                                              && TryGetRandomAvailableTargetMap(out Map map)
                                              && TryFindTile(tile: out int num)
-                                             && TryGetFactionHost(out Faction faction);
+                                             && TryGetFactionHost(out Faction faction)
+                                             && !Find.World.worldObjects.AllWorldObjects.Any(x=> x is AnnualExpo);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

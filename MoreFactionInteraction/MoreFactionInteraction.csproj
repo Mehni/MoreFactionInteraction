@@ -74,7 +74,7 @@
     <Compile Include="World Incidents\EventRewardWorker_GameOfUrComp.cs" />
     <Compile Include="World Incidents\EventRewardWorker_ScienceFaire.cs" />
     <Compile Include="World Incidents\EventRewardWorker_ShootingComp.cs" />
-    <Compile Include="More Flavour\IncidentWorker_AnnualExpo.cs" />
+    <Compile Include="World Incidents\IncidentWorker_AnnualExpo.cs" />
     <Compile Include="More Flavour\IncidentWorker_DiplomaticMarriage.cs" />
     <Compile Include="More Flavour\IncidentWorker_MysticalShaman.cs" />
     <Compile Include="More Flavour\MysticalShaman.cs" />
