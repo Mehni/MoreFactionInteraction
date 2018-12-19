@@ -64,7 +64,33 @@
   <MFI_FactionWarLeaderDecidedOnWar>和平会議は失敗に終わり、{0}と{1}の間で派閥間戦争が勃発しました。\n時々彼らは互いの拠点に対して攻撃を開始するでしょう。戦争の当事者である派閥に対して敵対している派閥よりも支援した場合、彼らはあなたに援助を求めるかもしれません。\n\nメインメニューの派閥タブで派閥間戦争り進展を追跡することができます。</MFI_FactionWarLeaderDecidedOnWar>
   <MFI_FactionWarLeaderDecidedAgainstWar>和平会議は無事に終わりました。派閥間の緊張が緩和され、{0}と{1}の派閥は当初予定された和平合意に達しました。</MFI_FactionWarLeaderDecidedAgainstWar>
 
-  <!-- equivalent to NeedSilverLaunchable, just with steel. -->
+  <!-- equivalent to NeedSilverLaunchable, just with steel. (currently unused) -->
   <MFI_SellingWarBondsNeedSteelLaunchable>貿易用ビーコンの近くにスチールが{0}必要です</MFI_SellingWarBondsNeedSteelLaunchable>
+
+  <!-- Annual Expo start -->
+  <MFI_AnnualExpoLetterLabel>{0}年次万国博覧会</MFI_AnnualExpoLetterLabel>
+  <!-- it is time for the {ORDINALNUMBER} annual {WORLDNAME}. This year's host is {FACTIONLABEL} and the theme is {MFI_gameOfUrComp / MFI_shootingComp / MFI_culturalSwap / etc} {MFI_gameOfUrCompExpl / MFI_shootingCompExpl / etc} -->
+  <MFI_AnnualExpoLetterText>{0}年次の{1}博覧会に、あなたの派閥が招待されました。今年の開催派閥は{2}で、テーマは{3}です。{4}\n\n毎年開催されるこの展覧会は、大変敬意を集める平和的な集会です。歴史的には、ほぼすべての派閥が文化や経験を交流して、実力を誇示する場として使われてきました。</MFI_AnnualExpoLetterText>
+  <MFI_AnnualExpoDialogueIntroduction>あなたのキャラバン隊は、今年の万博会場に到着しました。 今年のテーマは{0}なので、そのテーマに沿った多くの専門家たちが居ます。ほとんどの人たちはまだ準備をしていますが、何人かはすでに自分たちの技術展示を始めています。\n\nこの万博は、博覧展示物が並ぶお祭りです。いくつかは控えめで地元の部材を利用して作られていますが、大半は星系外の世界から持ち込まれた高度なプレハブ建築です。それらは{1}に設置されたメインステージの周囲に円を描くように建てられています。\n\n終わった後でもそれらは確実に役立つでしょう。</MFI_AnnualExpoDialogueIntroduction>
+  <MFI_AnnualExpoFirstOption>開催します！</MFI_AnnualExpoFirstOption>
+
+  <MFI_buffPemmican>ペミカンの保存する際に腐敗させない新しい方法です。</MFI_buffPemmican>
+  <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
+  <MFI_buffEmanator>あなたはオーバークロックについて学びます。リードスイッチの半月コイル状の巻線を介してミリサイズの電圧を調整することにより、より高い性能を引き出すことができます。{0}は現在、電力消費の増加と長期間の耐久度を犠牲にして、効果範囲とその効果を増強するようになりました。</MFI_buffEmanator>
+  <!-- like the emanator above, only for the infinite chemfuel reactor generator doodad thing. -->
+  <MFI_buffChemfuel>パネルAの「サービスラッチ」と、現在公開されているシーソースイッチタイプ2-Aの起動によって、「より早く」とラベル付けされたことにより、{0}はより多く{1}を生成します。</MFI_buffChemfuel>
+  <MFI_buffPsychite>現在、材料を長時間浸すことで、{0}はより強力になりました。まさに現代工学の驚異です。</MFI_buffPsychite>
+
+  <MFI_SinceYouSuckAndDidntHaveIt>あなたがまだそれを持っていなかったので、彼らはあなたに{0}を供与してくれました！</MFI_SinceYouSuckAndDidntHaveIt>
+
+  <MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>あなたのキャラバン隊が博覧会に持って来た芸術品は、審査競技会では2位を獲得しましたが、それは観客たちに大人気でした。ある専門家が展示の後であなたのキャラバン隊に接触して、{0}を{1}で購入することを提案してきました。審査員たちは作品の市場価値を{2}と鑑定しました。</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
+
+  <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
+  <MFI_AnnualExpoXPGain>{0}は{2}に経験値を{1}得ました。</MFI_AnnualExpoXPGain>
+  <MFI_AnnualExpoMedicalEmergency>何か所かに打撲傷と、軽度の脳震盪、そしてプライドがいくらか凹みました。</MFI_AnnualExpoMedicalEmergency>
+  <MFI_AnnualExpoMedicalEmergencySerious>足首の捻挫と筋肉の痛み、そして恥ずかしい衣装ダンスの間違い。</MFI_AnnualExpoMedicalEmergencySerious>
+
+  <MFI_AnnualExpoMessageNoRepresentative>意識がある交渉可能な代表者が居ません。</MFI_AnnualExpoMessageNoRepresentative>
+  <!-- Annual Expo end -->
 
 </LanguageData>
