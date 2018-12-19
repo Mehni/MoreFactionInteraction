@@ -4,6 +4,9 @@
   <MFI_FactionWarPeaceTalks.label>和平会談の会場</MFI_FactionWarPeaceTalks.label>
   <MFI_FactionWarPeaceTalks.description>平和について協議するために指定された場所です。</MFI_FactionWarPeaceTalks.description>
 
+  <MFI_AnnualExpoObject.label>今年の万博会場</MFI_AnnualExpoObject.label>
+  <MFI_AnnualExpoObject.description>毎年行われる万国博覧会が開催される今年の会場が指定された場所です。</MFI_AnnualExpoObject.description>
+
   <MFI_MysticalShaman.label>呪術師のテント</MFI_MysticalShaman.label>
   <MFI_MysticalShaman.description>神秘的な呪術師が住むテントです。</MFI_MysticalShaman.description>
 
