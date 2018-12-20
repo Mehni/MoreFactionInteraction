@@ -61,5 +61,43 @@
 	<MFI_FactionWarLeaderDecidedAgainstWar>Las conversaciones de paz han terminado. Las tensiones se han aliviado y las facciones de {0} y {1} han alcanzado un acuerdo mutuo.</MFI_FactionWarLeaderDecidedAgainstWar>
 
 	<MFI_SellingWarBondsNeedSteelLaunchable>necesitas {0} de acero cerca de una baliza de comercio</MFI_SellingWarBondsNeedSteelLaunchable>
+	<MFI_AnnualExpoLetterLabel>{0} exposición anual</MFI_AnnualExpoLetterLabel>
+	<MFI_AnnualExpoLetterText>Es hora de la {0} exposición anual de {1} y tu facción ha sido invitada. El anfitrión de este año es {2} y el tema principal es {3}. {4}.\n\nLa exposición anual es una reunión pacífica altamente respetada. Históricamente ha sido utilizado por casi todas las facciones como una oportunidad para intercambiar cultura, experiencias y presumir.</MFI_AnnualExpoLetterText>
+	<MFI_AnnualExpoDialogueIntroduction>Tu caravana ha llegado a la exposición anual. Como el tema de este año es {0}, hay muchos expertos aquí. La mayoría de ellos se están preparando, mientras que otros ya han empezado a demostrar sus habilidades.\n\nLa exposición es un conjunto de puestos, algunos modestos y hechos de materiales de origen local, mientras que otros son prefabricados de alta tecnología, formando un círculo alrededor del escenario principal, {1}.\n\nSeguramente se usará para algo más adelante.</MFI_AnnualExpoDialogueIntroduction>
+	<MFI_AnnualExpoFirstOption>¡Empecemos!</MFI_AnnualExpoFirstOption>
+
+	<MFI_buffPemmican>Una nueva forma de preservar Pemmican permite que ya no se eche a perder.</MFI_buffPemmican>
+	<MFI_buffEmanator>Aprendes sobre overclocking; obteniendo más rendimiento al ajustar el voltaje que recorre la bobina del emanador. El {0} ahora tiene un mayor alcance y efecto, a costa de un mayor consumo de energía y vida útil.</MFI_buffEmanator>
+	<MFI_buffChemfuel>A través de la eliminación de un panel etiquetado como "cierre de servicio" y la activación de un nuevo interruptor, expuesto como 'GO FASTER', el {0} ahora produce {1} con más frecuencia.</MFI_buffChemfuel>
+	<MFI_buffPsychite>Al cambiar ligeramente su producción, {0} ahora es más potente. Verdaderamente una maravilla de la ingeniería moderna.</MFI_buffPsychite>
+
+	<MFI_SinceYouSuckAndDidntHaveIt>Como no lo tenías y sienten lástima por ti, ¡te dieron {0}!</MFI_SinceYouSuckAndDidntHaveIt>
+
+	<MFI_gameOfUrCompOutcomeFirstPlace>Gracias a la habilidad, nervios de acero y una buena cantidad de suerte, ¡[PAWN_nameDef] ganó el torneo! Fue recompensado con:\n\n{0}</MFI_gameOfUrCompOutcomeFirstPlace>
+	<MFI_gameOfUrCompOutcomeFirstLoser>Para la ronda final, bastante tensa por cierto, ¡[PAWN_nameDef] se enfrentó con el campeón invicto desde hace cinco años, y perdió! Su recompensa por participar fue:\n\n{0}</MFI_gameOfUrCompOutcomeFirstLoser>
+	<MFI_gameOfUrCompOutcomeFirstOther>Durante la quinta ronda, [PAWN_nameDef] hizo una jugada que confundió al oponente [PAWN_possessive] y sorprendió a los árbitros. Comprensiblemente, se produjo una pelea masiva. Su recompensa por participar fue:\n\n{0}</MFI_gameOfUrCompOutcomeFirstOther>
+
+	<MFI_shootingCompOutcomeFirstPlace>Con una habilidad casi robótica, [PAWN_nameDef] acertó a todos los objetivos con una precisión milimétrica. Los jueces estaban muy impresionados y te recompensaron con:\n\n{0}</MFI_shootingCompOutcomeFirstPlace>
+	<MFI_shootingCompOutcomeFirstLoser>Hubo una fuerte competencia este año, con muchos representantes de facciones que han vivido como cazadores o con partes biónicas avanzadas. [PAWN_nameDef] quedó varado en algún lugar de los cuartos de final. Su recompensa por participar fue:\n\n{0}</MFI_shootingCompOutcomeFirstLoser>
+	<MFI_shootingCompOutcomeFirstOther>[PAWN_nameDef] no avanzó más allá de la primera ronda, que consistió en disparar a un elefante a escasos metros de distancia. Agregaron esta simple prueba como una broma hace años. [PAWN_nameDef] es el primero desde su introducción que no avanza a la segunda ronda. Su recompensa por participar fue:\n\n{0}\n\nAl parecer, el premio representa la habilidad de [PAWN_nameDef] como tirador.</MFI_shootingCompOutcomeFirstOther>
+
+	<MFI_culturalSwapOutcomeFirstPlace>A medida que la noche llegaba, [PAWN_nameDef] simplemente se sentó en un taburete de granito y habló de [PAWN_possessive] educación como un {0}. Esta historia simple y, lo que es más importante, la atmósfera que [PAWN_pronoun] creó fue alabada por los jueces por su intimidad, originalidad y valentía. Su recompensa por participar fue:\n\n{1}</MFI_culturalSwapOutcomeFirstPlace>
+	<MFI_culturalSwapOutcomeFirstLoser>Al no estar mejor preparado ni haber traído nada, el acto de tu facción consistió en una rutina de canciones y bailes con [PAWN_nameDef] tomando el centro del escenario. No fue bien ensayado, lo que brilló a través de la actuación. No todas las facciones participantes pudieron apreciarlo, pero fue un esfuerzo admirable. Su recompensa por participar fue:\n\n{0}</MFI_culturalSwapOutcomeFirstLoser>
+	<MFI_culturalSwapOutcomeFirstOther>La facción de {0} conmovió al público hasta el llanto con su deslumbrante actuación; una dramática recreación del descubrimiento de {1}.  Fue una pieza conmovedora de teatro que trascendió las barreras del idioma y llegó a los corazones de jóvenes y adultos por igual.\n\nDemás decir que la presentación de tu facción fue opacada completamente. Su recompensa por participar fue:\n\n{2}</MFI_culturalSwapOutcomeFirstOther>
+	<MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>La obra de arte que tu caravana llevó a la exposición ocupó el segundo lugar en la competencia, pero fue una de las favoritas entre el público. Un experto se acercó después del espectáculo y ofreció comprar {0} por {1}, pero, los jueces estimaron que el valor de mercado estaba en {2}.</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
+
+	<MFI_scienceFaireOutcomeFirstPlace>Un poderoso orador y un gran erudito no te explican nada acerca de las complejidades del universo, en cambio, revelan sus simplicidades:\n\n{0}}</MFI_scienceFaireOutcomeFirstPlace>
+	<MFI_scienceFaireOutcomeFirstLoser>Tu facción se encuentra entre los miembros de un grupo llamado despectivamente "aficionados a la ciencia". Te otorgan un don de conocimiento:\n\n{0}</MFI_scienceFaireOutcomeFirstLoser>
+	<MFI_scienceFaireOutcomeFirstOther>Cansados por el largo viaje, los miembros de tu facción tuvieron problemas para mantenerse despiertos durante la extremadamente larga y aburrida conferencia de un famoso profesor. Como premio de consolación, obtienes:\n\n{0}</MFI_scienceFaireOutcomeFirstOther>
+
+	<MFI_acousticShowOutcomeFirstPlace>Tu facción pasó el día recorriendo los puestos y admirando la amplia gama de instrumentos musicales no eléctricos de todo el mundo y más allá. A medida que caía el atardecer y las personas reunían sus instrumentos, se celebró un concierto en el escenario principal. Levantó los ánimos de los miembros considerablemente. Tu recompensa por venir fue:\n\n{0}</MFI_acousticShowOutcomeFirstPlace>
+	<MFI_acousticShowOutcomeFirstLoser>La exposición resultó ser una reunión muy acogedora, que se enfocó mayormente en las guitarras. A parte de algunas actuaciones medianamente interesantes, fue una tarde bastante tranquila que puso a todos de buen humor. Tu recompensa por venir fue:\n\n{0}</MFI_acousticShowOutcomeFirstLoser>
+	<MFI_acousticShowOutcomeFirstOther>Uno de los miembros de tu facción tocó un instrumento que no debería y, al no tener talento musical alguno, rompió una cuerda. Se pidieron disculpas, pero no fue suficiente: debió trabajar como ayudante en el escenario la noche de la actuación. Como todavía tenían un buen momento, les dejaron las sobras de la fiesta:\n\n{0}</MFI_acousticShowOutcomeFirstOther>
+
+	<MFI_AnnualExpoXPGain>{0} ha ganado {1} de experiencia en {2}.</MFI_AnnualExpoXPGain>
+	<MFI_AnnualExpoMedicalEmergency>Algunos moretones, una conmoción cerebral menor y un par de egos aplastados.</MFI_AnnualExpoMedicalEmergency>
+	<MFI_AnnualExpoMedicalEmergencySerious>Un esguince en el tobillo, músculos adoloridos y un vergonzoso y horripilante vestuario.</MFI_AnnualExpoMedicalEmergencySerious>
+
+	<MFI_AnnualExpoMessageNoRepresentative>No hay un representante capaz.</MFI_AnnualExpoMessageNoRepresentative>
 
 </LanguageData>
