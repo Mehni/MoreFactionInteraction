@@ -4,6 +4,9 @@
 	<MFI_FactionWarPeaceTalks.label>Conversaciones de paz</MFI_FactionWarPeaceTalks.label>
 	<MFI_FactionWarPeaceTalks.description>Un lugar designado para conversaciones de paz.</MFI_FactionWarPeaceTalks.description>
 
+	<MFI_AnnualExpoObject.label>exposición anual</MFI_AnnualExpoObject.label>
+	<MFI_AnnualExpoObject.description>Un lugar designado para celebrar la exposición de este año.</MFI_AnnualExpoObject.description>
+
 	<MFI_MysticalShaman.label>chamán místico</MFI_MysticalShaman.label>
 	<MFI_MysticalShaman.description>La tienda donde se encuentra un chamán místico.</MFI_MysticalShaman.description>
 
