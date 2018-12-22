@@ -46,7 +46,8 @@ namespace MoreFactionInteraction
                             incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
                             incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                             incidentParms.target = this.map;
-                            if (this.outpost) incidentParms.points *= 0.7f;
+                            if (this.outpost)
+                                incidentParms.points *= 0.7f;
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms: incidentParms);
                             Find.LetterStack.RemoveLetter(@let: this);
                         },
@@ -58,7 +59,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(item: this.map);
+        public override bool CanShowInLetterStack => Find.Maps.Contains(item: this.map);
 
         public override void ExposeData()
         {

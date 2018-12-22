@@ -52,6 +52,9 @@ namespace MoreFactionInteraction.General
             return false;
         }
 
+        public static bool IsScenarioBlocked(this IncidentWorker incidentWorker) => Find.Scenario.AllParts.Any(x => x is ScenPart_DisableIncident scenPart
+                                                                                                               && scenPart.Incident == incidentWorker.def);
+
         public static bool CaravanOrRichestColonyHasAnyOf(ThingDef thingdef, Caravan caravan, out Thing thing)
         {
             if (CaravanInventoryUtility.TryGetThingOfDef(caravan, thingdef, out thing, out Pawn owner))

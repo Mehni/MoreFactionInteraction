@@ -17,7 +17,7 @@ namespace MoreFactionInteraction
         public override void WorldComponentUpdate()
         {
             base.WorldComponentUpdate();
-            if (Find.TickManager.TicksGame % 100 == 0)
+            if (Find.TickManager.TicksGame % 350 == 0)
             {
                 //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
                 //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
@@ -72,9 +72,14 @@ namespace MoreFactionInteraction
                     choiceLetters.Remove(letter);
                     break;
                 }
+
                 if (Find.TickManager.TicksGame > letter.disappearAtTick)
                 {
-                    letter.OpenLetter();
+                    if (letter is ChoiceLetter_ExtortionDemand)
+                    {
+                        Find.LetterStack.ReceiveLetter(letter);
+                        letter.OpenLetter();
+                    }
                     choiceLetters.Remove(letter);
                     break;
                 }

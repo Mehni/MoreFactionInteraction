@@ -6,6 +6,8 @@ using Verse;
 
 namespace MoreFactionInteraction
 {
+    using General;
+
     public class IncidentWorker_DiplomaticMarriage : IncidentWorker
     {
         private Pawn marriageSeeker;
@@ -17,19 +19,22 @@ namespace MoreFactionInteraction
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && TryFindMarriageSeeker(marriageSeeker: out this.marriageSeeker)
-                                                    && this.TryFindBetrothed(betrothed: out this.betrothed);
+                                                    && this.TryFindBetrothed(betrothed: out this.betrothed)
+                                                    && !this.IsScenarioBlocked();
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
             if (!TryFindMarriageSeeker(marriageSeeker: out this.marriageSeeker))
             {
-                if (Prefs.LogVerbose) Log.Warning(text: "no marriageseeker");
+                if (Prefs.LogVerbose)
+                    Log.Warning(text: "no marriageseeker");
                 return false;
             }
             if (!this.TryFindBetrothed(betrothed: out this.betrothed))
             {
-                if (Prefs.LogVerbose) Log.Warning(text: "no betrothed");
+                if (Prefs.LogVerbose)
+                    Log.Warning(text: "no betrothed");
                 return false;
             }
 
@@ -53,8 +58,9 @@ namespace MoreFactionInteraction
                                                               select potentialPartners).TryRandomElementByWeight(weightSelector: (Pawn marriageSeeker2) => this.marriageSeeker.relations.SecondaryLovinChanceFactor(otherPawn: marriageSeeker2), result: out betrothed);
 
         private static bool TryFindMarriageSeeker(out Pawn marriageSeeker) => (from x in Find.WorldPawns.AllPawnsAlive
-                                                                               where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer && x.Faction.PlayerGoodwill <= 50
-                                                                               && !x.Faction.defeated && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned && x.Faction.def.techLevel <= TechLevel.Medieval
+                                                                               where x.Faction != null && !x.Faction.def.hidden && !x.Faction.def.permanentEnemy && !x.Faction.IsPlayer
+                                                                                  && x.Faction.PlayerGoodwill <= 50 && !x.Faction.defeated && x.Faction.def.techLevel <= TechLevel.Medieval
+                                                                                  && x.Faction.leader != null && !x.Faction.leader.IsPrisoner && !x.Faction.leader.Spawned
                                                                                && !x.IsPrisoner && !x.Spawned && x.relations != null && x.RaceProps.Humanlike
                                                                                && !SettlementUtility.IsPlayerAttackingAnySettlementOf(faction: x.Faction) && !PeaceTalksExist(faction: x.Faction)
                                                                                && (!LovePartnerRelationUtility.HasAnyLovePartner(pawn: x) || LovePartnerRelationUtility.ExistingMostLikedLovePartner(p: x, allowDead: false)?.Faction == Faction.OfPlayer)

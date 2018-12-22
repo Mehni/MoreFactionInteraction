@@ -23,35 +23,35 @@ namespace MoreFactionInteraction
             //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
-            harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PriceTypeSetter_PostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
                  prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
-             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
             #endregion
 
             #region WorldIncidents
-            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
-             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
-                          transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
             if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
             {
@@ -119,15 +119,21 @@ namespace MoreFactionInteraction
 
                 if (map != null && (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_")))
                 {
-                    float silverCount = __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount;
+                    //nullable float because not all traders bring silver
+                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    if (!silverCount.HasValue)
+                        return;
                     silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(x: map.PlayerWealthForStoryteller);
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount = (int)silverCount;
                     return;
                 }
                 if (map != null && parms.traderFaction != null)
                 {
+                    //nullable float because not all traders bring silver
+                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    if (!silverCount.HasValue)
+                        return;
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.traderFaction.GoodwillWith(other: Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
-                    return;
                 }
             }
         }

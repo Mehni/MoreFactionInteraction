@@ -15,7 +15,7 @@ namespace MoreFactionInteraction.More_Flavour
     {
         private const int MinDistance = 12;
         private const int MaxDistance = 26;
-        private static readonly IntRange TimeoutDaysRange = new IntRange(min: 21, max: 23);
+        private static readonly IntRange TimeoutDaysRange = new IntRange(min: 15, max: 21);
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {

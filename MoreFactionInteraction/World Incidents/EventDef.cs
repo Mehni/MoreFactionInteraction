@@ -22,9 +22,9 @@ namespace MoreFactionInteraction
         public string outcomeFirstLoser;
         public string outComeFirstOther;
 
-        public float xPGainFirstPlace = 6000f;
-        public float xPGainFirstLoser = 4000f;
-        public float xPGainFirstOther = 2000f;
+        public float xPGainFirstPlace = 4000f;
+        public float xPGainFirstLoser = 2000f;
+        public float xPGainFirstOther = 1000f;
 
         public List<SkillDef> learnedSkills;
 
