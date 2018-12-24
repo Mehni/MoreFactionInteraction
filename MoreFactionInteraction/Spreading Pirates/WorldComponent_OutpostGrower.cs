@@ -75,7 +75,7 @@ namespace MoreFactionInteraction
 
                 if (Find.TickManager.TicksGame > letter.disappearAtTick)
                 {
-                    if (letter is ChoiceLetter_ExtortionDemand)
+                    if (letter is ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand && !choiceLetter_ExtortionDemand.completed)
                     {
                         Find.LetterStack.ReceiveLetter(letter);
                         letter.OpenLetter();

@@ -10,6 +10,7 @@ namespace MoreFactionInteraction
         public Faction faction;
         public bool outpost = false;
         public int fee;
+        public bool completed = false;
 
         public override IEnumerable<DiaOption> Choices
         {
@@ -25,6 +26,7 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
+                            completed = true;
                             TradeUtility.LaunchSilver(map: this.map, fee: this.fee);
                             Find.LetterStack.RemoveLetter(@let: this);
                         },
@@ -40,6 +42,7 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
+                            completed = true;
                             IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.ThreatBig, target: this.map);
                             incidentParms.forced = true;
                             incidentParms.faction = this.faction;
@@ -67,6 +70,7 @@ namespace MoreFactionInteraction
             Scribe_References.Look<Map>(refee: ref this.map, label: "map");
             Scribe_References.Look<Faction>(refee: ref this.faction, label: "faction");
             Scribe_Values.Look<int>(value: ref this.fee, label: "fee");
+            Scribe_Values.Look(ref completed, "completed");
         }
     }
 }
