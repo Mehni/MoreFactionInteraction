@@ -61,7 +61,7 @@ namespace MoreFactionInteraction.More_Flavour
             CompProperties_Power power = (CompProperties_Power)ThingDefOf.PsychicEmanator.comps.FirstOrDefault(x => x is CompProperties_Power);
 
             if (power != null)
-                power.basePowerConsumption *= 1.5f;
+                power.basePowerConsumption = 350f;
             this.Active = true;
         }
 
