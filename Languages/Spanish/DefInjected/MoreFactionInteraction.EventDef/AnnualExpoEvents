@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_GameOfUrComp.label>competición de Ur</MFI_GameOfUrComp.label>
+	<MFI_GameOfUrComp.theme>el juego real de Ur</MFI_GameOfUrComp.theme>
+	<MFI_GameOfUrComp.themeDesc>Envía a tu mejor jugador</MFI_GameOfUrComp.themeDesc>
+	<MFI_GameOfUrComp.outComeFirstPlace>Gracias a la habilidad, nervios de acero y una buena cantidad de suerte, ¡[PAWN_nameDef] ganó el torneo! Fue recompensado con:\n\n{0}</MFI_GameOfUrComp.outComeFirstPlace>
+	<MFI_GameOfUrComp.outcomeFirstLoser>Para la ronda final, bastante tensa por cierto, ¡[PAWN_nameDef] se enfrentó con el campeón invicto desde hace cinco años, y perdió! Su recompensa por participar fue:\n\n{0}</MFI_GameOfUrComp.outcomeFirstLoser>
+	<MFI_GameOfUrComp.outComeFirstOther>Durante la quinta ronda, [PAWN_nameDef] hizo una jugada que confundió a [PAWN_possessive] oponente y sorprendió a los árbitros. Comprensiblemente, se produjo una pelea masiva. Su recompensa por participar fue:\n\n{0}</MFI_GameOfUrComp.outComeFirstOther>
+
+	<MFI_ShootingComp.label>competición de tiro</MFI_ShootingComp.label>
+	<MFI_ShootingComp.theme>una competencia de tiro</MFI_ShootingComp.theme>
+	<MFI_ShootingComp.themeDesc>Envía a tu mejor tirador</MFI_ShootingComp.themeDesc>
+	<MFI_ShootingComp.outComeFirstPlace>Con una habilidad casi robótica, [PAWN_nameDef] acertó a todos los objetivos con una precisión milimétrica. Los jueces estaban muy impresionados y te recompensaron con:\n\n{0}</MFI_ShootingComp.outComeFirstPlace>
+	<MFI_ShootingComp.outcomeFirstLoser>Hubo una fuerte competencia este año, con muchos representantes de facciones que han vivido como cazadores o con partes biónicas avanzadas. [PAWN_nameDef] quedó varado en algún lugar de los cuartos de final. Su recompensa por participar fue:\n\n{0}</MFI_ShootingComp.outcomeFirstLoser>
+	<MFI_ShootingComp.outComeFirstOther>[PAWN_nameDef] no avanzó más allá de la primera ronda, que consistió en disparar a un elefante a escasos metros de distancia. Agregaron esta simple prueba como una broma hace años. [PAWN_nameDef] es el primero desde su introducción que no avanza a la segunda ronda. Su recompensa por participar fue:\n\n{0}\n\nAl parecer, el premio representa la habilidad de [PAWN_nameDef] como tirador.</MFI_ShootingComp.outComeFirstOther>
+
+	<MFI_CulturalSwap.label>intercambio cultural</MFI_CulturalSwap.label>
+	<MFI_CulturalSwap.theme>el arte y cultura</MFI_CulturalSwap.theme>
+	<MFI_CulturalSwap.themeDesc>Puede haber una oportunidad para comerciar</MFI_CulturalSwap.themeDesc>
+	<MFI_CulturalSwap.outComeFirstPlace>A medida que la noche llegaba, [PAWN_nameDef] simplemente se sentó en un taburete de granito y habló de [PAWN_possessive] educación como [PAWN_title]. Esta historia simple y, lo que es más importante, la atmósfera que [PAWN_pronoun] creó, fue alabada por los jueces por su intimidad, originalidad y valentía. Su recompensa por participar fue:\n\n{0}</MFI_CulturalSwap.outComeFirstPlace>
+	<MFI_CulturalSwap.outcomeFirstLoser>Al no estar mejor preparado ni haber traído nada, el acto de tu facción consistió en una rutina de canciones y bailes con [PAWN_nameDef] tomando el centro del escenario. No fue bien ensayado, lo que brilló a través de la actuación. No todas las facciones participantes pudieron apreciarlo, pero fue un esfuerzo admirable. Su recompensa por participar fue:\n\n{0}</MFI_CulturalSwap.outcomeFirstLoser>
+	<MFI_CulturalSwap.outComeFirstOther>La facción anfitriona conmovió al público hasta el llanto con su deslumbrante actuación; una dramática recreación del descubrimiento de la Cordillera del Conejo Blanco por un ancestro suyo. Fue una pieza conmovedora de teatro que trascendió las barreras del idioma y llegó a los corazones de jóvenes y adultos por igual.\n\nDemás decir que la presentación de tu facción fue opacada completamente. Su recompensa por participar fue:\n\n{0}</MFI_CulturalSwap.outComeFirstOther>
+
+	<MFI_ScienceFaire.label>feria de ciencias</MFI_ScienceFaire.label>
+	<MFI_ScienceFaire.theme>intercambio de descubrimientos científicos</MFI_ScienceFaire.theme>
+	<MFI_ScienceFaire.themeDesc>¡Excitante!</MFI_ScienceFaire.themeDesc>
+	<MFI_ScienceFaire.outComeFirstPlace>Un poderoso orador y un gran erudito no te explican nada acerca de las complejidades del universo, en cambio, revelan sus simplicidades:\n\n{0}</MFI_ScienceFaire.outComeFirstPlace>
+	<MFI_ScienceFaire.outcomeFirstLoser>Tu facción se encuentra entre los miembros de un grupo llamado despectivamente "aficionados a la ciencia". Te otorgan un don de conocimiento:\n\n{0}</MFI_ScienceFaire.outcomeFirstLoser>
+	<MFI_ScienceFaire.outComeFirstOther>Cansados por el largo viaje, los miembros de tu facción tuvieron problemas para mantenerse despiertos durante la extremadamente larga y aburrida conferencia de un famoso profesor. Como premio de consolación, obtienes:\n\n{0}</MFI_ScienceFaire.outComeFirstOther>
+
+	<MFI_AcousticShow.label>exposición musical</MFI_AcousticShow.label>
+	<MFI_AcousticShow.theme>una exposición musical</MFI_AcousticShow.theme>
+	<MFI_AcousticShow.themeDesc>Tal vez deberías llevar tapones para oídos</MFI_AcousticShow.themeDesc>
+	<MFI_AcousticShow.outComeFirstPlace>Tu facción pasó el día recorriendo los puestos y admirando la amplia gama de instrumentos musicales no eléctricos de todo el mundo y más allá. A medida que caía el atardecer y las personas reunían sus instrumentos, se celebró un concierto en el escenario principal. Levantó los ánimos de los miembros considerablemente. Tu recompensa por venir fue:\n\n{0}</MFI_AcousticShow.outComeFirstPlace>
+	<MFI_AcousticShow.outcomeFirstLoser>La exposición resultó ser una reunión muy acogedora, que se enfocó mayormente en las guitarras. A parte de algunas actuaciones medianamente interesantes, fue una tarde bastante tranquila que puso a todos de buen humor. Tu recompensa por venir fue:\n\n{0}</MFI_AcousticShow.outcomeFirstLoser>
+	<MFI_AcousticShow.outComeFirstOther>Uno de los miembros de tu facción tocó un instrumento que no debería y, al no tener talento musical alguno, rompió una cuerda. Se pidieron disculpas, pero no fue suficiente: debió trabajar como ayudante en el escenario la noche de la actuación. Como todavía tenían un buen momento, les dejaron las sobras de la fiesta:\n\n{0}</MFI_AcousticShow.outComeFirstOther>
+
+</LanguageData>

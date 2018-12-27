@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_HuntersLodgePart.label>cabaña de los cazadores</MFI_HuntersLodgePart.label>
+	<MFI_HuntersLodgePart.description>Un pequeño puesto de avanzada, utilizado por otras facciones como base de caza.</MFI_HuntersLodgePart.description>
+	<MFI_HuntersLodgePart.descriptionDialogue>Generalmente hay una manada de {0} en esta época del año</MFI_HuntersLodgePart.descriptionDialogue>
+	<MFI_HuntersLodgePart.arrivedLetter>Tu caravana ha llegado a la cabaña de los cazadores. Parece que no hay nadie aquí, pero obviamente te han estado esperando y han hecho que el lugar sea agradable.</MFI_HuntersLodgePart.arrivedLetter> 
+	<MFI_HuntersLodgePart.arrivedLetterlabel>Cabaña de los cazadores</MFI_HuntersLodgePart.arrivedLetterlabel>
+
+</LanguageData>

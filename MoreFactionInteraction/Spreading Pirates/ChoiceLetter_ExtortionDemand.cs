@@ -10,6 +10,7 @@ namespace MoreFactionInteraction
         public Faction faction;
         public bool outpost = false;
         public int fee;
+        public bool done;
 
         public override IEnumerable<DiaOption> Choices
         {
@@ -25,6 +26,7 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
+                            this.done = true;
                             TradeUtility.LaunchSilver(map: this.map, fee: this.fee);
                             Find.LetterStack.RemoveLetter(@let: this);
                         },
@@ -32,10 +34,7 @@ namespace MoreFactionInteraction
                     };
                     if (!TradeUtility.ColonyHasEnoughSilver(map: this.map, fee: this.fee))
                     {
-                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(args: new object[]
-                        {
-                            this.fee.ToString()
-                        }));
+                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(this.fee.ToString()));
                     }
                     yield return accept;
 
@@ -43,13 +42,15 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
+                            this.done = true;
                             IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.ThreatBig, target: this.map);
                             incidentParms.forced = true;
                             incidentParms.faction = this.faction;
                             incidentParms.raidStrategy = RaidStrategyDefOf.ImmediateAttack;
                             incidentParms.raidArrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn;
                             incidentParms.target = this.map;
-                            if (this.outpost) incidentParms.points *= 0.7f;
+                            if (this.outpost)
+                                incidentParms.points *= 0.7f;
                             IncidentDefOf.RaidEnemy.Worker.TryExecute(parms: incidentParms);
                             Find.LetterStack.RemoveLetter(@let: this);
                         },
@@ -61,7 +62,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(item: this.map);
+        public override bool CanShowInLetterStack => Find.Maps.Contains(item: this.map);
 
         public override void ExposeData()
         {
@@ -69,6 +70,7 @@ namespace MoreFactionInteraction
             Scribe_References.Look<Map>(refee: ref this.map, label: "map");
             Scribe_References.Look<Faction>(refee: ref this.faction, label: "faction");
             Scribe_Values.Look<int>(value: ref this.fee, label: "fee");
+            Scribe_Values.Look(value: ref this.done, label: "done");
         }
     }
 }

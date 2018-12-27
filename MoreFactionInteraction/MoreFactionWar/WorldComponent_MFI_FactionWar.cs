@@ -33,7 +33,6 @@ namespace MoreFactionInteraction
             }
         }
 
-
         public Faction WarringFactionOne
         {
             get
@@ -86,7 +85,8 @@ namespace MoreFactionInteraction
             factionOne.TrySetRelationKind(factionInstigator, FactionRelationKind.Hostile, false);
             factionInstigator.TrySetRelationKind(factionOne, FactionRelationKind.Hostile, false);
 
-            if (selfResolved) return;
+            if (selfResolved)
+                return;
 
             WorldObject peacetalks =
                 (WorldObject) (Find.WorldObjects.AllWorldObjects.FirstOrDefault(x => x.def == MFI_DefOf.MFI_FactionWarPeaceTalks) 
@@ -103,14 +103,16 @@ namespace MoreFactionInteraction
             this.SetFirstWarringFaction(factionOne);
             this.SetSecondWarringFaction(factionTwo);
         }
-        
-        public void ResolveWar()
+
+        private void ResolveWar()
         {
-            Find.LetterStack.ReceiveLetter("MFI_FactionWarOverLabel".Translate(), "MFI_FactionWarOver".Translate(WarringFactionOne, WarringFactionTwo), LetterDefOf.PositiveEvent);
             this.warIsOngoing = false;
             this.SetFirstWarringFaction(null);
             this.SetSecondWarringFaction(null);
+            this.allFactionsInVolvedInWar.Clear();
             MainTabWindow_FactionWar.ResetBars();
+
+            Find.LetterStack.ReceiveLetter("MFI_FactionWarOverLabel".Translate(), "MFI_FactionWarOver".Translate(WarringFactionOne, WarringFactionTwo), LetterDefOf.PositiveEvent);
         }
 
         public void AllOuttaFactionSettlements()
@@ -131,12 +133,14 @@ namespace MoreFactionInteraction
 
         public void NotifyBattleWon(Faction faction)
         {
-            if (faction == this.factionOne) this.factionOneBattlesWon++;
+            if (faction == this.factionOne)
+                this.factionOneBattlesWon++;
 
-            if (faction == this.factionTwo) this.factionTwoBattlesWon++;
+            if (faction == this.factionTwo)
+                this.factionTwoBattlesWon++;
 
-            if (this.factionOneBattlesWon + this.factionTwoBattlesWon == 12 
-             || this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f))
+            if ((this.factionOneBattlesWon + this.factionTwoBattlesWon >= 12 && Rand.Chance(0.75f))
+             || (this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f)))
                 this.ResolveWar();
         }
 
@@ -158,11 +162,23 @@ namespace MoreFactionInteraction
 
             if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                int rollForIntendedOutcome =  Rand.Bool ? 1 : 4;
+                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
                 FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
-                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(), 
-                                               WarIsOngoing ? "MFI_FactionWarLeaderDecidedAgainstWar".Translate(faction, factionInstigator) : "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator), 
+                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
+                                               WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator)
+                                                            : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(faction, factionInstigator),
                                                WarIsOngoing ? LetterDefOf.NegativeEvent : LetterDefOf.NeutralEvent);
+                return;
+            }
+            else if (factionInstigator.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
+            {
+                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
+                FactionWarDialogue.DetermineOutcome(factionInstigator, faction, factionInstigator.leader, rollForIntendedOutcome, out string blah);
+                Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
+                                               WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(factionInstigator, faction)
+                                                            : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(factionInstigator, faction),
+                                               WarIsOngoing ? LetterDefOf.NegativeEvent : LetterDefOf.NeutralEvent);
+                return;
             }
         }
     }

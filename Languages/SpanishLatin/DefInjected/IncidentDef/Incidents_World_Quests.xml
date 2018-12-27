@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<MFI_ReverseTradeRequest.label>solicitud de caravana</MFI_ReverseTradeRequest.label>
+	<MFI_ReverseTradeRequest.letterLabel>Solicitud de caravana</MFI_ReverseTradeRequest.letterLabel>
+
+	<MFI_BumperCropRequest.label>solicitud de alimentos</MFI_BumperCropRequest.label>
+
+	<MFI_Quest_PeaceTalks.label>¿Se avecina una guerra?</MFI_Quest_PeaceTalks.label>
+	<MFI_Quest_PeaceTalks.letterLabel>Malestar entre facciones</MFI_Quest_PeaceTalks.letterLabel>
+	<MFI_Quest_PeaceTalks.letterText>Has recibido un mensaje de [PAWN_nameDef], {0} de la facción {1}. Su facción recientemente tuvo problemas diplomáticos con otra y te piden que negocies entre ellos y {2}. Han elegido un lugar cercano y te invitan a venir a las negociaciones.\n\nPodría ser una gran oportunidad para mejorar las relaciones con su facción, pero cuidado: un negociador pobre puede causar más daño que bien e incluso enfadarlos.\n\nLa oferta expirará después de {3} días, después de los cuales [PAWN_nameDef] teme lo peor.</MFI_Quest_PeaceTalks.letterText>
+
+	<MFI_AnnualExpo.label>exposición anual</MFI_AnnualExpo.label>
+	<MFI_AnnualExpo.letterLabel>Exposición anual</MFI_AnnualExpo.letterLabel>
+	
+</LanguageData>

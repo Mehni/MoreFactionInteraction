@@ -31,10 +31,7 @@ namespace MoreFactionInteraction.World_Incidents
         {
             if (this.ActiveRequest)
             {
-                return "MFI_HarvestRequestInfo".Translate(args: new object[]
-                {
-                    (this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays()
-                });
+                return "MFI_HarvestRequestInfo".Translate((this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays());
             }
             return null;
         }
@@ -70,9 +67,10 @@ namespace MoreFactionInteraction.World_Incidents
 
             //TODO: Calculate a good amount
             //v1 (first vers): base of 20 * Sum of plant harvest yield * count * avg grow skill (20 * 2.96 * 3 * 14.5) = ~2579 or 20*5.96*6*20 = 14400
-            //v2 (2018/08/03): base of 50 * avg of plant harvest yield * count * avg grow skill (50 * 0.99 * 3 * 14.5) = ~2153 or 40*0.99*6*20 = 4752
-            float totalreward = basereward * totalYieldPowerForCaravan * (allMembersCapableOfGrowing.Count
-                              * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level)));
+            //v2 (2018/08/03): base of 50 * avg of plant harvest yield * count * avg grow skill (50 * 0.99 * 3 * 14.5) = ~2153 or 40*0.99*6*20 = 4752 ((5940 for 50))
+            //v3 (2018/12/18): base of 50 * avg of plant harvest yield * (count*0.75) * avg grow skill = (50 * 0.99 * (2.25) * 14.5 = ~1615 or (50 * 0.99 * (4.5) * 20 = 4455
+            float totalreward = basereward * totalYieldPowerForCaravan * (allMembersCapableOfGrowing.Count * 0.75f) 
+                              * Mathf.Max(a: 1, b: (float)allMembersCapableOfGrowing.Average(selector: pawn => pawn.skills.GetSkill(skillDef: SkillDefOf.Plants).Level));
 
             Thing reward = ThingMaker.MakeThing(def: RandomRawFood());
             reward.stackCount = Mathf.RoundToInt(f: totalreward);

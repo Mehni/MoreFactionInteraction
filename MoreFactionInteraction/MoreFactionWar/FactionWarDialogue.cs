@@ -21,7 +21,6 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         public static DiaNode FactionWarPeaceTalks(Pawn pawn, Faction factionOne, Faction factionInstigator, IIncidentTarget incidentTarget = null)
         {
-
             string factionInstigatorLeaderName = factionInstigator.leader != null
                 ? factionInstigator.leader.Name.ToStringFull
                 : factionInstigator.Name;
@@ -38,10 +37,10 @@ namespace MoreFactionInteraction.MoreFactionWar
             if (Prefs.DevMode)
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
-                                                { action =() => 
-                                                { Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: false);},
-                                                    linkLateBind = 
-                                                        () => DialogueResolver(textResult: "Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option.")});
+                {
+                    action =() => Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: false),
+                    linkLateBind = () => DialogueResolver(textResult: "Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option."),
+                });
             }
             return dialogueGreeting;
         }
@@ -52,34 +51,22 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionOne.Name ))
             {
-                action = () =>
-                {
-                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 1, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
-                },
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 1, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionInstigator.Name ))
             {
-                action = () =>
-                {
-                    DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: 2, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
-                },
+                action = () => DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: 2, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksSabotage".Translate())
             {
-                action = () =>
-                {
-                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 3, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget);
-                },
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 3, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksBrokerPeace".Translate())
             {
-                action = () =>
-                {
-                    DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 4, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome);
-                },
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 4, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
         }
@@ -197,8 +184,6 @@ namespace MoreFactionInteraction.MoreFactionWar
             }
             else throw new NotImplementedException();
         }
-
-
 
         private static DiaNode DialogueResolver(string textResult)
         {
@@ -424,6 +409,6 @@ namespace MoreFactionInteraction.MoreFactionWar
     #endregion
 
         private static float GetBadOutcomeWeightFactor(float diplomacyPower) =>
-            FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtDiplomacyPower.Evaluate(x: diplomacyPower);
+            FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: diplomacyPower);
     }
 }

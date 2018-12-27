@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_GameOfUrComp.label>ウルのゲーム大会</MFI_GameOfUrComp.label>
+  <MFI_GameOfUrComp.theme>ウルのゲーム大会</MFI_GameOfUrComp.theme>
+  <MFI_GameOfUrComp.themeDesc>最善のゲームプレイヤーを送ってください。</MFI_GameOfUrComp.themeDesc>
+
+  <MFI_gameOfUrCompOutcomeFirstPlace>技能と鉄のような度胸、そして運が良かったので、[PAWN_nameDef]が競技会で優勝しました！ 参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstPlace>
+  <MFI_gameOfUrCompOutcomeFirstLoser>緊迫した決勝ラウンドで、[PAWN_nameDef]は5年連続優勝した前年度の優勝者と対戦し、敗北しました。参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstLoser>
+  <MFI_gameOfUrCompOutcomeFirstOther>第5試合の2戦目で、[PAWN_nameDef]は[PAWN_objective]相手を妨害する動きをして審判を驚かせました。当然、これは大規模な喧嘩に発展しました。参加した報酬は以下の通りです：\n\n{0}</MFI_gameOfUrCompOutcomeFirstOther>
+
+  <MFI_ShootingComp.label>射撃競技会</MFI_ShootingComp.label>
+  <MFI_ShootingComp.theme>射撃競技会</MFI_ShootingComp.theme>
+  <MFI_ShootingComp.themeDesc>最善の射撃手を送ってください。</MFI_ShootingComp.themeDesc>
+
+  <MFI_shootingCompOutcomeFirstPlace>まるで機械化されたロボットのような精度で、[PAWN_nameDef]は目標を射抜き、正確な命中精度ですべてのターゲットに命中しました。審判は非常に感銘を受け、あなたに優勝賞品を授与しました：\n\n{0}</MFI_shootingCompOutcomeFirstPlace>
+  <MFI_shootingCompOutcomeFirstLoser>今年は多くの派閥代表が歴戦のハンターだったり、または（アーキテック）強化義肢を装備してコマを進めたことで、今年は強力な競争相手が多くいました。[PAWN_nameDef]は準々決勝で敗北しました。参加した報酬は以下の通りです：\n\n{0}</MFI_shootingCompOutcomeFirstLoser>
+  <MFI_shootingCompOutcomeFirstOther>[PAWN_nameDef]は第一試合を通過できなかった。その結果は「的の外に付いている広い面に当たった」という惨憺たるものだった。大会ではその部分を何年も前に冗談として付け加えたものでした。[PAWN_nameDef]が、第2回戦に進めなかったのは参加してから初めてです。参加した報酬は以下の通りです：\n\n{0}</MFI_shootingCompOutcomeFirstOther>
+
+  <MFI_CulturalSwap.label>文化交流</MFI_CulturalSwap.label>
+  <MFI_CulturalSwap.theme>文化と芸術</MFI_CulturalSwap.theme>
+  <MFI_CulturalSwap.themeDesc>芸術品を販売するチャンスがあるかもしれません。</MFI_CulturalSwap.themeDesc>
+
+  <!-- {0 = childhood backstory label} -->
+  <MFI_culturalSwapOutcomeFirstPlace>夕日の照らす最後の光がゆっくりとぼやけていき、[PAWN_nameDef]は簡単に花崗岩のスツールに座って、[PAWN_objective]の生い立ちについて{0}のように語りました。このわかりやすい物語、もっと重要なのは、作りあげられた[PAWN_objective]取り巻く雰囲気は、その親密さや、独創性、そして勇気のために審判員によって賞賛されました。参加した報酬は以下の通りです：\n\n{1}</MFI_culturalSwapOutcomeFirstPlace>
+  <MFI_culturalSwapOutcomeFirstLoser>あなたのキャラバン隊は、もっとやるべきだった良い準備などを何も行っていなかったので、型通りの歌とダンスを即興で行いました。演奏はうまくできませんでした。参加していた全ての派閥が即興の見世物に感激するわけではありませんでしたが、それにも関わらずあなたのキャラバン隊はすばらしい努力を見せました。参加した報酬は以下の通りです：\n\n{0}</MFI_culturalSwapOutcomeFirstLoser>
+  <!-- {0 = factionName} {1 = TerrainFeatureLabel, e.g. White Rabbit Mountain Range} -->
+  <MFI_culturalSwapOutcomeFirstOther>派閥{0}は、彼らの祖先が{1}を発見した時を劇的に再現した絢爛豪華な展示によって観客を感動の涙へと誘いました。それは言語の壁を越えて、老若男女の心に響いた感動的な演劇作品でした。\n\n彼らの後にあなたのコロニーによる演劇が行われました。参加した報酬は以下の通りです：\n\n{2}</MFI_culturalSwapOutcomeFirstOther>
+
+  <MFI_ScienceFaire.label>科学博覧会</MFI_ScienceFaire.label>
+  <MFI_ScienceFaire.theme>発見した研究成果の交換</MFI_ScienceFaire.theme>
+  <MFI_ScienceFaire.themeDesc>ワクワクしています！</MFI_ScienceFaire.themeDesc>
+
+  <MFI_scienceFaireOutcomeFirstPlace>簡単に整理すると、強力な雄弁家と偉大な学者はあなたに宇宙の複雑さについては何も説明しませんでした。その代わり、彼らはその単純さを明確にしました：\n\n{0}</MFI_scienceFaireOutcomeFirstPlace>
+  <MFI_scienceFaireOutcomeFirstLoser>あなたのキャラバン隊は、「科学の鑑定家」と呼ばれるグループの鑑定員たちに囲まれています。彼らはあなたに知識の贈り物を贈りました。\n\n{0}</MFI_scienceFaireOutcomeFirstLoser>
+  <MFI_scienceFaireOutcomeFirstOther>これまでの長旅に疲れていた、あなたのキャラバン隊の隊員たちは、有名な教授の長くて退屈な講演の中で目を覚し続けているのには限界がありました。出発する際に贈り物として、あなたは以下を得ました：\n\n{0}</MFI_scienceFaireOutcomeFirstOther>
+
+  <MFI_AcousticShow.label>音楽演奏会</MFI_AcousticShow.label>
+  <MFI_AcousticShow.theme>音楽演奏会</MFI_AcousticShow.theme>
+  <MFI_AcousticShow.themeDesc>あなたは耳栓を持ってくるべきか考え込んでいます。</MFI_AcousticShow.themeDesc>
+
+  <MFI_acousticShowOutcomeFirstPlace>あなたのキャラバン隊は、立ち並ぶ屋台を見て一日を過ごし、この世界のあちこちから集まった多種多様な電気を使わない楽器を堪能しました。夕暮れ終わり、人々が楽器を持って集まると、親睦を深めるコンサートがメインステージで行われました。あなたのキャラバン隊の隊員たちの心情が向上しました。参加した報酬は以下の通りです：\n\n{0}</MFI_acousticShowOutcomeFirstPlace>
+  <MFI_acousticShowOutcomeFirstLoser>今年の博覧会は非常に居心地の良い集まりで、様々な人々と共にギターの演奏を共演しました。そのうち誰かが古い地球の曲「ワンダーウォール(Wonderwall:イギリスのロックバンドOasisのシングル曲)」を演奏しましたが、観客たちの誰もが気分のいい寒い夜でした。参加した報酬は以下の通りです：\n\n{0}</MFI_acousticShowOutcomeFirstLoser>
+  <MFI_acousticShowOutcomeFirstOther>あなたのキャラバン隊の隊員の一人が、弾いてはいけない楽器を使い、音楽的な才能がないだけではなく、未熟な演奏を行って楽器の弦を切ってしまいました。この事態に謝罪がなされましたが、観客たちには全く不十分でした。あなたの不器用なキャラバン隊の隊員は夜の演奏会でステージハンドとして働きました。展示会が終わり清掃を行った後、参加した彼らは残り物を与えられました：\n\n{0}</MFI_acousticShowOutcomeFirstOther>
+
+</LanguageData>

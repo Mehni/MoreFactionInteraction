@@ -17,14 +17,17 @@ namespace MoreFactionInteraction
         public override void WorldComponentUpdate()
         {
             base.WorldComponentUpdate();
-            if (Find.TickManager.TicksGame % 100 == 0)
+            if (Find.TickManager.TicksGame % 350 == 0)
             {
                 //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
                 //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
                 IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
-                                          where site.Faction.HostileTo(other: Faction.OfPlayer) && site.Faction.def.permanentEnemy && !site.Faction.def.hidden && !site.Faction.defeated
-                                          && site.ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
-                                          && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost) && !site.GetComponent<TimeoutComp>().Active
+                                          where site.Faction.HostileTo(other: Faction.OfPlayer)
+                                              && site.Faction.def.permanentEnemy && !site.Faction.def.hidden
+                                              && !site.Faction.defeated
+                                              && (site.HasMap ? site.ShouldRemoveMapNow(out bool _) : true)
+                                              && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost)
+                                              && !site.GetComponent<TimeoutComp>().Active
                                           select site;
 
                 Site toUpgrade = null;
@@ -34,30 +37,50 @@ namespace MoreFactionInteraction
                     if (current.creationGameTicks + MoreFactionInteraction_Settings.ticksToUpgrade <= Find.TickManager.TicksGame)
                     {
                         toUpgrade = current;
+                        break;
                     }
                 }
 
                 if (toUpgrade != null)
                 {
-                    Settlement factionBase = (Settlement)WorldObjectMaker.MakeWorldObject(def: WorldObjectDefOf.Settlement);
-                    factionBase.SetFaction(newFaction: toUpgrade.Faction);
-                    factionBase.Tile = toUpgrade.Tile;
-                    factionBase.Name = SettlementNameGenerator.GenerateSettlementName(factionBase: factionBase);
-                    Find.WorldObjects.Remove(o: toUpgrade);
-                    Find.WorldObjects.Add(o: factionBase);
-                    Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelBanditOutpostUpgraded".Translate(), text: "MFI_LetterBanditOutpostUpgraded".Translate(args: new object[]
-                    {
-                            factionBase.Faction.Name,
-                    }), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase, relatedFaction: toUpgrade.Faction);
+                    UpgradeSiteToSettlement(toUpgrade);
+                }
+                TickLetters();
+            }
+        }
+
+        private static void UpgradeSiteToSettlement(Site toUpgrade)
+        {
+            Settlement factionBase = (Settlement)WorldObjectMaker.MakeWorldObject(def: WorldObjectDefOf.Settlement);
+            factionBase.SetFaction(newFaction: toUpgrade.Faction);
+            factionBase.Tile = toUpgrade.Tile;
+            factionBase.Name = SettlementNameGenerator.GenerateSettlementName(factionBase: factionBase);
+            Find.WorldObjects.Remove(o: toUpgrade);
+            Find.WorldObjects.Add(o: factionBase);
+            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelBanditOutpostUpgraded".Translate(), text: "MFI_LetterBanditOutpostUpgraded".Translate(
+                    factionBase.Faction.Name
+            ), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase, relatedFaction: toUpgrade.Faction);
+        }
+
+        private void TickLetters()
+        {
+            foreach (ChoiceLetter letter in choiceLetters)
+            {
+                if (letter == null)
+                {
+                    choiceLetters.Remove(letter);
+                    break;
                 }
 
-                foreach (ChoiceLetter letter in choiceLetters)
+                if (Find.TickManager.TicksGame > letter.disappearAtTick)
                 {
-                    if (Find.TickManager.TicksGame > letter.disappearAtTick)
+                    if (letter is ChoiceLetter_ExtortionDemand choiceLetterExtortionDemand && !choiceLetterExtortionDemand.done)
                     {
-                        choiceLetters.Remove(letter);
-                        break;
-                    }                        
+                        Find.LetterStack.ReceiveLetter(letter);
+                        letter.OpenLetter();
+                    }
+                    choiceLetters.Remove(letter);
+                    break;
                 }
             }
         }

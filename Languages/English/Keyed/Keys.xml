@@ -2,7 +2,7 @@
 <LanguageData>
 
     <!--settings -->
-    <MFI_ticksToUpgrade>Time until pirates upgrade their outposts to bases</MFI_ticksToUpgrade>
+    <MFI_ticksToUpgrade>How much time it takes for pirates to upgrade their outposts to bases</MFI_ticksToUpgrade>
     <MFI_ticksToUpgradeDesc>Larger values means that pirates take longer to change outposts into bases.</MFI_ticksToUpgradeDesc>
     <MFI_pirateBaseUpgraderModifier>Pirate outpost spawn rate</MFI_pirateBaseUpgraderModifier>
     <MFI_pirateBaseUpgraderModifierDesc>Higher values means an increased chance of pirates spreading. Low values = lazy pirates.</MFI_pirateBaseUpgraderModifierDesc>
@@ -64,7 +64,33 @@
     <MFI_FactionWarLeaderDecidedOnWar>The peace talks have ended in failure, and a war between {0} and {1} has broken out. They will occasionally launch attacks on each others bases. If you favoured one faction over the other, they may call upon you for help.\n\nYou can keep track of the faction war in the Factions tab.</MFI_FactionWarLeaderDecidedOnWar>
     <MFI_FactionWarLeaderDecidedAgainstWar>The peace talks have ended. Tensions have been alleviated and the factions of {0} and {1} have reached an initial agreement.</MFI_FactionWarLeaderDecidedAgainstWar>
 
-    <!-- equivalent to NeedSilverLaunchable, just with a list of items. -->
-    <MFI_NeedLaunchablesNearTradeBeacon>need {0} near trade beacon</MFI_NeedLaunchablesNearTradeBeacon>
+    <!-- equivalent to NeedSilverLaunchable, just with a list.  -->
+    <MFI_NeedLaunchablesNearTradeBeacon>need {0} near trade beacons</MFI_NeedLaunchablesNearTradeBeacon>
+
+<!-- Annual Expo start -->
+    <MFI_AnnualExpoLetterLabel>{0} annual expo</MFI_AnnualExpoLetterLabel>
+    <!-- it is time for the {ORDINALNUMBER} annual {WORLDNAME}. This year's host is {FACTIONLABEL} and the theme is {MFI_gameOfUrComp / MFI_shootingComp / MFI_culturalSwap / etc} {MFI_gameOfUrCompExpl / MFI_shootingCompExpl / etc} -->
+    <MFI_AnnualExpoLetterText>It is time for the {0} annual {1} exposition, and your faction has been invited. This year's host is {2} and the theme is {3}. {4}\n\nThe annual exposition is a highly respected peaceful gathering. It has historically been used by almost all factions as an opportunity to exchange culture, experiences, and to show off.</MFI_AnnualExpoLetterText>
+    <MFI_AnnualExpoDialogueIntroduction>Your caravan has arrived at the annual exposition. As this year's theme is {0}, there are many experts on that topic here. Most of them are preparing, while others have already started showing off their skills.\n\nThe expo is a hodge-podge of stalls, some modest and made of locally sourced materials while others are high-tech pre-fabs from Urb worlds. They form a circle around the main stage, where {1}.\n\nSurely it'll be used for something more useful later.</MFI_AnnualExpoDialogueIntroduction>
+    <MFI_AnnualExpoFirstOption>Let's get started!</MFI_AnnualExpoFirstOption>
+
+    <MFI_buffPemmican>A new way of preserving Pemmican so it no longer rots.</MFI_buffPemmican>
+    <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
+    <MFI_buffEmanator>You learn about overclocking; getting more performance by tweaking the millivoltage coursing through the half-moon coil windings on the reed switches. The {0} now has an increased range and effect, at the cost of an increased power consumption and longevity.</MFI_buffEmanator>
+    <!-- like the emanator above, only for the infinite chemfuel reactor generator doodad thing. -->
+    <MFI_buffChemfuel>Through removal of Panel A labelled 'Service Latch' and activation of now-exposed Rockerswitch type 2-A labelled 'GO FASTER' the {0} now produces {1} more often.</MFI_buffChemfuel>
+    <MFI_buffPsychite>By steeping it longer, {0} is now more potent. Truly a marvel of modern engineering.</MFI_buffPsychite>
+
+    <MFI_SinceYouSuckAndDidntHaveIt>Since you didn't have it yet, they gave you {0}!</MFI_SinceYouSuckAndDidntHaveIt>
+    
+    <MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>The artwork your caravan brought along to the expo took second place at the judging competition, but it was a favourite with the audience. One pundit approached your caravan after the show and offered to buy {0} for {1}, which the judges estimated the market value to be at {2}.</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
+
+    <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
+    <MFI_AnnualExpoXPGain>{0} has gained {1} {2} experience.</MFI_AnnualExpoXPGain>
+    <MFI_AnnualExpoMedicalEmergency>A few bruises, a minor concussion, and a couple of dented egos.</MFI_AnnualExpoMedicalEmergency>
+    <MFI_AnnualExpoMedicalEmergencySerious>A sprained ankle, sore muscles, and an embarrassing wardrobe malfunction.</MFI_AnnualExpoMedicalEmergencySerious>
+
+    <MFI_AnnualExpoMessageNoRepresentative>No conscious, capable representative.</MFI_AnnualExpoMessageNoRepresentative>
+<!-- Annual Expo end -->
 
 </LanguageData>

@@ -84,7 +84,6 @@ namespace MoreFactionInteraction
             //We don't need to run all that often
             if (Find.TickManager.TicksGame % 531 == 0 && GenDate.DaysPassed > 8)
             {
-
                 foreach (KeyValuePair<Faction, int> kvp in this.NextFactionInteraction)
                 {
                     if (Find.TickManager.TicksGame >= kvp.Value)
@@ -122,13 +121,13 @@ namespace MoreFactionInteraction
                 case int n when n <= 6 * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier:
                     return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
 
-                case int n when n <= 7:
+                case int n when n <= 8:
                     return IncidentDef.Named("Quest_BanditCamp");
 
                 case int n when n <= 9:
                     return MFI_DefOf.MFI_DiplomaticMarriage;
 
-                case int n when n <= 17:
+                case int n when n <= 19:
                     return faction.leader != null ? MFI_DefOf.MFI_ReverseTradeRequest : IncomingIncidentDef(faction);
 
                 case int n when n <= 25:

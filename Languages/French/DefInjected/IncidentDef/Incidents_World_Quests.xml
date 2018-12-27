@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>demande commerciale</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>Demande commerciale</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_BumperCropRequest.label>demande de récolte</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>La guerre arrive-t-elle ?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterText>Vous avez reçu un message de [PAWN_nameDef], {0} z {1}. Leur faction a récemment eu des problèmes diplomatiques avec une autre faction et vous a demandé de négocier avec eux {2}.Ils ont choisi un emplacement neutre à proximité et vous invitent à négocier.\n\nC'est une excellente occasion d'améliorer les relations avec leur faction, mais soyez prudent - un négociateur faible peut causer plus de mal que de bien et même causer de la colère.\n\nL'offre expire après {3} jours, àprès quoi [PAWN_nameDef] craint le pire.</MFI_Quest_PeaceTalks.letterText>
+  <MFI_Quest_PeaceTalks.letterLabel>Trouble des factions</MFI_Quest_PeaceTalks.letterLabel>
+
+
+</LanguageData>

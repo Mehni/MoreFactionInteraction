@@ -25,12 +25,9 @@
     <MFI_BumperCropXPGain>Your grower {0} has gained {1} growing experience.</MFI_BumperCropXPGain>
 
     <MFI_DiplomaticMarriage>Word of {1}'s charm has reached {0} and they've asked you for {1}'s hand in marriage. Accepting this marriage proposal will cement relations and strengthen faction ties, but {1} will leave your faction to join {2}.</MFI_DiplomaticMarriage>
-    <!-- FACTION contacts us, marry off their pawnKindDefLabel pawnName to pawn2Name. They want a dowry consisting of:  -->
-    <MFI_DiplomaticMarriageShotGunEdition>{2} contacts us with an opportunity to cement relations and strengthen faction ties. They wish to marry off their {3} {1} to {0}. To finalise and celebrate this joyous occasion they request to be paid a dowry of:\n\n{4}</MFI_DiplomaticMarriageShotGunEdition>
     <MFI_DiplomaticMarriageLabel>Diplomatic marriage</MFI_DiplomaticMarriageLabel>
     <MFI_AcceptedProposal>[PAWN_nameDef] sounds overjoyed. [PAWN_pronoun] is convinced they'll live happily ever after with {0}.\n\nRelations with {1} improved.</MFI_AcceptedProposal>
     <MFI_DejectedProposal>[PAWN_nameDef] tries [PAWN_possessive] best not to sound rejected.\n\nRelations with {1} have deteriorated somewhat.</MFI_DejectedProposal>
-    <MFI_CantAffordDowry>Can't afford dowry</MFI_CantAffordDowry>
 
     <MFI_MysticalShamanLetter>Someone who claims to be a representative of {0} contacts us with a tall tale of a mystical shaman who has mastered the &quot;healer's hand&quot; to cure any injury or missing part. They'll tell us the location of this mysterious and normally reclusive person for a small fee of {1} silver.</MFI_MysticalShamanLetter>
     <MFI_MysticalShamanTitle>Mystical Shaman</MFI_MysticalShamanTitle>
@@ -44,5 +41,9 @@
     <MFI_WoundedCombatantAmbush>It's a trap! {0}'s enemy has somehow managed to hack your communication and abused it to get ahead in the war. {1}</MFI_WoundedCombatantAmbush>
     <MFI_WoundedCombatantGratitude>The commander gives you an earnest and heartfelt salute. It loses a lot of its impact and meaning as you can't see the gesture through the radio, so you hang up.</MFI_WoundedCombatantGratitude>
     <MFI_WoundedCombatantAmbushAvoided>You hear a voice in the background yell, asking if &quot;they've taken the bait yet&quot;. You quickly hang up, confused and somewhat relieved you escaped potential disaster.</MFI_WoundedCombatantAmbushAvoided>
-    
+
+    <!-- Diplomatic Marriage: Shotgun edition -->
+    <MFI_DiplomaticMarriageShotgunEdition>{2} contacts us with an opportunity to cement relations and strengthen faction tires. They wish to marry off their {3} {1} to {0}. To finalise and celebrate this joyous occasion they request to be paid a dowry of:\n\n{4}</MFI_DiplomaticMarriageShotgunEdition>
+    <MFI_CantAffordDowry>Can't afford dowry</MFI_CantAffordDowry>
+
 </LanguageData>

@@ -12,95 +12,86 @@ using System.Reflection.Emit;
 
 namespace MoreFactionInteraction
 {
+    using More_Flavour;
 
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
         static HarmonyPatches()
         {
-            HarmonyInstance harmony = HarmonyInstance.Create(id: "Mehni.RimWorld.MFI.main");
+            HarmonyInstance harmony = HarmonyInstance.Create(id: "mehni.rimworld.MFI.main");
             //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
-            harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PriceTypeSetter_PostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
                  prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"), prefix: null, postfix: null,
-             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
             #endregion
 
             #region WorldIncidents
-            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)), prefix: null,
+            harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"), prefix: null, postfix: null,
-             transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 
-            //harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"), prefix: null, postfix: null,
-            //              transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"),
+                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
-            if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+            //if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
+            //{
+            //    try
+            //    {
+            //        ((Action)(() =>
+            //        {
+            //            float func(Faction faction, Vector2 pos, float width)
+            //            {
+            //                if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
+            //                {
+            //                    Rect canvas = new Rect(pos.x, pos.y, width, 125f);
+            //                    MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
+            //                    return 125f;
+            //                }
+            //                return 0;
+            //            }
+            //            Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
+            //        }))();
+            //    }
+            //    catch (TypeLoadException) { }
+            //}
+        }
+
+        private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
+
+            foreach (CodeInstruction codeInstruction in instructions)
             {
-                try
+                if (codeInstruction.opcode == OpCodes.Ldc_R4)
                 {
-                    ((Action)(() =>
-                    {
-                        float func(Faction faction, Vector2 pos, float width)
-                        {
-                            if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
-                            {
-                                Rect canvas = new Rect(pos.x, pos.y, width, 125f);
-                                MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
-                                return 125f;
-                            }
-                            return 0;
-                        }
-                        Fluffy_Relations.MainTabWindow_Relations.ExtraFactionDetailDrawers.Add(func);
-                    }))();
+                    codeInstruction.opcode = OpCodes.Call;
+                    codeInstruction.operand = helperMethod;
                 }
-                catch (TypeLoadException) { }
+                yield return codeInstruction;
             }
         }
 
-        //private static void WonderfullyFluffyRelations(ref float __result, Faction faction, Vector2 pos, float width)
-        //{
-        //    if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StuffIsGoingDown)
-        //    {
-        //        Rect canvas = new Rect(pos.x, pos.y + 5, width, 125f);
-        //        MainTabWindow_FactionWar.DrawFactionWarBar(canvas);
-        //        __result += 125f;
-        //    }
-        //}
-
-        //private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
-        //{
-        //    MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
-
-        //    foreach (CodeInstruction codeInstruction in instructions)
-        //    {
-        //        if (codeInstruction.opcode == OpCodes.Ldc_R4)
-        //        {
-        //            codeInstruction.opcode = OpCodes.Call;
-        //            codeInstruction.operand = helperMethod;
-        //        }
-        //        yield return codeInstruction;
-        //    }
-        //}
-
-        //private static float SootheTranspilerHelperMethod() => Find.World?.GetComponent<WorldComponent_MFI_AnnualExpo>()?.BuffedEmanator ?? false ? 20f : 15f;
+        private static float SootheTranspilerHelperMethod() => Find.World?.GetComponent<WorldComponent_MFI_AnnualExpo>()?.BuffedEmanator ?? false ? 20f : 15f;
 
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
@@ -128,15 +119,21 @@ namespace MoreFactionInteraction
 
                 if (map != null && (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_")))
                 {
-                    float silverCount = __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount;
+                    //nullable float because not all traders bring silver
+                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    if (!silverCount.HasValue)
+                        return;
                     silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(x: map.PlayerWealthForStoryteller);
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount = (int)silverCount;
                     return;
                 }
                 if (map != null && parms.traderFaction != null)
                 {
+                    //nullable float because not all traders bring silver
+                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    if (!silverCount.HasValue)
+                        return;
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.traderFaction.GoodwillWith(other: Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
-                    return;
                 }
             }
         }

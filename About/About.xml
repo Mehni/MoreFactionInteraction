@@ -3,7 +3,7 @@
   <name>More Faction Interaction</name>
   <author>Mehni</author>
   <url></url>
-  <targetVersion>0.19.0</targetVersion>
+  <targetVersion>1.0.0</targetVersion>
   <description><![CDATA[<b>More Faction Interaction</b>
 
 Adds more interaction with and between factions, bringing the world to life.
@@ -25,6 +25,7 @@ Adds more interaction with and between factions, bringing the world to life.
 <b>A living world</b>
 - Pirates spread out and grow outposts
 - Pirates can demand tribute if they're close by - destroy their outposts!
+- Show off your skills at the yearly exposition. Maybe you'll do well and be invited to host next year?
 
 <b>Warring factions</b>
 - Unrest is brewing between two factions! Will you pick a side, stay neutral or profiteer? 
@@ -36,6 +37,7 @@ Adds more interaction with and between factions, bringing the world to life.
 - Hunter's Lodge
 - Pirate extortion
 - Mystical Shaman
+- Annual Expo
 - Faction WAR
 ]]>
 </description>

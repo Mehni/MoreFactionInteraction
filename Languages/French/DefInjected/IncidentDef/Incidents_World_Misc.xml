@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_DiplomaticMarriage.label>mariage diplomatique</MFI_DiplomaticMarriage.label>
+  <MFI_DiplomaticMarriage.letterLabel>Mariage diplomatique</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>chaman mystique</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.letterLabel>Chaman mystique</MFI_MysticalShaman.letterLabel>
+
+  <MFI_HuntersLodge.label>pavillon de chasse</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterText>Vous êtes invité à {0}'s {1} retraite estivale. {2}. Il y a un avant-poste sur le site avec toutes les installations nécessaires pour préparer des repas, et ils vous ont offert leur hospitalité. Cette offre expire dans {3} jours.</MFI_HuntersLodge.letterText>
+  <MFI_HuntersLodge.letterLabel>Pavillon de chasse</MFI_HuntersLodge.letterLabel>
+
+  <MFI_SettlementBaseAttack.label>Base de Faction Attaquée</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>
