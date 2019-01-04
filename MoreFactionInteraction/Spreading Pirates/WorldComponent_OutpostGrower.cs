@@ -75,12 +75,12 @@ namespace MoreFactionInteraction
 
                 if (Find.TickManager.TicksGame > letter.disappearAtTick)
                 {
+                    choiceLetters.Remove(letter);
                     if (letter is ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand && !choiceLetter_ExtortionDemand.completed)
                     {
                         Find.LetterStack.ReceiveLetter(letter);
                         letter.OpenLetter();
                     }
-                    choiceLetters.Remove(letter);
                     break;
                 }
             }

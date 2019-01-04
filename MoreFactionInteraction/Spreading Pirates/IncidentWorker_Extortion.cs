@@ -62,14 +62,16 @@ namespace MoreFactionInteraction
             {
                 int extorsionDemand = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points) * NearbyHostileEncampments(forTile: map.Tile).Count();
 
+                Pawn representative = this.faction.leader ?? ((worldObject is SettlementBase baese) ? baese.previouslyGeneratedInhabitants.FirstOrDefault() : null);
+
                 ChoiceLetter_ExtortionDemand choiceLetterExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(
-                    this.faction.leader.LabelShort,
+                    representative?.LabelShort ?? "MFI_Representative".Translate(),
                     this.faction.def.leaderTitle,
                     this.faction.Name,
                     this.worldObject.def.label,
                     this.worldObject.Label,
                     extorsionDemand
-                ).AdjustedFor(p: this.faction.leader), def: this.def.letterDef);
+                ).AdjustedFor(p: this.faction.leader ?? Find.WorldPawns.AllPawnsAlive.Where(x => x.Faction == this.faction).RandomElement()), def: this.def.letterDef);
 
                 choiceLetterExtortionDemand.title = "MFI_ExtortionDemandTitle".Translate(map.info.parent.Label).CapitalizeFirst();
 

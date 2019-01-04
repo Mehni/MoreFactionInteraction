@@ -14,8 +14,8 @@ namespace MoreFactionInteraction
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
-            return base.CanFireNowSub(parms: parms)  && TryGetRandomAvailableTargetMap(map: out Map map) 
-                                                     && RandomNearbyTradeableSettlement(originTile: map.Tile) != null 
+            return base.CanFireNowSub(parms: parms) && TryGetRandomAvailableTargetMap(map: out Map map)
+                                                     && RandomNearbyTradeableSettlement(originTile: map.Tile) != null
                                                      && CommsConsoleUtility.PlayerHasPoweredCommsConsole(map);
         }
 
@@ -76,7 +76,7 @@ namespace MoreFactionInteraction
             switch (Rand.RangeInclusive(min: 0, max: 4))
             {
                 case 0:
-                    return "MFI_ReverseTradeRequest_Pyro";                
+                    return "MFI_ReverseTradeRequest_Pyro";
                 case 1:
                     return "MFI_ReverseTradeRequest_Mechs";
                 case 2:
@@ -92,15 +92,15 @@ namespace MoreFactionInteraction
         }
 
         public static SettlementBase RandomNearbyTradeableSettlement(int originTile)
-		{
-			return (from settlement in Find.WorldObjects.SettlementBases
-			where settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null 
-                    && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
-                    && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
-                    && Find.WorldReachability.CanReach(originTile, settlement.Tile)
-                    && settlement.Faction.leader != null
-			select settlement).RandomElementWithFallback(null);
-		}
+        {
+            return (from settlement in Find.WorldObjects.SettlementBases
+                    where settlement.Visitable && settlement.Faction.leader != null
+                            && settlement.GetComponent<TradeRequestComp>() != null
+                            && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                            && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
+                            && Find.WorldReachability.CanReach(originTile, settlement.Tile)
+                    select settlement).RandomElementWithFallback(null);
+        }
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
         {

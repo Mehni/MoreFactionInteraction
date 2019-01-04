@@ -49,7 +49,7 @@ namespace MoreFactionInteraction
             Find.WorldObjects.Add(o: site);
             this.SendStandardLetter(lookTargets: site, relatedFaction: this.faction, textArgs: new string[]
             {
-                (this.faction.leader?.LabelShort ?? "A representative of the "), this.faction.def.leaderTitle, this.faction.Name,
+                (this.faction.leader?.LabelShort ?? "MFI_Representative".Translate()), this.faction.def.leaderTitle, this.faction.Name,
             });
             return true;
         }
