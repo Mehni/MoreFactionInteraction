@@ -20,6 +20,7 @@ namespace MoreFactionInteraction
         public static WorldObjectDef MFI_FactionWarPeaceTalks;
         public static WorldObjectDef MFI_MysticalShaman;
         public static WorldObjectDef MFI_AnnualExpoObject;
+        public static WorldObjectDef MFI_RoadUnderConstruction;
 
         public static EventDef MFI_GameOfUrComp;
         public static EventDef MFI_ShootingComp;

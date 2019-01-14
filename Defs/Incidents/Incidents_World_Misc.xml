@@ -2,6 +2,19 @@
 <Defs>
 
 	<IncidentDef>
+		<defName>MFI_RoadWorks</defName>
+		<label>road works</label>
+		<category>Misc</category>
+		<targetTags>
+			<li>World</li>
+		</targetTags>
+		<workerClass>MoreFactionInteraction.IncidentWorker_RoadWorks</workerClass>
+		<baseChance>0.8</baseChance>
+		<earliestDay>20</earliestDay>
+		<minRefireDays>5</minRefireDays>
+	</IncidentDef>
+
+	<IncidentDef>
 		<defName>MFI_DiplomaticMarriage</defName>
 		<label>diplomatic marriage</label>
 		<category>Misc</category>
