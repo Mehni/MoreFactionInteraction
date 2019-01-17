@@ -8,7 +8,7 @@ using RimWorld.Planet;
 
 namespace MoreFactionInteraction
 {
-    class WorldObject_RoadConstruction : WorldObject
+    public class WorldObject_RoadConstruction : WorldObject
     {
         //Path ?
         //Tick until done
@@ -17,7 +17,7 @@ namespace MoreFactionInteraction
         public RoadDef road;
         public int nextTile;
 
-        public override string GetInspectString() => $"Estimated time of completion: {(projectedTimeOfCompletion - Find.TickManager.TicksGame).ToStringTicksToPeriodVague()}";
+        public override string GetInspectString() => $"Estimated time of completion: {(projectedTimeOfCompletion - Find.TickManager.TicksGame).ToStringTicksToPeriodVague(false)}";
 
         public override void Tick()
         {
@@ -26,7 +26,9 @@ namespace MoreFactionInteraction
                 Messages.Message("MFI_RoadSectionCompleted", this, MessageTypeDefOf.TaskCompletion);
                 Find.WorldGrid.OverlayRoad(this.Tile, this.nextTile, this.road);
                 Find.WorldObjects.Remove(this);
-                Find.World.renderer.RegenerateAllLayersNow();
+                Find.World.renderer.SetDirty<WorldLayer_Roads>();
+                Find.World.renderer.SetDirty<WorldLayer_Paths>();
+                Find.WorldPathGrid.RecalculatePerceivedMovementDifficultyAt(this.Tile);
             }
         }
 
