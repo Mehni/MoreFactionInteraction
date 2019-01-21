@@ -4,6 +4,7 @@
     <!-- Ransom demand -->
     <MFI_ExtortionDemandTitle>extortion demand at {0}</MFI_ExtortionDemandTitle>
     <MFI_ExtortionDemand>{0}, {1} of {2}, contacts you on the Comms Console. Based on your proximity to their {3} {4}, [PAWN_pronoun] feels you are encroaching on their terrain.\n\n[PAWN_pronoun] says [PAWN_pronoun] is willing to overlook this transgression for a modest fee of {5} silver. [PAWN_pronoun] adds that failure to pay will be met with aggression, but [PAWN_pronoun] is gracefully willing to give you a day to pay.</MFI_ExtortionDemand>
+    <MFI_Representative>a representative</MFI_Representative>
 
     <!-- Reverse Trade Request -->
     <MFI_ReverseTradeRequest_Pyro>{0}, {1} of {2}, has sent us a message. Their nearby settlement {3} had an incident with a pyromaniac and are now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.\n\n{0} assures us the offending pyromaniac will stay home.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Pyro>

@@ -19,6 +19,30 @@ namespace MoreFactionInteraction
             base.WorldComponentUpdate();
             if (Find.TickManager.TicksGame % 350 == 0)
             {
+                TickLetters();
+
+                IEnumerable<WorldObject> abandoned = from wObject in Find.WorldObjects.AllWorldObjects
+                                                     where wObject.def == WorldObjectDefOf.AbandonedSettlement ||
+                                                           wObject.def == WorldObjectDefOf.DestroyedSettlement
+                                                     select wObject;
+
+                foreach (WorldObject wObject in abandoned)
+                {
+                    if (Find.TickManager.TicksGame > wObject.creationGameTicks + GenDate.TicksPerYear)
+                    {
+                        if (Rand.Chance(0.02f))
+                        {
+                            Settlement settlement = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
+                            settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight != 0f).RandomElement());
+                            settlement.Tile = wObject.Tile;
+                            settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
+                            Find.WorldObjects.Remove(wObject);
+                            Find.WorldObjects.Add(settlement);
+                            Find.LetterStack.ReceiveLetter("MFI_LetterLabelSquatters".Translate(), "MFI_LetterSquatters".Translate(settlement.Faction, settlement.Name), LetterDefOf.NeutralEvent, settlement);
+                        }
+                    }
+                }
+
                 //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
                 //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
 
@@ -31,22 +55,14 @@ namespace MoreFactionInteraction
                                               && !site.GetComponent<TimeoutComp>().Active
                                           select site;
 
-                Site toUpgrade = null;
-
                 foreach (Site current in sites)
                 {
                     if (current.creationGameTicks + MoreFactionInteraction_Settings.ticksToUpgrade <= Find.TickManager.TicksGame)
                     {
-                        toUpgrade = current;
+                        UpgradeSiteToSettlement(current);
                         break;
                     }
                 }
-
-                if (toUpgrade != null)
-                {
-                    UpgradeSiteToSettlement(toUpgrade);
-                }
-                TickLetters();
             }
         }
 
@@ -58,9 +74,12 @@ namespace MoreFactionInteraction
             factionBase.Name = SettlementNameGenerator.GenerateSettlementName(factionBase: factionBase);
             Find.WorldObjects.Remove(o: toUpgrade);
             Find.WorldObjects.Add(o: factionBase);
-            Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelBanditOutpostUpgraded".Translate(), text: "MFI_LetterBanditOutpostUpgraded".Translate(
-                    factionBase.Faction.Name
-            ), textLetterDef: LetterDefOf.NeutralEvent, lookTargets: factionBase, relatedFaction: toUpgrade.Faction);
+            Find.LetterStack.ReceiveLetter(
+                label: "MFI_LetterLabelBanditOutpostUpgraded".Translate(),
+                text: "MFI_LetterBanditOutpostUpgraded".Translate(factionBase.Faction.Name),
+                textLetterDef: LetterDefOf.NeutralEvent,
+                lookTargets: factionBase,
+                relatedFaction: toUpgrade.Faction);
         }
 
         private void TickLetters()
@@ -75,12 +94,12 @@ namespace MoreFactionInteraction
 
                 if (Find.TickManager.TicksGame > letter.disappearAtTick)
                 {
-                    choiceLetters.Remove(letter);
                     if (letter is ChoiceLetter_ExtortionDemand choiceLetter_ExtortionDemand && !choiceLetter_ExtortionDemand.completed)
                     {
                         Find.LetterStack.ReceiveLetter(letter);
                         letter.OpenLetter();
                     }
+                    choiceLetters.Remove(letter);
                     break;
                 }
             }
@@ -95,7 +114,7 @@ namespace MoreFactionInteraction
         {
             //this is where I store letters, because RimWorld just goes and deletes them.
             base.ExposeData();
-            Scribe_Collections.Look<ChoiceLetter>(ref choiceLetters, "MFI_ChoiceLetters", LookMode.Deep);
+            Scribe_Collections.Look<ChoiceLetter>(ref choiceLetters, "MFI_ChoiceLetters", LookMode.Reference);
         }
     }
 }

@@ -93,4 +93,7 @@
     <MFI_AnnualExpoMessageNoRepresentative>No conscious, capable representative.</MFI_AnnualExpoMessageNoRepresentative>
 <!-- Annual Expo end -->
 
+    <MFI_LetterLabelSquatters>Squatters</MFI_LetterLabelSquatters>
+    <MFI_LetterSquatters>A group of squatters from {0} made camp in a nearby empty settlement and decided to take up permanent residence in the ruins there. They've called their new home {1}.</MFI_LetterSquatters>
+
 </LanguageData>
