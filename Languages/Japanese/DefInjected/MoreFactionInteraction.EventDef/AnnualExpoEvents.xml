@@ -25,7 +25,7 @@
   <MFI_CulturalSwap.outcomeFirstPlace>夕日の照らす最後の光がゆっくりとぼやけていき、[PAWN_nameDef]は簡単に花崗岩のスツールに座って、[PAWN_objective]の生い立ちについて{0}のように語りました。このわかりやすい物語、もっと重要なのは、作りあげられた[PAWN_objective]取り巻く雰囲気は、その親密さや、独創性、そして勇気のために審判員によって賞賛されました。参加した報酬は以下の通りです：\n\n{1}</MFI_CulturalSwap.outcomeFirstPlace>
   <MFI_CulturalSwap.outcomeFirstLoser>あなたのキャラバン隊は、もっとやるべきだった良い準備などを何も行っていなかったので、型通りの歌とダンスを即興で行いました。演奏はうまくできませんでした。参加していた全ての派閥が即興の見世物に感激するわけではありませんでしたが、それにも関わらずあなたのキャラバン隊はすばらしい努力を見せました。参加した報酬は以下の通りです：\n\n{0}</MFI_CulturalSwap.outcomeFirstLoser>
   <!-- {0 = factionName} {1 = TerrainFeatureLabel, e.g. White Rabbit Mountain Range} -->
-  <MFI_CulturalSwap.outcomeFirstOther>派閥{0}は、彼らの祖先が{1}を発見した時を劇的に再現した絢爛豪華な展示によって観客を感動の涙へと誘いました。それは言語の壁を越えて、老若男女の心に響いた感動的な演劇作品でした。\n\n彼らの後にあなたのコロニーによる演劇が行われました。参加した報酬は以下の通りです：\n\n{2}</MFI_CulturalSwap.outcomeFirstOther>
+  <MFI_CulturalSwap.outcomeFirstOther>ホストになった派閥は、彼らの祖先がホワイトラビット連峰を発見した際を劇的に再現した絢爛豪華な演劇によって観客を感動の涙へと誘いました。それは言語の壁を越えて、老若男女の心に響いた感動的な演劇作品でした。\n\n彼らの後にあなたのコロニーによる演劇が行われました。\n\nあなたが参加した報酬は以下の通りです：\n\n{0}</MFI_CulturalSwap.outcomeFirstOther>
 
   <MFI_ScienceFaire.label>科学博覧会</MFI_ScienceFaire.label>
   <MFI_ScienceFaire.theme>発見した研究成果の交換</MFI_ScienceFaire.theme>
