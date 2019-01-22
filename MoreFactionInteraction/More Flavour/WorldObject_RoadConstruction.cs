@@ -17,14 +17,14 @@ namespace MoreFactionInteraction
         public RoadDef road;
         public int nextTile;
 
-        public override string GetInspectString() => $"Estimated time of completion: {(projectedTimeOfCompletion - Find.TickManager.TicksGame).ToStringTicksToPeriodVague(false)}";
+        public override string GetInspectString() => "MFI_EstTimeOfCompletion".Translate() + $": {(projectedTimeOfCompletion - Find.TickManager.TicksGame).ToStringTicksToPeriodVague(false)}";
 
         public override void Tick()
         {
             if (Find.TickManager.TicksGame > projectedTimeOfCompletion)
             {
                 Messages.Message("MFI_RoadSectionCompleted", this, MessageTypeDefOf.TaskCompletion);
-                Find.WorldGrid.OverlayRoad(this.Tile, this.nextTile, this.road);
+                Find.WorldGrid.OverlayRoad(this.Tile, this.nextTile, this.road); //OverlayRoad makes sure roads don't degrade
                 Find.WorldObjects.Remove(this);
                 Find.World.renderer.SetDirty<WorldLayer_Roads>();
                 Find.World.renderer.SetDirty<WorldLayer_Paths>();

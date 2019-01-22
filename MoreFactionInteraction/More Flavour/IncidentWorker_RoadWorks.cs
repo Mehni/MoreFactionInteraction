@@ -39,7 +39,7 @@ namespace MoreFactionInteraction
             RoadDef roadToBuild = DefDatabase<RoadDef>.AllDefsListForReading.Where(x => x.priority <= maxPriority).RandomElement();
 
             WorldPath path = WorldPath.NotFound;
-            StringBuilder stringBuilder = new StringBuilder();
+            //StringBuilder stringBuilder = new StringBuilder();
 
             float cost2 = 12000;
             int timeToBuild = 0;
@@ -55,10 +55,10 @@ namespace MoreFactionInteraction
 
                     if (roadCount / path.NodesReversed.Count >= maxRoadCoverage)
                     {
-                        Log.Message($"too many roads leading from {(Find.WorldObjects.AnyWorldObjectAt(destination) ? Find.WorldObjects.ObjectsAt(destination).FirstOrDefault()?.Label : destination.ToString())} to {settlementBase}");
+                        Log.Message($"MFI :: too many roads leading from {(Find.WorldObjects.AnyWorldObjectAt(destination) ? Find.WorldObjects.ObjectsAt(destination).FirstOrDefault()?.Label : destination.ToString())} to {settlementBase} for road project");
                         return false;
                     }
-                    stringBuilder.Append($"Path found from {settlementBase.Label} to {map.info.parent.Label}. Length = {path.NodesReversed.Count} ");
+                    //stringBuilder.Append($"Path found from {settlementBase.Label} to {map.info.parent.Label}. Length = {path.NodesReversed.Count} ");
                     //not 0 and - 1
                     for (int i = 1; i < path.NodesReversed.Count - 1; i++)
                     {
@@ -68,6 +68,12 @@ namespace MoreFactionInteraction
                                                * WorldPathGrid.CalculatedMovementDifficultyAt(path.NodesReversed[i], true)
                                                * Find.WorldGrid.GetRoadMovementDifficultyMultiplier(i, i + 1));
 
+                        if (!Find.WorldGrid[path.NodesReversed[i]].Roads.NullOrEmpty() 
+                            && Find.WorldGrid[path.NodesReversed[i]].Roads.Any(roadLink => roadLink.road.priority >= roadToBuild.priority))
+                        {
+                            timeToBuild = timeToBuild / 2;
+                        }
+
                         WorldObject_RoadConstruction roadConstruction = (WorldObject_RoadConstruction)WorldObjectMaker.MakeWorldObject(MFI_DefOf.MFI_RoadUnderConstruction);
                         roadConstruction.Tile = path.NodesReversed[i];
                         roadConstruction.nextTile = path.NodesReversed[i + 1];
@@ -75,7 +81,7 @@ namespace MoreFactionInteraction
                         roadConstruction.projectedTimeOfCompletion = Find.TickManager.TicksGame + timeToBuild;
                         list.Add(roadConstruction);
                     }
-                    DiaNode node = new DiaNode($"{settlementBase} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
+                    DiaNode node = new DiaNode($"MFI_RoadWorksDialogue".Translate(settlementBase, cost2 / 10, path.NodesReversed.Count)); // {settlementBase} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
                     DiaOption accept = new DiaOption("OK".Translate())
                     {
                         resolveTree = true,
@@ -110,7 +116,7 @@ namespace MoreFactionInteraction
                     node.options.Add(accept);
                     node.options.Add(reject);
 
-                    Log.Message(stringBuilder.ToString());
+                    //Log.Message(stringBuilder.ToString());
                     Find.WindowStack.Add(new Dialog_NodeTree(node));
                     Find.Archive.Add(new ArchivedDialog(node.text, letterTitle, settlementBase.Faction));
                 }
