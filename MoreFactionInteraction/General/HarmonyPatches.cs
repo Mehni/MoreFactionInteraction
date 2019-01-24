@@ -13,6 +13,7 @@ using System.Reflection.Emit;
 namespace MoreFactionInteraction
 {
     using More_Flavour;
+    using World_Incidents;
 
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
@@ -53,6 +54,8 @@ namespace MoreFactionInteraction
             harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"),
                 transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
+            harmony.Patch(original: AccessTools.Method(type: typeof(Faction), name: nameof(Faction.Notify_RelationKindChanged)), postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(Notify_RelationKindChanged)));
+
             if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
             {
                 try
@@ -73,6 +76,21 @@ namespace MoreFactionInteraction
                     }))();
                 }
                 catch (TypeLoadException) { }
+            }
+        }
+
+        private static void Notify_RelationKindChanged(Faction __instance, Faction other)
+        {
+            if (other == Faction.OfPlayer && __instance.HostileTo(other))
+            {
+                foreach (WorldObject item in Find.WorldObjects.AllWorldObjects.Where(x => x is WorldObject_RoadConstruction))
+                {
+                    Find.WorldObjects.Remove(item);
+                }
+                foreach (Settlement stlmnt in Find.WorldObjects.Settlements)
+                {
+                    stlmnt.GetComponent<WorldObjectComp_SettlementBumperCropComp>()?.Disable();
+                }
             }
         }
 
