@@ -9,9 +9,9 @@
 			<li>World</li>
 		</targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_RoadWorks</workerClass>
-		<baseChance>0.8</baseChance>
-		<earliestDay>20</earliestDay>
-		<minRefireDays>5</minRefireDays>
+		<baseChance>0.2</baseChance>
+		<earliestDay>60</earliestDay>
+		<minRefireDays>30</minRefireDays>
 	</IncidentDef>
 
 	<IncidentDef>

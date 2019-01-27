@@ -83,11 +83,11 @@ namespace MoreFactionInteraction
         {
             if (other == Faction.OfPlayer && __instance.HostileTo(other))
             {
-                foreach (WorldObject item in Find.WorldObjects.AllWorldObjects.Where(x => x is WorldObject_RoadConstruction))
+                foreach (WorldObject item in Find.WorldObjects.AllWorldObjects.Where(x => x is WorldObject_RoadConstruction && x.Faction == __instance))
                 {
                     Find.WorldObjects.Remove(item);
                 }
-                foreach (Settlement stlmnt in Find.WorldObjects.Settlements)
+                foreach (Settlement stlmnt in Find.WorldObjects.Settlements.Where(x => x.Faction == __instance))
                 {
                     stlmnt.GetComponent<WorldObjectComp_SettlementBumperCropComp>()?.Disable();
                 }

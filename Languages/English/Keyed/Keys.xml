@@ -94,6 +94,7 @@
 <!-- Annual Expo end -->
 
 <MFI_EstTimeOfCompletion>Estimated time of completion</MFI_EstTimeOfCompletion>
-<MFI_RoadSectionCompleted>A new section of road has been completed</MFI_RoadSectionCompleted>
+<MFI_RoadWorks>Road works</MFI_RoadWorks>
+<MFI_RoadSectionCompleted>A new section of road has been completed.</MFI_RoadSectionCompleted>
 <MFI_RoadWorksDialogue>{0} proposes an idea that they believe will increase trade and economic prosperity in the region. They want to build a road of {1} tiles long, starting at their settlement. To offset the cost of materials and labour they ask all settlements in their general vicinity for a single contribution of {2} silver.\n\nIf you do not give them the requested amount, they will invest their efforts elsewhere.</MFI_RoadWorksDialogue>
 </LanguageData>

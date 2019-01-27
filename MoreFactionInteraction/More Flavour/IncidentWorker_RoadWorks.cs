@@ -41,9 +41,9 @@ namespace MoreFactionInteraction
             WorldPath path = WorldPath.NotFound;
             //StringBuilder stringBuilder = new StringBuilder();
 
-            float cost2 = 12000;
+            int cost2 = 12000;
             int timeToBuild = 0;
-            string letterTitle = "";
+            string letterTitle = "MFI_RoadWorks".Translate();
             List<WorldObject_RoadConstruction> list = new List<WorldObject_RoadConstruction>();
             using (path = Find.WorldPathFinder.FindPath(destination, settlementBase.Tile, null))
             {
@@ -78,16 +78,18 @@ namespace MoreFactionInteraction
                         roadConstruction.Tile = path.NodesReversed[i];
                         roadConstruction.nextTile = path.NodesReversed[i + 1];
                         roadConstruction.road = roadToBuild;
+                        roadConstruction.SetFaction(settlementBase.Faction);
                         roadConstruction.projectedTimeOfCompletion = Find.TickManager.TicksGame + timeToBuild;
                         list.Add(roadConstruction);
                     }
-                    DiaNode node = new DiaNode($"MFI_RoadWorksDialogue".Translate(settlementBase, cost2 / 10, path.NodesReversed.Count)); // {settlementBase} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
+                    cost2 = cost2 / 10;
+                    DiaNode node = new DiaNode("MFI_RoadWorksDialogue".Translate(settlementBase, path.NodesReversed.Count, cost2)); // {settlementBase} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
                     DiaOption accept = new DiaOption("OK".Translate())
                     {
                         resolveTree = true,
                         action = () =>
                         {
-                            TradeUtility.LaunchSilver(TradeUtility.PlayerHomeMapWithMostLaunchableSilver(), (int)cost2);
+                            TradeUtility.LaunchSilver(TradeUtility.PlayerHomeMapWithMostLaunchableSilver(), cost2);
                             foreach (WorldObject_RoadConstruction worldObjectRoadConstruction in list)
                             {
                                 Find.WorldObjects.Add(worldObjectRoadConstruction);
@@ -96,9 +98,9 @@ namespace MoreFactionInteraction
                         }
                     };
 
-                    if (!TradeUtility.ColonyHasEnoughSilver(TradeUtility.PlayerHomeMapWithMostLaunchableSilver(), (int)cost2))
+                    if (!TradeUtility.ColonyHasEnoughSilver(TradeUtility.PlayerHomeMapWithMostLaunchableSilver(), cost2))
                     {
-                        accept.Disable("NeedSilverLaunchable".Translate((int)cost2));
+                        accept.Disable("NeedSilverLaunchable".Translate(cost2));
                     }
                     DiaOption reject = new DiaOption("RejectLetter".Translate())
                     {
@@ -117,7 +119,7 @@ namespace MoreFactionInteraction
                     node.options.Add(reject);
 
                     //Log.Message(stringBuilder.ToString());
-                    Find.WindowStack.Add(new Dialog_NodeTree(node));
+                    Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(node, settlementBase.Faction));
                     Find.Archive.Add(new ArchivedDialog(node.text, letterTitle, settlementBase.Faction));
                 }
             }
