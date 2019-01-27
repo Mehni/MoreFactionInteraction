@@ -31,26 +31,82 @@ namespace MoreFactionInteraction
                 string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
                 int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                ChoiceLetter_ReverseTradeRequest choiceLetterReverseTradeRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(
-                    settlement.Faction.leader.LabelShort,
-                    settlement.Faction.def.leaderTitle,
-                    settlement.Faction.Name,
-                    settlement.Label,
-                    categorylabel,
-                    feeRequest
-                ).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
+                //ChoiceLetter_ReverseTradeRequest choiceLetterReverseTradeRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(
+                //    settlement.Faction.leader.LabelShort,
+                //    settlement.Faction.def.leaderTitle,
+                //    settlement.Faction.Name,
+                //    settlement.Label,
+                //    categorylabel,
+                //    feeRequest
+                //).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
 
-                choiceLetterReverseTradeRequest.title = "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst();
-                choiceLetterReverseTradeRequest.thingCategoryDef = thingCategoryDef;
-                choiceLetterReverseTradeRequest.map = map;
-                parms.target = map;
-                choiceLetterReverseTradeRequest.incidentParms = parms;
-                choiceLetterReverseTradeRequest.faction = settlement.Faction;
-                choiceLetterReverseTradeRequest.fee = feeRequest;
-                choiceLetterReverseTradeRequest.StartTimeout(duration: TimeoutTicks);
-                choiceLetterReverseTradeRequest.tile = settlement.Tile;
-                Find.LetterStack.ReceiveLetter(let: choiceLetterReverseTradeRequest);
-                Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterReverseTradeRequest);
+                //choiceLetterReverseTradeRequest.title = "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst();
+                //choiceLetterReverseTradeRequest.thingCategoryDef = thingCategoryDef;
+                //choiceLetterReverseTradeRequest.map = map;
+                //parms.target = map;
+                //choiceLetterReverseTradeRequest.incidentParms = parms;
+                //choiceLetterReverseTradeRequest.faction = settlement.Faction;
+                //choiceLetterReverseTradeRequest.fee = feeRequest;
+                //choiceLetterReverseTradeRequest.StartTimeout(duration: TimeoutTicks);
+                //choiceLetterReverseTradeRequest.tile = settlement.Tile;
+                //Find.LetterStack.ReceiveLetter(let: choiceLetterReverseTradeRequest);
+                //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterReverseTradeRequest);
+
+                DiaNode diaNode = new DiaNode(letterToSend.Translate(
+                                                                     settlement.Faction.leader.LabelShort,
+                                                                     settlement.Faction.def.leaderTitle,
+                                                                     settlement.Faction.Name,
+                                                                     settlement.Label,
+                                                                     categorylabel,
+                                                                     feeRequest
+                                                                    ).AdjustedFor(p: settlement.Faction.leader));
+
+                int traveltime = this.CalcuteTravelTimeForTrader(originTile: settlement.Tile, map);
+                DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
+                {
+                    action = () =>
+                    {
+                        //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
+                        //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
+                        parms.faction = settlement.Faction; ;
+                        TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed(defName: "MFI_EmptyTrader_" + thingCategoryDef);
+
+                        traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.max += feeRequest;
+                        traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.min += feeRequest;
+
+                        traderKind.label = thingCategoryDef.label + " " + "MFI_Trader".Translate();
+                        parms.traderKind = traderKind;
+                        parms.forced = true;
+
+                        Find.Storyteller.incidentQueue.Add(def: IncidentDefOf.TraderCaravanArrival, fireTick: Find.TickManager.TicksGame + traveltime, parms: parms);
+                        TradeUtility.LaunchSilver(map: map, fee: feeRequest);
+                    },
+                };
+                DiaNode acceptLink = new DiaNode(text: "MFI_TraderSent".Translate(
+                    settlement.Faction.leader?.LabelShort,
+                    traveltime.ToStringTicksToPeriodVague(vagueMin: false)
+                ).CapitalizeFirst());
+                acceptLink.options.Add(DiaOption.DefaultOK);
+                accept.link = acceptLink;
+
+                if (!TradeUtility.ColonyHasEnoughSilver(map: map, fee: feeRequest))
+                {
+                    accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(feeRequest.ToString()));
+                }
+
+                DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
+                {
+                    action = () =>
+                    {
+                    },
+                    resolveTree = true
+                };
+
+                diaNode.options = new List<DiaOption> {accept, reject};
+
+                Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, settlement.Faction, title: "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst()));
+                Find.Archive.Add(new ArchivedDialog(diaNode.text, "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst(), settlement.Faction));
+
                 return true;
             }
             return false;
@@ -116,6 +172,12 @@ namespace MoreFactionInteraction
             bool result = tmpAvailableMaps.TryRandomElement(result: out map);
             tmpAvailableMaps.Clear();
             return result;
+        }
+
+        private int CalcuteTravelTimeForTrader(int originTile, Map map)
+        {
+            int travelTime = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(@from: originTile, to: map.Tile, caravan: null);
+            return Math.Min(val1: travelTime, val2: GenDate.TicksPerDay * 4);
         }
     }
 }

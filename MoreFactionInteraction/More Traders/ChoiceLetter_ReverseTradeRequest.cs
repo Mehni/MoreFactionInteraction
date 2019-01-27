@@ -47,12 +47,12 @@ namespace MoreFactionInteraction
                             TradeUtility.LaunchSilver(map: this.map, fee: this.fee);
                         },
                     };
-                    DiaNode diaNode = new DiaNode(text: "MFI_TraderSent".Translate(
+                    DiaNode acceptLink = new DiaNode(text: "MFI_TraderSent".Translate(
                         this.faction.leader?.LabelShort,
                         traveltime.ToStringTicksToPeriodVague(vagueMin: false)
                     ).CapitalizeFirst());
-                    diaNode.options.Add(item: this.Option_Close);
-                    accept.link = diaNode;
+                    acceptLink.options.Add(item: this.Option_Close);
+                    accept.link = acceptLink;
 
                     if (!TradeUtility.ColonyHasEnoughSilver(map: this.map, fee: this.fee))
                     {
