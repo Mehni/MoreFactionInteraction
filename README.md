@@ -39,9 +39,9 @@ Adds more interaction with and between factions, bringing the world to life.
 - Pirate extortion
 - Mystical Shaman
 - Annual Expo
-- Faction WAR
 - Squatters
 - Roadworks
+- Faction WAR
 
 ## Credits
 
