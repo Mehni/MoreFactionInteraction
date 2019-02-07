@@ -23,6 +23,8 @@ Adds more interaction with and between factions, bringing the world to life.
 - Pirates spread out and grow outposts
 - Pirates can demand tribute if they're close by - destroy their outposts!
 - Show off your skills at the yearly exposition. Maybe you'll do well and be invited to host next year?
+- Roadworks. To strengthen ties and increase trade, your allies can build roads as a nice silver sink.
+- Squatters! Someone found a use for an old deserted settlement.
 
 ## Warring factions
 
@@ -38,6 +40,8 @@ Adds more interaction with and between factions, bringing the world to life.
 - Mystical Shaman
 - Annual Expo
 - Faction WAR
+- Squatters
+- Roadworks
 
 ## Credits
 
