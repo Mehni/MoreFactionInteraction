@@ -26,11 +26,6 @@ namespace MoreFactionInteraction.More_Flavour
             }
         }
 
-        public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
-        {
-            return base.GetCaravanGizmos(caravan: caravan);
-        }
-
         public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan)
         {
             foreach (FloatMenuOption o in base.GetFloatMenuOptions(caravan: caravan)) yield return o;
@@ -52,7 +47,7 @@ namespace MoreFactionInteraction.More_Flavour
                 Thing serum = ThingMaker.MakeThing(def: ThingDef.Named(defName: "MechSerumHealer")); //obj ref req, but me lazy.
                 serum.TryGetComp<CompUseEffect_FixWorstHealthCondition>().DoEffect(usedBy: pawn);
                 serum = null;
-                Find.WindowStack.Add(window: new Dialog_MessageBox(text: "MFI_MysticalShamanDoesHisMagic".Translate(pawn.LabelShort))); 
+                Find.WindowStack.Add(window: new Dialog_MessageBox(text: "MFI_MysticalShamanDoesHisMagic".Translate(pawn.LabelShort)));
             }
             Find.WorldObjects.Remove(o: this);
         }
@@ -67,8 +62,8 @@ namespace MoreFactionInteraction.More_Flavour
             tempPawns.Clear();
             //Muffalo 1 deserves a chance to get healed too.
             foreach (Pawn pawn in caravan.PawnsListForReading)
-                tempPawns.Add(key: pawn, 
-                              value: CalcHealthThreatenedScore(usedBy: pawn) / ( pawn.RaceProps.Humanlike ? 1 : 2 ));
+                tempPawns.Add(key: pawn,
+                              value: CalcHealthThreatenedScore(usedBy: pawn) / (pawn.RaceProps.Humanlike ? 1 : 4));
 
             tempPawns.RemoveAll(predicate: x => x.Value == 0);
             return tempPawns.FirstOrDefault(predicate: x => x.Value.Equals(obj: tempPawns.Values.Max())).Key;
@@ -146,15 +141,15 @@ namespace MoreFactionInteraction.More_Flavour
                 if (current.Visible && current.def.everCurableByItem)
                     if (!current.FullyImmune())
                     {
-                        bool flag  = current.CurStage           != null && current.CurStage.lifeThreatening;
-                        bool flag2 = current.def.lethalSeverity >= 0f   && current.Severity / current.def.lethalSeverity >= 0.8f;
+                        bool flag = current.CurStage != null && current.CurStage.lifeThreatening;
+                        bool flag2 = current.def.lethalSeverity >= 0f && current.Severity / current.def.lethalSeverity >= 0.8f;
                         if (flag || flag2)
                         {
                             float num2 = current.Part?.coverageAbsWithChildren ?? 999f;
                             if (hediff == null || num2 > num)
                             {
                                 hediff = current;
-                                num    = num2;
+                                num = num2;
                             }
                         }
                     }
@@ -174,7 +169,7 @@ namespace MoreFactionInteraction.More_Flavour
                     float bleedRate = current.BleedRate;
                     if (bleedRate > 0f && (bleedRate > num || hediff == null))
                     {
-                        num    = bleedRate;
+                        num = bleedRate;
                         hediff = current;
                     }
                 }
@@ -198,7 +193,7 @@ namespace MoreFactionInteraction.More_Flavour
                                 if (hediff == null || severity > num)
                                 {
                                     hediff = current;
-                                    num    = severity;
+                                    num = severity;
                                 }
                             }
             }
@@ -216,11 +211,11 @@ namespace MoreFactionInteraction.More_Flavour
                     if (!(current is Hediff_Injury) && !(current is Hediff_MissingPart) && !(current is Hediff_Addiction) && !(current is Hediff_AddedPart))
                         if (!onlyIfCanKill || CanEverKill(hediff: current))
                         {
-                            float num2 = (current.Part == null) ? 999f : current.Part.coverageAbsWithChildren;
+                            float num2 = current.Part?.coverageAbsWithChildren ?? 999f;
                             if (hediff == null || num2 > num)
                             {
                                 hediff = current;
-                                num    = num2;
+                                num = num2;
                             }
                         }
             }
@@ -256,9 +251,9 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Hediff_Injury hediffInjury = null;
             List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
-            for (int i = 0; i < hediffs.Count; i++)
+            foreach (Hediff currentHediff in hediffs)
             {
-                if (hediffs[index: i] is Hediff_Injury hediffInjury2 && hediffInjury2.Visible && hediffInjury2.IsPermanent() && hediffInjury2.def.everCurableByItem)
+                if (currentHediff is Hediff_Injury hediffInjury2 && hediffInjury2.Visible && hediffInjury2.IsPermanent() && hediffInjury2.def.everCurableByItem)
                     if (allowedBodyParts == null || allowedBodyParts.Contains(value: hediffInjury2.Part))
                         if (hediffInjury == null || hediffInjury2.Severity > hediffInjury.Severity)
                             hediffInjury = hediffInjury2;
@@ -283,9 +278,9 @@ namespace MoreFactionInteraction.More_Flavour
         {
             if (hediff.def.stages != null)
                 if (Enumerable.Any(source: hediff.def.stages, predicate: t => t.lifeThreatening))
-                
                     return true;
-            return (hediff.def.lethalSeverity >= 0f);
+
+            return hediff.def.lethalSeverity >= 0f;
         }
     }
 }

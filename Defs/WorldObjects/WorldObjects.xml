@@ -15,7 +15,7 @@
     </comps>
   </WorldObjectDef>
 
-    <WorldObjectDef>
+  <WorldObjectDef>
     <defName>MFI_AnnualExpoObject</defName>
     <label>annual expo</label>
     <description>A site designated for holding this year's Exposition.</description>
@@ -41,6 +41,14 @@
     <comps>
       <li Class="WorldObjectCompProperties_Timeout" />
     </comps>
+  </WorldObjectDef>
+
+  <WorldObjectDef>
+    <defName>MFI_RoadUnderConstruction</defName>
+    <label>under construction road</label>
+    <description>A construction site.</description>
+    <worldObjectClass>MoreFactionInteraction.WorldObject_RoadConstruction</worldObjectClass>
+    <texture>World/WorldObjects/RoutePlannerWaypoint</texture>
   </WorldObjectDef>
 
 </Defs>
