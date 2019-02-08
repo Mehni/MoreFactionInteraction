@@ -93,4 +93,12 @@
   <MFI_AnnualExpoMessageNoRepresentative>意識がある交渉可能な代表者が居ません。</MFI_AnnualExpoMessageNoRepresentative>
   <!-- Annual Expo end -->
 
+  <MFI_LetterLabelSquatters>無断居住者</MFI_LetterLabelSquatters>
+  <MFI_LetterSquatters>{0}から来た無断居住者の一団が近辺にあった無人の集落跡にキャンプを作り、そこの廃墟に永住することにしました。彼らは自分達の新しいコロニーを{1}と呼称しています。</MFI_LetterSquatters>
+
+  <MFI_EstTimeOfCompletion>工事完成予定</MFI_EstTimeOfCompletion>
+  <MFI_RoadWorks>道路工事</MFI_RoadWorks>
+  <MFI_RoadSectionCompleted>道路の新しい区間が完成しました。</MFI_RoadSectionCompleted>
+  <MFI_RoadWorksDialogue>{0}は、この地域の交易と経済的な繁栄を豊かにすると主張する、彼らの計画を提案してきました。彼らは自分達の拠点から工事を始めて、{1}タイル分の道路を延長する工事をしたいと考えています。建設費用と労働にかかる人件費を皆で分担するために、彼らは自分達の近隣にあるすべてのコロニーに対して、一律{2}シルバーの寄付を求めています。\n\nもしも、あなたが彼らから要求されたシルバーを支払わないなら、彼らはあなたのコロニー以外の場所に対して尽力し、投資を集めるでしょう。</MFI_RoadWorksDialogue>
+
 </LanguageData>
