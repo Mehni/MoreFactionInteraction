@@ -35,7 +35,7 @@ namespace MoreFactionInteraction
                         if (Rand.Chance(0.000175f)) //350 ticks / 0.000175 == 2,000,000 ticks =~ 33 days
                         {
                             Settlement settlement = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
-                            settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight != 0f).RandomElement());
+                            settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight > 0f).RandomElement());
                             settlement.Tile = wObject.Tile;
                             settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
                             Find.WorldObjects.Remove(wObject);
