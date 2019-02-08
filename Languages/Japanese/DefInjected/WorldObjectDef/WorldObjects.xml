@@ -10,4 +10,7 @@
   <MFI_MysticalShaman.label>呪術師のテント</MFI_MysticalShaman.label>
   <MFI_MysticalShaman.description>神秘的な呪術師が住むテントです。</MFI_MysticalShaman.description>
 
+  <MFI_RoadUnderConstruction.label>工事中の道路</MFI_RoadUnderConstruction.label>
+  <MFI_RoadUnderConstruction.description>工事現場です。</MFI_RoadUnderConstruction.description>
+
 </LanguageData>
