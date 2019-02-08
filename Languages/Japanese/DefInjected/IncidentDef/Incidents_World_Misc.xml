@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <MFI_RoadWorks.label>道路工事</MFI_RoadWorks.label>
+
   <MFI_DiplomaticMarriage.label>政略結婚</MFI_DiplomaticMarriage.label>
   <MFI_DiplomaticMarriage.letterLabel>政治的な結婚</MFI_DiplomaticMarriage.letterLabel>
 
@@ -12,6 +14,5 @@
   <MFI_HuntersLodge.letterLabel>狩猟への招待</MFI_HuntersLodge.letterLabel>
 
   <MFI_SettlementBaseAttack.label>派閥の拠点が攻撃を受けた</MFI_SettlementBaseAttack.label>
-
 
 </LanguageData>
