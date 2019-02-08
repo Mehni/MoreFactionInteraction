@@ -4,6 +4,7 @@
   <!-- Ransom demand -->
   <MFI_ExtortionDemandTitle>{0}から迷惑料の要求</MFI_ExtortionDemandTitle>
   <MFI_ExtortionDemand>{2}の{0}に所属する{1}が、あなたに連絡をしてきました。彼らの{3}の{4}の付近にあなたのコロニーが近すぎる事で、[PAWN_pronoun]は彼らの領土を侵略していると感じていると主張しています。\n\n[PAWN_pronoun]は、「寛大な[PAWN_pronoun]はこの罪をたった{5}シルバーを支払う事で許してやる」と言ってきました。さらに[PAWN_pronoun]は、もし「支払わなければお前たちのコロニーは襲われることになるだろう」と付け加えましたが、[PAWN_pronoun]はあなたに支払い期日を喜んで教えてくれました。</MFI_ExtortionDemand>
+  <MFI_Representative>代表者</MFI_Representative>
 
   <!-- Reverse Trade Request -->
   <MFI_ReverseTradeRequest_Pyro>{2}の{0}に所属する{1}は私たちにメッセージを送ってきました。付近にある彼らの入植地{3}で起きた放火魔事件によって{4}が絶望的に足りない状況だとのことです。彼らはこの分野のどのアイテムだろうと購入で余分に支払うつもりがあるが、買取りに来るキャラバン隊を派遣してもらう依頼するには{5}シルバーの費用が必要です。\n\n{0}は、問題となった放火魔は彼らの入植地に留まることを保証します。\n\n\n{4}を高額で買い取ってくれるトレーダーを派遣してもらうために派遣費用として{5}シルバーを支払いますか？</MFI_ReverseTradeRequest_Pyro>
