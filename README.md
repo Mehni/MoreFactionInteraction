@@ -1,4 +1,4 @@
-# More Faction Interation
+# More Faction Interaction
 
 Adds more interaction with and between factions, bringing the world to life.
 
