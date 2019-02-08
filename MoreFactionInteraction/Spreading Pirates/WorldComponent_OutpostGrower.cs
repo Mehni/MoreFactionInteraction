@@ -14,7 +14,7 @@ namespace MoreFactionInteraction
         {
         }
 
-        public override void WorldComponentUpdate()
+        public override void WorldComponentTick()
         {
             base.WorldComponentUpdate();
             if (Find.TickManager.TicksGame % 350 == 0)
@@ -28,9 +28,11 @@ namespace MoreFactionInteraction
 
                 foreach (WorldObject wObject in abandoned)
                 {
-                    if (Find.TickManager.TicksGame > wObject.creationGameTicks + GenDate.TicksPerYear)
+                    if (wObject.Tile - wObject.ID % 10 == 0)
+                        continue;
+                    if (Find.TickManager.TicksGame > wObject.creationGameTicks + GenDate.TicksPerYear * (1 + UnityEngine.Mathf.Clamp01(wObject.ID / 10)))
                     {
-                        if (Rand.Chance(0.02f))
+                        if (Rand.Chance(0.000175f)) //350 ticks / 0.000175 == 2,000,000 ticks =~ 33 days
                         {
                             Settlement settlement = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
                             settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight != 0f).RandomElement());
