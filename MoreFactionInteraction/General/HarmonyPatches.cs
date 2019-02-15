@@ -41,8 +41,8 @@ namespace MoreFactionInteraction
             #endregion
 
             #region WorldIncidents
-            harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
+            //harmony.Patch(original: AccessTools.Method(type: typeof(SettlementBase), name: nameof(SettlementBase.GetCaravanGizmos)),
+            //    postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(SettlementBase_CaravanGizmos_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
@@ -277,50 +277,50 @@ namespace MoreFactionInteraction
         #endregion
 
         #region WorldIncidents
-        private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, Caravan caravan, ref IEnumerable<Gizmo> __result)
-        {
-            if (__instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>()?.ActiveRequest ?? false)
-            {
-                Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
-                Caravan localCaravan = caravan;
+        //private static void SettlementBase_CaravanGizmos_Postfix(Settlement __instance, Caravan caravan, ref IEnumerable<Gizmo> __result)
+        //{
+        //    if (__instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>()?.ActiveRequest ?? false)
+        //    {
+        //        Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
+        //        Caravan localCaravan = caravan;
 
-                Command_Action commandAction = new Command_Action
-                {
-                    defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
-                    defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
-                    icon = setPlantToGrowTex,
-                    action = delegate
-                    {
-                        World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
-                        if (bumperCrop != null)
-                        {
-                            if (!bumperCrop.ActiveRequest)
-                            {
-                                Log.Error(text: "Attempted to fulfill an unavailable request");
-                                return;
-                            }
-                            if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
-                            {
-                                Messages.Message(text: "MFI_MessageBumperCropNoGrower".Translate(), lookTargets: localCaravan, def: MessageTypeDefOf.NegativeEvent);
-                                return;
-                            }
-                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(localCaravan.LabelCap),
-                            confirmedAct: delegate
-                            {
-                                bumperCrop.NotifyCaravanArrived(caravan: localCaravan);
-                            }));
-                        }
-                    }
-                };
+        //        Command_Action commandAction = new Command_Action
+        //        {
+        //            defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
+        //            defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
+        //            icon = setPlantToGrowTex,
+        //            action = delegate
+        //            {
+        //                World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCrop = __instance.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
+        //                if (bumperCrop != null)
+        //                {
+        //                    if (!bumperCrop.ActiveRequest)
+        //                    {
+        //                        Log.Error(text: "Attempted to fulfill an unavailable request");
+        //                        return;
+        //                    }
+        //                    if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
+        //                    {
+        //                        Messages.Message(text: "MFI_MessageBumperCropNoGrower".Translate(), lookTargets: localCaravan, def: MessageTypeDefOf.NegativeEvent);
+        //                        return;
+        //                    }
+        //                    Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(localCaravan.LabelCap),
+        //                    confirmedAct: delegate
+        //                    {
+        //                        bumperCrop.NotifyCaravanArrived(caravan: localCaravan);
+        //                    }));
+        //                }
+        //            }
+        //        };
 
 
-                if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
-                {
-                    commandAction.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());
-                }
-                __result = __result.Add(item: commandAction);
-            }
-        }
+        //        if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: localCaravan, stat: StatDefOf.PlantHarvestYield) == null)
+        //        {
+        //            commandAction.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());
+        //        }
+        //        __result = __result.Add(item: commandAction);
+        //    }
+        //}
 
         private static void WorldReachUtility_PostFix(ref bool __result, Caravan c)
         {

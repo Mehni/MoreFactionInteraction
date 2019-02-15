@@ -8,6 +8,7 @@ using Verse;
 
 namespace MoreFactionInteraction.World_Incidents
 {
+    [StaticConstructorOnStartup]
     public class WorldObjectComp_SettlementBumperCropComp : WorldObjectComp
     {
         //attentive readers may find similarities between this and the Peacetalks quest. 
@@ -19,12 +20,54 @@ namespace MoreFactionInteraction.World_Incidents
         private const float expGain = 6000f;
         private static readonly IntRange FactionRelationOffset = new IntRange(min: 3, max: 8);
 
+        Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
+
         public bool CaravanIsWorking => this.workStarted && Find.TickManager.TicksGame < this.workLeft;
 
         public bool ActiveRequest => this.expiration > Find.TickManager.TicksGame;
 
         public WorldObjectComp_SettlementBumperCropComp()
         {
+        }
+
+        public override IEnumerable<Gizmo> GetCaravanGizmos(Caravan caravan)
+        {
+            if (ActiveRequest)
+            {
+                Command_Action commandAction = new Command_Action
+                {
+                    defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
+                    defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
+                    icon = setPlantToGrowTex,
+                    action = delegate
+                    {
+                        {
+                            if (!ActiveRequest)
+                            {
+                                Log.Error(text: "Attempted to fulfill an unavailable request");
+                                return;
+                            }
+                            if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: caravan, stat: StatDefOf.PlantHarvestYield) == null)
+                            {
+                                Messages.Message(text: "MFI_MessageBumperCropNoGrower".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent);
+                                return;
+                            }
+                            Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(caravan.LabelCap),
+                            confirmedAct: delegate
+                            {
+                                NotifyCaravanArrived(caravan: caravan);
+                            }));
+                        }
+                    }
+                };
+
+
+                if (BestCaravanPawnUtility.FindPawnWithBestStat(caravan: caravan, stat: StatDefOf.PlantHarvestYield) == null)
+                {
+                    commandAction.Disable(reason: "MFI_MessageBumperCropNoGrower".Translate());
+                }
+                yield return commandAction;
+            }
         }
 
         public override string CompInspectStringExtra()
