@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using Harmony.ILCopying;
 using Harmony;
 using UnityEngine;
 using RimWorld.Planet;
 using MoreFactionInteraction.MoreFactionWar;
 using System.Reflection;
 using System.Reflection.Emit;
+using MoreFactionInteraction.More_Flavour;
+using MoreFactionInteraction.World_Incidents;
 
 namespace MoreFactionInteraction
 {
-    using More_Flavour;
-    using World_Incidents;
 
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
+        //resources must be loaded in cctor
+        public static Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
+
         static HarmonyPatches()
         {
             HarmonyInstance harmony = HarmonyInstance.Create(id: "mehni.rimworld.MFI.main");

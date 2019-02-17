@@ -113,6 +113,13 @@ namespace MoreFactionInteraction
             }
         }
 
+        public override void MapRemoved()
+        {
+            base.MapRemoved();
+            List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
+            queued.RemoveAll(qi => qi.FiringIncident.parms.target == this.map);
+        }
+
         private static IncidentDef IncomingIncidentDef(Faction faction)
         {
             switch (Rand.RangeInclusive(min: 0, max: 50))

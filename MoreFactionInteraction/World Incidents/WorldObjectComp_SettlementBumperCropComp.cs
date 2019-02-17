@@ -8,7 +8,6 @@ using Verse;
 
 namespace MoreFactionInteraction.World_Incidents
 {
-    [StaticConstructorOnStartup]
     public class WorldObjectComp_SettlementBumperCropComp : WorldObjectComp
     {
         //attentive readers may find similarities between this and the Peacetalks quest. 
@@ -20,7 +19,7 @@ namespace MoreFactionInteraction.World_Incidents
         private const float expGain = 6000f;
         private static readonly IntRange FactionRelationOffset = new IntRange(min: 3, max: 8);
 
-        Texture2D setPlantToGrowTex = ContentFinder<Texture2D>.Get(itemPath: "UI/Commands/SetPlantToGrow");
+        private readonly Texture2D setPlantToGrowTex = HarmonyPatches.setPlantToGrowTex;
 
         public bool CaravanIsWorking => this.workStarted && Find.TickManager.TicksGame < this.workLeft;
 
