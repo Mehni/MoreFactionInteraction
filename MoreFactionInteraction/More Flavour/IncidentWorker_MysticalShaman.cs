@@ -38,10 +38,10 @@ namespace MoreFactionInteraction
                                                                 && !f.HostileTo(other: Faction.OfPlayer)).TryRandomElement(result: out Faction faction))
                 return false;
 
-            if (!TryGetRandomAvailableTargetMap(map: out Map map))
+            if (faction == null)
                 return false;
 
-            if (faction == null)
+            if (!TryGetRandomAvailableTargetMap(map: out Map map))
                 return false;
 
             if (map == null)
@@ -51,16 +51,6 @@ namespace MoreFactionInteraction
                 return false;
 
             int fee = Rand.RangeInclusive(min: 400, max: 1000);
-
-            //ChoiceLetter_MysticalShaman choiceLetterMysticalShaman = (ChoiceLetter_MysticalShaman)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_MysticalShamanLetter".Translate(faction.Name, fee.ToString()), def: this.def.letterDef);
-            //choiceLetterMysticalShaman.title = "MFI_MysticalShamanTitle".Translate().CapitalizeFirst();
-            //choiceLetterMysticalShaman.faction = faction;
-            //choiceLetterMysticalShaman.tile = tile;
-            //choiceLetterMysticalShaman.map = map;
-            //choiceLetterMysticalShaman.fee = fee;
-            //choiceLetterMysticalShaman.StartTimeout(duration: TimeoutTicks);
-            //Find.LetterStack.ReceiveLetter(let: choiceLetterMysticalShaman);
-            //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterMysticalShaman);
 
             DiaNode diaNode = new DiaNode("MFI_MysticalShamanLetter".Translate(faction.Name, fee.ToString()));
             DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
@@ -114,9 +104,7 @@ namespace MoreFactionInteraction
                     tmpAvailableMaps.Add(item: potentialTargetMap);
                 }
             }
-            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
-            tmpAvailableMaps.Clear();
-            return result;
+            return tmpAvailableMaps.TryRandomElement(result: out map);
         }
     }
 }

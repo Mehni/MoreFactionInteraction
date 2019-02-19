@@ -31,27 +31,6 @@ namespace MoreFactionInteraction
                 string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
                 int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
                 string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                //ChoiceLetter_ReverseTradeRequest choiceLetterReverseTradeRequest = (ChoiceLetter_ReverseTradeRequest)LetterMaker.MakeLetter(label: this.def.letterLabel, text: letterToSend.Translate(
-                //    settlement.Faction.leader.LabelShort,
-                //    settlement.Faction.def.leaderTitle,
-                //    settlement.Faction.Name,
-                //    settlement.Label,
-                //    categorylabel,
-                //    feeRequest
-                //).AdjustedFor(p: settlement.Faction.leader), def: this.def.letterDef);
-
-                //choiceLetterReverseTradeRequest.title = "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst();
-                //choiceLetterReverseTradeRequest.thingCategoryDef = thingCategoryDef;
-                //choiceLetterReverseTradeRequest.map = map;
-                //parms.target = map;
-                //choiceLetterReverseTradeRequest.incidentParms = parms;
-                //choiceLetterReverseTradeRequest.faction = settlement.Faction;
-                //choiceLetterReverseTradeRequest.fee = feeRequest;
-                //choiceLetterReverseTradeRequest.StartTimeout(duration: TimeoutTicks);
-                //choiceLetterReverseTradeRequest.tile = settlement.Tile;
-                //Find.LetterStack.ReceiveLetter(let: choiceLetterReverseTradeRequest);
-                //Find.World.GetComponent<WorldComponent_OutpostGrower>().Registerletter(choiceLetterReverseTradeRequest);
-
                 DiaNode diaNode = new DiaNode(letterToSend.Translate(
                                                                      settlement.Faction.leader.LabelShort,
                                                                      settlement.Faction.def.leaderTitle,

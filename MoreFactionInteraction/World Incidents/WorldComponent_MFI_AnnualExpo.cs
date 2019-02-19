@@ -91,7 +91,7 @@ namespace MoreFactionInteraction.More_Flavour
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref occuringTick, "MFI_occuringTick");
+            Scribe_Values.Look(ref occuringTick, "MFI_occuringTick", 0f, true);
             Scribe_Collections.Look(ref events, "MFI_Events");
             Scribe_Collections.Look(ref activeBuffList, "MFI_buffList");
             Scribe_Values.Look(ref timesHeld, "MFI_AnnualExpoTimesHeld");
