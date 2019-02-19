@@ -41,7 +41,7 @@ namespace MoreFactionInteraction
             return from worldObject in Find.WorldObjects.AllWorldObjects
                    where (worldObject is SettlementBase || worldObject is Site)
                            && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
-                           && !worldObject.GetComponent<TimeoutComp>().Active
+                           && (!worldObject.GetComponent<TimeoutComp>()?.Active ?? true)
                            && worldObject.Faction.def.permanentEnemy
                            && Find.WorldGrid.ApproxDistanceInTiles(firstTile: forTile, secondTile: worldObject.Tile) < 20f
                            && (Find.WorldReachability.CanReach(startTile: forTile, destTile: worldObject.Tile) || forTile == -1)
