@@ -60,7 +60,7 @@ Shoutout to [Albion of Sparkling Worlds](https://steamcommunity.com/sharedfiles/
 
 - Japanese, courtesy of Proxyer
 - Russian, courtesy of Djeban74/Reasonable Max
-- Chinese (Simplified), courtesy of =O.W.L.S=o_Onion
+- Chinese (Simplified), courtesy of =O.W.L.S=o_Onion and publicuser
 - Polish, courtesy of pawelik001
 - Spanish, courtesy of CANALETA
 - Spanish (Latin), courtesy of CANALETA
