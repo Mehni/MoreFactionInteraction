@@ -10,14 +10,23 @@ namespace MoreFactionInteraction
 
     public class MapComponent_GoodWillTrader : MapComponent
     {
+        private List<QueuedIncident> queued;
+        private Dictionary<Faction, int> nextFactionInteraction = new Dictionary<Faction, int>();
+        private Dictionary<Faction, int> timesTraded = new Dictionary<Faction, int>();
+
         //empty constructor
         public MapComponent_GoodWillTrader(Map map) : base(map: map)
         {
         }
 
-        //private IncidentQueue incidentQueue;
-        private Dictionary<Faction, int> nextFactionInteraction = new Dictionary<Faction, int>();
-        private Dictionary<Faction, int> timesTraded = new Dictionary<Faction, int>();
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+            queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
+
+            if (queued == null)
+                Log.Error("MFI failed to initialise IncidentQueue in MapComponent.");
+        }
 
         /// <summary>
         /// Used to keep track of how many times the player traded with the faction and increase trader stock based on that.
@@ -58,8 +67,7 @@ namespace MoreFactionInteraction
 
                 if (nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail)) > 0)
                 {
-                    List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
-                    queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && this.allowedIncidentDefs.Contains(qi.FiringIncident.def));
+                    CleanIncidentQueue(null, true);
                 }
 
                 //and the opposite
@@ -84,6 +92,8 @@ namespace MoreFactionInteraction
             //We don't need to run all that often
             if (Find.TickManager.TicksGame % 531 == 0 && GenDate.DaysPassed > 8)
             {
+                CleanIncidentQueue(null);
+
                 foreach (KeyValuePair<Faction, int> kvp in this.NextFactionInteraction)
                 {
                     if (Find.TickManager.TicksGame >= kvp.Value)
@@ -105,7 +115,6 @@ namespace MoreFactionInteraction
                               + (int)(FactionInteractionTimeSeperator.TimeBetweenInteraction.Evaluate(faction.PlayerGoodwill)
                                     * MoreFactionInteraction_Settings.timeModifierBetweenFactionInteraction);
 
-
                         //kids, you shouldn't change values you iterate over.
                         break;
                     }
@@ -116,8 +125,7 @@ namespace MoreFactionInteraction
         public override void MapRemoved()
         {
             base.MapRemoved();
-            List<QueuedIncident> queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
-            queued.RemoveAll(qi => qi.FiringIncident.parms.target == this.map);
+            CleanIncidentQueue(this.map);
         }
 
         private static IncidentDef IncomingIncidentDef(Faction faction)
@@ -173,6 +181,19 @@ namespace MoreFactionInteraction
                 IncidentDefOf.Quest_TradeRequest,
                 IncidentDefOf.TraderCaravanArrival
             };
+
+        private void CleanIncidentQueue(Map map, bool removeHostile = false)
+        {
+            if (removeHostile)
+                queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && this.allowedIncidentDefs.Contains(qi.FiringIncident.def));
+
+            queued.RemoveAll(qi => qi.FiringIncident.parms.target == map);
+
+            if (queued.RemoveAll(qi => (qi.FireTick + GenDate.TicksPerTwelfth) < Find.TickManager.TicksGame) < 0)
+            {
+                Log.Warning($"MFI removed one or more stale incidents from the incidentQueue.");
+            }
+        }
 
         //working lists for ExposeData.
         private List<Faction> factionsListforInteraction = new List<Faction>();

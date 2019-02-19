@@ -16,7 +16,7 @@ namespace MoreFactionInteraction
 
         public override void WorldComponentTick()
         {
-            base.WorldComponentUpdate();
+            base.WorldComponentTick();
             if (Find.TickManager.TicksGame % 350 == 0)
             {
                 TickLetters();
