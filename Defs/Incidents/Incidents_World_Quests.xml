@@ -10,7 +10,7 @@
 		</targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_ReverseTradeRequest</workerClass>
 		<letterLabel>Trade request</letterLabel>
-		<letterDef>ReverseTradeRequest</letterDef>
+		<!-- <letterDef>ReverseTradeRequest</letterDef> -->
 		<baseChance>0.3</baseChance>
 		<earliestDay>1</earliestDay>
 		<minRefireDays>15</minRefireDays>

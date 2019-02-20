@@ -2,23 +2,23 @@
 <Defs>
 
   <LetterDef ParentName="CustomChoiceLetterBase">
-  	<defName>ExtortionDemand</defName>
-  	<letterClass>MoreFactionInteraction.ChoiceLetter_ExtortionDemand</letterClass>
+    <defName>ExtortionDemand</defName>
+    <letterClass>MoreFactionInteraction.ChoiceLetter_ExtortionDemand</letterClass>
   </LetterDef>
 
-    <LetterDef ParentName="CustomChoiceLetterBase">
-  	<defName>ReverseTradeRequest</defName>
-  	<letterClass>MoreFactionInteraction.ChoiceLetter_ReverseTradeRequest</letterClass>
-  </LetterDef>
-
-  <LetterDef ParentName="CustomChoiceLetterBase">
-  	<defName>DiplomaticMarriage</defName>
-  	<letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticMarriage</letterClass>
-  </LetterDef>
+  <!-- <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>ReverseTradeRequest</defName>
+    <letterClass>MoreFactionInteraction.ChoiceLetter_ReverseTradeRequest</letterClass>
+  </LetterDef> -->
 
   <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>DiplomaticMarriage</defName>
+    <letterClass>MoreFactionInteraction.ChoiceLetter_DiplomaticMarriage</letterClass>
+  </LetterDef>
+
+  <!-- <LetterDef ParentName="CustomChoiceLetterBase">
     <defName>MysticalShaman</defName>
     <letterClass>MoreFactionInteraction.ChoiceLetter_MysticalShaman</letterClass>
-  </LetterDef>
+  </LetterDef> -->
 
 </Defs>
