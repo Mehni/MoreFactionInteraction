@@ -27,7 +27,7 @@ namespace MoreFactionInteraction.World_Incidents
 
             if (faction == null)
             {
-                faction = Find.FactionManager.RandomNonHostileFaction(false, false, false);
+                faction = Find.FactionManager.RandomNonHostileFaction(allowNonHumanlike: false);
                 Log.ErrorOnce("MFI: No allied faction found, but event was forced. Using random faction.", 40830425);
             }
 
@@ -46,19 +46,18 @@ namespace MoreFactionInteraction.World_Incidents
             site.Tile = tile;
             site.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
             site.SetFaction(newFaction: faction);
-            site.customLabel = site.def.LabelCap + site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).def.Worker
-                                                            .GetPostProcessedThreatLabel(site, site.parts.FirstOrDefault());
+            site.customLabel = site.def.LabelCap + site.parts.First(predicate: x => x.def == MFI_DefOf.MFI_HuntersLodgePart).def.Worker.GetPostProcessedThreatLabel(site, site.parts.FirstOrDefault());
 
             Find.WorldObjects.Add(o: site);
 
-            string text = string.Format(format: this.def.letterText, 
+            string text = string.Format(format: def.letterText, 
                                         faction, 
                                         faction.def.leaderTitle, 
                                         SitePartUtility.GetDescriptionDialogue(site, site.parts.FirstOrDefault()), 
                                         randomInRange)
                                 .CapitalizeFirst();
 
-            Find.LetterStack.ReceiveLetter(label: this.def.letterLabel, text: text, textLetterDef: this.def.letterDef, lookTargets: site);
+            Find.LetterStack.ReceiveLetter(label: def.letterLabel, text: text, textLetterDef: def.letterDef, lookTargets: site);
             return true;
         }
 

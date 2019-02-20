@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Harmony;
+using MoreFactionInteraction.General;
 using RimWorld;
-using Verse;
-using Harmony;
-using System.Reflection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Verse;
 
 namespace MoreFactionInteraction
 {
@@ -23,6 +23,9 @@ namespace MoreFactionInteraction
         public override void FinalizeInit()
         {
             base.FinalizeInit();
+
+            allowedIncidentDefs.RemoveAll(x => x.IsScenarioBlocked());
+
             queued = Traverse.Create(Find.Storyteller.incidentQueue).Field("queuedIncidents").GetValue<List<QueuedIncident>>();
 
             if (queued == null)
@@ -129,44 +132,18 @@ namespace MoreFactionInteraction
             CleanIncidentQueue(map);
         }
 
-        private static IncidentDef IncomingIncidentDef(Faction faction)
-        {
-            switch (Rand.RangeInclusive(min: 0, max: 50))
+        private IncidentDef IncomingIncidentDef(Faction faction)
+            => allowedIncidentDefs
+                .Where(x => faction.leader == null ? !incidentsInNeedOfValidFactionLeader.Contains(x) : true)
+                    .RandomElementByWeight(x => x.baseChance);
+
+        private readonly List<IncidentDef> incidentsInNeedOfValidFactionLeader =
+            new List<IncidentDef>()
             {
-                //kinda dirty hack that also means if you set the modifier to 2 you get fewer of the other quests. Oh well.
-                case int n when n <= 6 * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier:
-                    return MFI_DefOf.MFI_QuestSpreadingPirateCamp;
-
-                case int n when n <= 8:
-                    return IncidentDef.Named("Quest_BanditCamp");
-
-                case int n when n <= 9:
-                    return MFI_DefOf.MFI_DiplomaticMarriage;
-
-                case int n when n <= 19:
-                    return faction.leader != null ? MFI_DefOf.MFI_ReverseTradeRequest : IncomingIncidentDef(faction);
-
-                case int n when n <= 25:
-                    return MFI_DefOf.MFI_BumperCropRequest;
-
-                case int n when n <= 29:
-                    return faction.leader != null ? MFI_DefOf.MFI_HuntersLodge : IncomingIncidentDef(faction);
-
-                case int n when n <= 31:
-                    return IncidentDef.Named("MFI_MysticalShaman");
-
-                case int n when n <= 35:
-                    return faction.leader != null ? IncidentDef.Named("Quest_ItemStash") : IncomingIncidentDef(faction);
-
-                case int n when n <= 40:
-                    return IncidentDefOf.Quest_TradeRequest;
-
-                case int n when n <= 50:
-                    return IncidentDefOf.TraderCaravanArrival;
-
-                default: return IncidentDefOf.TraderCaravanArrival;
-            }
-        }
+                MFI_DefOf.MFI_ReverseTradeRequest,
+                MFI_DefOf.MFI_HuntersLodge,
+                IncidentDef.Named("Quest_ItemStash")
+            };
 
         private readonly List<IncidentDef> allowedIncidentDefs =
             new List<IncidentDef>()

@@ -52,8 +52,13 @@ namespace MoreFactionInteraction.General
             return false;
         }
 
-        public static bool IsScenarioBlocked(this IncidentWorker incidentWorker) => Find.Scenario.AllParts.Any(x => x is ScenPart_DisableIncident scenPart
-                                                                                                               && scenPart.Incident == incidentWorker.def);
+        public static bool IsScenarioBlocked(this IncidentWorker incidentWorker)
+            => Find.Scenario.AllParts.Any(x => x is ScenPart_DisableIncident scenPart
+                                            && scenPart.Incident == incidentWorker.def);
+
+        public static bool IsScenarioBlocked(this IncidentDef incidentDef)
+            => Find.Scenario.AllParts.Any(x => x is ScenPart_DisableIncident scenPart
+                                            && scenPart.Incident == incidentDef);
 
         public static bool CaravanOrRichestColonyHasAnyOf(ThingDef thingdef, Caravan caravan, out Thing thing)
         {
