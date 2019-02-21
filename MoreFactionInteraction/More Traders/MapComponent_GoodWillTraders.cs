@@ -109,7 +109,7 @@ namespace MoreFactionInteraction
                         incidentParms.forced = true;
 
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(faction) ?? IncomingIncidentDef(faction), // overly-cautious "try again" null-check after strange bugreport.
+                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(faction) ?? IncomingIncidentDef(faction), // "try again" null-check.
                                                            fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3),
                                                            parms: incidentParms,
                                                            retryDurationTicks: 2500);
@@ -165,13 +165,9 @@ namespace MoreFactionInteraction
             if (removeHostile)
                 queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && allowedIncidentDefs.Contains(qi.FiringIncident.def));
 
-            queued.RemoveAll(qi => qi.FiringIncident.parms.target == map);
-
-            if (queued.RemoveAll(qi => (qi.FireTick + GenDate.TicksPerTwelfth) < Find.TickManager.TicksGame) < 0)
-            {
-                Log.Warning($"MFI removed one or more stale incidents from the incidentQueue.");/*Please contact the mod author and provide your previous auto-save.*/
-                //Log.TryOpenLogWindow();
-            }
+            queued.RemoveAll(qi => qi.FiringIncident.parms.target == map 
+                                || qi.FiringIncident.def == null 
+                                || (qi.FireTick + GenDate.TicksPerDay) < Find.TickManager.TicksGame);
         }
 
         //working lists for ExposeData.
