@@ -1,13 +1,12 @@
-﻿using Harmony;
-using MoreFactionInteraction.General;
-using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Verse;
-
-namespace MoreFactionInteraction
+﻿namespace MoreFactionInteraction
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using General;
+    using Harmony;
+    using RimWorld;
+    using Verse;
 
     public class MapComponent_GoodWillTrader : MapComponent
     {
@@ -70,9 +69,8 @@ namespace MoreFactionInteraction
                 }
 
                 if (nextFactionInteraction.RemoveAll(x => x.Key.HostileTo(Faction.OfPlayerSilentFail)) > 0)
-                {
                     CleanIncidentQueue(null, true);
-                }
+
 
                 //and the opposite
                 while ((from faction in Find.FactionManager.AllFactionsVisible
@@ -134,11 +132,11 @@ namespace MoreFactionInteraction
 
         private IncidentDef IncomingIncidentDef(Faction faction)
             => allowedIncidentDefs
-                .Where(x => faction.leader == null ? !incidentsInNeedOfValidFactionLeader.Contains(x) : true)
+                .Where(x => faction.leader != null || !incidentsInNeedOfValidFactionLeader.Contains(x))
                     .RandomElementByWeight(x => x.baseChance);
 
         private readonly List<IncidentDef> incidentsInNeedOfValidFactionLeader =
-            new List<IncidentDef>()
+            new List<IncidentDef>
             {
                 MFI_DefOf.MFI_ReverseTradeRequest,
                 MFI_DefOf.MFI_HuntersLodge,
@@ -146,7 +144,7 @@ namespace MoreFactionInteraction
             };
 
         private readonly List<IncidentDef> allowedIncidentDefs =
-            new List<IncidentDef>()
+            new List<IncidentDef>
             {
                 MFI_DefOf.MFI_QuestSpreadingPirateCamp,
                 IncidentDef.Named("Quest_BanditCamp"),
@@ -162,12 +160,17 @@ namespace MoreFactionInteraction
 
         private void CleanIncidentQueue(Map map, bool removeHostile = false)
         {
+            if (queued == null)
+                FinalizeInit();
+
             if (removeHostile)
                 queued.RemoveAll(qi => qi.FiringIncident.parms.faction.HostileTo(Faction.OfPlayer) && allowedIncidentDefs.Contains(qi.FiringIncident.def));
 
-            queued.RemoveAll(qi => qi.FiringIncident.parms.target == map 
+            //Theoretically there is no way this should happen. Reality has proven me wrong.
+            queued.RemoveAll(qi => qi.FiringIncident.parms.target == null
+                                || qi.FiringIncident.parms.target == map
                                 || qi.FiringIncident.def == null 
-                                || (qi.FireTick + GenDate.TicksPerDay) < Find.TickManager.TicksGame);
+                                || qi.FireTick + GenDate.TicksPerDay < Find.TickManager.TicksGame);
         }
 
         //working lists for ExposeData.
