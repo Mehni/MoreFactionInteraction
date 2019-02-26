@@ -38,11 +38,11 @@
       <HintPath>..\Assemblies\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Fluffy_Relations">
-      <HintPath>..\..\..\..\..\workshop\content\294100\709317151\Assemblies\Fluffy_Relations.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\workshop\content\294100\709317151\Assemblies\Fluffy_Relations.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,7 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -82,13 +82,11 @@
     <Compile Include="More Flavour\MysticalShaman.cs" />
     <Compile Include="World Incidents\WorldComponent_MFI_AnnualExpo.cs" />
     <Compile Include="MoreFactionWar\CaravanArrivalAction_VisitFactionWarPeaceTalks.cs" />
-    <Compile Include="MoreFactionWar\ChoiceLetter_SellingWarBonds.cs" />
     <Compile Include="MoreFactionWar\Dialogue_FactionWarNegotiation.cs" />
     <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />
     <Compile Include="MoreFactionWar\CustomFaction_HealthUtility.cs" />
     <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
     <Compile Include="MoreFactionWar\FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.cs" />
-    <Compile Include="MoreFactionWar\IncidentWorker_SellingWarBonds.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_WoundedCombatants.cs" />
     <Compile Include="MoreFactionWar\MainTabWindow_FactionWar.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />

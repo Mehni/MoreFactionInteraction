@@ -10,7 +10,6 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class WorldObjectComp_SettlementBumperCropComp : WorldObjectComp
     {
-        //attentive readers may find similarities between this and the Peacetalks quest. 
         public int expiration = -1;
         private const int basereward = 50;
         public int workLeft;
@@ -21,9 +20,9 @@ namespace MoreFactionInteraction.World_Incidents
 
         private readonly Texture2D setPlantToGrowTex = HarmonyPatches.setPlantToGrowTex;
 
-        public bool CaravanIsWorking => this.workStarted && Find.TickManager.TicksGame < this.workLeft;
+        public bool CaravanIsWorking => workStarted && Find.TickManager.TicksGame < workLeft;
 
-        public bool ActiveRequest => this.expiration > Find.TickManager.TicksGame;
+        public bool ActiveRequest => expiration > Find.TickManager.TicksGame;
 
         public WorldObjectComp_SettlementBumperCropComp()
         {
@@ -38,7 +37,7 @@ namespace MoreFactionInteraction.World_Incidents
                     defaultLabel = "MFI_CommandHelpOutHarvesting".Translate(),
                     defaultDesc = "MFI_CommandHelpOutHarvesting".Translate(),
                     icon = setPlantToGrowTex,
-                    action = delegate
+                    action = () =>
                     {
                         {
                             if (!ActiveRequest)
@@ -52,7 +51,7 @@ namespace MoreFactionInteraction.World_Incidents
                                 return;
                             }
                             Find.WindowStack.Add(window: Dialog_MessageBox.CreateConfirmation(text: "MFI_CommandFulfillBumperCropHarvestConfirm".Translate(caravan.LabelCap),
-                            confirmedAct: delegate
+                            confirmedAct: () =>
                             {
                                 NotifyCaravanArrived(caravan: caravan);
                             }));
@@ -71,9 +70,9 @@ namespace MoreFactionInteraction.World_Incidents
 
         public override string CompInspectStringExtra()
         {
-            if (this.ActiveRequest)
+            if (ActiveRequest)
             {
-                return "MFI_HarvestRequestInfo".Translate((this.expiration - Find.TickManager.TicksGame).ToStringTicksToDays());
+                return "MFI_HarvestRequestInfo".Translate((expiration - Find.TickManager.TicksGame).ToStringTicksToDays());
             }
             return null;
         }
@@ -85,24 +84,24 @@ namespace MoreFactionInteraction.World_Incidents
 
         public void NotifyCaravanArrived(Caravan caravan)
         {
-            this.workStarted = true;
-            this.workLeft = Find.TickManager.TicksGame + workAmount;
+            workStarted = true;
+            workLeft = Find.TickManager.TicksGame + workAmount;
             caravan.GetComponent<WorldObjectComp_CaravanComp>().workWillBeDoneAtTick = this.workLeft;
             caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = true;
-            this.Disable();
+            Disable();
         }
 
         public void DoOutcome(Caravan caravan)
         {
-            this.workStarted = false;
+            workStarted = false;
             caravan.GetComponent<WorldObjectComp_CaravanComp>().caravanIsWorking = false;
-            this.Outcome_Triumph(caravan: caravan);
+            Outcome_Triumph(caravan: caravan);
         }
 
         private void Outcome_Triumph(Caravan caravan)
         {
             int randomInRange = FactionRelationOffset.RandomInRange;
-            this.parent.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: randomInRange);
+            parent.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: randomInRange);
 
             List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan: caravan);
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(caravanMembersCapableOfGrowing: allMembersCapableOfGrowing);
@@ -119,10 +118,10 @@ namespace MoreFactionInteraction.World_Incidents
             CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
             Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(
-                this.parent.Faction.def.pawnsPlural, this.parent.Faction.Name,
+                parent.Faction.def.pawnsPlural, parent.Faction.Name,
                 Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
-            ), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: this.parent.Faction);
+            ), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: parent.Faction);
 
             allMembersCapableOfGrowing.ForEach(action: pawn => pawn.skills.Learn(sDef: SkillDefOf.Plants, xp: expGain, direct: true));
         }
@@ -160,9 +159,9 @@ namespace MoreFactionInteraction.World_Incidents
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<int>(value: ref this.expiration, label: "MFI_BumperCropExpiration");
-            Scribe_Values.Look<int>(value: ref this.workLeft, label: "MFI_BumperCropWorkLeft");
-            Scribe_Values.Look<bool>(value: ref this.workStarted, label: "MFI_BumperCropWorkStarted");
+            Scribe_Values.Look(value: ref expiration, label: "MFI_BumperCropExpiration");
+            Scribe_Values.Look(value: ref workLeft, label: "MFI_BumperCropWorkLeft");
+            Scribe_Values.Look(value: ref workStarted, label: "MFI_BumperCropWorkStarted");
         }
     }
 }
