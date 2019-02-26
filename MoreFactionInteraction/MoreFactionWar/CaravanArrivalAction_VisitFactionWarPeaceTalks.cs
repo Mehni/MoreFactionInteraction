@@ -35,7 +35,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         public override FloatMenuAcceptanceReport StillValid(Caravan caravan, int destinationTile)
         {
-            if (base.StillValid(caravan: caravan, destinationTile: destinationTile))
+            if (!base.StillValid(caravan: caravan, destinationTile: destinationTile))
                 return base.StillValid(caravan: caravan, destinationTile: destinationTile);
 
             if (this.factionWarPeaceTalks?.Tile != destinationTile)

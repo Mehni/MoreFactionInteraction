@@ -101,13 +101,14 @@
                     if (Find.TickManager.TicksGame >= kvp.Value)
                     {
                         Faction faction = kvp.Key;
-                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: IncidentCategoryDefOf.FactionArrival, target: map);
+                        IncidentDef incident = IncomingIncidentDef(faction) ?? IncomingIncidentDef(faction); // "try again" null-check.
+                        IncidentParms incidentParms = StorytellerUtility.DefaultParmsNow(incCat: incident.category, target: map);
                         incidentParms.faction = faction;
                         //forced, because half the time game doesn't feel like firing events.
                         incidentParms.forced = true;
 
                         //trigger incident somewhere between half a day and 3 days from now
-                        Find.Storyteller.incidentQueue.Add(def: IncomingIncidentDef(faction) ?? IncomingIncidentDef(faction), // "try again" null-check.
+                        Find.Storyteller.incidentQueue.Add(def: incident,
                                                            fireTick: Find.TickManager.TicksGame + Rand.Range(min: GenDate.TicksPerDay / 2, max: GenDate.TicksPerDay * 3),
                                                            parms: incidentParms,
                                                            retryDurationTicks: 2500);

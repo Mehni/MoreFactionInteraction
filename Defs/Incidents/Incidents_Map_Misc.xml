@@ -4,14 +4,14 @@
 	<IncidentDef>
 		<defName>MFI_PirateExtortion</defName>
 		<label>pirate extortion</label>
-		<category>Misc</category>
+		<category>ThreatSmall</category>
 		<targetTags>
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>MoreFactionInteraction.IncidentWorker_Extortion</workerClass>
 		<letterLabel>Pirate fee demand</letterLabel>
 		<letterDef>ExtortionDemand</letterDef>
-		<baseChance>1.3</baseChance>
+		<baseChance>1.25</baseChance>
 		<earliestDay>30</earliestDay>
 		<minRefireDays>15</minRefireDays>
 		<chanceFactorByPopulationCurve>
@@ -30,30 +30,9 @@
 			<li>Map_PlayerHome</li>
 		</targetTags>
 		<workerClass>MoreFactionInteraction.MoreFactionWar.IncidentWorker_WoundedCombatants</workerClass>
-		<baseChance>0.5</baseChance>
+		<baseChance>0.8</baseChance>
 		<minRefireDays>8</minRefireDays>
 		<earliestDay>30</earliestDay>
 	</IncidentDef>
-
-	<!-- <IncidentDef>
-		<defName>MFI_WeddingGuestsArrival</defName>
-		<label>wedding guests arrived</label>
-		<category>Misc</category>
-    <targetTags>
-      <li>Map_PlayerHome</li>
-    </targetTags>
-		<workerClass>MoreFactionInteraction.IncidentWorker_WeddingGuestsArrival</workerClass>
-		<letterLabel>Wedding guests have arrived</letterLabel>
-		<letterDef>PositiveEvent</letterDef>
-		<baseChance>0</baseChance> 
-		<earliestDay>1</earliestDay>
-		<minRefireDays>15</minRefireDays>
-		<chanceFactorByPopulationCurve>
-			<points>
-				<li>(2,0)</li>
-				<li>(7,0)</li>
-			</points>
-		</chanceFactorByPopulationCurve>
-	</IncidentDef> -->
 
 </Defs>
