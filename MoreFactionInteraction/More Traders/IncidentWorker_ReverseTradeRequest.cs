@@ -10,7 +10,6 @@ namespace MoreFactionInteraction
     public class IncidentWorker_ReverseTradeRequest : IncidentWorker
     {
         private const int TimeoutTicks = GenDate.TicksPerDay;
-        private static readonly List<Map> tmpAvailableMaps = new List<Map>();
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -21,74 +20,76 @@ namespace MoreFactionInteraction
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            if (!TryGetRandomAvailableTargetMap(map: out Map map)) return false;
+            if (!TryGetRandomAvailableTargetMap(map: out Map map))
+                return false;
+
             SettlementBase settlement = RandomNearbyTradeableSettlement(originTile: map.Tile);
-            if (settlement != null)
+
+            if (settlement == null)
+                return false;
+
+            //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
+            ThingCategoryDef thingCategoryDef = DetermineThingCategoryDef();
+
+            string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
+            int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
+            string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
+            DiaNode diaNode = new DiaNode(letterToSend.Translate(
+                                                                 settlement.Faction.leader.LabelShort,
+                                                                 settlement.Faction.def.leaderTitle,
+                                                                 settlement.Faction.Name,
+                                                                 settlement.Label,
+                                                                 categorylabel,
+                                                                 feeRequest
+                                                                ).AdjustedFor(p: settlement.Faction.leader));
+
+            int traveltime = this.CalcuteTravelTimeForTrader(originTile: settlement.Tile, map);
+            DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
             {
-                //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.
-                ThingCategoryDef thingCategoryDef = DetermineThingCategoryDef();
-
-                string letterToSend = DetermineLetterToSend(thingCategoryDef: thingCategoryDef);
-                int feeRequest = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points);
-                string categorylabel = (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) ? thingCategoryDef.label + " items" : thingCategoryDef.label;
-                DiaNode diaNode = new DiaNode(letterToSend.Translate(
-                                                                     settlement.Faction.leader.LabelShort,
-                                                                     settlement.Faction.def.leaderTitle,
-                                                                     settlement.Faction.Name,
-                                                                     settlement.Label,
-                                                                     categorylabel,
-                                                                     feeRequest
-                                                                    ).AdjustedFor(p: settlement.Faction.leader));
-
-                int traveltime = this.CalcuteTravelTimeForTrader(originTile: settlement.Tile, map);
-                DiaOption accept = new DiaOption(text: "RansomDemand_Accept".Translate())
+                action = () =>
                 {
-                    action = () =>
-                    {
-                        //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
-                        //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
-                        parms.faction = settlement.Faction; ;
-                        TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed(defName: "MFI_EmptyTrader_" + thingCategoryDef);
+                    //spawn a trader with a stock gen that accepts our goods, has decent-ish money and nothing else.
+                    //first attempt had a newly created trader for each, but the game can't save that. Had to define in XML.
+                    parms.faction = settlement.Faction;
+                    TraderKindDef traderKind = DefDatabase<TraderKindDef>.GetNamed(defName: "MFI_EmptyTrader_" + thingCategoryDef);
 
-                        traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.max += feeRequest;
-                        traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.min += feeRequest;
+                    traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.max += feeRequest;
+                    traderKind.stockGenerators.First(predicate: x => x.HandlesThingDef(thingDef: ThingDefOf.Silver)).countRange.min += feeRequest;
 
-                        traderKind.label = thingCategoryDef.label + " " + "MFI_Trader".Translate();
-                        parms.traderKind = traderKind;
-                        parms.forced = true;
+                    traderKind.label = thingCategoryDef.label + " " + "MFI_Trader".Translate();
+                    parms.traderKind = traderKind;
+                    parms.forced = true;
 
-                        Find.Storyteller.incidentQueue.Add(def: IncidentDefOf.TraderCaravanArrival, fireTick: Find.TickManager.TicksGame + traveltime, parms: parms);
-                        TradeUtility.LaunchSilver(map: map, fee: feeRequest);
-                    },
-                };
-                DiaNode acceptLink = new DiaNode(text: "MFI_TraderSent".Translate(
-                    settlement.Faction.leader?.LabelShort,
-                    traveltime.ToStringTicksToPeriodVague(vagueMin: false)
-                ).CapitalizeFirst());
-                acceptLink.options.Add(DiaOption.DefaultOK);
-                accept.link = acceptLink;
+                    Find.Storyteller.incidentQueue.Add(def: IncidentDefOf.TraderCaravanArrival, fireTick: Find.TickManager.TicksGame + traveltime, parms: parms);
+                    TradeUtility.LaunchSilver(map: map, fee: feeRequest);
+                },
+            };
+            DiaNode acceptLink = new DiaNode(text: "MFI_TraderSent".Translate(
+                settlement.Faction.leader?.LabelShort,
+                traveltime.ToStringTicksToPeriodVague(vagueMin: false)
+            ).CapitalizeFirst());
+            acceptLink.options.Add(DiaOption.DefaultOK);
+            accept.link = acceptLink;
 
-                if (!TradeUtility.ColonyHasEnoughSilver(map: map, fee: feeRequest))
-                {
-                    accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(feeRequest.ToString()));
-                }
-
-                DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
-                {
-                    action = () =>
-                    {
-                    },
-                    resolveTree = true
-                };
-
-                diaNode.options = new List<DiaOption> {accept, reject};
-
-                Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, settlement.Faction, title: "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst()));
-                Find.Archive.Add(new ArchivedDialog(diaNode.text, "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst(), settlement.Faction));
-
-                return true;
+            if (!TradeUtility.ColonyHasEnoughSilver(map: map, fee: feeRequest))
+            {
+                accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(feeRequest.ToString()));
             }
-            return false;
+
+            DiaOption reject = new DiaOption(text: "RansomDemand_Reject".Translate())
+            {
+                action = () =>
+                {
+                },
+                resolveTree = true
+            };
+
+            diaNode.options = new List<DiaOption> { accept, reject };
+
+            Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(diaNode, settlement.Faction, title: "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst()));
+            Find.Archive.Add(new ArchivedDialog(diaNode.text, "MFI_ReverseTradeRequestTitle".Translate(map.info.parent.Label).CapitalizeFirst(), settlement.Faction));
+
+            return true;
         }
 
         private static ThingCategoryDef DetermineThingCategoryDef()
@@ -106,7 +107,8 @@ namespace MoreFactionInteraction
         private static string DetermineLetterToSend(ThingCategoryDef thingCategoryDef)
         {
 
-            if (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw) return "MFI_ReverseTradeRequest_Blight";
+            if (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw)
+                return "MFI_ReverseTradeRequest_Blight";
 
             switch (Rand.RangeInclusive(min: 0, max: 4))
             {
@@ -139,18 +141,8 @@ namespace MoreFactionInteraction
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
         {
-            tmpAvailableMaps.Clear();
-            List<Map> maps = Find.Maps;
-            foreach (Map potentialTargetMap in maps)
-            {
-                if (potentialTargetMap.IsPlayerHome && RandomNearbyTradeableSettlement(originTile: potentialTargetMap.Tile) != null)
-                {
-                    tmpAvailableMaps.Add(item: potentialTargetMap);
-                }
-            }
-            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
-            tmpAvailableMaps.Clear();
-            return result;
+            return Find.Maps.Where(x => x.IsPlayerHome && RandomNearbyTradeableSettlement(x.Tile) != null)
+                .TryRandomElement(out map);
         }
 
         private int CalcuteTravelTimeForTrader(int originTile, Map map)
