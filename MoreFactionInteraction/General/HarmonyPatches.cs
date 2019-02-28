@@ -33,7 +33,7 @@ namespace MoreFactionInteraction
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
-                 prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreasePreFix)));
+                 prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreaseDestructivePreFix)));
 
             harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }),
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
@@ -47,13 +47,16 @@ namespace MoreFactionInteraction
                 postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
             #endregion
 
+#if DEBUG
             harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"),
                 transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+#endif
 
             harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"),
                 transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Faction), name: nameof(Faction.Notify_RelationKindChanged)), postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(Notify_RelationKindChanged)));
+            harmony.Patch(original: AccessTools.Method(type: typeof(Faction), name: nameof(Faction.Notify_RelationKindChanged)),
+                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(Notify_RelationKindChanged)));
 
             if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
             {
@@ -118,7 +121,7 @@ namespace MoreFactionInteraction
             return instructions.MethodReplacer(from: from, to: to);
         }
 
-        #region MoreTraders
+#region MoreTraders
         private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ThingSetMakerParams parms)
         {
             if (parms.traderDef != null)
@@ -165,12 +168,13 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 2000000, y: 7f)
         };
 
-        #region TradeQualityImprovements
-        private static bool CompQuality_TradeQualityIncreasePreFix(CompQuality __instance, TraderKindDef trader, int forTile, Faction forFaction)
+#region TradeQualityImprovements
+        private static bool CompQuality_TradeQualityIncreaseDestructivePreFix(CompQuality __instance, TraderKindDef trader, int forTile, Faction forFaction)
         {
             //forTile is assigned in RimWorld.ThingSetMaker_TraderStock.Generate. It's either a best-effort map, or -1.
             Map map = null;
-            if (forTile != -1) map = Current.Game.FindMap(tile: forTile);
+            if (forTile != -1)
+                map = Current.Game.FindMap(tile: forTile);
             __instance.SetQuality(q: FactionAndGoodWillDependantQuality(faction: forFaction, map: map, trader: trader), source: ArtGenerationContext.Outsider);
             return false;
         }
@@ -189,7 +193,7 @@ namespace MoreFactionInteraction
                 }
                 float num = Rand.Gaussian(centerX: WealthQualityDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal), widthFactor: WealthQualitySpreadDeterminationCurve.Evaluate(x: map.wealthWatcher.WealthTotal));
                 num = Mathf.Clamp(value: num, min: 0f, max: QualityUtility.AllQualityCategories.Count - 0.5f);
-                return (QualityCategory)((int)num);
+                return (QualityCategory)num;
             }
             if (map != null && faction != null)
             {
@@ -202,7 +206,7 @@ namespace MoreFactionInteraction
                 }
                 float num = Rand.Gaussian(centerX: 2.5f + qualityIncreaseFactorFromPlayerGoodWill, widthFactor: 0.84f + qualityIncreaseFromTimesTradedWithFaction);
                 num = Mathf.Clamp(value: num, min: 0f, max: QualityUtility.AllQualityCategories.Count - 0.5f);
-                return (QualityCategory)((int)num);
+                return (QualityCategory)num;
             }
             return QualityUtility.GenerateQualityTraderItem();
         }
@@ -223,7 +227,7 @@ namespace MoreFactionInteraction
             }
         }
 
-        #region SimpleCurves
+#region SimpleCurves
         private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
         {
             new CurvePoint(x: 0, y: 1),
@@ -243,8 +247,8 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 1000000, y: 1.5f),
             new CurvePoint(x: 2000000, y: 1.2f)
         };
-        #endregion SimpleCurves
-        #endregion TradeQualityImprovements
+#endregion SimpleCurves
+#endregion TradeQualityImprovements
 
         /// <summary>
         /// Increment TimesTraded count of dictionary by one for this faction.
@@ -273,19 +277,19 @@ namespace MoreFactionInteraction
             }
             else __result = priceType;
         }
-        #endregion
+#endregion
 
-        #region WorldIncidents
+#region WorldIncidents
         private static void WorldReachUtility_PostFix(ref bool __result, Caravan c)
         {
             SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(caravan: c);
-            World_Incidents.WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement?.GetComponent<World_Incidents.WorldObjectComp_SettlementBumperCropComp>();
+            WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement?.GetComponent<WorldObjectComp_SettlementBumperCropComp>();
 
             if (bumperCropComponent != null)
             {
                 __result = !bumperCropComponent.CaravanIsWorking;
             }
         }
-        #endregion
+#endregion
     }
 }
