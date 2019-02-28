@@ -39,7 +39,6 @@ namespace MoreFactionInteraction
             RoadDef roadToBuild = DefDatabase<RoadDef>.AllDefsListForReading.Where(x => x.priority <= maxPriority).RandomElement();
 
             WorldPath path = WorldPath.NotFound;
-            //StringBuilder stringBuilder = new StringBuilder();
 
             int cost2 = 12000;
             int timeToBuild = 0;
@@ -58,13 +57,12 @@ namespace MoreFactionInteraction
                         Log.Message($"MFI :: too many roads leading from {(Find.WorldObjects.AnyWorldObjectAt(destination) ? Find.WorldObjects.ObjectsAt(destination).FirstOrDefault()?.Label : destination.ToString())} to {settlementBase} for road project");
                         return false;
                     }
-                    //stringBuilder.Append($"Path found from {settlementBase.Label} to {map.info.parent.Label}. Length = {path.NodesReversed.Count} ");
                     //not 0 and - 1
                     for (int i = 1; i < path.NodesReversed.Count - 1; i++)
                     {
                         cost2 += Caravan_PathFollower.CostToMove(CaravanTicksPerMoveUtility.DefaultTicksPerMove, path.NodesReversed[i], path.NodesReversed[i + 1]);
 
-                        timeToBuild += (int)(2 * GenDate.TicksPerHour
+                        timeToBuild += (int)(2 * GenDate.TicksPerDay
                                                * WorldPathGrid.CalculatedMovementDifficultyAt(path.NodesReversed[i], true)
                                                * Find.WorldGrid.GetRoadMovementDifficultyMultiplier(i, i + 1));
 
