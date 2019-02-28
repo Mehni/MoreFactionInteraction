@@ -9,6 +9,7 @@ using MoreFactionInteraction.More_Flavour;
 
 namespace MoreFactionInteraction
 {
+    [Obsolete]
     public class ChoiceLetter_MysticalShaman : ChoiceLetter
     {
         public int tile;
@@ -21,9 +22,9 @@ namespace MoreFactionInteraction
         {
             get
             {
-                if (this.ArchivedOnly)
+                if (ArchivedOnly)
                 {
-                    yield return this.Option_Close;
+                    yield return Option_Close;
                 }
                 else
                 {
@@ -38,14 +39,14 @@ namespace MoreFactionInteraction
                             mysticalShaman.GetComponent<TimeoutComp>().StartTimeout(ticks: randomInRange * GenDate.TicksPerDay);
                             Find.WorldObjects.Add(o: mysticalShaman);
 
-                            TradeUtility.LaunchSilver(map: this.map, fee: this.fee);
+                            TradeUtility.LaunchSilver(map: map, fee: fee);
                             Find.LetterStack.RemoveLetter(let: this);
                         },
                         resolveTree = true
                     };
-                    if (!TradeUtility.ColonyHasEnoughSilver(map: this.map, fee: this.fee))
+                    if (!TradeUtility.ColonyHasEnoughSilver(map: map, fee: fee))
                     {
-                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(this.fee.ToString()));
+                        accept.Disable(newDisabledReason: "NeedSilverLaunchable".Translate(fee.ToString()));
                     }
                     yield return accept;
 
@@ -58,20 +59,20 @@ namespace MoreFactionInteraction
                         resolveTree = true
                     };
                     yield return reject;
-                    yield return this.Option_Postpone;
+                    yield return Option_Postpone;
                 }
             }
         }
 
-        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(item: this.map);
+        public override bool CanShowInLetterStack => base.CanShowInLetterStack && Find.Maps.Contains(item: map);
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Map>(refee: ref this.map, label: "MFI_Shaman_Map");
-            Scribe_References.Look<Faction>(refee: ref this.faction, label: "MFI_Shaman_Faction");
-            Scribe_Values.Look(ref this.tile, "MFI_ShamanTile");
-            Scribe_Values.Look<int>(value: ref this.fee, label: "MFI_ShamanFee");
+            Scribe_References.Look(refee: ref map, label: "MFI_Shaman_Map");
+            Scribe_References.Look(refee: ref faction, label: "MFI_Shaman_Faction");
+            Scribe_Values.Look(ref tile, "MFI_ShamanTile");
+            Scribe_Values.Look(value: ref fee, label: "MFI_ShamanFee");
         }
     }
 }

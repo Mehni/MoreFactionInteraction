@@ -59,6 +59,7 @@ namespace MoreFactionInteraction
                     traderKind.label = thingCategoryDef.label + " " + "MFI_Trader".Translate();
                     parms.traderKind = traderKind;
                     parms.forced = true;
+                    parms.target = map;
 
                     Find.Storyteller.incidentQueue.Add(def: IncidentDefOf.TraderCaravanArrival, fireTick: Find.TickManager.TicksGame + traveltime, parms: parms);
                     TradeUtility.LaunchSilver(map: map, fee: feeRequest);
