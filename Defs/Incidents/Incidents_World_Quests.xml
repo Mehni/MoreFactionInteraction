@@ -2,27 +2,6 @@
 <Defs>
 
 	<IncidentDef>
-		<defName>MFI_ReverseTradeRequest</defName>
-		<label>trade request</label>
-		<category>Misc</category>
-		<targetTags>
-			<li>World</li>
-		</targetTags>
-		<workerClass>MoreFactionInteraction.IncidentWorker_ReverseTradeRequest</workerClass>
-		<letterLabel>Trade request</letterLabel>
-		<!-- <letterDef>ReverseTradeRequest</letterDef> -->
-		<baseChance>0.3</baseChance>
-		<earliestDay>1</earliestDay>
-		<minRefireDays>15</minRefireDays>
-		<chanceFactorByPopulationCurve>
-			<points>
-				<li>(2,0)</li>
-				<li>(7,1)</li>
-			</points>
-		</chanceFactorByPopulationCurve>
-	</IncidentDef>
-
-	<IncidentDef>
 		<defName>MFI_BumperCropRequest</defName>
 		<label>harvesting request</label>
 		<category>Misc</category>
