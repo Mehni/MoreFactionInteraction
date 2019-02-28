@@ -28,6 +28,9 @@ namespace MoreFactionInteraction
         public static EventDef MFI_ScienceFaire;
         public static EventDef MFI_AcousticShow;
 
-        //public static IncidentDef MFI_WeddingGuestsArrival;
+        static MFI_DefOf()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(MFI_DefOf));
+        }
     }
 }
