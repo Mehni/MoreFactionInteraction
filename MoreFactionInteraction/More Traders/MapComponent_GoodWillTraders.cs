@@ -134,7 +134,7 @@
         private IncidentDef IncomingIncidentDef(Faction faction)
             => allowedIncidentDefs
                 .Where(x => faction.leader != null || !incidentsInNeedOfValidFactionLeader.Contains(x))
-                    .RandomElementByWeight(x => x.baseChance);
+                    .RandomElementByWeight(x => x.Worker.AdjustedChance);
 
         private readonly List<IncidentDef> incidentsInNeedOfValidFactionLeader =
             new List<IncidentDef>
