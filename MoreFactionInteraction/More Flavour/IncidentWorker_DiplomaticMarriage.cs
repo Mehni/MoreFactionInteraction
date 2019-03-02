@@ -3,6 +3,7 @@ using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using System;
 
 namespace MoreFactionInteraction
 {
@@ -14,7 +15,7 @@ namespace MoreFactionInteraction
         private Pawn betrothed;
         private const int TimeoutTicks = GenDate.TicksPerDay;
 
-        public override float AdjustedChance => base.AdjustedChance - StorytellerUtilityPopulation.PopulationIntent;
+        public override float AdjustedChance => Math.Max(0.01f, base.AdjustedChance - StorytellerUtilityPopulation.PopulationIntent);
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
