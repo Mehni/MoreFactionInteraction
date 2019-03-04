@@ -30,8 +30,9 @@ namespace MoreFactionInteraction.General
             // which is a nested ternary and just awful to read. Be happy I spared you.
         }
 
-        public static bool IsPartOfFactionWar(this Faction faction) => faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne ||
-                                                                       faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
+        public static bool IsPartOfFactionWar(this Faction faction)
+            => faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionOne
+            || faction == Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarringFactionTwo;
 
         public static bool TryGetBestArt(Caravan caravan, out Thing thing, out Pawn owner)
         {
@@ -92,11 +93,11 @@ namespace MoreFactionInteraction.General
                 return true;
             }
             var minifiedBuilds = map.listerThings.ThingsInGroup(ThingRequestGroup.MinifiedThing);
-            for (int i = 0; i < minifiedBuilds.Count; i++)
+            foreach (Thing t in minifiedBuilds)
             {
-                if (minifiedBuilds[i].GetInnerIfMinified().def == thingdef)
+                if (t.GetInnerIfMinified().def == thingdef)
                 {
-                    thing = minifiedBuilds[i];
+                    thing = t;
                     return true;
                 }
             }
