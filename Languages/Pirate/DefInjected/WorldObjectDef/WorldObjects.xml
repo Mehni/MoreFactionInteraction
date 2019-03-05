@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_FactionWarPeaceTalks.label>peace talks</MFI_FactionWarPeaceTalks.label>
+  <MFI_FactionWarPeaceTalks.description>A site designated for peace talks.</MFI_FactionWarPeaceTalks.description>
+
+  <MFI_AnnualExpoObject.label>annual expo</MFI_AnnualExpoObject.label>
+  <MFI_AnnualExpoObject.description>A site designated for holding this year's Exposition.</MFI_AnnualExpoObject.description>
+
+  <MFI_MysticalShaman.label>mystical shaman</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.description>The tent where a mystical shaman recides.</MFI_MysticalShaman.description>
+
+  <MFI_RoadUnderConstruction.label>under construction road</MFI_RoadUnderConstruction.label>
+  <MFI_RoadUnderConstruction.description>A construction site.</MFI_RoadUnderConstruction.description>
+
+
+</LanguageData>

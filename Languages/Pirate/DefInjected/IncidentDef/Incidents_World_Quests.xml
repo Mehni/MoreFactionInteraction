@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_BumperCropRequest.label>harvesting request</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>a war be coming?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterText>You's gotten a message from some [PAWN_nameDef], {0} of {1}. Them thar's faction recently had some trouble with s'meother dudes and call upon ye to parlay with them and {2}. They got a nearby stash location and invite you to come'n'chat.\n\nIt could be a great treasure of a relationship boost with their faction, but beware - a poor chatter can do ye more harm than good.\n\nThe offer will expire after {3} days, after which [PAWN_nameDef] fears the worst.</MFI_Quest_PeaceTalks.letterText>
+  <MFI_Quest_PeaceTalks.letterLabel>Faction unrest</MFI_Quest_PeaceTalks.letterLabel>
+
+  <MFI_AnnualExpo.label>the annual expo</MFI_AnnualExpo.label>
+  <MFI_AnnualExpo.letterLabel>Annual expo</MFI_AnnualExpo.letterLabel>
+
+
+</LanguageData>

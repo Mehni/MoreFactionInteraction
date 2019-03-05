@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Ransom demand -->
+  <MFI_ExtortionDemandTitle>extortion demand at {0}</MFI_ExtortionDemandTitle>
+  <MFI_ExtortionDemand>{0}, {1} of {2}, contacts you on the Comms Console. Based on your proximity to their {3} {4}, [PAWN_pronoun] feels you are encroaching on their terrain.\n\n[PAWN_pronoun] says [PAWN_pronoun] is willing to overlook this transgression for a modest fee of {5} silver. [PAWN_pronoun] adds that failure to pay will be met with aggression, but [PAWN_pronoun] is gracefully willing to give you a day to pay.</MFI_ExtortionDemand>
+  <MFI_Representative>a representative</MFI_Representative>
+
+  <!-- Reverse Trade Request -->
+  <MFI_ReverseTradeRequest_Pyro>{0}, {1} of {2}, has sent us a message. Their nearby settlement {3} had an incident with a pyromaniac and are now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.\n\n{0} assures us the offending pyromaniac will stay home.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Pyro>
+  <MFI_ReverseTradeRequest_Mechs>A somewhat rushed and poorly written message from {0}, {1} of {2}, reached us. Their nearby settlement {3} narrowly escaped a deadly encounter with mechanoids! They've started to rebuild, but they would like our help. Specifically, they are desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to hire a caravan as their settlement can't spare the manpower.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Mechs>
+  <MFI_ReverseTradeRequest_Caravan>We have received a humble request from {0}, {1} of {2}. Their nearby settlement of {3} has mismanaged their time and is now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Caravan>
+  <MFI_ReverseTradeRequest_Pirates>{0}, {1} of {2}, has sent us a message. Their nearby settlement {3} was recently ravaged by pirates and are now desperate for {4}. They are willing to pay extra for any items of this category, but will need {5} silver to cover costs for the caravan.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Pirates>
+  <MFI_ReverseTradeRequest_Hardship>An anonymous broker contacts you on the Comms Console. He has been in contact with {2} and has managed to strike a deal for {4}. He has managed to negotiate for a trader to pay extra for any items of this category, but he requests {5} silver as a brokerage fee before he'll send the caravan.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Hardship>
+  <MFI_ReverseTradeRequest_Blight>{0} sends us a message on behalf of the nearby settlement of {3}. Their crops have been struck by blight and they might not survive the winter without extra supplies of {4}. They are willing to pay extra for any items of this category, but without immediate food or money they will starve. They ask for {5} silver before they pack their caravan and come your way.\n\n\nPay {5} silver for a trader willing to pay extra for {4}?</MFI_ReverseTradeRequest_Blight>
+  <MFI_ReverseTradeRequestTitle>trading opportunity at {0}</MFI_ReverseTradeRequestTitle>
+
+  <MFI_LetterLabel_HarvestRequest>Help wanted</MFI_LetterLabel_HarvestRequest>
+  <MFI_LetterHarvestRequest>A nearby settlement, {0}, contacts you with a special request. Their fields have yielded far more than originally expected, and they could really use your help with the harvest.\n\nThis request expires after: {1}\n\nIf you want to help them, send a caravan with capable growers. You can review this offer by selecting {0} on the world map.</MFI_LetterHarvestRequest>
+  <MFI_CommandFulfillBumperCropHarvestConfirm>Offer your help in harvesting? {0} will temporarily be unable to move while harvesting takes place.</MFI_CommandFulfillBumperCropHarvestConfirm>
+  <MFI_MessageBumperCropNoGrower>No conscious, capable grower.</MFI_MessageBumperCropNoGrower>
+  <MFI_HarvestRequestInfo>Requesting help with harvesting. ({0} left)</MFI_HarvestRequestInfo>
+  <MFI_CommandHelpOutHarvesting>Help harvest</MFI_CommandHelpOutHarvesting>
+  <MFI_Harvest_Triumph>The harvest was an overwhelming success. While harvesting, your colonists chatted and came closer with the {0} of {1}.\n\nRelations with {1} have improved by {2}.\n\nAs your caravan departed, {0} offered you a parting gift: {3}.</MFI_Harvest_Triumph>
+  <MFI_LetterLabelHarvest_Triumph>Bumper crop harvested</MFI_LetterLabelHarvest_Triumph>
+  <MFI_BumperCropXPGain>Your grower {0} has gained {1} growing experience.</MFI_BumperCropXPGain>
+
+  <MFI_DiplomaticMarriage>Word of {1}'s charm has reached {0} and they've asked you for {1}'s hand in marriage. Accepting this marriage proposal will cement relations and strengthen faction ties, but {1} will leave your faction to join {2}.</MFI_DiplomaticMarriage>
+  <MFI_DiplomaticMarriageLabel>Diplomatic marriage</MFI_DiplomaticMarriageLabel>
+  <MFI_AcceptedProposal>[PAWN_nameDef] sounds overjoyed. [PAWN_pronoun] is convinced they'll live happily ever after with {0}.\n\nRelations with {1} improved.</MFI_AcceptedProposal>
+  <MFI_DejectedProposal>[PAWN_nameDef] tries [PAWN_possessive] best not to sound rejected.\n\nRelations with {1} have deteriorated somewhat.</MFI_DejectedProposal>
+
+  <MFI_MysticalShamanLetter>Someone who claims to be a representative of {0} contacts us with a tall tale of a mystical shaman who has mastered the "healer's hand" to cure any injury or missing part. They'll tell us the location of this mysterious and normally reclusive person for a small fee of {1} silver.</MFI_MysticalShamanLetter>
+  <MFI_MysticalShamanTitle>Mystical Shaman</MFI_MysticalShamanTitle>
+
+  <MFI_MysticalShamanFoundNoSickPawn>The Shaman emerges from his polyester teepee just before your caravan announces their presence. He judges your group silently, passing one quivering eye over your decidedly healthy group, the other eye crossed in apparent meditation. Visibly sweating, he orders you to wait a respectable distance while he retreats back in his teepee. Moments later you hear the rustling of fabric and the sound of a muffalo being spurred on.\n\nIt seems the mystical shaman packed up and left.</MFI_MysticalShamanFoundNoSickPawn>
+  <MFI_MysticalShamanDoesHisMagic>The Shaman seems to have been expecting you, and with great practice regales you the tale of his "healer's hands". Once finished, he invites {0} into his teepee. There is a brief shake of the screen before {0} re-emerges, feeling much better.</MFI_MysticalShamanDoesHisMagic>
+
+  <MFI_WoundedCombatant>A high-ranking military official from {0} sends a distress signal. Multiple of his combatants have sustained serious injuries and require immediate medical attention. They're loaded in a transport pod but the nearest medical outpost is too far away to save the lives of these men and women, so he calls upon you as their ally to help them. Will you respond to his plea for help and nurture his troops back to health?</MFI_WoundedCombatant>
+  <MFI_WoundedCombatantRejected>It's amazing how well you can hear the commander's expletives over the sound of heavy mortar fire, as he wishes bad things upon your colony and holds you responsible for the death of his men.\n\n Relations with {0} have deteriorated by {1}.</MFI_WoundedCombatantRejected>
+  <MFI_WoundedCombatantTitle>Ally distress signal at {0}</MFI_WoundedCombatantTitle>
+  <MFI_WoundedCombatantAmbush>It's a trap! {0}'s enemy has somehow managed to hack your communication and abused it to get ahead in the war. {1}</MFI_WoundedCombatantAmbush>
+  <MFI_WoundedCombatantGratitude>The commander gives you an earnest and heartfelt salute. It loses a lot of its impact and meaning as you can't see the gesture through the radio, so you hang up.</MFI_WoundedCombatantGratitude>
+  <MFI_WoundedCombatantAmbushAvoided>You hear a voice in the background yell, asking if "they've taken the bait yet". You quickly hang up, confused and somewhat relieved you escaped potential disaster.</MFI_WoundedCombatantAmbushAvoided>
+
+</LanguageData>

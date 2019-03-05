@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>trade request</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>Trade request</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_PirateExtortion.label>humble pirate request</MFI_PirateExtortion.label>
+  <MFI_PirateExtortion.letterLabel>Pirate payment d'mand</MFI_PirateExtortion.letterLabel>
+
+  <MFI_WoundedCombatants.label>wounded combatants</MFI_WoundedCombatants.label>
+
+
+</LanguageData>

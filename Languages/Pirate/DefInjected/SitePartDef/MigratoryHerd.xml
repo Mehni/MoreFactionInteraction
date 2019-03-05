@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>Hunter's lodge</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>A small outpost, used by friendly factions as a hunting base.</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>There's usually a large herd of {0} coming through around this time of year</MFI_HuntersLodgePart.descriptionDialogue>
+
+
+</LanguageData>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>herd migration</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>A large group o' {0} is passin' thru th'area.\n\nIt's shootin' time.</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>Animal migration: {0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>

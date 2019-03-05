@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_RoadWorks.label>road works</MFI_RoadWorks.label>
+
+  <MFI_DiplomaticMarriage.label>diplomatic marriage</MFI_DiplomaticMarriage.label>
+  <MFI_DiplomaticMarriage.letterLabel>Diplomatic marriage</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>mystical shaman</MFI_MysticalShaman.label>
+  <MFI_MysticalShaman.letterLabel>Mystical shaman</MFI_MysticalShaman.letterLabel>
+
+  <MFI_HuntersLodge.label>huntars loje</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterText>Ye's been invited to {0}'s {1} special little cabin. {2}. There is an outpost thar what with all them stuff youse need to make meals, and they want ye to come. If y'ain't thar in {3} days they'll torch the entire place.</MFI_HuntersLodge.letterText>
+  <MFI_HuntersLodge.letterLabel>Hunter's lodge</MFI_HuntersLodge.letterLabel>
+
+  <MFI_SettlementBaseAttack.label>Faction base attacked</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>
