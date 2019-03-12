@@ -13,13 +13,18 @@ namespace MoreFactionInteraction
         public ThingSetMakerDef rewardFirstLoser;
         public ThingSetMakerDef rewardFirstOther;
 
+        [MustTranslate]
         public string theme;
+        [MustTranslate]
         public string themeDesc;
 
         public StatDef relevantStat;
 
+        [MustTranslate]
         public string outComeFirstPlace;
+        [MustTranslate]
         public string outcomeFirstLoser;
+        [MustTranslate]
         public string outComeFirstOther;
 
         public float xPGainFirstPlace = 4000f;
