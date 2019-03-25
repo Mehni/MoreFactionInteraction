@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <MFI_FactionWarPeaceTalks.label>мирные переговоры</MFI_FactionWarPeaceTalks.label>
+  <MFI_FactionWarPeaceTalks.label>Мирные переговоры</MFI_FactionWarPeaceTalks.label>
   <MFI_FactionWarPeaceTalks.description>Назначено место мирных переговоров.</MFI_FactionWarPeaceTalks.description>
+  
   <MFI_MysticalShaman.label>Таинственный колдун</MFI_MysticalShaman.label>
   <MFI_MysticalShaman.description>Палатка в которой живет колдун</MFI_MysticalShaman.description>
+
+  <MFI_RoadUnderConstruction.label>Строящаяся дорога</MFI_RoadUnderConstruction.label>
+  <MFI_RoadUnderConstruction.description>Строительная площадка.</MFI_RoadUnderConstruction.description>
+
+  <MFI_AnnualExpoObject.label>Ежегодная выставка</MFI_AnnualExpoObject.label>
+  <MFI_AnnualExpoObject.description>Место, предназначенное для проведения выставки в этом году.</MFI_AnnualExpoObject.description>
 
 </LanguageData>
