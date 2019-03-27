@@ -3,6 +3,7 @@
   <Excluded>
     <exclude>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\MoreFactionInteraction\.git</exclude>
     <exclude>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\MoreFactionInteraction\.vs</exclude>
+    <exclude>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\MoreFactionInteraction\Languages\Pirate</exclude>
     <exclude>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\MoreFactionInteraction\MoreFactionInteraction\bin</exclude>
     <exclude>C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\MoreFactionInteraction\MoreFactionInteraction\obj</exclude>
   </Excluded>
