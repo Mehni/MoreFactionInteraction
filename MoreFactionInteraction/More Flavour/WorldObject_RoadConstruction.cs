@@ -23,7 +23,7 @@ namespace MoreFactionInteraction
         {
             if (Find.TickManager.TicksGame > projectedTimeOfCompletion)
             {
-                Messages.Message("MFI_RoadSectionCompleted", this, MessageTypeDefOf.TaskCompletion);
+                Messages.Message("MFI_RoadSectionCompleted".Translate(), this, MessageTypeDefOf.TaskCompletion);
                 Find.WorldGrid.OverlayRoad(this.Tile, this.nextTile, this.road); //OverlayRoad makes sure roads don't degrade
                 Find.WorldObjects.Remove(this);
                 Find.World.renderer.SetDirty<WorldLayer_Roads>();
