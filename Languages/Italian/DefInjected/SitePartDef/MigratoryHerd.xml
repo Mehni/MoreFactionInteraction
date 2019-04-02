@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HuntersLodgePart.label>Casa del cacciatore</MFI_HuntersLodgePart.label>
+  <MFI_HuntersLodgePart.description>Piccolo avamposto, usato dalle fazioni alleate come posti di caccia.</MFI_HuntersLodgePart.description>
+  <MFI_HuntersLodgePart.descriptionDialogue>In questo periodo dell'anno di solito passa una grande orda di {0}</MFI_HuntersLodgePart.descriptionDialogue>
+  <MFI_HuntersLodgePart.arrivedLetter>La tua caravana è arrivata all'avamposto del cacciatore. Sembra che non ci sia nessuno qui, ma di sicuro si aspettavano il tuo arrivo e hanno creato il posto ospitabile per te.</MFI_HuntersLodgePart.arrivedLetter> 
+  <MFI_HuntersLodgePart.arrivedLetterlabel>Casa del cacciatore</MFI_HuntersLodgePart.arrivedLetterlabel>
+
+</LanguageData>

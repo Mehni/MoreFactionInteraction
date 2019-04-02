@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_ReverseTradeRequest.label>Richiesta di commercio</MFI_ReverseTradeRequest.label>
+  <MFI_ReverseTradeRequest.letterLabel>Richiesta di commercio</MFI_ReverseTradeRequest.letterLabel>
+
+  <MFI_BumperCropRequest.label>Richiesta di raccola</MFI_BumperCropRequest.label>
+
+  <MFI_Quest_PeaceTalks.label>La guerra sta arrivando?</MFI_Quest_PeaceTalks.label>
+  <MFI_Quest_PeaceTalks.letterLabel>Tensione tra fazioni</MFI_Quest_PeaceTalks.letterLabel>
+  <MFI_Quest_PeaceTalks.letterText>Hai ricevuto un messaggio da [PAWN_nameDef], {0} di {1}. La loro fazione di recente ha avuto difficolta diplomatiche con un'altra fazione e ti ha chiamato per negoziare tra di loro e {2} Hanno una preso una localita neutrale vicina e ti hanno invitato per negoziare.\n\nPotrebbe essere una buona opportunita per migliorare la relazione con la loro fazione, ma Attento! - un piccolo negoziato come questo può causare piu danni and potrebbe anche irritargli.\n\nL'offerta scade in {3} giorni, dopo di che [PAWN_nameDef] preparati al peggio</MFI_Quest_PeaceTalks.letterText>
+
+
+
+</LanguageData>

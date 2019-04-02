@@ -65,6 +65,7 @@ Shoutout to [Albion of Sparkling Worlds](https://steamcommunity.com/sharedfiles/
 - Spanish, courtesy of CANALETA
 - Spanish (Latin), courtesy of CANALETA
 - French, courtesy of jerlotrie
+- Italian, courtesy of EvaineQ
 
 Want to help translate this mod in your language? Check out the "Pirate" folder inside the Languages folder for all up to date strings.
 

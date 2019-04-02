@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_HerdMigration_Ambush.label>Migrazione della mandria</MFI_HerdMigration_Ambush.label>
+  <MFI_HerdMigration_Ambush.letterText>Un gruppo di {0} sta passando attraverso l'area.\n\nE tempo di caccia.</MFI_HerdMigration_Ambush.letterText>
+  <MFI_HerdMigration_Ambush.letterLabel>Migrazione animale：{0}</MFI_HerdMigration_Ambush.letterLabel>
+
+
+</LanguageData>

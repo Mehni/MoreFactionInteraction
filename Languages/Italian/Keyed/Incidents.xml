@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <!-- Ransom demand -->
+    <MFI_ExtortionDemandTitle>Domanda di estorsione da {0}</MFI_ExtortionDemandTitle>
+    <MFI_ExtortionDemand>{0}, {1} {2}, vieni contattato tramite una Console. Basandoti alla tua prossimita rispetto all loro {3} {4}, [PAWN_pronoun] sentono che stai invadento il loro terreno.\n\n[PAWN_pronoun] dice, che [PAWN_pronoun] può chiudere un occhio per una modesta somma di {5} d'argento. [PAWN_pronoun] aggiunge che un rifiuto al pagamento sara considerato un atto di aggressione, ma [PAWN_pronoun] e di buon cuore e ti da un giorno per pagarlo.</MFI_ExtortionDemand>
+    <MFI_Representative>una rappresentativa</MFI_Representative> 
+
+    <!-- Reverse Trade Request -->
+    <MFI_ReverseTradeRequest_Pyro>{0}, {1} {2}, ti ha mandato un messaggio. Il loro accampamento vicino {3} ha avuto un incidente con un piromane ed adesso sono disperati per {4}. Sono disposti a pagare un extra per qualsiasi oggetto che appartiene a questa categoria, ma ha bisogno di {5} d'argento per coprire i costi della carovana.\n\n{0} assicura che il piromane non verrà con noi.\n\n\nPaga {5} d'argento per un commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Pyro>
+    <MFI_ReverseTradeRequest_Mechs>Un messaggio scritto velocemente da {0}, {1} di {2}, ci ha raggiunti. Il loro accampamento vicino {3} ha scampato un incontro mortale con dei mechanoidi! Ed hanno già iniziato a ricostruirlo, ma non ce la faranno mai senza il tuo aiuto. Sono disperati per {4}. Sono disposti a pagare un extra per dei oggetti che appartengono a questa categoria, ma hanno anche bisogno di {5} d'argento per affittare una carovana, perche il loro accampamento non ha abbastanza forza maschile.\n\n\nPaga {5} d'argento per il commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Mechs>
+    <MFI_ReverseTradeRequest_Caravan>Abbiamo ricevuto molte richieste umili da {0}, {1} di {2}. Il loro accampamento {3} ha mal gestito il loro tempo ed ora sono disperati per {4}. Sono disposti a pagare un extra per dei oggetti di questa categoria, ma hanno bisogno di {5} d'argento per coprire i costi della carovana.\n\n\nPaga {5} d'argento per il commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Caravan>
+    <MFI_ReverseTradeRequest_Pirates>{0}, {1} di {2}, ha mandato un messaggio. Il loro accampamento vicino {3} e stato di recente saccheggiato dai pirati ed adesso sono disperati per {4}. Sono disposti a pagare un extra per dei oggetti che appartengono a questa categoria, ma hanno anche bisogno di {5} d'argento per coprire i costi della carovana.\n\n\nPaga {5} d'argento per il commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Pirates>
+    <MFI_ReverseTradeRequest_Hardship>Un intermediario anonimo ti contatta alla Console. Lui e stato in contatto con {2} ed è riuscito a trovare un accordo per {4}. E riuscito a negoziare con un commerciante disposto a pagare un extra per dei oggetti di questa categoria, ma in cambio chiede {5} d'argento come spese da intermediario prima che invii una carovana verso la tua posizione.\n\n\nPaga {5} d'argento per il commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Hardship>
+    <MFI_ReverseTradeRequest_Blight>{0} ci manda un messaggio per conto di un accampamento vicino di {3}. Le loro piante sono state colpite da una malattia e probabilmente non riusciranno a sopravvivire all'inverno senza delle forniture extra di {4}. Sono disposti a pagare un extra per dei oggetti che appartengono a questa categoria, ma senza una consegna affrettata delle razioni di cibo o dei soldi moriranno di fame. Loro ti chiedono umilmente anche {5} d'argento prima che possano partire verso la tua posizione.\n\n\nPaga {5} d'argento per il commerciante disposto a pagare un extra per {4}?</MFI_ReverseTradeRequest_Blight>
+    <MFI_ReverseTradeRequestTitle>opportunita di commercio al {0}</MFI_ReverseTradeRequestTitle>
+
+
+    <MFI_LetterLabel_HarvestRequest>Serve aiuto</MFI_LetterLabel_HarvestRequest>
+    <MFI_LetterHarvestRequest>Un acampamento vicino, {0}, ti contatta con una richiesta speciale. I loro campi di cibo sono ceduti molto prima del previsto, e loro potrebbero usare tuo aiuto con il raccolto.\n\nQuesta richiesta scade dopo: {1}\n\nSe li vuoi aiutare, invia una carovana con dei conatidini verso la loro posizione. Puoi rivedere la tua offera selezionando {0} nella mappa del mondo.</MFI_LetterHarvestRequest>
+    <MFI_CommandFulfillBumperCropHarvestConfirm>Vuoi offrire il tuo aiuto nella raccolta? {0} sara temporaneamente incapace di muoversi mentre aiutera con il raccolto in questo posto.</MFI_CommandFulfillBumperCropHarvestConfirm>
+    <MFI_MessageBumperCropNoGrower>Nessun coltivatore capace.</MFI_MessageBumperCropNoGrower>
+    <MFI_HarvestRequestInfo>Richiesta di aiuto con la raccolta. ({0} left)</MFI_HarvestRequestInfo>
+    <MFI_CommandHelpOutHarvesting>Aiuta con la raccolta</MFI_CommandHelpOutHarvesting>
+    <MFI_Harvest_Triumph>La raccolta e stata un grandissimo successo! Mentre lavoravano, il tuo colono ha avuto delle conversazioni molto piacevoli avvicinandosi con il {0} di {1}.\n\nRelazione con {1} e stata migliorata di {2}.\n\nMentre la tua carovana si avviava per tornare alla base, {0} ti ha offerto un piccolo dono: {3}.</MFI_Harvest_Triumph>
+    <MFI_LetterLabelHarvest_Triumph>Raccolto eccezzionale.</MFI_LetterLabelHarvest_Triumph>
+    <MFI_BumperCropXPGain>Il tuo contadino {0} ha guadagnato {1} esperienza nel crescere le piante.</MFI_BumperCropXPGain> 
+
+    <MFI_DiplomaticMarriage>La parola del fascino {1} ha raggiunto {0} e loro ti hanno chiesto la tua mano nel matrimonio. Accettando la proposta di matrimonio incrementera la relazione tra le due fazioni, ma {1} abbandonerà la tua fazione per far parte di {2}.</MFI_DiplomaticMarriage>
+    <MFI_DiplomaticMarriageLabel>Matrimonio diplomatico</MFI_DiplomaticMarriageLabel>
+    <MFI_AcceptedProposal>[PAWN_nameDef] si sente felicissimo. [PAWN_pronoun] è convinto che vivranno felici e contenti per sempre con {0}.\n\nRelazione con {1} migliorata.</MFI_AcceptedProposal>
+    <MFI_DejectedProposal>[PAWN_nameDef] ci prova [PAWN_possessive] ma e stato rigettato.\n\nRelazione con {1} e peggiorata leggermente.</MFI_DejectedProposal>
+
+    <MFI_MysticalShamanLetter>Qualcuno che dice di essere un rappresentante di {0} ci contatta con una storia di un sciamano che ha imparato le arti nel &quot;healer's hand&quot; per curare qualsiasi lesione o parte del corpo mancante. Loro ci diranno dove si trova il luogo della persona che reclama di avere questo misterioso potere per un modesto prezzo di {1} d'argento.</MFI_MysticalShamanLetter>
+    <MFI_MysticalShamanTitle>Sciamano mistico</MFI_MysticalShamanTitle>
+
+    <MFI_MysticalShamanFoundNoSickPawn>Lo sciamano emerge dalla sua tenda di pelle ancora prima che la tua carovana noti la sua presenza. Lo sciamano giudica silenziosamente il tuo gruppo, passando con uno sguardo tremante sul tuo gruppo. Ti ordina di aspettarlo ad una distanza rispettabile mentre si ritira indietro nella sua tenda. Un momento dopo senti un fruscio ed il suono di come un muffao stimolato.\n\nSembra che lo sciamano misterioso sia sparito.</MFI_MysticalShamanFoundNoSickPawn>
+    <MFI_MysticalShamanDoesHisMagic>Sembra che lo sciamanno ti stava aspettando, e con grande pratica ti racconta la storia della sua abilita &quot;mani curative&quot; Una volta finito, ti invita {0} nella sua tenda di pelle. Per un momento lo schermo si scuote prima che {0} riemerge, sentendosi molto meglio.</MFI_MysticalShamanDoesHisMagic>
+
+    <MFI_WoundedCombatant>Un alto ufficiale militare di {0} ha inviato una richiesta di soccorso. Diversi combattenti dal suo insediamento sono stati gravemente feriti e richiedono cure mediche immediate. Sono stati caricati in capsule di trasporto, ma l'avamposto medico più vicino e troppo lontano date le condizioni fisiche dei suoi uomini, così ha cercato di contattarti. Risponderai alla sua chiamata per la salvezza e la cura dei suoi soldati?</MFI_WoundedCombatant>
+    <MFI_WoundedCombatantRejected>Senti molto bene le imprecazioni dell'ufficiale, nonostante le esplosioni di proiettili di mortaio, chiaramente non vuole niente di buono per la tua colonia e ti incolpa per la morte del suo popolo.\n\n Il rapporto con {0} è peggiorato di {1}.</MFI_WoundedCombatantRejected>
+    <MFI_WoundedCombatantTitle>Segnale di soccorso alleato {0}</MFI_WoundedCombatantTitle>
+    <MFI_WoundedCombatantAmbush>Questa è una trappola! I nemici {0} in qualche modo sono riusciti ad intercettare la tua connessione e l'hanno usata durante la guerra. {1}</MFI_WoundedCombatantAmbush>
+    <MFI_WoundedCombatantGratitude>L'ufficiale cerca di contattarti tramite la radio. Ma per te quello che dice non ha senso perché non lo riesci a sentire attraverso la radio, quindi hai concluso la conversazione.</MFI_WoundedCombatantGratitude>
+    <MFI_WoundedCombatantAmbushAvoided>Alla radio senti una voce che chiede: &quot;Sono gia partiti?&quot;. Hai riattaccato rapidamente e poco dopo realizzi che hai appena sventato una potenziale minaccia.</MFI_WoundedCombatantAmbushAvoided>
+    
+</LanguageData>

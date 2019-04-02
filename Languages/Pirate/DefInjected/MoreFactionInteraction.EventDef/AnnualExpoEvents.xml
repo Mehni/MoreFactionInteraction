@@ -21,8 +21,7 @@
   <MFI_CulturalSwap.outComeFirstPlace>As the last of daylight slowly dimmed away, [PAWN_nameDef] simply sat down on a granite stool and told of [PAWN_possessive] upbringing as a [PAWN_title]. This simple story and more importantly the atmosphere [PAWN_pronoun] created was lauded by judges for its intimacy, originality and bravery. Your reward for participating is:\n\n{0}</MFI_CulturalSwap.outComeFirstPlace>
   <MFI_CulturalSwap.outcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine with [PAWN_nameDef] taking centre stage. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{0}</MFI_CulturalSwap.outcomeFirstLoser>
   <MFI_CulturalSwap.outComeFirstOther>The host faction moved the audience to tears with their dazzling display; a dramatic reenactment of their ancestor's discovery of White Rabbit Mountain Range. It was a touching piece of theatre that transcended language barriers, and reached the hearts of young and old alike.\n\nAnd then there was your troupe. Your reward for participating is:\n\n{0}</MFI_CulturalSwap.outComeFirstOther>
-  <MFI_CulturalSwap.outcomeFirstLoser>Not being better prepared or having brought anything, your caravan broke out in a song and dance routine with [PAWN_nameDef] taking centre stage. It wasn't well-rehearsed, which shone through the performance. Not all participating factions were able to appreciate the improvised show, but it was an admirable effort nonetheless. Your reward for participating is:\n\n{0}</MFI_CulturalSwap.outcomeFirstLoser>
-
+ 
   <MFI_ScienceFaire.label>Science Faire</MFI_ScienceFaire.label>
   <MFI_ScienceFaire.theme>exchanging scientific discoveries</MFI_ScienceFaire.theme>
   <MFI_ScienceFaire.themeDesc>Exciting!</MFI_ScienceFaire.themeDesc>
