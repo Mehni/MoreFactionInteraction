@@ -60,10 +60,38 @@ namespace MoreFactionInteraction.More_Flavour
                     StringBuilder sb = new StringBuilder();
                     foreach (var defEvent in DefDatabase<EventDef>.AllDefsListForReading)
                     {
+                        sb.AppendLine(defEvent.LabelCap);
                         Pawn bestpawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, eventDef.relevantStat);
                         if (bestpawn == null)
                             sb.AppendLine($"No pawn for {defEvent.LabelCap} found in caravan");
+                        else
+                        {
+                            int outComeOne = 0;
+                            int outComeTwo = 0;
+                            int outComeThree = 0;
+                            for (int i = 0; i < 1000; i++)
+                            {
+                                int placement = DetermineOutComeFor(bestpawn, defEvent);
+                                switch (placement)
+                                {
+                                    case 1:
+                                        outComeOne++;
+                                        break;
+                                    case 2:
+                                        outComeTwo++;
+                                        break;
+                                    case 3:
+                                        outComeThree++;
+                                        break;
+                                }
+                            }
+                            sb.AppendLine($"Chances for {bestpawn.LabelShort} with stat {defEvent.relevantStat} @ {bestpawn.GetStatValue(defEvent.relevantStat)}:" +
+                                          $" first: {(outComeOne / 1000f).ToStringPercent()}, " +
+                                          $" second: {(outComeTwo / 1000f).ToStringPercent()}, " +
+                                          $" third: {(outComeThree / 1000f).ToStringPercent()} " );
+                        }
                     }
+                    Log.Error(sb.ToString(), true);
                 }
             };
             if (Prefs.DevMode)
@@ -79,7 +107,7 @@ namespace MoreFactionInteraction.More_Flavour
             if (pawn.skills.GetSkill(thisYearsRelevantSkill).TotallyDisabled) //fallback
                 thisYearsRelevantSkill = pawn.skills.skills.Where(x => !x.TotallyDisabled).RandomElementByWeight(x => (int)x.passion).def;
 
-            int placement = DetermineOutComeFor(pawn, eventDef, thisYearsRelevantSkill);
+            int placement = DetermineOutComeFor(pawn, eventDef);
 
             switch (placement)
             {
@@ -110,7 +138,7 @@ namespace MoreFactionInteraction.More_Flavour
             }
         }
 
-        private static int DetermineOutComeFor(Pawn pawn, EventDef eventDef, SkillDef thisYearsRelevantSkill)
+        private static int DetermineOutComeFor(Pawn pawn, EventDef eventDef)
         {
             const float BaseWeight_FirstPlace = 0.2f;
             const float BaseWeight_FirstLoser = 0.5f;
