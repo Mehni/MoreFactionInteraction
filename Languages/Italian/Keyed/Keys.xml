@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+    <!--settings -->
+    <MFI_ticksToUpgrade>Quanto tempo impiegheranno i pirati a migliora i loro accampamenti in basi.</MFI_ticksToUpgrade>
+    <MFI_ticksToUpgradeDesc>Valori piu grandi significano che i pirati impiegheranno piu tempo per cambiare accampamenti in basi.</MFI_ticksToUpgradeDesc>
+    <MFI_pirateBaseUpgraderModifier>Tempo di spawn dei accampamenti pirata.</MFI_pirateBaseUpgraderModifier> 
+    <MFI_pirateBaseUpgraderModifierDesc>Valori piu grandi significano una possibilita piu alta di diffusione pirata.</MFI_pirateBaseUpgraderModifierDesc>
+    <MFI_timeModifierBetweenFactionInteraction>Modificare questo valore cambia il tempo d'interazione tra le fazioni</MFI_timeModifierBetweenFactionInteraction>
+    <MFI_timeModifierBetweenFactionInteractionDesc>Modificare questo valore cambia il tempo d'interazione tra le fazioni. Scala in modo positivo con Buonvolonta (migliore sara la Buonavolonta = piu visite) e negativamente con piu fazioni alleate (molti amici = meno visite per amico, totale approssimativamente uguale. Per quelli che hanno modlte mod delle fazioni installate).</MFI_timeModifierBetweenFactionInteractionDesc>
+    <MFI_traderWealthOffsetFromTimesTraded>Un opzione che permette di cambiare l'argento offerto dai mercanti.</MFI_traderWealthOffsetFromTimesTraded>
+
+    <MFI_LetterLabelBanditOutpostUpgraded>Avamposti dei banditi migliorato</MFI_LetterLabelBanditOutpostUpgraded>
+    <MFI_LetterBanditOutpostUpgraded>Pirati da {0} hanno migliorato un avamposto qui vicino in una base!\n\nOccasionalmente ci potranno invadere per testare le nostre difese, ed eventualmente creare dei nuovi avamposti che potranno diventare basi.</MFI_LetterBanditOutpostUpgraded>
+    <MFI_DesperateTrader>Mercante disperato</MFI_DesperateTrader>
+    <MFI_TraderSent>{0} grazie mille. La loro carovana arrivera in {1}.</MFI_TraderSent>
+    <MFI_Trader>Mercante</MFI_Trader>
+
+    <MFI_CaravanWorking>La carovana non può muoversi durante il lavoro di raccolta.</MFI_CaravanWorking>
+
+    <MFI_FactionWarPeaceTalksIntroduction>I due leader rivali {0} è {1} hanno entrambi creato i le loro basi in angoli opposti della mappa. Le tensioni sono alla stelle quanto il tuo negoziatore {2} arriva. I giorni precedenti sono stati motlo impegnativi, e il tuo negoziatore sa che qualunque sia la cosa che diranno potra avere delle conseguenze spiacevoli.\n\n{2} ha le seguenti opzioni:</MFI_FactionWarPeaceTalksIntroduction>
+
+    <MFI_FactionWarPeaceTalksCurryFavour>Curry favour with {0}</MFI_FactionWarPeaceTalksCurryFavour>
+    <MFI_FactionWarPeaceTalksSabotage>Sabotage the peace talks to better the colony</MFI_FactionWarPeaceTalksSabotage>
+    <MFI_FactionWarPeaceTalksBrokerPeace>Broker peace between the two factions</MFI_FactionWarPeaceTalksBrokerPeace>
+
+    <!-- Faction war, favour one faction over the other -->
+    <MFI_FactionWarFavourFactionDisaster>La riunione e stata un disastro. Nessuna delle fazioni ha gradito i trattati proposti {0}. Gli sforzi per decidere il vincitore del conflitto sono stati considerati un atto di aggressione e di conseguenza i trattati di pace si sono interrotti.\n\nLa relazione con {0} e peggiorata leggermente.\n\nLa relazione con {1} e peggiorata drasticamente.</MFI_FactionWarFavourFactionDisaster>
+    <MFI_FactionWarFavourFactionBackFire>La riunione e stata un fallimento. Mentre i delegati delle fazioni discutevano su differenze chiavi, le decisioni che il tuo negoziatore ha preso sono stati visti come non costruttive verso l'obiettivo e di conseguenza i trattati si sono interrotti.\n\nLa relazione con {0} e peggiorata.\n\nLa relazione con {1} e peggiorata drasticamente.</MFI_FactionWarFavourFactionBackFire>
+    <MFI_FactionWarFavourFactionFlounder>La riunione si e svolta quasi come prevista. I delegati delle fazioni hanno espresso i loro problemi chiave molto chiaramente, ma il tuo negoziatore non e stato ingrado di contribuire in un modo significativo nei trattati di pace.\n\nLa relazione con {0} e migliorata leggermente.\n\nLa relazione con {1} e peggiorata in modo considerabile.</MFI_FactionWarFavourFactionFlounder>
+    <MFI_FactionWarFavourFactionSuccess>La riunione e stata un successo. Il tuo negoziatore e riuscito a convincere {1} di fare ammenda con {0}, e i loro delegati hanno raggiunto un trattato.\n\nLa relazione con {0} e mig.liorata in modo considerabile.\n\nLa relazione con {1} e peggiorata leggermente.</MFI_FactionWarFavourFactionSuccess>
+    <MFI_FactionWarFavourFactionTriumph>La riunione e stata un grande successo! Il tuo negoziatore ha giocato un grande ruolo nel convincere {1} di pagare le riparazioni per gli attacchi passati, per questo {0} e diventato molto felice.\n\nLa relazione con {0} e migliorata drasticamente.\n\nLa relazione con {1} e peggiorata.</MFI_FactionWarFavourFactionTriumph>
+
+    <!-- Faction war, sabotage to benefit colony -->
+    <MFI_FactionWarSabotageDisaster>Il sabotaggio e stato un totale fallimento. I delegati hanno scoperto immediatamente le tue intenzioni e le due fazioni si sono rivoltate contro di te! La tua carovana ha fatto un brusca partenza, ma i guerrieri delle due fazioni sono comunque riusciti a raggiungerti e ti hanno aggredito!\n\nLa relazione con {0} si e interrotta. Ora sono i tuoi nemici.\n\nLa relazione con {1} si e interrotta. Ora sono i tuoi nemici.</MFI_FactionWarSabotageDisaster>
+    <MFI_FactionWarSabotageBackFire>Il sabotaggio e stato un fallimento. Non lungo dopo che i delegati si sono scambiati parole di pace, ti hanno scoperto nel tentativo segreto della tua sabotazione e ti hanno escluso dalla riunione.\n\nLa relazione con {0} e peggiorata drasticamente.\n\nLa relazione con {1} e peggiorata drasticamente.</MFI_FactionWarSabotageBackFire>
+    <MFI_FactionWarSabotageFlounder>Il sabotaggio e stato un insuccesso. Il tuo negoziatore non e stato capace di mettere nemmeno una parola giusta per mettere una fazione contro l'altra.\n\nLa relazione con {0} e {1} sono rimaste invariate.</MFI_FactionWarSabotageFlounder>
+    <MFI_FactionWarSabotageSuccess>Il sabotaggio ha avuto un successo discutibile. Mentre i delegati discutevano dei problemi importanti, il tuo negoziatore ha espresso il suo parere politico che ha lasciato lasciato impresse le due fazioni anche se non ha avuto nessun impatto sostanziale nel tuo sabotaggio.\n\nLa relazione con {0} e migliorata in modo significativo.\n\nLa relazione con {1} e migliorata in modo considerevole.</MFI_FactionWarSabotageSuccess>
+    <MFI_FactionWarSabotageTriumph>Il sabotaggio e state un grandissimo successo in tutti sensi! I delegati sono stati messi uno contro l'altro in modo molto professionale dal tuo negoziatore, e non molto dopo le presentazioni iniziali, la discussione si e trasformata in insulti e incriminazioni mentre i due aggressori sono rimasti impressionati dalla tua fazione.\n\nLa relazione con {0} e migliorata significativamente.\n\nLa relazione con {1} e migliorata significativamente.</MFI_FactionWarSabotageTriumph>
+
+    <!-- Faction war, broker peace -->
+    <MFI_FactionWarBrokerPeaceDisaster>I trattati sono stati un disastro. I delegati hanno malapena passato le presentazioni iniziali prima che inziava una discussione piena di insulti e incriminazioni. Niente che il tuo negoziatore ha detto e stato approvato, e la relazione con le due fazioni opposte sono peggiorate rispetto a prima.\n\La relazione con {0} e peggiorata.\n\nLa relazione con {1} e peggiorata.</MFI_FactionWarBrokerPeaceDisaster>
+    <MFI_FactionWarBrokerPeaceBackFire>I trattati sono stati un fallimento. Nonostante le buone maniere, i delegati non hanno fatto nessun progresso sui problemi sostanziali, e multipli dichiarazioni sono stati interpretati come insulti. Hanno deciso di spostare i trattati di pace in un'altro giorno.\n\nLa relazione con {0} e rimasta invariata.\n\nLa relazione con {1} e rimasta invariata.</MFI_FactionWarBrokerPeaceBackFire>
+    <MFI_FactionWarBrokerPeaceFlounder>I trattati sono stati incasinati. I delegati sono riusciti a comunicare in modo molto chiaro e con molto rispetto, ma non sono stati in grado di fare nessun progresso sino all'arrivo del tuo negoziatore. Principalmente hanno solamente rassicurato le paure.\n\nLa relazione con {0} e migliorata leggermente.\n\nLa relazione con {1} e migliorata leggermente.</MFI_FactionWarBrokerPeaceFlounder>
+    <MFI_FactionWarBrokerPeaceSuccess>I trattati sono stati un successo. Grazie al tuo negoziatore, i delegati hanno capito come risolvere vari problemi.\n\nLa relazione con {0} e migliorata significativamente.\n\nLa relazione con {1} e migliorata significativamente.</MFI_FactionWarBrokerPeaceSuccess>
+    <MFI_FactionWarBrokerPeaceTriumph>I trattati sono stati un grandissimo successo! Il tuo negoziatore ha connesso rapidamente con i delegati in modo da capire la perspettiva di ognuno di loro per identificare i problemi più importanti del giorno.\n\nLa relazione con {0} e migliorata drasticamente.\n\nLa relazione con {1} e migliorata drasticamente.</MFI_FactionWarBrokerPeaceTriumph>
+
+    <MFI_FactionWarProgress>La guerra tra le fazioni continua</MFI_FactionWarProgress>
+    <MFI_UnrestIsBrewing>I disordini tra le fazioni stanno iniziando ad essere preoccupanti.</MFI_UnrestIsBrewing>
+
+    <MFI_FactionWarBaseBattleTookPlaceLabel>Base della fazione attaccata</MFI_FactionWarBaseBattleTookPlaceLabel>
+    <MFI_FactionWarBaseAttacked>La base appartenente a {0} e stata attaccata da {1}!</MFI_FactionWarBaseAttacked>
+    <MFI_FactionWarBaseDefeated>Loro non sono stati ingrado di difendere se stessi ed hanno subito un duro colpo.</MFI_FactionWarBaseDefeated>
+    <MFI_FactionWarBaseTakenOver>Dopo aver perso {0}, la fazione di {1} ha preso il sopravvento ed ha reclamato l'area nei dintorni.</MFI_FactionWarBaseTakenOver>
+    <MFI_FactionWarBaseDestroyed>Gli aggressori da {1} hanno saccheggiato la base e l'hanno brucita. Guesto e un grande colpo per {0}.</MFI_FactionWarBaseDestroyed>
+    <MFI_FactionWarBaseSuccessfullyDefended>I difensori hanno respinto con successo l'attaco contro di loro. {0} considera questa una vittoria nella guerra tra le fazioni.</MFI_FactionWarBaseSuccessfullyDefended>
+
+    <MFI_FactionWarStarted>La guerra tra le fazioni e iniziata</MFI_FactionWarStarted>
+    <MFI_FactionWarExplanation>La guerra tra {0} è {1} e appena cominciata. Occasionalmente lanceranno attacchi uno contro l'altro. Sei hai favorita una delle due fazioni, loro sicuramente chiameranno in  tuo aiuto.\n\nPuoi tenere traccia dei progressi di guerra nella scheda delle Fazioni.</MFI_FactionWarExplanation>
+    <MFI_FactionWarOverLabel>Guerra terminata</MFI_FactionWarOverLabel>
+    <MFI_FactionWarOver>Dopo tante battaglie e molte sconfitte, la guerra tra {0} and {1} e finalmente terminata.</MFI_FactionWarOver>
+
+
+    <MFI_FactionWarLeaderDecidedLabel>Esito del trattato di pace</MFI_FactionWarLeaderDecidedLabel> 
+    <MFI_FactionWarLeaderDecidedOnWar>I trattati di pace sono stati un fallimento, e la guerra tra {0} e {1} è appena iniziata. Occasionalmente lanceranno attacchi uno contro l'altro. Sei hai favorita una delle due fazioni, loro sicuramente chiameranno in  tuo aiuto.\n\nPuoi tenere traccia dei progressi di guerra nella scheda delle Fazioni.</MFI_FactionWarLeaderDecidedOnWar>
+    <MFI_FactionWarLeaderDecidedAgainstWar>I trattati di pace sono terminati. Le tensioni sono statte alleviate e la fazione di {0} e {1} hanno raggiunto un accordo.</MFI_FactionWarLeaderDecidedAgainstWar>
+
+    <!-- equivalent to NeedSilverLaunchable, just with steel. (currently unused) -->
+    <MFI_SellingWarBondsNeedSteelLaunchable>ho bisogno di {0} d'acciaio vicino al faro commerciale</MFI_SellingWarBondsNeedSteelLaunchable>
+
+    <!-- Annual Expo start -->
+    <MFI_AnnualExpoLetterLabel>{0} Expo annuale</MFI_AnnualExpoLetterLabel> 
+    <!-- it is time for the {ORDINALNUMBER} annual {WORLDNAME}. This year's host is {FACTIONLABEL} and the theme is {MFI_gameOfUrComp / MFI_shootingComp / MFI_culturalSwap / etc} {MFI_gameOfUrCompExpl / MFI_shootingCompExpl / etc} -->
+    <MFI_AnnualExpoLetterText>E tempo per {0} l'esposizione {1} annuale, e la tua fazione e stata invitata. Quest'anno l'host e {2} ed il tema e {3}. {4}\n\nL'esposizione annuale e un incontro pacifico altamente rispettato. Nel passato e stato usato da quasi tutte le fazioni come opportunita per scambiare conoscenze culturali, esperienze, e anche per mettersi in mostra.</MFI_AnnualExpoLetterText>
+    <MFI_AnnualExpoDialogueIntroduction>La tua carovana è arrivata all'esposizione annuale. Il tema di quest'anno è {0}, ci sono anche molti esperti su questo argomento qui oggi. Molti di loro si stanno gia preparando, mentre gli altri hanno gia iniziato a mostrare le proprie abilità.\n\nL'expo e una mostra di materiali semplici e ma anche molto avanzati o pre fabricate da tutto il globo. Loro stanno formando un cerchio sul palco principale, dove {1}.\n\nSicuramente sara usato per mostrare qualcosa di interessante.</MFI_AnnualExpoDialogueIntroduction>
+    <MFI_AnnualExpoFirstOption>Allora cosa aspettiamo? Iniziamo!</MFI_AnnualExpoFirstOption> 
+
+    <MFI_buffPemmican>Un nuovo metodo per preservare Pemmican in questo modo non può marcire.</MFI_buffPemmican> 
+    <!-- It's gotta *sound* fancy, it doesn't necessarily has to make sense. {0} is the label for the Psychic Emitter; replaced automagically. -->
+    <MFI_buffEmanator>Hai imparato come overcloccare; ottenere piu performance cambiando varie impostazioni del milli-voltaggio e premendo qualche bottone rosso. Il {0} ora ha un effetto di raggio aumentato, al costo dell'energia elettrica e longetività.</MFI_buffEmanator>
+    <!-- like the emanator above, only for the infinite chemfuel reactor generator doodad thing. -->
+    <MFI_buffChemfuel>Rimuovendo il pannello con la scritta 'Laccio di servizio' e l'attivazione del ora esposto Rockerswitch premi 2-A etichettato 'VAI PIU VELOCE' il {0} ora produce {1} molto piu spesso.</MFI_buffChemfuel>
+    <MFI_buffPsychite>Facendo un passo piu in avanti, {0} e ora molto piu potente. La vera bellezza dell'ingegneria moderna.</MFI_buffPsychite> 
+          
+    <MFI_SinceYouSuckAndDidntHaveIt>Dato che non l'hai ancora fatto, ti hanno dato{0}!</MFI_SinceYouSuckAndDidntHaveIt>
+
+    <MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>Le opere d'arte che la tua carovana ha portato alla manifestazione hanno preso il secondo posto nella competizione, ma è stata la preferita in assoluto dal pubblico. Un esperto si e avvicinato alla tua roulotte dopo lo spettacolo e si è offerto di comprare {0} per {1}, che sul mercato ha un valore stabili dai giudici di {2}.</MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt>
+
+    <!-- {Pawn.LabelShort} has gained {amount} {SkillDef.label} experience. -->
+    <MFI_AnnualExpoXPGain>{0} ha guadagnato {1} {2} esperienza.</MFI_AnnualExpoXPGain>
+    <MFI_AnnualExpoMedicalEmergency>Alcuni lividi, una leggera commozione cerebrale e un paio di ego ammaccati.</MFI_AnnualExpoMedicalEmergency>
+    <MFI_AnnualExpoMedicalEmergencySerious>Una distorsione alla caviglia, muscoli indolenziti e un imbarazzante malfunzionamento del guardaroba.</MFI_AnnualExpoMedicalEmergencySerious>
+
+    <MFI_AnnualExpoMessageNoRepresentative>Non hai nessun rappresentante consapevole capace.</MFI_AnnualExpoMessageNoRepresentative>
+    <!-- Annual Expo end -->
+
+    <MFI_LetterLabelSquatters>Occupanti abusivi</MFI_LetterLabelSquatters>
+    <MFI_LetterSquatters>Un gruppo di occupanti abusivi di {0} si e accampato in un vicino insediamento vuoto e decise di stabilirsi definitivamente nelle rovine da quelle parti. Loro la chiamano la loro nuova casa {1}.</MFI_LetterSquatters>
+
+    <MFI_EstTimeOfCompletion>Tempo stimato al completamento</MFI_EstTimeOfCompletion>
+    <MFI_RoadWorks>Lavori stradali</MFI_RoadWorks>
+    <MFI_RoadSectionCompleted>Una nuova costruzione della strada e stata appena completata.</MFI_RoadSectionCompleted>
+    <MFI_RoadWorksDialogue>{0} propone un'idea che credono aumenterà il commercio e la prosperità economica nella regione attuale. Vogliono costruire una strada di {1} tessere lunga, a partire dal loro insediamento. Per compensare il costo dei materiali e della manodopera, chiedono a tutti gli insediamenti nelle loro vicinanze generali un piccolo contributo di {2} argento.\n\nSe non gli dai l'importo richiesto, saranno costretti ad investire i loro sforzi altrove..</MFI_RoadWorksDialogue>
+</LanguageData>

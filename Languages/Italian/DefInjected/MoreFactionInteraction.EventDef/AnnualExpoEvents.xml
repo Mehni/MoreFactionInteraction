@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_GameOfUrComp.label>gioco competitivo di Ur</MFI_GameOfUrComp.label>
+  <MFI_GameOfUrComp.theme>gioco reale di Ur</MFI_GameOfUrComp.theme>
+  <MFI_GameOfUrComp.themeDesc>Manda il tuo giocatore migliore.</MFI_GameOfUrComp.themeDesc>
+  <MFI_GameOfUrComp.outComeFirstPlace>Tramite abilità, nervi d'acciaio e una bella fortuna, [PAWN_nameDef] ha vinto il torneo! Il tuo premio per partecipare è:\n\n{0}</MFI_GameOfUrComp.outComeFirstPlace>
+  <MFI_GameOfUrComp.outcomeFirstLoser>Per il round finale, [PAWN_nameDef] è andato testa a testa con il campione in carica da oltre cinque anni e ha perso. Il tuo premio per partecipare è:\n\n{0}</MFI_GameOfUrComp.outcomeFirstLoser>
+  <MFI_GameOfUrComp.outComeFirstOther>Durante il secondo scontro del quinto round, [PAWN_nameDef] ha giocato una mossa che ha confuso l'avversario [PAWN_possessive] e gli sono rimasti a dir poco arbitri sbalorditi. Comprensibilmente, ne seguì una massiccia rissa. La tua ricompensa per la partecipazione è:\n\n{0}</MFI_GameOfUrComp.outComeFirstOther>
+
+  <MFI_ShootingComp.label>Concorso di tiro</MFI_ShootingComp.label>
+  <MFI_ShootingComp.theme>un concorso di tiro</MFI_ShootingComp.theme>
+  <MFI_ShootingComp.themeDesc>Invia il tuo colpo migliore.</MFI_ShootingComp.themeDesc>
+  <MFI_ShootingComp.outComeFirstPlace>Con una precisione quasi robotica, [PAWN_nameDef] ha preso la mira e ha colpito tutti i bersagli con precisione millimetrica. I giudici sono rimasti molto colpiti e ti hanno premiato con:\n\n{0}</MFI_ShootingComp.outComeFirstPlace>
+  <MFI_ShootingComp.outcomeFirstLoser>Quest'anno c'è stato un forte campo di contendenti, con molti rappresentanti di fazioni che hanno vissuto da cacciatori o semplicemente vestiti con la bionica (archotech). [PAWN_nameDef] si è incagliato da qualche parte nei quarti di finale. Il tuo premio per aver partecipato è:\n\n{0}</MFI_ShootingComp.outcomeFirstLoser>
+  <MFI_ShootingComp.outComeFirstOther>[PAWN_nameDef] non ha passato oltre il primo turno, che consisteva nel "colpire il lato largo di un granaio". Hanno aggiunto quella parte come un bavaglio anni fa. [PAWN_nameDef] è il primo dalla sua introduzione a non progredire verso il secondo round. La tua ricompensa per la partecipazione è:\n\n{0}\n\n Sembra rappresentare l'abilità di [PAWN_nameDef] come sparatutto.</MFI_ShootingComp.outComeFirstOther>
+
+  <MFI_CulturalSwap.label>scambio culturale</MFI_CulturalSwap.label>
+  <MFI_CulturalSwap.theme>cultura e arte</MFI_CulturalSwap.theme>
+  <MFI_CulturalSwap.themeDesc>Potrebbe esserci un'opportunità per il commercio.</MFI_CulturalSwap.themeDesc>
+  <MFI_CulturalSwap.outComeFirstPlace>Mentre l'ultima luce del giorno si attenuava lentamente, [PAWN_nameDef] si sedeva semplicemente su uno sgabello di granito e raccontava di [PAWN_possessive] crescere come [PAWN_title]. Questa semplice storia e, soprattutto, l'atmosfera creata da PAWN_pronoun è stata lodata dai giudici per la sua intimità, originalità e coraggio. Il tuo premio per aver partecipato è:\n\n{0}</MFI_CulturalSwap.outComeFirstPlace>
+  <MFI_CulturalSwap.outcomeFirstLoser>Non essendo meglio preparato o avendo portato nulla, la tua carovana è scoppiata in una canzone e balla la routine con [PAWN_nameDef] al centro della scena. Non era ben provato, che brillava attraverso la performance. Non tutte le fazioni partecipanti hanno potuto apprezzare lo spettacolo improvvisato, ma ciò nonostante è stato uno sforzo ammirevole. Il tuo premio per aver partecipato è:\n\n{0}</MFI_CulturalSwap.outcomeFirstLoser>
+  <MFI_CulturalSwap.outComeFirstOther>La fazione ospite ha commosso il pubblico fino alle lacrime con il loro display abbagliante; una drammatica rievocazione storica della scoperta dei loro antenati di White Rabbit Mountain Range. Era un pezzo teatrale commovente che ha superato le barriere linguistiche e ha raggiunto il cuore di giovani e vecchi allo stesso modo.\n\nE poi c'era il tuo uomo. Il tuo premio per partecipare è:\n\n{0}</MFI_CulturalSwap.outComeFirstOther>
+
+  <MFI_ScienceFaire.label>Fiera scientifica</MFI_ScienceFaire.label>
+  <MFI_ScienceFaire.theme>scoperte scientifiche eccitanti</MFI_ScienceFaire.theme>
+  <MFI_ScienceFaire.themeDesc>Eccitante!</MFI_ScienceFaire.themeDesc>
+  <MFI_ScienceFaire.outComeFirstPlace>Insediandoti facilmente, un potente oratore e grande studioso non ti spiega nulla delle complessità dell'universo. Invece rivelano le sue simpatie:\n\n{0}</MFI_ScienceFaire.outComeFirstPlace>
+  <MFI_ScienceFaire.outcomeFirstLoser>La tua roulotte si annida tra i membri di un gruppo chiamato "Apprezzatori della scienza". Ti donano un dono di conoscenza:\n\n{0}</MFI_ScienceFaire.outcomeFirstLoser>
+  <MFI_ScienceFaire.outComeFirstOther>Stanco del lungo viaggio, i membri della tua roulotte hanno difficoltà a rimanere svegli durante la lunga e noiosa lezione di un famoso professore. Come regalo di partenza, ottieni:\n\n{0}</MFI_ScienceFaire.outComeFirstOther>
+
+  <MFI_AcousticShow.label>Spettacolo acustico</MFI_AcousticShow.label>
+  <MFI_AcousticShow.theme>uno spettacolo acustico</MFI_AcousticShow.theme>
+  <MFI_AcousticShow.themeDesc>Ti chiedi se portare i tappi per le orecchie.</MFI_AcousticShow.themeDesc>
+  <MFI_AcousticShow.outComeFirstPlace>La tua roulotte ha passato la giornata a gironzolare tra le bancarelle e ad ammirare la vasta gamma di eclettici strumenti musicali non elettrici provenienti da tutto il mondo e oltre. Quando calò il crepuscolo e la gente raccolse i loro strumenti, sul palco principale si tenne un concerto intimo. Ha sollevato gli spiriti dei tuoi membri della carovana. Il tuo premio per essere venuto è:\n\n{0}</MFI_AcousticShow.outComeFirstPlace>
+  <MFI_AcousticShow.outcomeFirstLoser>L'expo si è rivelato un incontro molto accogliente, passato a suonare le chitarre. Qualcuno ha giocato a Wonderwall, ma a parte questo è stata una serata piuttosto fredda che ha messo tutti di buon umore. Il tuo premio per essere venuto è:\n\n{0}</MFI_AcousticShow.outcomeFirstLoser>
+  <MFI_AcousticShow.outComeFirstOther>Uno dei membri della tua roulotte ha preso uno strumento che non dovrebbero avere e, non essendo musicalmente dotato, ha rotto una corda mentre diteggiava un minore. Ci siamo scusati ma non è stato sufficiente: il tuo klutzy membro della roulotte doveva lavorare come palcoscenico nella notte dello spettacolo. Dal momento che era ancora un buon momento, ricevettero gli avanzi del dopo-partito:\n\n{0}</MFI_AcousticShow.outComeFirstOther>
+
+</LanguageData>

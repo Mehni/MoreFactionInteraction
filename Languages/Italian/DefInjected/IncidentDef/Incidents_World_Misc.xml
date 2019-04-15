@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MFI_DiplomaticMarriage.label>Tregua militare</MFI_DiplomaticMarriage.label> Tregua Militare
+  <MFI_DiplomaticMarriage.letterLabel>Tregua militare</MFI_DiplomaticMarriage.letterLabel>
+
+  <MFI_MysticalShaman.label>Sciamano mistico</MFI_MysticalShaman.label>
+
+  <MFI_HuntersLodge.label>Tenda del cacciatore</MFI_HuntersLodge.label>
+  <MFI_HuntersLodge.letterLabel>Tenda del cacciatore</MFI_HuntersLodge.letterLabel>
+  <MFI_HuntersLodge.letterText>{1}({0}) Sei invitato al loro ritiro estivo.{2}. C'e un avamposto al sito con tutte le strutture necessare per fare dei pasti, è loro hanno esteso la loro ospitalita a te. Questa offerta scade in {3} giorni.</MFI_HuntersLodge.letterText>
+
+  <MFI_SettlementBaseAttack.label>Base della fazione sotto attacco.</MFI_SettlementBaseAttack.label>
+
+
+</LanguageData>
