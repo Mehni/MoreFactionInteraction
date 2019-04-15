@@ -160,9 +160,12 @@ namespace MoreFactionInteraction
         {
             this.unrestIsBrewing = false;
 
+            DesiredOutcome rollForIntendedOutcome = Rand.Bool
+                                                    ? DesiredOutcome.CURRY_FAVOUR_FACTION_ONE
+                                                    : DesiredOutcome.BROKER_PEACE;
+
             if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
                 FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator)
@@ -172,7 +175,6 @@ namespace MoreFactionInteraction
             }
             else if (factionInstigator.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                int rollForIntendedOutcome = Rand.Bool ? 1 : 4;
                 FactionWarDialogue.DetermineOutcome(factionInstigator, faction, factionInstigator.leader, rollForIntendedOutcome, out string blah);
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(factionInstigator, faction)

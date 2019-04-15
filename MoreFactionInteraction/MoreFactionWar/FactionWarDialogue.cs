@@ -8,6 +8,13 @@ using Verse.AI.Group;
 
 namespace MoreFactionInteraction.MoreFactionWar
 {
+    public enum DesiredOutcome
+    {
+        CURRY_FAVOUR_FACTION_ONE = 1,
+        CURRY_FAVOUR_FACTION_TWO = 2,
+        SABOTAGE = 3,
+        BROKER_PEACE = 4
+    }
 
     public static class FactionWarDialogue
     {
@@ -51,33 +58,34 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionOne.Name ))
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 1, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.CURRY_FAVOUR_FACTION_ONE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionInstigator.Name ))
             {
-                action = () => DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: 2, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: DesiredOutcome.CURRY_FAVOUR_FACTION_TWO, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksSabotage".Translate())
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 3, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget),
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.SABOTAGE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksBrokerPeace".Translate())
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: 4, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.BROKER_PEACE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
         }
 
-        public static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, int desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
+        public static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, DesiredOutcome desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
         {
             float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.NegotiationAbility));
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
             factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            if (desiredOutcome == 1 || desiredOutcome == 2)
+            if (desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_ONE
+                || desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_TWO)
             {
                 tmpPossibleOutcomes.Clear();
 
@@ -112,7 +120,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
             }
-            else if (desiredOutcome == 3)
+            else if (desiredOutcome == DesiredOutcome.SABOTAGE)
             {
                 tmpPossibleOutcomes.Clear();
 
@@ -147,7 +155,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
                 pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
             }
-            else if (desiredOutcome == 4)
+            else if (desiredOutcome == DesiredOutcome.BROKER_PEACE)
             {
                 tmpPossibleOutcomes.Clear();
 
