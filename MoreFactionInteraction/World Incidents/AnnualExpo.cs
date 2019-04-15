@@ -15,7 +15,6 @@ namespace MoreFactionInteraction.More_Flavour
 
         public void Notify_CaravanArrived(Caravan caravan)
         {
-            Log.ResetMessageCount(); //because I don't trust other mods, nor my own code.
             Pawn pawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, eventDef.relevantStat);
             if (pawn == null)
                 Messages.Message(text: "MFI_AnnualExpoMessageNoRepresentative".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent);
