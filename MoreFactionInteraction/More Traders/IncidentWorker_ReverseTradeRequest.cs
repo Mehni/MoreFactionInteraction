@@ -9,8 +9,6 @@ namespace MoreFactionInteraction
 {
     public class IncidentWorker_ReverseTradeRequest : IncidentWorker
     {
-        private const int TimeoutTicks = GenDate.TicksPerDay;
-
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && TryGetRandomAvailableTargetMap(map: out Map map)
@@ -130,21 +128,18 @@ namespace MoreFactionInteraction
         }
 
         public static SettlementBase RandomNearbyTradeableSettlement(int originTile)
-        {
-            return (from settlement in Find.WorldObjects.SettlementBases
-                    where settlement.Visitable && settlement.Faction.leader != null
-                            && settlement.GetComponent<TradeRequestComp>() != null
-                            && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
-                            && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
-                            && Find.WorldReachability.CanReach(originTile, settlement.Tile)
-                    select settlement).RandomElementWithFallback(null);
-        }
+            => (from settlement in Find.WorldObjects.SettlementBases
+                where settlement.Visitable && settlement.Faction.leader != null
+                        && settlement.GetComponent<TradeRequestComp>() != null
+                        && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                        && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
+                        && Find.WorldReachability.CanReach(originTile, settlement.Tile)
+                select settlement).RandomElementWithFallback(null);
+
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
-        {
-            return Find.Maps.Where(x => x.IsPlayerHome && RandomNearbyTradeableSettlement(x.Tile) != null)
-                .TryRandomElement(out map);
-        }
+            => Find.Maps.Where(x => x.IsPlayerHome && RandomNearbyTradeableSettlement(x.Tile) != null)
+                                                                               .TryRandomElement(out map);
 
         private int CalcuteTravelTimeForTrader(int originTile, Map map)
         {
