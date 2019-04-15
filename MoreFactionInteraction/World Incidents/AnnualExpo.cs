@@ -41,5 +41,17 @@ namespace MoreFactionInteraction.More_Flavour
             Scribe_Defs.Look(ref this.eventDef, "MFI_EventDef");
             Scribe_References.Look(ref this.host, "MFI_ExpoHost");
         }
+
+        public override string GetInspectString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(base.GetInspectString());
+            if (stringBuilder.Length != 0)
+            {
+                stringBuilder.AppendLine();
+            }
+            stringBuilder.Append(eventDef.LabelCap);
+            return stringBuilder.ToString();
+        }
     }
 }
