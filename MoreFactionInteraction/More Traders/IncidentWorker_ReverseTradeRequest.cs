@@ -93,14 +93,16 @@ namespace MoreFactionInteraction
 
         private static ThingCategoryDef DetermineThingCategoryDef()
         {
-            ThingCategoryDef thingCategoryDef;
-
             int rand = Rand.RangeInclusive(min: 0, max: 100);
-            if (rand < 33) thingCategoryDef = ThingCategoryDefOf.Apparel;
-            else if (rand > 33 && rand < 66) thingCategoryDef = ThingCategoryDefOf.PlantFoodRaw;
-            else if (rand > 66 && rand < 90) thingCategoryDef = ThingCategoryDefOf.Weapons;
-            else thingCategoryDef = ThingCategoryDefOf.Medicine;
-            return thingCategoryDef;
+
+            if (rand <= 33)
+                return ThingCategoryDefOf.Apparel;
+            if (rand > 33 && rand <= 66)
+                return ThingCategoryDefOf.PlantFoodRaw;
+            if (rand > 66 && rand < 90)
+                return ThingCategoryDefOf.Weapons;
+
+            return ThingCategoryDefOf.Medicine;
         }
 
         private static string DetermineLetterToSend(ThingCategoryDef thingCategoryDef)
@@ -129,13 +131,12 @@ namespace MoreFactionInteraction
 
         public static SettlementBase RandomNearbyTradeableSettlement(int originTile)
             => (from settlement in Find.WorldObjects.SettlementBases
-                where settlement.Visitable && settlement.Faction.leader != null
+                where settlement.Visitable && settlement.Faction?.leader != null
                         && settlement.GetComponent<TradeRequestComp>() != null
                         && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
                         && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
                         && Find.WorldReachability.CanReach(originTile, settlement.Tile)
                 select settlement).RandomElementWithFallback(null);
-
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
             => Find.Maps.Where(x => x.IsPlayerHome && RandomNearbyTradeableSettlement(x.Tile) != null)
@@ -143,7 +144,7 @@ namespace MoreFactionInteraction
 
         private int CalcuteTravelTimeForTrader(int originTile, Map map)
         {
-            int travelTime = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(@from: originTile, to: map.Tile, caravan: null);
+            int travelTime = CaravanArrivalTimeEstimator.EstimatedTicksToArrive(from: originTile, to: map.Tile, caravan: null);
             return Math.Min(val1: travelTime, val2: GenDate.TicksPerDay * 4);
         }
     }
