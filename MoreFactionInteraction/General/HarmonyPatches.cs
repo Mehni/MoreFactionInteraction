@@ -121,7 +121,7 @@ namespace MoreFactionInteraction
             return instructions.MethodReplacer(from: from, to: to);
         }
 
-#region MoreTraders
+        #region MoreTraders
         private static void TraderStocker_OverStockerPostFix(ref List<Thing> __result, ThingSetMakerParams parms)
         {
             if (parms.traderDef != null)
@@ -168,7 +168,7 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 2000000, y: 7f)
         };
 
-#region TradeQualityImprovements
+        #region TradeQualityImprovements
         private static bool CompQuality_TradeQualityIncreaseDestructivePreFix(CompQuality __instance, TraderKindDef trader, int forTile, Faction forFaction)
         {
             //forTile is assigned in RimWorld.ThingSetMaker_TraderStock.Generate. It's either a best-effort map, or -1.
@@ -227,7 +227,7 @@ namespace MoreFactionInteraction
             }
         }
 
-#region SimpleCurves
+        #region SimpleCurves
         private static readonly SimpleCurve WealthQualityDeterminationCurve = new SimpleCurve
         {
             new CurvePoint(x: 0, y: 1),
@@ -247,8 +247,8 @@ namespace MoreFactionInteraction
             new CurvePoint(x: 1000000, y: 1.5f),
             new CurvePoint(x: 2000000, y: 1.2f)
         };
-#endregion SimpleCurves
-#endregion TradeQualityImprovements
+        #endregion SimpleCurves
+        #endregion TradeQualityImprovements
 
         /// <summary>
         /// Increment TimesTraded count of dictionary by one for this faction.
@@ -277,9 +277,9 @@ namespace MoreFactionInteraction
             }
             else __result = priceType;
         }
-#endregion
+        #endregion
 
-#region WorldIncidents
+        #region WorldIncidents
         private static void WorldReachUtility_PostFix(ref bool __result, Caravan c)
         {
             SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(caravan: c);
@@ -290,6 +290,6 @@ namespace MoreFactionInteraction
                 __result = !bumperCropComponent.CaravanIsWorking;
             }
         }
-#endregion
+        #endregion
     }
 }

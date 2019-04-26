@@ -41,7 +41,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             SettlementBase someRandomPreferablyNearbySettlement = RandomPreferablyNearbySettlementOfFactionInvolvedInWar(originTile: randomPlayerTile);
 
-            if (someRandomPreferablyNearbySettlement == null)
+            if (someRandomPreferablyNearbySettlement == null || someRandomPreferablyNearbySettlement.Faction == null)
             {
                 Find.World.GetComponent<WorldComponent_MFI_FactionWar>().AllOuttaFactionSettlements();
                 return false;

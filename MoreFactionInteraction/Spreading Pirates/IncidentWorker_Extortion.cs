@@ -40,6 +40,7 @@ namespace MoreFactionInteraction
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
                    where (worldObject is SettlementBase || worldObject is Site)
+                           && worldObject.Faction != null
                            && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
                            && (!worldObject.GetComponent<TimeoutComp>()?.Active ?? true)
                            && worldObject.Faction.def.permanentEnemy

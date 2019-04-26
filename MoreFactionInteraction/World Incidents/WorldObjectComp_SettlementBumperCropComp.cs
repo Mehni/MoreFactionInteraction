@@ -101,7 +101,7 @@ namespace MoreFactionInteraction.World_Incidents
         private void Outcome_Triumph(Caravan caravan)
         {
             int randomInRange = FactionRelationOffset.RandomInRange;
-            parent.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: randomInRange);
+            parent.Faction?.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: randomInRange);
 
             List<Pawn> allMembersCapableOfGrowing = AllCaravanMembersCapableOfGrowing(caravan: caravan);
             float totalYieldPowerForCaravan = CalculateYieldForCaravan(caravanMembersCapableOfGrowing: allMembersCapableOfGrowing);
@@ -118,7 +118,7 @@ namespace MoreFactionInteraction.World_Incidents
             CaravanInventoryUtility.GiveThing(caravan: caravan, thing: reward);
 
             Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabelHarvest_Triumph".Translate(), text: GetLetterText(baseText: "MFI_Harvest_Triumph".Translate(
-                parent.Faction.def.pawnsPlural, parent.Faction.Name,
+                parent.Faction?.def.pawnsPlural, parent.Faction?.Name,
                 Mathf.RoundToInt(f: randomInRange),
                 reward.LabelCap
             ), caravan: caravan), textLetterDef: LetterDefOf.PositiveEvent, lookTargets: caravan, relatedFaction: parent.Faction);

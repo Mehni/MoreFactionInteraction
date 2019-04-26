@@ -51,6 +51,7 @@ namespace MoreFactionInteraction.More_Flavour
             worldComp.events.InRandomOrder().TryMinBy(kvp => kvp.Value, out KeyValuePair<EventDef, int> result);
             annualExpo.eventDef = result.Key;
             annualExpo.host = faction;
+            annualExpo.SetFaction(faction);
 
             worldComp.timesHeld++;
             worldComp.events[result.Key]++;

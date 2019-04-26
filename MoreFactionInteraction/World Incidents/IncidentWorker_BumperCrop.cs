@@ -12,16 +12,10 @@ namespace MoreFactionInteraction.World_Incidents
         private static readonly IntRange OfferDurationRange = new IntRange(min: 10, max: 30);
         private static List<Map> tmpAvailableMaps = new List<Map>();
 
-        public override float AdjustedChance
-        {
-            get
-            {
-                return base.AdjustedChance +
-                (float)(Find.FactionManager.AllFactionsVisible
+        public override float AdjustedChance => base.AdjustedChance
+            + (float)(Find.FactionManager.AllFactionsVisible
                     .Where(predicate: faction => !faction.defeated && !faction.IsPlayer && !faction.HostileTo(other: Faction.OfPlayer))
                         .Average(selector: faction => faction.GoodwillWith(other: Faction.OfPlayer)) / 100);
-            }
-        }
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -40,12 +34,12 @@ namespace MoreFactionInteraction.World_Incidents
 
             if (settlement == null)
                 return false;
-            
+
             WorldObjectComp_SettlementBumperCropComp component = settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>();
 
             if (!TryGenerateBumperCrop(target: component, map: map))
                 return false;
-            
+
             Find.LetterStack.ReceiveLetter(label: "MFI_LetterLabel_HarvestRequest".Translate(), text: "MFI_LetterHarvestRequest".Translate(
                 settlement.Label,
                 (component.expiration - Find.TickManager.TicksGame).ToStringTicksToDays(format: "F0")
@@ -65,13 +59,13 @@ namespace MoreFactionInteraction.World_Incidents
         }
 
         public static Settlement RandomNearbyGrowerSettlement(int originTile)
-        {
-            return (from settlement in Find.WorldObjects.Settlements
-                    where settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null && !settlement.GetComponent<TradeRequestComp>().ActiveRequest 
-                    && !settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>().ActiveRequest && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f 
-                    && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile)
-                    select settlement).RandomElementWithFallback();
-        }
+            => Find.WorldObjects.Settlements
+                .Where(settlement => settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null
+                        && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                        && !settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>().ActiveRequest
+                        && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f
+                        && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile))
+                .RandomElementWithFallback();
 
         private static int RandomOfferDuration(int tileIdFrom, int tileIdTo)
         {
@@ -88,21 +82,10 @@ namespace MoreFactionInteraction.World_Incidents
         }
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
-        {
-            tmpAvailableMaps.Clear();
-            List<Map> maps = Find.Maps;
-            foreach (Map potentialTargetMap in maps)
-            {
-                if (potentialTargetMap.IsPlayerHome && AtLeast2HealthyColonists(map: potentialTargetMap) && RandomNearbyGrowerSettlement(originTile: potentialTargetMap.Tile) != null)
-                {
-                    tmpAvailableMaps.Add(item: potentialTargetMap);
-                }
-            }
-            bool result = tmpAvailableMaps.TryRandomElement(result: out map);
-            tmpAvailableMaps.Clear();
-            return result;
-        }
-        
+            => Find.Maps
+                .Where(maps => maps.IsPlayerHome && AtLeast2HealthyColonists(maps) && RandomNearbyGrowerSettlement(maps.Tile) != null)
+                .TryRandomElement(out map);
+
         private static bool AtLeast2HealthyColonists(Map map)
         {
             List<Pawn> pawnList = map.mapPawns.SpawnedPawnsInFaction(faction: Faction.OfPlayer);

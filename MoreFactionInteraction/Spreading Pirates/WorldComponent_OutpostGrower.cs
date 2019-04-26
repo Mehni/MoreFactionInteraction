@@ -20,49 +20,57 @@ namespace MoreFactionInteraction
             if (Find.TickManager.TicksGame % 350 == 0)
             {
                 TickLetters();
+                MakeHomeForSquatters();
+                FindSitesToUpgrade();
+            }
+        }
 
-                IEnumerable<WorldObject> abandoned = from wObject in Find.WorldObjects.AllWorldObjects
-                                                     where wObject.def == WorldObjectDefOf.AbandonedSettlement ||
-                                                           wObject.def == WorldObjectDefOf.DestroyedSettlement
-                                                     select wObject;
+        private static void FindSitesToUpgrade()
+        {
+            //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
+            //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
 
-                foreach (WorldObject wObject in abandoned)
+            IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
+                                      where site.Faction != null
+                                          && site.Faction.HostileTo(other: Faction.OfPlayer)
+                                          && site.Faction.def.permanentEnemy && !site.Faction.def.hidden
+                                          && !site.Faction.defeated
+                                          && (site.HasMap ? site.ShouldRemoveMapNow(out bool alsoRemoveWorldObject) : true)
+                                          && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost)
+                                          && !site.GetComponent<TimeoutComp>().Active
+                                      select site;
+
+            foreach (Site current in sites)
+            {
+                if (current.creationGameTicks + MoreFactionInteraction_Settings.ticksToUpgrade <= Find.TickManager.TicksGame)
                 {
-                    if (wObject.Tile - wObject.ID % 10 == 0)
-                        continue;
-                    if (Find.TickManager.TicksGame > wObject.creationGameTicks + GenDate.TicksPerYear * (1 + UnityEngine.Mathf.Clamp01(wObject.ID / 10)))
-                    {
-                        if (Rand.Chance(0.000175f)) //350 ticks / 0.000175 == 2,000,000 ticks =~ 33 days
-                        {
-                            Settlement settlement = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
-                            settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight > 0f).RandomElement());
-                            settlement.Tile = wObject.Tile;
-                            settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
-                            Find.WorldObjects.Remove(wObject);
-                            Find.WorldObjects.Add(settlement);
-                            Find.LetterStack.ReceiveLetter("MFI_LetterLabelSquatters".Translate(), "MFI_LetterSquatters".Translate(settlement.Faction, settlement.Name), LetterDefOf.NeutralEvent, settlement);
-                        }
-                    }
+                    UpgradeSiteToSettlement(current);
+                    break;
                 }
+            }
+        }
 
-                //get settlements to upgrade. These shouldn't include temp generated or event maps -- preferably only the outposts this spawned by this mod
-                //ideally I'd add some specific Component to each outpost (as a unique identifier and maybe even as the thing that makes em upgrade), but for the moment that's not needed.
+        private static void MakeHomeForSquatters()
+        {
+            IEnumerable<WorldObject> abandoned = Find.WorldObjects.AllWorldObjects
+                .Where(wObject => wObject.def == WorldObjectDefOf.AbandonedSettlement || wObject.def == WorldObjectDefOf.DestroyedSettlement);
 
-                IEnumerable<Site> sites = from site in Find.WorldObjects.Sites
-                                          where site.Faction.HostileTo(other: Faction.OfPlayer)
-                                              && site.Faction.def.permanentEnemy && !site.Faction.def.hidden
-                                              && !site.Faction.defeated
-                                              && (site.HasMap ? site.ShouldRemoveMapNow(out bool alsoRemoveWorldObject) : true)
-                                              && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost)
-                                              && !site.GetComponent<TimeoutComp>().Active
-                                          select site;
+            foreach (WorldObject wObject in abandoned)
+            {
+                if (wObject.Tile - wObject.ID % 10 == 0)
+                    continue;
 
-                foreach (Site current in sites)
+                if (Find.TickManager.TicksGame > wObject.creationGameTicks + GenDate.TicksPerYear * (1 + UnityEngine.Mathf.Clamp01(wObject.ID / 10)))
                 {
-                    if (current.creationGameTicks + MoreFactionInteraction_Settings.ticksToUpgrade <= Find.TickManager.TicksGame)
+                    if (Rand.Chance(0.000175f)) //350 ticks / 0.000175 == 2,000,000 ticks =~ 33 days
                     {
-                        UpgradeSiteToSettlement(current);
-                        break;
+                        Settlement settlement = (Settlement)WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
+                        settlement.SetFaction(Find.FactionManager.AllFactionsVisible.Where(x => x.def.settlementGenerationWeight > 0f).RandomElement());
+                        settlement.Tile = wObject.Tile;
+                        settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
+                        Find.WorldObjects.Remove(wObject);
+                        Find.WorldObjects.Add(settlement);
+                        Find.LetterStack.ReceiveLetter("MFI_LetterLabelSquatters".Translate(), "MFI_LetterSquatters".Translate(settlement.Faction, settlement.Name), LetterDefOf.NeutralEvent, settlement);
                     }
                 }
             }

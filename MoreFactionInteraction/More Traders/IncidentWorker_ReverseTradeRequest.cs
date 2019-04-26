@@ -23,7 +23,7 @@ namespace MoreFactionInteraction
 
             SettlementBase settlement = RandomNearbyTradeableSettlement(originTile: map.Tile);
 
-            if (settlement == null)
+            if (settlement?.Faction?.leader == null)
                 return false;
 
             //TODO: look into making the below dynamic based on requester's biome, faction, pirate outpost vicinity and other stuff.

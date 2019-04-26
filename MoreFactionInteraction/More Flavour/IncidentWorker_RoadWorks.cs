@@ -29,7 +29,7 @@ namespace MoreFactionInteraction
 
             SettlementBase settlementBase = RandomNearbyTradeableSettlement(map.Tile);
 
-            if (settlementBase == null)
+            if (settlementBase?.Faction == null)
                 return false;
 
             int destination = Rand.Chance(directConnectionChance) ? map.Tile : AllyOfNearbySettlement(settlementBase)?.Tile ?? map.Tile;
@@ -124,7 +124,7 @@ namespace MoreFactionInteraction
 
         public SettlementBase RandomNearbyTradeableSettlement(int originTile)
             => (from settlement in Find.WorldObjects.SettlementBases
-                where settlement.Visitable && settlement.Faction.leader != null
+                where settlement.Visitable && settlement.Faction?.leader != null
                                            && settlement.trader.CanTradeNow
                                            && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
                                            && Find.WorldReachability.CanReach(originTile, settlement.Tile)
@@ -133,7 +133,7 @@ namespace MoreFactionInteraction
         public SettlementBase AllyOfNearbySettlement(SettlementBase origin)
             => (from settlement in Find.WorldObjects.SettlementBases
                 where settlement.Tile != origin.Tile
-                   && (settlement.Faction == origin.Faction || settlement.Faction.GoodwillWith(origin.Faction) >= 0)
+                   && (settlement.Faction == origin.Faction || settlement.Faction?.GoodwillWith(origin.Faction) >= 0)
                    && settlement.trader.CanTradeNow
                    && Find.WorldGrid.ApproxDistanceInTiles(origin.Tile, settlement.Tile) < 20f
                    && Find.WorldReachability.CanReach(origin.Tile, settlement.Tile)

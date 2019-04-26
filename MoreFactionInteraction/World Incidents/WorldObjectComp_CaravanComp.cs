@@ -8,29 +8,28 @@ namespace MoreFactionInteraction.World_Incidents
         public int workWillBeDoneAtTick;
         public bool caravanIsWorking = false;
 
-
         public override string CompInspectStringExtra()
         {
-            if (CaravanVisitUtility.SettlementVisitedNow(caravan: (Caravan) this.parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>()?.CaravanIsWorking ?? false)
+            if (CaravanVisitUtility.SettlementVisitedNow(caravan: (Caravan) parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>()?.CaravanIsWorking ?? false)
             {
                 return "MFI_CaravanWorking".Translate();
             }
-            else return string.Empty;
+            return string.Empty;
         }
 
         public override void CompTick()
         {
-            if (this.caravanIsWorking && Find.TickManager.TicksGame > this.workWillBeDoneAtTick)
+            if (caravanIsWorking && Find.TickManager.TicksGame > workWillBeDoneAtTick)
             {
-                CaravanVisitUtility.SettlementVisitedNow(caravan: (Caravan) this.parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>().DoOutcome(caravan: (Caravan) this.parent);
+                CaravanVisitUtility.SettlementVisitedNow(caravan: (Caravan) parent)?.GetComponent<WorldObjectComp_SettlementBumperCropComp>().DoOutcome(caravan: (Caravan) parent);
             }
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<int>(ref this.workWillBeDoneAtTick, "MFI_BumperCropWorkingCaravanWorkWillBeDoneAt");
-            Scribe_Values.Look<bool>(ref this.caravanIsWorking, "MFI_BumperCropCaravanIsWorking");
+            Scribe_Values.Look(ref workWillBeDoneAtTick, "MFI_BumperCropWorkingCaravanWorkWillBeDoneAt");
+            Scribe_Values.Look(ref caravanIsWorking, "MFI_BumperCropCaravanIsWorking");
         }
     }
 }
