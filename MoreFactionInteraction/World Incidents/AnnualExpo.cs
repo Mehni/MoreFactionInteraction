@@ -22,7 +22,7 @@ namespace MoreFactionInteraction.More_Flavour
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
-                Find.WindowStack.Add(window: new Dialog_NodeTree(new AnnualExpoDialogue().AnnualExpoDialogueNode(pawn, caravan, eventDef, host)));
+                Find.WindowStack.Add(window: new Dialog_NodeTree(new AnnualExpoDialogue(pawn, caravan, eventDef, host).AnnualExpoDialogueNode()));
                 Find.WorldObjects.Remove(this);
             }
         }
