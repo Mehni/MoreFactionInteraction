@@ -10,7 +10,7 @@
             <li>Intellectual</li>
             <li>Social</li>
         </learnedSkills>
-        <relevantStat>PsychicSensitivity</relevantStat>
+        <relevantStat>MeleeHitChance</relevantStat>
         <workerClass>MoreFactionInteraction.EventRewardWorker_GameOfUrComp</workerClass>
         <xPGainFirstOther>0</xPGainFirstOther>
         <outComeFirstPlace>Through skill, nerves of steel and a good amount of luck, [PAWN_nameDef] won the tournament! Your reward for participating is:\n\n{0}</outComeFirstPlace>

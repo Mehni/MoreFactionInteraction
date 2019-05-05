@@ -5,12 +5,14 @@ using RimWorld.Planet;
 namespace MoreFactionInteraction
 {
     using System.Linq;
+    using More_Flavour;
 
     internal class Dialog_MFIDebugActionMenu : Dialog_DebugActionsMenu
     {
         protected override void DoListingItems()
         {
             base.DoListingItems();
+#if DEBUG
             if (WorldRendererUtility.WorldRenderedNow)
             {
                 DoGap();
@@ -41,7 +43,10 @@ namespace MoreFactionInteraction
                          }
                      }
                 );
+
+                DebugToolWorld("Test annual Expo", new AnnualExpoDialogue(null, null, null, Find.FactionManager.RandomAlliedFaction()).Action);
             }
+#endif
         }
     }
 }

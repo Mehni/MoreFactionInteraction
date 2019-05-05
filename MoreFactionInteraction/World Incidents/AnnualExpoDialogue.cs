@@ -13,6 +13,13 @@ namespace MoreFactionInteraction.More_Flavour
 {
     public class AnnualExpoDialogue
     {
+        private enum Placement
+        {
+            First,
+            Second,
+            Third
+        }
+
         private readonly Pawn participant;
         private readonly Caravan caravan;
         private readonly EventDef activity;
@@ -35,17 +42,17 @@ namespace MoreFactionInteraction.More_Flavour
 
             DiaNode dialogueGreeting = new DiaNode(text: "MFI_AnnualExpoDialogueIntroduction".Translate(activity.theme, FirstCharacterToLower(flavourText)));
 
-            foreach (DiaOption option in DialogueOptions(pawn: participant, caravan, activity, host))
+            foreach (DiaOption option in DialogueOptions(participant))
                 dialogueGreeting.options.Add(item: option);
 
             return dialogueGreeting;
         }
 
-        private IEnumerable<DiaOption> DialogueOptions(Pawn pawn, Caravan caravan, EventDef eventDef, Faction host)
+        private IEnumerable<DiaOption> DialogueOptions(Pawn participatingPawn)
         {
-            string annualExpoDialogueOutcome = $"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL + F12 now), you get a cookie. P: {pawn} C: {caravan} E: {eventDef} H: {host}";
+            string annualExpoDialogueOutcome = $"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL + F12 now), you get a cookie. P: {participatingPawn} C: {caravan} E: {activity} H: {host}";
 
-            bool broughtArt = eventDef == MFI_DefOf.MFI_CulturalSwap & MFI_Utilities.TryGetBestArt(caravan, out Thing art, out Pawn owner);
+            bool broughtArt = activity == MFI_DefOf.MFI_CulturalSwap & MFI_Utilities.TryGetBestArt(caravan, out Thing art, out Pawn owner);
 
             yield return new DiaOption(text: "MFI_AnnualExpoFirstOption".Translate())
             {
@@ -62,94 +69,108 @@ namespace MoreFactionInteraction.More_Flavour
             };
 
 #if DEBUG
-            var devModeTest = new DiaOption("DevMode: Test chances and outcomes")
-            {
-                action = () =>
-                {
-                    StringBuilder sb = new StringBuilder();
-                    foreach (var defEvent in DefDatabase<EventDef>.AllDefsListForReading)
-                    {
-                        sb.AppendLine(defEvent.LabelCap);
+            DiaOption devModeTest = new DiaOption("DevMode: Test chances and outcomes")
+            { action = Action };
 
-                        Pawn bestpawn = null;
-                        do
-                        {
-                            bestpawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
-                        }
-                        while (!defEvent.relevantStat.Worker.IsDisabledFor(bestpawn));
-                        //Pawn bestpawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, eventDef.relevantStat);
-                        if (bestpawn == null)
-                            sb.AppendLine($"No pawn for {defEvent.LabelCap} found in caravan");
-                        else
-                        {
-                            int outComeOne = 0;
-                            int outComeTwo = 0;
-                            int outComeThree = 0;
-                            int other = 0;
-                            float skill = 0;
-                            for (int i = 0; i < 1000; i++)
-                            {
-                                int placement = DetermineOutComeFor(bestpawn, defEvent);
-                                switch (placement)
-                                {
-                                    case 1:
-                                        outComeOne++;
-                                        break;
-                                    case 2:
-                                        outComeTwo++;
-                                        break;
-                                    case 3:
-                                        outComeThree++;
-                                        break;
-                                    default:
-                                        other++;
-                                        break;
-                                }
-                                skill += bestpawn.GetStatValue(eventDef.relevantStat);
-                            }
-                            sb.AppendLine($"Chances for 1000 pawns with stat {defEvent.relevantStat} @ {(skill / 1000f)}:" +
-                                          $" first: {(outComeOne / 1000f).ToStringPercent()}, " +
-                                          $" second: {(outComeTwo / 1000f).ToStringPercent()}, " +
-                                          $" third: {(outComeThree / 1000f).ToStringPercent()} " +
-                                          $" other: {(other / 1000f).ToStringPercent()}" +
-                                          $" avg skill {(skill / 1000f)}");
-                        }
-                    }
-                    Log.Error(sb.ToString(), true);
-                }
-            };
             if (Prefs.DevMode)
+            {
                 yield return devModeTest;
+                yield return new DiaOption("restart")
+                {
+                    action = GenCommandLine.Restart
+                };
+            }
 #endif
         }
+
+#if DEBUG
+        internal void Action()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (EventDef defEvent in DefDatabase<EventDef>.AllDefsListForReading)
+            {
+                int outComeOne = 0;
+                int outComeTwo = 0;
+                int outComeThree = 0;
+                const float pawnsToTest = 1000;
+                float skill = 0;
+
+                double mean = 0;
+                double variance = 0;
+                double stdDev = 0;
+                double min = 0;
+                double max = 0;
+
+                sb.AppendLine(defEvent.LabelCap);
+
+                for (int i = 0; i < pawnsToTest; i++)
+                {
+                    Pawn bestpawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
+
+                    while (defEvent.relevantStat.Worker.IsDisabledFor(bestpawn))
+                    {
+                        bestpawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Colonist, Faction.OfPlayer);
+                    }
+
+                    skill += bestpawn.GetStatValue(defEvent.relevantStat);
+
+                    Placement placement = DeterminePlacementFor(bestpawn, defEvent, out mean, out variance, out stdDev, out max, out min);
+                    switch (placement)
+                    {
+                        case Placement.First:
+                            outComeOne++;
+                            break;
+                        case Placement.Second:
+                            outComeTwo++;
+                            break;
+                        case Placement.Third:
+                            outComeThree++;
+                            break;
+
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+
+                sb.AppendLine($"Chances for {pawnsToTest} pawns with stat {defEvent.relevantStat} @ {skill / pawnsToTest}:" +
+                              $" first: {(outComeOne / pawnsToTest).ToStringPercent()}, " +
+                              $" second: {(outComeTwo / pawnsToTest).ToStringPercent()}, " +
+                              $" third: {(outComeThree / pawnsToTest).ToStringPercent()} " +
+                              $" mean: {mean}, variance: {variance}, stdDev: {stdDev}, min: {min}, max: {max}");
+            }
+            Log.Error(sb.ToString(), true);
+        }
+#endif
 
         private void DetermineOutcome(out string annualExpoDialogueOutcome)
         {
             string rewards = "Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log(press CTRL + F12 now), you get a cookie.";
             SkillDef thisYearsRelevantSkill = activity.learnedSkills.RandomElement();
 
-            if (participant.skills.GetSkill(thisYearsRelevantSkill).TotallyDisabled) //fallback
+            if (participant.skills.GetSkill(thisYearsRelevantSkill).TotallyDisabled)
+            {
                 thisYearsRelevantSkill = participant.skills.skills.Where(x => !x.TotallyDisabled).RandomElementByWeight(x => (int)x.passion).def;
+            }
 
-            int placement = DetermineOutComeFor(participant, activity);
+            Placement placement = DeterminePlacementFor(participant, activity, out double mean, out double variance, out double stdDev, out double max, out double min);
 
             switch (placement)
             {
-                case 1:
+                case Placement.First:
                     rewards = activity.Worker.GenerateRewards(participant, caravan, activity.Worker.ValidatorFirstPlace, activity.rewardFirstPlace);
                     participant.skills.Learn(sDef: thisYearsRelevantSkill, xp: activity.xPGainFirstPlace, direct: true);
                     TryAppendExpGainInfo(ref rewards, participant, thisYearsRelevantSkill, activity.xPGainFirstPlace);
                     annualExpoDialogueOutcome = activity.outComeFirstPlace.Formatted(rewards).AdjustedFor(participant);
                     break;
 
-                case 2:
+                case Placement.Second:
                     rewards = activity.Worker.GenerateRewards(participant, caravan, activity.Worker.ValidatorFirstLoser, activity.rewardFirstLoser);
                     participant.skills.Learn(sDef: thisYearsRelevantSkill, xp: activity.xPGainFirstLoser, direct: true);
                     TryAppendExpGainInfo(ref rewards, participant, thisYearsRelevantSkill, activity.xPGainFirstLoser);
                     annualExpoDialogueOutcome = activity.outcomeFirstLoser.Formatted(rewards).AdjustedFor(participant);
                     break;
 
-                case 3:
+                case Placement.Third:
                     rewards = activity.Worker.GenerateRewards(participant, caravan, activity.Worker.ValidatorFirstOther, activity.rewardFirstOther);
                     participant.skills.Learn(sDef: thisYearsRelevantSkill, xp: activity.xPGainFirstOther, direct: true);
                     TryAppendExpGainInfo(ref rewards, participant, thisYearsRelevantSkill, activity.xPGainFirstOther);
@@ -158,39 +179,38 @@ namespace MoreFactionInteraction.More_Flavour
 
                 default:
                     Log.Error($"P: {participant}, C: {caravan}, E: {activity}");
-                    throw new Exception($"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. If you bring a log (press CTRL+F12 now), you get a cookie. P: {participant} C: {caravan} E: {activity} H: {host}. C: default.");
+                    throw new Exception($"Something went wrong with More Faction Interaction. Contact the mod author with this year's theme. " +
+                                        $"If you bring a log (press CTRL+F12 now), you get a cookie. P: {participant} C: {caravan} E: {activity} H: {host}. C: default.");
             }
         }
 
-        private int DetermineOutComeFor(Pawn participant, EventDef eventDef)
+        private Placement DeterminePlacementFor(Pawn rep, EventDef eventDef, out double mean, out double variance, out double stdDev, out double max, out double min)
         {
+            float difficultyModifier = 1 + Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld % 10;
+
             var leaders = Find.FactionManager.AllFactionsVisible
-                .Select(faction => faction.leader)
-                .Where(leader => !eventDef.relevantStat.Worker.IsDisabledFor(leader))
-                .Concat(new[] { participant })
-                .Select((pawn)
-                    => new { pawn, score = pawn.Faction == host ? pawn.GetStatValue(eventDef.relevantStat) * 1.1 : pawn.GetStatValue(eventDef.relevantStat) })
-                .OrderBy(x => x.score)
-                .ToArray();
+                              .Select(faction => faction.leader)
+                              .Where(leader => leader != null && !eventDef.relevantStat.Worker.IsDisabledFor(leader))
+                              .Concat(new[] { rep })
+                              .Concat(Find.WorldPawns.AllPawnsAlive.Where(x => x.Faction == host && !eventDef.relevantStat.Worker.IsDisabledFor(x)).Take(25))
+                              .Select(pawn => new { pawn, score = pawn.Faction.leader == pawn ? pawn.GetStatValue(eventDef.relevantStat) * difficultyModifier : pawn.GetStatValue(eventDef.relevantStat) })
+                              .OrderBy(x => x.score)
+                              .ToArray();
 
-            return leaders.FirstIndexOf(x => x.pawn == participant);
-            //return Mathf.Min(3, leaders.FirstIndexOf(x => x.pawn == participant) );
-        }
+            float repSkill = rep.GetStatValue(eventDef.relevantStat);
 
-        private int DetermineOutComeFor(Pawn particpant, EventDef eventDef, bool useOutdatedAlgo = false)
-        {
-            const float BaseWeight_FirstPlace = 0.2f;
-            const float BaseWeight_FirstLoser = 0.5f;
-            const float BaseWeight_FirstOther = 0.3f;
+            max = leaders.Max(x => x.score);
+            min = leaders.Min(x => x.score);
+            mean = leaders.Average(x => x.score);
+            variance = (((max - min + 1) * (max - min + 1)) - 1.0) / 12;
+            stdDev = Math.Sqrt(variance);
 
-            List<KeyValuePair<float, int>> outComeAndChances = new List<KeyValuePair<float, int>>
-            {
-                new KeyValuePair<float, int>(BaseWeight_FirstPlace * (1 / GetOutcomeWeightFactor(participant.GetStatValue(eventDef.relevantStat))), 1),
-                new KeyValuePair<float, int>(BaseWeight_FirstLoser * (1 / GetOutcomeWeightFactor(participant.GetStatValue(eventDef.relevantStat))), 2),
-                new KeyValuePair<float, int>(BaseWeight_FirstOther * (1 / GetOutcomeWeightFactor(participant.GetStatValue(eventDef.relevantStat))), 3),
-            };
+            FloatRange averageSkillRange = new FloatRange((float)(mean - stdDev * 0.3), (float)(mean + stdDev * 0.3));
 
-            return outComeAndChances.RandomElementByWeight(x => x.Key).Value;
+            if (averageSkillRange.Includes(repSkill))
+                return Placement.Second;
+
+            return repSkill > mean ? Placement.First : Placement.Third;
         }
 
         private static void TryAppendExpGainInfo(ref string rewardsOutcome, Pawn pawn, SkillDef skill, float amount)
@@ -211,8 +231,6 @@ namespace MoreFactionInteraction.More_Flavour
             resolver.options.Add(item: diaOption);
             return resolver;
         }
-
-        private static float GetOutcomeWeightFactor(float statPower) => MoreFactionWar.FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: statPower);
 
         private static string FirstCharacterToLower(string str)
         {
