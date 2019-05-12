@@ -17,13 +17,15 @@ namespace MoreFactionInteraction.More_Flavour
         private const int MaxDistance = 26;
         private static readonly IntRange TimeoutDaysRange = new IntRange(min: 15, max: 21);
 
+        public override float AdjustedChance => 0f;
+
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms) && Find.AnyPlayerHomeMap != null
                                              && TryGetRandomAvailableTargetMap(out Map map)
                                              && TryFindTile(tile: out int num)
                                              && TryGetFactionHost(out Faction faction)
-                                             && !Find.World.worldObjects.AllWorldObjects.Any(x=> x is AnnualExpo);
+                                             && !Find.World.worldObjects.AllWorldObjects.Any(x => x is AnnualExpo);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

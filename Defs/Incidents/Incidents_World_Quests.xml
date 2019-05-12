@@ -46,7 +46,6 @@
 		<workerClass>MoreFactionInteraction.More_Flavour.IncidentWorker_AnnualExpo</workerClass>
 		<letterLabel>Annual expo</letterLabel>
 		<letterDef>NeutralEvent</letterDef>
-		<baseChance>0.51</baseChance>
 		<minRefireDays>50</minRefireDays>
 	</IncidentDef>
 
