@@ -186,7 +186,7 @@ namespace MoreFactionInteraction.More_Flavour
 
         private Placement DeterminePlacementFor(Pawn rep, EventDef eventDef, out double mean, out double variance, out double stdDev, out double max, out double min)
         {
-            float difficultyModifier = 1 + Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld % 10;
+            float difficultyModifier = 1.05f + 0.05f * Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld;
 
             var leaders = Find.FactionManager.AllFactionsVisible
                               .Select(faction => faction.leader)
