@@ -44,7 +44,7 @@ namespace MoreFactionInteraction
                      }
                 );
 
-                DebugToolWorld("Test annual Expo", new AnnualExpoDialogue(null, null, null, Find.FactionManager.RandomAlliedFaction()).Action);
+                DebugToolWorld("Test annual Expo", new AnnualExpoDialogue(null, null, null, Find.FactionManager.RandomAlliedFaction()).DebugLogChances);
             }
 #endif
         }

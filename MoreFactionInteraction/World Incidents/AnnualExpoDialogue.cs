@@ -70,7 +70,7 @@ namespace MoreFactionInteraction.More_Flavour
 
 #if DEBUG
             DiaOption devModeTest = new DiaOption("DevMode: Test chances and outcomes")
-            { action = Action };
+            { action = DebugLogChances };
 
             if (Prefs.DevMode)
             {
@@ -84,7 +84,7 @@ namespace MoreFactionInteraction.More_Flavour
         }
 
 #if DEBUG
-        internal void Action()
+        internal void DebugLogChances()
         {
             StringBuilder sb = new StringBuilder();
             foreach (EventDef defEvent in DefDatabase<EventDef>.AllDefsListForReading)
@@ -186,7 +186,9 @@ namespace MoreFactionInteraction.More_Flavour
 
         private Placement DeterminePlacementFor(Pawn rep, EventDef eventDef, out double mean, out double variance, out double stdDev, out double max, out double min)
         {
-            float difficultyModifier = 1.05f + 0.05f * Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld;
+            float difficultyModifier = 1.05f + 0.01f * Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld;
+
+            difficultyModifier = Mathf.Clamp(difficultyModifier, 1.05f, 1.1f);
 
             var leaders = Find.FactionManager.AllFactionsVisible
                               .Select(faction => faction.leader)
@@ -206,6 +208,9 @@ namespace MoreFactionInteraction.More_Flavour
             stdDev = Math.Sqrt(variance);
 
             FloatRange averageSkillRange = new FloatRange((float)(mean - stdDev * 0.3), (float)(mean + stdDev * 0.3));
+
+            if (leaders.First().pawn == rep)
+                return Placement.First;
 
             if (averageSkillRange.Includes(repSkill))
                 return Placement.Second;
