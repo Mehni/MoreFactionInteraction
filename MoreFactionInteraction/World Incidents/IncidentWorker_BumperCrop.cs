@@ -10,7 +10,6 @@ namespace MoreFactionInteraction.World_Incidents
     public class IncidentWorker_BumperCrop : IncidentWorker
     {
         private static readonly IntRange OfferDurationRange = new IntRange(min: 10, max: 30);
-        private static List<Map> tmpAvailableMaps = new List<Map>();
 
         public override float AdjustedChance => base.AdjustedChance
             + (float)(Find.FactionManager.AllFactionsVisible
@@ -60,8 +59,10 @@ namespace MoreFactionInteraction.World_Incidents
 
         public static Settlement RandomNearbyGrowerSettlement(int originTile)
             => Find.WorldObjects.Settlements
-                .Where(settlement => settlement.Visitable && settlement.GetComponent<TradeRequestComp>() != null
+                .Where(settlement => settlement.Visitable
+                        && settlement.GetComponent<TradeRequestComp>() != null
                         && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                        && settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>() != null
                         && !settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>().ActiveRequest
                         && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f
                         && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile))

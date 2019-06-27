@@ -140,7 +140,7 @@ namespace MoreFactionInteraction
                 if (map != null && (parms.traderDef.orbital || parms.traderDef.defName.Contains(value: "Base_")))
                 {
                     //nullable float because not all traders bring silver
-                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    float? silverCount = __result.Find(x => x.def == ThingDefOf.Silver)?.stackCount;
                     if (!silverCount.HasValue)
                         return;
                     silverCount *= WealthSilverIncreaseDeterminationCurve.Evaluate(x: map.PlayerWealthForStoryteller);
@@ -150,7 +150,7 @@ namespace MoreFactionInteraction
                 if (map != null && parms.traderFaction != null)
                 {
                     //nullable float because not all traders bring silver
-                    float? silverCount = __result.FirstOrDefault(predicate: x => x.def == ThingDefOf.Silver)?.stackCount;
+                    float? silverCount = __result.Find(x => x.def == ThingDefOf.Silver)?.stackCount;
                     if (!silverCount.HasValue)
                         return;
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.traderFaction.GoodwillWith(other: Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
@@ -257,7 +257,7 @@ namespace MoreFactionInteraction
         {
             if (fi.parms.target is Map map && fi.def == IncidentDefOf.TraderCaravanArrival && fi.parms.faction != null)
             {
-                map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: fi.parms.faction] += 1;
+                map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: fi.parms.faction]++;
             }
         }
 
@@ -275,7 +275,10 @@ namespace MoreFactionInteraction
             {
                 __result = PriceType.Expensive;
             }
-            else __result = priceType;
+            else
+            {
+                __result = priceType;
+            }
         }
         #endregion
 

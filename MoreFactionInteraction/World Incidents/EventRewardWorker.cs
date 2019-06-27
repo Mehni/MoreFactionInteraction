@@ -8,11 +8,11 @@ namespace MoreFactionInteraction
 {
     public abstract class EventRewardWorker
     {
-        public virtual Predicate<ThingDef> ValidatorFirstPlace => (ThingDef x) => true;
+        public virtual Predicate<ThingDef> ValidatorFirstPlace => (ThingDef _) => true;
 
-        public virtual Predicate<ThingDef> ValidatorFirstLoser => (ThingDef x) => true;
+        public virtual Predicate<ThingDef> ValidatorFirstLoser => (ThingDef _) => true;
 
-        public virtual Predicate<ThingDef> ValidatorFirstOther => (ThingDef x) => true;
+        public virtual Predicate<ThingDef> ValidatorFirstOther => (ThingDef _) => true;
 
         public virtual string GenerateRewards(Pawn pawn, Caravan caravan, Predicate<ThingDef> globalValidator, ThingSetMakerDef thingSetMakerDef)
         {
@@ -39,8 +39,10 @@ namespace MoreFactionInteraction
         public virtual void TryAppendExpGainInfo(ref string rewardsOutcome, Pawn pawn, SkillDef skill, float amount)
         {
             if (amount > 0)
+            {
                 rewardsOutcome = rewardsOutcome + "\n\n" + "MFI_AnnualExpoXPGain"
                     .Translate(pawn.LabelShort, amount.ToString("F0"), skill.label);
+            }
         }
     }
 }

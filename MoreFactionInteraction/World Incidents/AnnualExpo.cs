@@ -17,8 +17,9 @@ namespace MoreFactionInteraction.More_Flavour
         {
             Pawn pawn = BestCaravanPawnUtility.FindPawnWithBestStat(caravan, eventDef.relevantStat);
             if (pawn == null)
+            {
                 Messages.Message(text: "MFI_AnnualExpoMessageNoRepresentative".Translate(), lookTargets: caravan, def: MessageTypeDefOf.NegativeEvent);
-
+            }
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);

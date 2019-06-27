@@ -61,11 +61,11 @@ namespace MoreFactionInteraction.More_Flavour
             Find.WorldObjects.Add(o: annualExpo);
             Find.LetterStack.ReceiveLetter(label: this.def.letterLabel,
                                             text: "MFI_AnnualExpoLetterText".Translate(
-                                                Find.ActiveLanguageWorker.OrdinalNumber(worldComp.TimesHeld), 
+                                                Find.ActiveLanguageWorker.OrdinalNumber(worldComp.TimesHeld),
                                                 Find.World.info.name,
                                                 annualExpo.host.Name,
                                                 annualExpo.eventDef.theme,
-                                                annualExpo.eventDef.themeDesc ),
+                                                annualExpo.eventDef.themeDesc),
                                             textLetterDef: this.def.letterDef,
                                             lookTargets: annualExpo);
 

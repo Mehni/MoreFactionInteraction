@@ -62,7 +62,7 @@ namespace MoreFactionInteraction.More_Flavour
                                    DiaNode endpoint = DialogueResolver(annualExpoDialogueOutcome, broughtArt);
 
                                    if (broughtArt)
-                                       endpoint.options.First().linkLateBind = () => EventRewardWorker_CulturalSwap.DialogueResolverArtOffer("MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt", art, caravan);
+                                       endpoint.options[0].linkLateBind = () => EventRewardWorker_CulturalSwap.DialogueResolverArtOffer("MFI_culturalSwapOutcomeWhoaYouActuallyBroughtArt", art, caravan);
 
                                    return endpoint;
                                }
@@ -152,9 +152,7 @@ namespace MoreFactionInteraction.More_Flavour
                 thisYearsRelevantSkill = participant.skills.skills.Where(x => !x.TotallyDisabled).RandomElementByWeight(x => (int)x.passion).def;
             }
 
-            Placement placement = DeterminePlacementFor(participant, activity, out double mean, out double variance, out double stdDev, out double max, out double min);
-
-            switch (placement)
+            switch (DeterminePlacementFor(participant, activity, out double mean, out double variance, out double stdDev, out double max, out double min))
             {
                 case Placement.First:
                     rewards = activity.Worker.GenerateRewards(participant, caravan, activity.Worker.ValidatorFirstPlace, activity.rewardFirstPlace);
@@ -186,7 +184,7 @@ namespace MoreFactionInteraction.More_Flavour
 
         private Placement DeterminePlacementFor(Pawn rep, EventDef eventDef, out double mean, out double variance, out double stdDev, out double max, out double min)
         {
-            float difficultyModifier = 1.05f + 0.01f * Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld;
+            float difficultyModifier = 1.05f + (0.01f * Find.World.GetComponent<WorldComponent_MFI_AnnualExpo>().timesHeld);
 
             difficultyModifier = Mathf.Clamp(difficultyModifier, 1.05f, 1.1f);
 
@@ -207,9 +205,9 @@ namespace MoreFactionInteraction.More_Flavour
             variance = (((max - min + 1) * (max - min + 1)) - 1.0) / 12;
             stdDev = Math.Sqrt(variance);
 
-            FloatRange averageSkillRange = new FloatRange((float)(mean - stdDev * 0.3), (float)(mean + stdDev * 0.3));
+            FloatRange averageSkillRange = new FloatRange((float)(mean - (stdDev * 0.3)), (float)(mean + (stdDev * 0.3)));
 
-            if (leaders.First().pawn == rep)
+            if (leaders[0].pawn == rep)
                 return Placement.First;
 
             if (averageSkillRange.Includes(repSkill))

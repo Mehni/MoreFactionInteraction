@@ -9,8 +9,8 @@ namespace MoreFactionInteraction
     public class EventRewardWorker_ShootingComp : EventRewardWorker
     {
         public override Predicate<ThingDef> ValidatorFirstPlace => (ThingDef x) => base.ValidatorFirstPlace(x)
-                                                    && x.techLevel >= TechLevel.Industrial 
-                                                    && x.equipmentType == EquipmentType.Primary 
+                                                    && x.techLevel >= TechLevel.Industrial
+                                                    && x.equipmentType == EquipmentType.Primary
                                                     && x.GetStatValueAbstract(StatDefOf.MarketValue, GenStuff.DefaultStuffFor(x)) >= 100f;
 
         public override Predicate<ThingDef> ValidatorFirstLoser => (ThingDef x) => base.ValidatorFirstLoser(x)

@@ -41,7 +41,9 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             if (faction.EnemyInFactionWar().def.techLevel >= TechLevel.Industrial
                 && faction.EnemyInFactionWar().RelationKindWith(other: Faction.OfPlayer) == FactionRelationKind.Hostile)
+            {
                 bamboozle = Rand.Chance(chance: 0.25f);
+            }
 
             if (bamboozle)
             {
@@ -153,7 +155,9 @@ namespace MoreFactionInteraction.MoreFactionWar
             if (Find.World.GetComponent<WorldComponent_MFI_FactionWar>().AllFactionsInVolvedInWar
                     .Where(predicate: f => f.RelationWith(other: Faction.OfPlayer).kind == FactionRelationKind.Ally
                              && f.def.techLevel >= TechLevel.Industrial).TryRandomElementByWeight(weightSelector: f => f.def.RaidCommonalityFromPoints(points: 600f), result: out faction))
+            {
                 return true;
+            }
 
             return false;
         }
