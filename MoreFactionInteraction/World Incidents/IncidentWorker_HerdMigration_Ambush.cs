@@ -12,7 +12,7 @@ namespace MoreFactionInteraction.World_Incidents
     {
         PawnKindDef pawnKindDef = PawnKindDefOf.Thrumbo;
 
-        public override float AdjustedChance => 0f;
+        public override float BaseChanceThisGame => 0f;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {

@@ -8,7 +8,7 @@ namespace MoreFactionInteraction.World_Incidents
 {
     public class SitePartWorker_MigratoryHerd : SitePartWorker
     {
-        public override string GetPostProcessedThreatLabel(Site site, SiteCoreOrPartBase siteCoreOrPart)
+        public override string GetPostProcessedThreatLabel(Site site, SitePart siteCoreOrPart)
         {
             return string.Concat(base.GetPostProcessedThreatLabel(site, siteCoreOrPart),
                                      " (",
@@ -26,7 +26,7 @@ namespace MoreFactionInteraction.World_Incidents
             Find.Storyteller.incidentQueue.Add(qi: queuedIncident);
         }
 
-        public override string GetPostProcessedDescriptionDialogue(Site site, SiteCoreOrPartBase siteCoreOrPart)
+        public override string GetPostProcessedDescriptionDialogue(Site site, SitePart siteCoreOrPart)
         {
             return string.Format(base.GetPostProcessedDescriptionDialogue(site, siteCoreOrPart), GenLabel.BestKindLabel(siteCoreOrPart.parms.animalKind, Gender.None, true));
         }
@@ -42,10 +42,10 @@ namespace MoreFactionInteraction.World_Incidents
             return animalKind != fallback;
         }
 
-        public override SiteCoreOrPartParams GenerateDefaultParams(Site site, float myThreatPoints)
+        public override SitePartParams GenerateDefaultParams(float myThreatPoints, int tile, Faction faction)
         {
-            SiteCoreOrPartParams siteCoreOrPartParams = base.GenerateDefaultParams(site, myThreatPoints);
-            if (TryFindAnimalKind(site.Tile, out siteCoreOrPartParams.animalKind))
+            var siteCoreOrPartParams = base.GenerateDefaultParams(myThreatPoints, tile, faction);
+            if (TryFindAnimalKind(tile, out siteCoreOrPartParams.animalKind))
             {
                 siteCoreOrPartParams.threatPoints = Mathf.Max(siteCoreOrPartParams.threatPoints, siteCoreOrPartParams.animalKind.combatPower);
             }

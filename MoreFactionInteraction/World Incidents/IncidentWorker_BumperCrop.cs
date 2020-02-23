@@ -11,7 +11,7 @@ namespace MoreFactionInteraction.World_Incidents
     {
         private static readonly IntRange OfferDurationRange = new IntRange(min: 10, max: 30);
 
-        public override float AdjustedChance => base.AdjustedChance
+        public override float BaseChanceThisGame => base.BaseChanceThisGame
             + (float)(Find.FactionManager.AllFactionsVisible
                     .Where(predicate: faction => !faction.defeated && !faction.IsPlayer && !faction.HostileTo(other: Faction.OfPlayer))
                         .Average(selector: faction => faction.GoodwillWith(other: Faction.OfPlayer)) / 100);

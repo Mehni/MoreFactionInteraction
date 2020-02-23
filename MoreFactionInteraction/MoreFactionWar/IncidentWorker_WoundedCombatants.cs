@@ -15,9 +15,9 @@ namespace MoreFactionInteraction.MoreFactionWar
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing
-                                                    && FindAlliedWarringFaction(faction: out Faction faction)
+                                                    && FindAlliedWarringFaction(faction: out Faction _)
                                                     && CommsConsoleUtility.PlayerHasPoweredCommsConsole(map: (Map)parms.target)
-                                                    && DropCellFinder.TryFindRaidDropCenterClose(spot: out IntVec3 dropSpot, map: (Map)parms.target);
+                                                    && DropCellFinder.TryFindRaidDropCenterClose(spot: out IntVec3 _, map: (Map)parms.target);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)

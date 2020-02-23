@@ -13,7 +13,7 @@ namespace MoreFactionInteraction.MoreFactionWar
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && FoundTwoFactions() 
-                                                    && TryFindTile(tile: out int tile)                                        
+                                                    && TryFindTile(tile: out _)                                        
                                                     && !Find.World.GetComponent<WorldComponent_MFI_FactionWar>().WarIsOngoing 
                                                     && !Find.World.GetComponent<WorldComponent_MFI_FactionWar>().UnrestIsBrewing;
         }
@@ -48,7 +48,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         private static bool TryFindTile(out int tile) => TileFinder.TryFindNewSiteTile(tile: out tile, minDist: 5, maxDist: 13, allowCaravans: false, preferCloserTiles: false);
 
-        private static bool FoundTwoFactions() => TryFindFactions(instigatingFaction: out Faction instigatingFaction) != null;
+        private static bool FoundTwoFactions() => TryFindFactions(instigatingFaction: out _) != null;
 
         private static Faction TryFindFactions(out Faction instigatingFaction)
         {

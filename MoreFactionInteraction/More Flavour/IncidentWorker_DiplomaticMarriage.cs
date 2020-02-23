@@ -15,7 +15,7 @@ namespace MoreFactionInteraction
         private Pawn betrothed;
         private const int TimeoutTicks = GenDate.TicksPerDay;
 
-        public override float AdjustedChance => Math.Max(0.01f, base.AdjustedChance - StorytellerUtilityPopulation.PopulationIntent);
+        public override float BaseChanceThisGame => Math.Max(0.01f, base.BaseChanceThisGame - StorytellerUtilityPopulation.PopulationIntent);
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
@@ -39,7 +39,7 @@ namespace MoreFactionInteraction
                 return false;
             }
 
-            string text = "MFI_DiplomaticMarriage".Translate(this.marriageSeeker.LabelShort, this.betrothed.LabelShort, this.marriageSeeker.Faction.Name).AdjustedFor(p: this.marriageSeeker);
+            var text = "MFI_DiplomaticMarriage".Translate(this.marriageSeeker.LabelShort, this.betrothed.LabelShort, this.marriageSeeker.Faction.Name).AdjustedFor(p: this.marriageSeeker);
 
             PawnRelationUtility.TryAppendRelationsWithColonistsInfo(ref text, marriageSeeker);
 

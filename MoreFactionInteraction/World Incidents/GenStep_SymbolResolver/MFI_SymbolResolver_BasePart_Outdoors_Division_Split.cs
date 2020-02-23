@@ -18,8 +18,8 @@ namespace MoreFactionInteraction.World_Incidents.GenStep_SymbolResolver
 
         public override bool CanResolve(ResolveParams rp)
         {
-            return base.CanResolve(rp) && (this.TryFindSplitPoint(false, rp.rect, out int splitPoint, out int spaceBetween) 
-                                        || this.TryFindSplitPoint(true, rp.rect, out splitPoint, out spaceBetween));
+            return base.CanResolve(rp) && (this.TryFindSplitPoint(false, rp.rect, out _, out _) 
+                                        || this.TryFindSplitPoint(true, rp.rect, out _, out _));
         }
 
         public override void Resolve(ResolveParams rp)

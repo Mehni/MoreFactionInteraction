@@ -11,11 +11,6 @@ namespace MoreFactionInteraction
         public ThingCategoryDef thingCategoryDef;
         private const float maxValuePerUnit = 1000f;
 
-        public override IEnumerable<Thing> GenerateThings(int forTile)
-        {
-            yield break;
-        }
-
         public override bool HandlesThingDef(ThingDef thingDef)
         {
             //TODO: Look into maxTechLevelBuy. From what I can tell, nothing uses it.
@@ -23,6 +18,11 @@ namespace MoreFactionInteraction
             return this.thingCategoryDef.DescendantThingDefs.Contains(value: thingDef)
                 && thingDef.tradeability != Tradeability.None
                 && thingDef.BaseMarketValue / thingDef.VolumePerUnit < maxValuePerUnit;
+        }
+
+        public override IEnumerable<Thing> GenerateThings(int forTile, Faction faction = null)
+        {
+            yield break;
         }
     }
 }

@@ -27,14 +27,14 @@ namespace MoreFactionInteraction
             if (!TryGetRandomAvailableTargetMap(out map))
                 return false;
 
-            SettlementBase settlementBase = RandomNearbyTradeableSettlement(map.Tile);
+            Settlement Settlement = RandomNearbyTradeableSettlement(map.Tile);
 
-            if (settlementBase?.Faction == null)
+            if (Settlement?.Faction == null)
                 return false;
 
-            int destination = Rand.Chance(directConnectionChance) ? map.Tile : AllyOfNearbySettlement(settlementBase)?.Tile ?? map.Tile;
+            int destination = Rand.Chance(directConnectionChance) ? map.Tile : AllyOfNearbySettlement(Settlement)?.Tile ?? map.Tile;
 
-            int maxPriority = settlementBase.Faction.def.techLevel >= TechLevel.Medieval ? 30 : 20;
+            int maxPriority = Settlement.Faction.def.techLevel >= TechLevel.Medieval ? 30 : 20;
 
             RoadDef roadToBuild = DefDatabase<RoadDef>.AllDefsListForReading.Where(x => x.priority <= maxPriority).RandomElement();
 
@@ -44,7 +44,7 @@ namespace MoreFactionInteraction
             int timeToBuild = 0;
             string letterTitle = "MFI_RoadWorks".Translate();
             List<WorldObject_RoadConstruction> list = new List<WorldObject_RoadConstruction>();
-            using (path = Find.WorldPathFinder.FindPath(destination, settlementBase.Tile, null))
+            using (path = Find.WorldPathFinder.FindPath(destination, Settlement.Tile, null))
             {
                 if (path == null || path == WorldPath.NotFound)
                     return true;
@@ -75,12 +75,12 @@ namespace MoreFactionInteraction
                     roadConstruction.Tile = path.NodesReversed[i];
                     roadConstruction.nextTile = path.NodesReversed[i + 1];
                     roadConstruction.road = roadToBuild;
-                    roadConstruction.SetFaction(settlementBase.Faction);
+                    roadConstruction.SetFaction(Settlement.Faction);
                     roadConstruction.projectedTimeOfCompletion = Find.TickManager.TicksGame + timeToBuild;
                     list.Add(roadConstruction);
                 }
                 cost2 = cost2 / 10;
-                DiaNode node = new DiaNode("MFI_RoadWorksDialogue".Translate(settlementBase, path.NodesReversed.Count, cost2)); // {settlementBase} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
+                DiaNode node = new DiaNode("MFI_RoadWorksDialogue".Translate(Settlement, path.NodesReversed.Count, cost2)); // {Settlement} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
                 DiaOption accept = new DiaOption("OK".Translate())
                 {
                     resolveTree = true,
@@ -116,22 +116,22 @@ namespace MoreFactionInteraction
                 node.options.Add(reject);
 
                 //Log.Message(stringBuilder.ToString());
-                Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(node, settlementBase.Faction));
-                Find.Archive.Add(new ArchivedDialog(node.text, letterTitle, settlementBase.Faction));
+                Find.WindowStack.Add(new Dialog_NodeTreeWithFactionInfo(node, Settlement.Faction));
+                Find.Archive.Add(new ArchivedDialog(node.text, letterTitle, Settlement.Faction));
             }
             return true;
         }
 
-        public SettlementBase RandomNearbyTradeableSettlement(int originTile)
-            => (from settlement in Find.WorldObjects.SettlementBases
+        public Settlement RandomNearbyTradeableSettlement(int originTile)
+            => (from settlement in Find.WorldObjects.Settlements
                 where settlement.Visitable && settlement.Faction?.leader != null
                                            && settlement.trader.CanTradeNow
                                            && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
                                            && Find.WorldReachability.CanReach(originTile, settlement.Tile)
                 select settlement).RandomElementWithFallback(null);
 
-        public SettlementBase AllyOfNearbySettlement(SettlementBase origin)
-            => (from settlement in Find.WorldObjects.SettlementBases
+        public Settlement AllyOfNearbySettlement(Settlement origin)
+            => (from settlement in Find.WorldObjects.Settlements
                 where settlement.Tile != origin.Tile
                    && (settlement.Faction == origin.Faction || settlement.Faction?.GoodwillWith(origin.Faction) >= 0)
                    && settlement.trader.CanTradeNow

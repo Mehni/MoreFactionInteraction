@@ -9,9 +9,9 @@ namespace MoreFactionInteraction.MoreFactionWar
     {
         private FactionWarPeaceTalks factionWarPeaceTalks;
 
-        public override string Label => "VisitPeaceTalks".Translate( factionWarPeaceTalks.Label );
+        public override string Label => "VisitPeaceTalks".Translate(factionWarPeaceTalks.Label);
 
-        public override string ReportString => "CaravanVisiting".Translate( this.factionWarPeaceTalks.Label );
+        public override string ReportString => "CaravanVisiting".Translate(this.factionWarPeaceTalks.Label);
 
         public override void Arrived(Caravan caravan)
         {
@@ -40,22 +40,22 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             if (this.factionWarPeaceTalks?.Tile != destinationTile)
                 return false;
-            
-            return CanVisit(caravan: caravan, factionWarPeaceTalks: this.factionWarPeaceTalks);
+
+            return CanVisit(factionWarPeaceTalks: this.factionWarPeaceTalks);
         }
 
-        public static FloatMenuAcceptanceReport CanVisit(Caravan caravan, FactionWarPeaceTalks factionWarPeaceTalks)
+        public static FloatMenuAcceptanceReport CanVisit(FactionWarPeaceTalks factionWarPeaceTalks)
         {
             return factionWarPeaceTalks != null && factionWarPeaceTalks.Spawned;
         }
 
         public static IEnumerable<FloatMenuOption> GetFloatMenuOptions(Caravan caravan, FactionWarPeaceTalks factionWarPeaceTalks)
         {
-            return CaravanArrivalActionUtility.GetFloatMenuOptions(acceptanceReportGetter: 
-                                                                   () => CanVisit(caravan: caravan, factionWarPeaceTalks: factionWarPeaceTalks), arrivalActionGetter: 
-                                                                   () => new CaravanArrivalAction_VisitFactionWarPeaceTalks(factionWarPeaceTalks: factionWarPeaceTalks), 
-                                                                   label: "VisitPeaceTalks".Translate(factionWarPeaceTalks.Label), 
-                                                                   caravan: caravan, pathDestination: factionWarPeaceTalks.Tile, 
+            return CaravanArrivalActionUtility.GetFloatMenuOptions(acceptanceReportGetter:
+                                                                   () => CanVisit(factionWarPeaceTalks: factionWarPeaceTalks), arrivalActionGetter:
+                                                                   () => new CaravanArrivalAction_VisitFactionWarPeaceTalks(factionWarPeaceTalks: factionWarPeaceTalks),
+                                                                   label: "VisitPeaceTalks".Translate(factionWarPeaceTalks.Label),
+                                                                   caravan: caravan, pathDestination: factionWarPeaceTalks.Tile,
                                                                    revalidateWorldClickTarget: factionWarPeaceTalks);
         }
     }

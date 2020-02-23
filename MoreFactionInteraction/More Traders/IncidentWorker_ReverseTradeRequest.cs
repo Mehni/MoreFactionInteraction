@@ -21,7 +21,7 @@ namespace MoreFactionInteraction
             if (!TryGetRandomAvailableTargetMap(map: out Map map))
                 return false;
 
-            SettlementBase settlement = RandomNearbyTradeableSettlement(originTile: map.Tile);
+            Settlement settlement = RandomNearbyTradeableSettlement(originTile: map.Tile);
 
             if (settlement?.Faction?.leader == null)
                 return false;
@@ -129,14 +129,14 @@ namespace MoreFactionInteraction
             }
         }
 
-        public static SettlementBase RandomNearbyTradeableSettlement(int originTile)
-            => (from settlement in Find.WorldObjects.SettlementBases
-                where settlement.Visitable && settlement.Faction?.leader != null
+        public static Settlement RandomNearbyTradeableSettlement(int originTile)
+            => Find.WorldObjects.Settlements.Where(settlement => settlement != null
+                        && settlement.Visitable && settlement.Faction?.leader != null
                         && settlement.GetComponent<TradeRequestComp>() != null
                         && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
                         && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
                         && Find.WorldReachability.CanReach(originTile, settlement.Tile)
-                select settlement).RandomElementWithFallback(null);
+               ).RandomElementWithFallback(null);
 
         private static bool TryGetRandomAvailableTargetMap(out Map map)
             => Find.Maps.Where(x => x.IsPlayerHome && RandomNearbyTradeableSettlement(x.Tile) != null)

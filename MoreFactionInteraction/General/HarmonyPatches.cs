@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using MoreFactionInteraction.More_Flavour;
 using MoreFactionInteraction.MoreFactionWar;
 using MoreFactionInteraction.World_Incidents;
@@ -22,41 +22,41 @@ namespace MoreFactionInteraction
 
         static HarmonyPatches()
         {
-            HarmonyInstance harmony = HarmonyInstance.Create(id: "mehni.rimworld.MFI.main");
+            var harmony = new Harmony(id: "mehni.rimworld.MFI.main");
             //HarmonyInstance.DEBUG = true;
 
             #region MoreTraders
-            harmony.Patch(original: AccessTools.Method(type: typeof(TraderKindDef), name: nameof(TraderKindDef.PriceTypeFor)),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PriceTypeSetter_PostFix)));
+            harmony.Patch(original: AccessTools.Method(typeof(TraderKindDef), nameof(TraderKindDef.PriceTypeFor)),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(PriceTypeSetter_PostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(StoryState), name: nameof(StoryState.Notify_IncidentFired)),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(IncidentFired_TradeCounter_Postfix)));
+            harmony.Patch(original: AccessTools.Method(typeof(StoryState), nameof(StoryState.Notify_IncidentFired)),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(IncidentFired_TradeCounter_Postfix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(CompQuality), name: nameof(CompQuality.PostPostGeneratedForTrader)),
-                 prefix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(CompQuality_TradeQualityIncreaseDestructivePreFix)));
+            harmony.Patch(original: AccessTools.Method(typeof(CompQuality), nameof(CompQuality.PostPostGeneratedForTrader)),
+                 prefix: new HarmonyMethod(typeof(HarmonyPatches), nameof(CompQuality_TradeQualityIncreaseDestructivePreFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(ThingSetMaker), name: nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(TraderStocker_OverStockerPostFix)));
+            harmony.Patch(original: AccessTools.Method(typeof(ThingSetMaker), nameof(ThingSetMaker.Generate), parameters: new Type[] { typeof(ThingSetMakerParams) }),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(TraderStocker_OverStockerPostFix)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Tradeable), name: "InitPriceDataIfNeeded"),
-                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(ErrorSuppressionSssh)));
+            harmony.Patch(original: AccessTools.Method(typeof(Tradeable), "InitPriceDataIfNeeded"),
+                transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(ErrorSuppressionSssh)));
             #endregion
 
             #region WorldIncidents
-            harmony.Patch(original: AccessTools.Method(type: typeof(WorldReachabilityUtility), name: nameof(WorldReachabilityUtility.CanReach)),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(WorldReachUtility_PostFix)));
+            harmony.Patch(original: AccessTools.Method(typeof(WorldReachabilityUtility), nameof(WorldReachabilityUtility.CanReach)),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(WorldReachUtility_PostFix)));
             #endregion
 
 #if DEBUG
-            harmony.Patch(original: AccessTools.Method(type: typeof(DebugWindowsOpener), name: "ToggleDebugActionsMenu"),
-                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
+            harmony.Patch(original: AccessTools.Method(typeof(DebugWindowsOpener), "ToggleDebugActionsMenu"),
+                transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(DebugWindowsOpener_ToggleDebugActionsMenu_Patch)));
 #endif
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(ThoughtWorker_PsychicEmanatorSoothe), name: "CurrentStateInternal"),
-                transpiler: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(PsychicEmanatorSoothe_Transpiler)));
+            harmony.Patch(original: AccessTools.Method(typeof(ThoughtWorker_PsychicEmanatorSoothe), "CurrentStateInternal"),
+                transpiler: new HarmonyMethod(typeof(HarmonyPatches), nameof(PsychicEmanatorSoothe_Transpiler)));
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(Faction), name: nameof(Faction.Notify_RelationKindChanged)),
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches), name: nameof(Notify_RelationKindChanged)));
+            harmony.Patch(original: AccessTools.Method(typeof(Faction), nameof(Faction.Notify_RelationKindChanged)),
+                postfix: new HarmonyMethod(typeof(HarmonyPatches), nameof(Notify_RelationKindChanged)));
 
             if (ModsConfig.ActiveModsInLoadOrder.Any(m => m.Name == "Relations Tab"))
             {
@@ -98,7 +98,7 @@ namespace MoreFactionInteraction
 
         private static IEnumerable<CodeInstruction> PsychicEmanatorSoothe_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            MethodInfo helperMethod = AccessTools.Method(type: typeof(HarmonyPatches), name: nameof(HarmonyPatches.SootheTranspilerHelperMethod));
+            MethodInfo helperMethod = AccessTools.Method(typeof(HarmonyPatches), nameof(HarmonyPatches.SootheTranspilerHelperMethod));
 
             foreach (CodeInstruction codeInstruction in instructions)
             {
@@ -116,8 +116,8 @@ namespace MoreFactionInteraction
         //thx Brrainz
         private static IEnumerable<CodeInstruction> DebugWindowsOpener_ToggleDebugActionsMenu_Patch(IEnumerable<CodeInstruction> instructions)
         {
-            ConstructorInfo from = AccessTools.Constructor(type: typeof(Dialog_DebugActionsMenu));
-            ConstructorInfo to = AccessTools.Constructor(type: typeof(Dialog_MFIDebugActionMenu));
+            ConstructorInfo from = AccessTools.Constructor( typeof(Dialog_DebugActionsMenu));
+            ConstructorInfo to = AccessTools.Constructor( typeof(Dialog_MFIDebugActionMenu));
             return instructions.MethodReplacer(from: from, to: to);
         }
 
@@ -147,13 +147,13 @@ namespace MoreFactionInteraction
                     __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount = (int)silverCount;
                     return;
                 }
-                if (map != null && parms.traderFaction != null)
+                if (map != null && parms.makingFaction != null)
                 {
                     //nullable float because not all traders bring silver
                     float? silverCount = __result.Find(x => x.def == ThingDefOf.Silver)?.stackCount;
                     if (!silverCount.HasValue)
                         return;
-                    __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.traderFaction.GoodwillWith(other: Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: parms.traderFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
+                    __result.First(predicate: x => x.def == ThingDefOf.Silver).stackCount += (int)(parms.makingFaction.GoodwillWith(other: Faction.OfPlayer) * (map.GetComponent<MapComponent_GoodWillTrader>().TimesTraded[key: parms.makingFaction] * MoreFactionInteraction_Settings.traderWealthOffsetFromTimesTraded));
                 }
             }
         }
@@ -285,7 +285,7 @@ namespace MoreFactionInteraction
         #region WorldIncidents
         private static void WorldReachUtility_PostFix(ref bool __result, Caravan c)
         {
-            SettlementBase settlement = CaravanVisitUtility.SettlementVisitedNow(caravan: c);
+            var settlement = CaravanVisitUtility.SettlementVisitedNow(caravan: c);
             WorldObjectComp_SettlementBumperCropComp bumperCropComponent = settlement?.GetComponent<WorldObjectComp_SettlementBumperCropComp>();
 
             if (bumperCropComponent != null)

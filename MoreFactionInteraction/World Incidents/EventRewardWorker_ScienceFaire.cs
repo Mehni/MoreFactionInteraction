@@ -46,9 +46,9 @@ namespace MoreFactionInteraction
 
         private string MaybeTheySuckAndDontHaveItYet(Buff buff, Pawn pawn, Caravan caravan, ThingSetMakerDef thingSetMakerDef)
         {
-            if (thingSetMakerDef == eventDef.rewardFirstPlace && !MFI_Utilities.CaravanOrRichestColonyHasAnyOf(buff.RelevantThingDef(), caravan, out Thing thing))
+            if (thingSetMakerDef == eventDef.rewardFirstPlace && !MFI_Utilities.CaravanOrRichestColonyHasAnyOf(buff.RelevantThingDef(), caravan, out _))
             {
-                thing = ThingMaker.MakeThing(buff.RelevantThingDef());
+                Thing thing = ThingMaker.MakeThing(buff.RelevantThingDef());
                 thing.stackCount = Mathf.Min(thing.def.stackLimit, 75); //suck it, stackXXL users.
                 CaravanInventoryUtility.GiveThing(caravan, thing);
                 string anReward = Find.ActiveLanguageWorker.WithDefiniteArticlePostProcessed(thing.Label);

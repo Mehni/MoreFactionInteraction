@@ -18,7 +18,7 @@ namespace MoreFactionInteraction.World_Incidents
         {
             return base.CanFireNowSub(parms: parms) && Find.AnyPlayerHomeMap != null 
                                                     && Find.FactionManager.RandomAlliedFaction(allowHidden: false, allowDefeated: false, allowNonHumanlike: false) != null 
-                                                    && TryFindTile(tile: out int num);
+                                                    && TryFindTile(tile: out _);
         }
 
         protected override bool TryExecuteWorker(IncidentParms parms)
@@ -27,15 +27,14 @@ namespace MoreFactionInteraction.World_Incidents
 
             if (faction == null)
             {
-                faction = Find.FactionManager.RandomNonHostileFaction(allowNonHumanlike: false);
                 Log.ErrorOnce("MFI: No allied faction found, but event was forced. Using random faction.", 40830425);
+                faction = Find.FactionManager.RandomNonHostileFaction(allowNonHumanlike: false);
             }
 
             if (!TryFindTile(tile: out int tile))
                 return false;
 
-            Site site = SiteMaker.MakeSite(core: MFI_DefOf.MFI_HuntersLodgeCore, 
-                                           sitePart: MFI_DefOf.MFI_HuntersLodgePart, 
+            Site site = SiteMaker.MakeSite(sitePart: MFI_DefOf.MFI_HuntersLodgePart, 
                                            tile: tile, faction: faction, ifHostileThenMustRemainHostile: false);
 
             if (site == null)

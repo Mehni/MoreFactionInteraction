@@ -16,13 +16,13 @@ namespace MoreFactionInteraction
         private readonly int maxDist = 30;
         private readonly int maxSites = 20;
 
-        public override float AdjustedChance => base.AdjustedChance * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
+        public override float BaseChanceThisGame => base.BaseChanceThisGame * MoreFactionInteraction_Settings.pirateBaseUpgraderModifier;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {
             return base.CanFireNowSub(parms: parms) && TryFindFaction(enemyFaction: out faction)
-                                                    && TileFinder.TryFindNewSiteTile(tile: out int tile, minDist, maxDist)
-                                                    && TryGetRandomAvailableTargetMap(out Map map)
+                                                    && TileFinder.TryFindNewSiteTile(tile: out _, minDist, maxDist)
+                                                    && TryGetRandomAvailableTargetMap(out _)
                                                     && Find.World.worldObjects.Sites.Count() <= maxSites;
         }
 
@@ -43,19 +43,16 @@ namespace MoreFactionInteraction
             if (!TileFinder.TryFindNewSiteTile(out int tile, minDist: 2, maxDist: 8, allowCaravans: false, preferCloserTiles: true, nearThisTile: pirateTile))
                 return false;
 
-            Site site = SiteMaker.MakeSite(core: SiteCoreDefOf.Nothing, sitePart: SitePartDefOf.Outpost, tile: tile, faction: faction);
+            Site site = SiteMaker.MakeSite(sitePart: SitePartDefOf.Outpost, tile: tile, faction: faction);
             site.Tile = tile;
             site.sitePartsKnown = true;
             Find.WorldObjects.Add(o: site);
-            SendStandardLetter(lookTargets: site, relatedFaction: faction, textArgs: new string[]
-            {
-                (faction.leader?.LabelShort ?? "MFI_Representative".Translate()), faction.def.leaderTitle, faction.Name,
-            });
+            SendStandardLetter(parms, site, new NamedArgument[] { faction.leader?.LabelShort ?? "MFI_Representative".Translate(), faction.def.leaderTitle, faction.Name });
             return true;
         }
 
-        private SettlementBase RandomNearbyHostileSettlement(int originTile)
-            => Find.WorldObjects.SettlementBases
+        private Settlement RandomNearbyHostileSettlement(int originTile)
+            => Find.WorldObjects.Settlements
                 .Where(settlement => settlement.Attackable
                         && Find.WorldGrid.ApproxDistanceInTiles(firstTile: originTile, secondTile: settlement.Tile) < 36f
                         && Find.WorldReachability.CanReach(startTile: originTile, destTile: settlement.Tile)

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using General;
-    using Harmony;
+    using HarmonyLib;
     using RimWorld;
     using Verse;
 
@@ -134,7 +134,7 @@
         private IncidentDef IncomingIncidentDef(Faction faction)
             => allowedIncidentDefs
                 .Where(x => faction.leader != null || !incidentsInNeedOfValidFactionLeader.Contains(x))
-                    .RandomElementByWeight(x => x.Worker.AdjustedChance);
+                    .RandomElementByWeight(x => x.Worker.BaseChanceThisGame);
 
         private readonly List<IncidentDef> incidentsInNeedOfValidFactionLeader =
             new List<IncidentDef>
@@ -155,7 +155,6 @@
                 MFI_DefOf.MFI_HuntersLodge,
                 IncidentDef.Named("MFI_MysticalShaman"),
                 IncidentDef.Named("Quest_ItemStash"),
-                IncidentDefOf.Quest_TradeRequest,
                 IncidentDefOf.TraderCaravanArrival
             };
 

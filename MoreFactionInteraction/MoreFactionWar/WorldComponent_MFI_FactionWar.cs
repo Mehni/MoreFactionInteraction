@@ -166,7 +166,7 @@ namespace MoreFactionInteraction
 
             if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out string blah);
+                FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out _);
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator)
                                                             : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(faction, factionInstigator),
@@ -175,7 +175,7 @@ namespace MoreFactionInteraction
             }
             else if (factionInstigator.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                FactionWarDialogue.DetermineOutcome(factionInstigator, faction, factionInstigator.leader, rollForIntendedOutcome, out string blah);
+                FactionWarDialogue.DetermineOutcome(factionInstigator, faction, factionInstigator.leader, rollForIntendedOutcome, out _);
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(factionInstigator, faction)
                                                             : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(factionInstigator, faction),

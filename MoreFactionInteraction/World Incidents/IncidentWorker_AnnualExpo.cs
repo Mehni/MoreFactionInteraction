@@ -17,7 +17,7 @@ namespace MoreFactionInteraction.More_Flavour
         private const int MaxDistance = 26;
         private static readonly IntRange TimeoutDaysRange = new IntRange(min: 15, max: 21);
 
-        public override float AdjustedChance => 0f;
+        public override float BaseChanceThisGame => 0f;
 
         protected override bool CanFireNowSub(IncidentParms parms)
         {

@@ -14,7 +14,7 @@ namespace MoreFactionInteraction
         private Faction faction;
         private WorldObject worldObject;
 
-        public override float AdjustedChance
+        public override float BaseChanceThisGame
         {
             get
             {
@@ -39,7 +39,7 @@ namespace MoreFactionInteraction
                 forTile = Find.CurrentMap.Tile;
 
             return from worldObject in Find.WorldObjects.AllWorldObjects
-                   where (worldObject is SettlementBase || worldObject is Site)
+                   where (worldObject is Settlement || worldObject is Site)
                            && worldObject.Faction != null
                            && worldObject.Faction.HostileTo(other: Faction.OfPlayer)
                            && (!worldObject.GetComponent<TimeoutComp>()?.Active ?? true)
@@ -64,7 +64,7 @@ namespace MoreFactionInteraction
             {
                 int extorsionDemand = Math.Max(val1: Rand.Range(min: 150, max: 300), val2: (int)parms.points) * NearbyHostileEncampments(forTile: map.Tile).Count();
 
-                Pawn representative = this.faction.leader ?? ((worldObject is SettlementBase baese) ? baese.previouslyGeneratedInhabitants.FirstOrDefault() : null);
+                Pawn representative = this.faction.leader ?? ((worldObject is Settlement baese) ? baese.previouslyGeneratedInhabitants.FirstOrDefault() : null);
 
                 ChoiceLetter_ExtortionDemand choiceLetterExtortionDemand = (ChoiceLetter_ExtortionDemand)LetterMaker.MakeLetter(label: this.def.letterLabel, text: "MFI_ExtortionDemand".Translate(
                     representative?.LabelShort ?? "MFI_Representative".Translate(),

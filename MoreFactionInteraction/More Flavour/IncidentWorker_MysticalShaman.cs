@@ -10,15 +10,13 @@ namespace MoreFactionInteraction
 {
     using More_Flavour;
 
-    class IncidentWorker_MysticalShaman : IncidentWorker
+    public class IncidentWorker_MysticalShaman : IncidentWorker
     {
-        private static List<Map> tmpAvailableMaps = new List<Map>();
 
-        public override float AdjustedChance => base.AdjustedChance;
+        public override float BaseChanceThisGame => base.BaseChanceThisGame;
 
         private const int MinDistance = 8;
         private const int MaxDistance = 22;
-        private const int TimeoutTicks = GenDate.TicksPerDay;
         private static readonly IntRange TimeoutDaysRange = new IntRange(min: 5, max: 15);
 
         protected override bool CanFireNowSub(IncidentParms parms)
@@ -93,18 +91,18 @@ namespace MoreFactionInteraction
             return TileFinder.TryFindNewSiteTile(tile: out tile, minDist: MinDistance, maxDist: MaxDistance, allowCaravans: true, preferCloserTiles: false);
         }
 
-        private static bool TryGetRandomAvailableTargetMap(out Map map)
+        private bool TryGetRandomAvailableTargetMap(out Map map)
         {
-            tmpAvailableMaps.Clear();
-            List<Map> maps = Find.Maps;
-            foreach (Map potentialTargetMap in maps)
-            {
-                if (potentialTargetMap.IsPlayerHome && IncidentWorker_QuestTradeRequest.RandomNearbyTradeableSettlement(originTile: potentialTargetMap.Tile) != null)
-                {
-                    tmpAvailableMaps.Add(item: potentialTargetMap);
-                }
-            }
-            return tmpAvailableMaps.TryRandomElement(result: out map);
+            return Find.Maps.Where(target => target.IsPlayerHome && RandomNearbyTradeableSettlement(target.Tile) != null).TryRandomElement(result: out map);
+        }
+
+        private Settlement RandomNearbyTradeableSettlement(int tile)
+        {
+            return Find.WorldObjects.SettlementBases.Where(settlement => settlement.Visitable
+                && settlement.GetComponent<TradeRequestComp>() != null
+                && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
+                && Find.WorldGrid.ApproxDistanceInTiles(tile, settlement.Tile) < MaxDistance && Find.WorldReachability.CanReach(tile, settlement.Tile)
+            ).RandomElementWithFallback();
         }
     }
 }

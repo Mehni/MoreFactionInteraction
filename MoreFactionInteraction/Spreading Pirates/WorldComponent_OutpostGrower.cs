@@ -36,7 +36,7 @@ namespace MoreFactionInteraction
                                           && site.Faction.def.permanentEnemy && !site.Faction.def.hidden
                                           && !site.Faction.defeated
                                           && (site.HasMap ? site.ShouldRemoveMapNow(out bool alsoRemoveWorldObject) : true)
-                                          && site.parts.Any(predicate: (SitePart x) => x.Def == SitePartDefOf.Outpost)
+                                          && site.parts.Any(x => x.def == SitePartDefOf.Outpost)
                                           && !site.GetComponent<TimeoutComp>().Active
                                       select site;
 

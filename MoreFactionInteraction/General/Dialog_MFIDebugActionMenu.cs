@@ -18,7 +18,7 @@ namespace MoreFactionInteraction
                 DoGap();
                 DoLabel("Tools - MFI");
 
-                base.DebugToolWorld("Spawn pirate base", delegate
+                base.DebugToolWorld("Spawn pirate base", () =>
                      {
                          int tile = GenWorld.MouseTile(false);
 
@@ -44,7 +44,7 @@ namespace MoreFactionInteraction
                      }
                 );
 
-                DebugToolWorld("Test annual Expo", new AnnualExpoDialogue(null, null, null, Find.FactionManager.RandomAlliedFaction()).DebugLogChances);
+                DebugToolWorld("Test annual Expo",  new AnnualExpoDialogue(null, null, null, Find.FactionManager.RandomAlliedFaction()).DebugLogChances);
             }
 #endif
         }
