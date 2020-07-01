@@ -139,9 +139,11 @@ namespace MoreFactionInteraction
             if (faction == this.factionTwo)
                 this.factionTwoBattlesWon++;
 
-            if ((this.factionOneBattlesWon + this.factionTwoBattlesWon >= 12 && Rand.Chance(0.75f))
-             || (this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f)))
+            if ((this.factionOneBattlesWon + this.factionTwoBattlesWon >= 12 && Rand.Chance(0.75f)) ||
+                (this.factionOneBattlesWon + this.factionTwoBattlesWon >= 8 && Rand.Chance(0.25f)))
+            {
                 this.ResolveWar();
+            }
         }
 
         public override void ExposeData()
@@ -166,7 +168,9 @@ namespace MoreFactionInteraction
 
             if (faction.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                FactionWarDialogue.DetermineOutcome(faction, factionInstigator, faction.leader, rollForIntendedOutcome, out _);
+                var dialogue = new FactionWarDialogue(faction.leader, faction, factionInstigator, null);
+                dialogue.DetermineOutcome(rollForIntendedOutcome, out _);
+
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(faction, factionInstigator)
                                                             : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(faction, factionInstigator),
@@ -175,7 +179,9 @@ namespace MoreFactionInteraction
             }
             else if (factionInstigator.leader?.GetStatValue(StatDefOf.NegotiationAbility) != null)
             {
-                FactionWarDialogue.DetermineOutcome(factionInstigator, faction, factionInstigator.leader, rollForIntendedOutcome, out _);
+                var dialogue = new FactionWarDialogue(factionInstigator.leader, factionInstigator, faction, null);
+                dialogue.DetermineOutcome(rollForIntendedOutcome, out _);
+
                 Find.LetterStack.ReceiveLetter("MFI_FactionWarLeaderDecidedLabel".Translate(),
                                                WarIsOngoing ? "MFI_FactionWarLeaderDecidedOnWar".Translate(factionInstigator, faction)
                                                             : "MFI_FactionWarLeaderDecidedAgainstWar".Translate(factionInstigator, faction),

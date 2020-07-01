@@ -49,7 +49,9 @@ namespace MoreFactionInteraction
             else
             {
                 CameraJumper.TryJumpAndSelect(target: caravan);
-                Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: FactionWarDialogue.FactionWarPeaceTalks(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator, incidentTarget: caravan)));
+                var dialogue = new FactionWarDialogue(pawn: pawn, factionOne: this.factionOne, factionInstigator: this.factionInstigator, incidentTarget: caravan);
+                var nodeRoot = dialogue.FactionWarPeaceTalks();
+                Find.WindowStack.Add(window: new Dialogue_FactionWarNegotiation(factionOne: this.factionOne, factionInstigator: this.factionInstigator, nodeRoot: nodeRoot));
                 this.canRemoveWithoutPostRemove = true;
                 Find.WorldObjects.Remove(this);
             }

@@ -16,28 +16,41 @@ namespace MoreFactionInteraction.MoreFactionWar
         BROKER_PEACE = 4
     }
 
-    public static class FactionWarDialogue
+    public class FactionWarDialogue
     {
-        private static readonly List<Pair<Pair<Action, float>, string>> tmpPossibleOutcomes = new List<Pair<Pair<Action, float>, string>>();
+        private List<(Action Outcome_Talks, float weight, string dialogueResolverText)> outComes;
+
         private const float BaseWeight_Disaster = 0.05f;
         private const float BaseWeight_Backfire = 0.1f;
         private const float BaseWeight_TalksFlounder = 0.2f;
         private const float BaseWeight_Success = 0.55f;
         private const float BaseWeight_Triumph = 0.1f;
 
+        private Pawn _pawn;
+        private Faction _favouredFaction;
+        private Faction _burdenedFaction;
+        private IIncidentTarget _incidentTarget;
 
-        public static DiaNode FactionWarPeaceTalks(Pawn pawn, Faction factionOne, Faction factionInstigator, IIncidentTarget incidentTarget = null)
+        public FactionWarDialogue(Pawn pawn, Faction factionOne, Faction factionInstigator, IIncidentTarget incidentTarget)
         {
-            string factionInstigatorLeaderName = factionInstigator.leader != null
-                ? factionInstigator.leader.Name.ToStringFull
-                : factionInstigator.Name;
+            _pawn = pawn;
+            _favouredFaction = factionOne;
+            _burdenedFaction = factionInstigator;
+            _incidentTarget = incidentTarget;
+        }
+
+        public DiaNode FactionWarPeaceTalks()
+        {
+            string factionInstigatorLeaderName = _burdenedFaction.leader != null
+                ? _burdenedFaction.leader.Name.ToStringFull
+                : _burdenedFaction.Name;
 
             string factionOneLeaderName =
-                factionOne.leader != null ? factionOne.leader.Name.ToStringFull : factionOne.Name;
+                _favouredFaction.leader != null ? _favouredFaction.leader.Name.ToStringFull : _favouredFaction.Name;
 
-            DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate( factionOneLeaderName, factionInstigatorLeaderName, pawn.Label ));
+            DiaNode dialogueGreeting = new DiaNode(text: "MFI_FactionWarPeaceTalksIntroduction".Translate( factionOneLeaderName, factionInstigatorLeaderName, _pawn.Label ));
 
-            foreach (DiaOption option in DialogueOptions(pawn: pawn, factionOne: factionOne, factionInstigator: factionInstigator, incidentTarget: incidentTarget))
+            foreach (DiaOption option in DialogueOptions())
             {
                 dialogueGreeting.options.Add(item: option);
             }
@@ -45,152 +58,184 @@ namespace MoreFactionInteraction.MoreFactionWar
             {
                 dialogueGreeting.options.Add(item: new DiaOption(text: "(Dev: start war)")
                 {
-                    action =() => Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: factionOne, factionInstigator: factionInstigator, selfResolved: false),
+                    action =() => Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: _favouredFaction, factionInstigator: _burdenedFaction, selfResolved: false),
                     linkLateBind = () => DialogueResolver(textResult: "Alrighty. War started. Sorry about the lack of fancy flavour text for this dev mode only option."),
                 });
             }
             return dialogueGreeting;
         }
 
-        private static IEnumerable<DiaOption> DialogueOptions(Pawn pawn, Faction factionOne, Faction factionInstigator, IIncidentTarget incidentTarget)
+        private IEnumerable<DiaOption> DialogueOptions()
         {
             string factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionOne.Name ))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( _favouredFaction.Name ))
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.CURRY_FAVOUR_FACTION_ONE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
-                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(DesiredOutcome.CURRY_FAVOUR_FACTION_ONE, out factionWarNegotiationsOutcome),
+                linkLateBind = () => DialogueResolver(factionWarNegotiationsOutcome),
             };
-            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( factionInstigator.Name ))
+            yield return new DiaOption(text: "MFI_FactionWarPeaceTalksCurryFavour".Translate( _burdenedFaction.Name ))
             {
-                action = () => DetermineOutcome(favouredFaction: factionInstigator, burdenedFaction: factionOne, pawn: pawn, desiredOutcome: DesiredOutcome.CURRY_FAVOUR_FACTION_TWO, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
+                action = () =>
+                {
+                    SwapFavouredFaction();
+                    DetermineOutcome(DesiredOutcome.CURRY_FAVOUR_FACTION_TWO, out factionWarNegotiationsOutcome);
+                },
                 linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksSabotage".Translate())
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.SABOTAGE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome, incidentTarget: incidentTarget),
-                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(DesiredOutcome.SABOTAGE, out factionWarNegotiationsOutcome),
+                linkLateBind = () => DialogueResolver(factionWarNegotiationsOutcome),
             };
             yield return new DiaOption(text: "MFI_FactionWarPeaceTalksBrokerPeace".Translate())
             {
-                action = () => DetermineOutcome(favouredFaction: factionOne, burdenedFaction: factionInstigator, pawn: pawn, desiredOutcome: DesiredOutcome.BROKER_PEACE, factionWarNegotiationsOutcome: out factionWarNegotiationsOutcome),
-                linkLateBind = () => DialogueResolver(textResult: factionWarNegotiationsOutcome),
+                action = () => DetermineOutcome(DesiredOutcome.BROKER_PEACE, out factionWarNegotiationsOutcome),
+                linkLateBind = () => DialogueResolver(factionWarNegotiationsOutcome),
             };
         }
 
-        public static void DetermineOutcome(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, DesiredOutcome desiredOutcome, out string factionWarNegotiationsOutcome, IIncidentTarget incidentTarget = null)
+        public void DetermineOutcome(DesiredOutcome desiredOutcome, out string factionWarNegotiationsOutcome)
         {
-            float badOutcomeWeightFactor = GetBadOutcomeWeightFactor(diplomacyPower: pawn.GetStatValue(stat: StatDefOf.NegotiationAbility));
+            var badOutcomeWeightFactor = BaseWeight_Disaster * GetBadOutcomeWeightFactor(_pawn);
             float goodOutcomeWeightFactor = 1f / badOutcomeWeightFactor;
             factionWarNegotiationsOutcome = "Something went wrong with More Faction Interaction. Please contact mod author.";
 
-            if (desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_ONE
-                || desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_TWO)
+            if (desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_ONE ||
+                desiredOutcome == DesiredOutcome.CURRY_FAVOUR_FACTION_TWO)
             {
-                tmpPossibleOutcomes.Clear();
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksFactionFavourDisaster(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Disaster * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarFavourFactionDisaster".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksFactionsFavourBackfire(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Backfire * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarFavourFactionBackFire".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksFactionsFavourFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_TalksFlounder),
-                                                                                    second: "MFI_FactionWarFavourFactionFlounder".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksFactionsFavourSuccess(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Success * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarFavourFactionSuccess".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksFactionsFavourTriumph(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Triumph * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarFavourFactionTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
-                outcome.First.First();
-                factionWarNegotiationsOutcome = outcome.Second;
-
-                pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
+                factionWarNegotiationsOutcome = CurryFavour(badOutcomeWeightFactor, goodOutcomeWeightFactor);
             }
             else if (desiredOutcome == DesiredOutcome.SABOTAGE)
             {
-                tmpPossibleOutcomes.Clear();
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageDisaster(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn, incidentTarget: incidentTarget),
-                                                                                        second: BaseWeight_Disaster * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarSabotageDisaster".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageBackfire(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Backfire * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarSabotageBackFire".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_TalksFlounder),
-                                                                                    second: "MFI_FactionWarSabotageFlounder".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageSuccess(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Success * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarSabotageSuccess".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksSabotageTriumph(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Triumph * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarSabotageTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
-                outcome.First.First();
-                factionWarNegotiationsOutcome = outcome.Second;
-
-                pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
+                factionWarNegotiationsOutcome = Sabotage(badOutcomeWeightFactor, goodOutcomeWeightFactor);
             }
             else if (desiredOutcome == DesiredOutcome.BROKER_PEACE)
             {
-                tmpPossibleOutcomes.Clear();
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksBrokerPeaceDisaster(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Disaster * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarBrokerPeaceDisaster".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksBrokerPeaceBackfire(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Backfire * badOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarBrokerPeaceBackFire".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksBrokerPeaceFlounder(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_TalksFlounder),
-                                                                                    second: "MFI_FactionWarBrokerPeaceFlounder".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksBrokerPeaceSuccess(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Success * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarBrokerPeaceSuccess".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                tmpPossibleOutcomes.Add(item: new Pair<Pair<Action, float>, string>(first: new Pair<Action, float>(
-                                                                                        first: () => Outcome_TalksBrokerPeaceTriumph(favouredFaction: favouredFaction, burdenedFaction: burdenedFaction, pawn: pawn),
-                                                                                        second: BaseWeight_Triumph * goodOutcomeWeightFactor),
-                                                                                    second: "MFI_FactionWarBrokerPeaceTriumph".Translate(favouredFaction.Name, burdenedFaction.Name)));
-
-                Pair<Pair<Action, float>, string> outcome = tmpPossibleOutcomes.RandomElementByWeight(x => x.First.Second);
-                outcome.First.First();
-                factionWarNegotiationsOutcome = outcome.Second;
-
-                pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
+                factionWarNegotiationsOutcome = BrokerPeace(badOutcomeWeightFactor, goodOutcomeWeightFactor);
             }
-            else throw new NotImplementedException();
+        }
+
+        private string CurryFavour(float badOutcomeWeightFactor, float goodOutcomeWeightFactor)
+        {
+            outComes = new List<(Action, float, string)>();
+
+            string factionWarNegotiationsOutcome;
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.FavourDisaster),
+                BaseWeight_Disaster * GetBadOutcomeWeightFactor(_pawn),
+                "MFI_FactionWarFavourFactionDisaster".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.FavourBackfire),
+                BaseWeight_Backfire * badOutcomeWeightFactor,
+                "MFI_FactionWarFavourFactionBackFire".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.FavourFlounder),
+                BaseWeight_TalksFlounder,
+                "MFI_FactionWarFavourFactionFlounder".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.FavourSuccess),
+                BaseWeight_Success * goodOutcomeWeightFactor,
+                "MFI_FactionWarFavourFactionSuccess".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.FavourTriumph),
+                BaseWeight_Triumph * goodOutcomeWeightFactor,
+                "MFI_FactionWarFavourFactionTriumph".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            factionWarNegotiationsOutcome = TriggerOutcome();
+            return factionWarNegotiationsOutcome;
+        }
+
+        private string Sabotage(float badOutcomeWeightFactor, float goodOutcomeWeightFactor)
+        {
+            outComes = new List<(Action, float, string)>();
+
+            string factionWarNegotiationsOutcome;
+            outComes.Add((
+                () =>
+                {
+                    HandleOutcome(MFI_DiplomacyTunings.SabotageDisaster);
+                    Outcome_TalksSabotageDisaster(_favouredFaction, _burdenedFaction, _pawn, _incidentTarget);
+                },
+                BaseWeight_Disaster * badOutcomeWeightFactor,
+                "MFI_FactionWarSabotageDisaster".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.SabotageBackfire),
+                BaseWeight_Backfire * badOutcomeWeightFactor,
+                "MFI_FactionWarSabotageBackFire".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.SabotageFlounder),
+                BaseWeight_TalksFlounder,
+                "MFI_FactionWarSabotageFlounder".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.SabotageSuccess),
+                BaseWeight_Success * goodOutcomeWeightFactor,
+                "MFI_FactionWarSabotageSuccess".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.SabotageTriumph),
+                BaseWeight_Triumph * goodOutcomeWeightFactor,
+                "MFI_FactionWarSabotageTriumph".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            factionWarNegotiationsOutcome = TriggerOutcome();
+            return factionWarNegotiationsOutcome;
+        }
+
+        private string BrokerPeace(float badOutcomeWeightFactor, float goodOutcomeWeightFactor)
+        {
+            outComes = new List<(Action, float, string)>();
+
+            string factionWarNegotiationsOutcome;
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.BrokerPeaceDisaster),
+                BaseWeight_Disaster * badOutcomeWeightFactor,
+                "MFI_FactionWarBrokerPeaceDisaster".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.BrokerPeaceBackfire),
+                BaseWeight_Backfire * badOutcomeWeightFactor,
+                "MFI_FactionWarBrokerPeaceBackFire".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.BrokerPeaceFlounder),
+                BaseWeight_TalksFlounder,
+                "MFI_FactionWarBrokerPeaceFlounder".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.BrokerPeaceSuccess),
+                BaseWeight_Success * goodOutcomeWeightFactor,
+                "MFI_FactionWarBrokerPeaceSuccess".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            outComes.Add((
+                () => HandleOutcome(MFI_DiplomacyTunings.BrokerPeaceTriumph),
+                BaseWeight_Triumph * goodOutcomeWeightFactor,
+                "MFI_FactionWarBrokerPeaceTriumph".Translate(_favouredFaction.Name, _burdenedFaction.Name)));
+
+            factionWarNegotiationsOutcome = TriggerOutcome();
+            return factionWarNegotiationsOutcome;
+        }
+
+        private string TriggerOutcome()
+        {
+            _pawn.skills.Learn(sDef: SkillDefOf.Social, xp: 6000f, direct: true);
+
+            var (chosenOutcome, weight, flavor) = outComes.RandomElementByWeight(x => x.weight);
+            chosenOutcome();
+            return flavor;
+        }
+
+        private void SwapFavouredFaction()
+        {
+            var temp = _favouredFaction;
+            _favouredFaction = _burdenedFaction;
+            _burdenedFaction = temp;
         }
 
         private static DiaNode DialogueResolver(string textResult)
@@ -204,128 +249,25 @@ namespace MoreFactionInteraction.MoreFactionWar
             return resolver;
         }
 
-    #region TalksFavourFaction
-        private static void Outcome_TalksFactionFavourDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
+        private void HandleOutcome(Outcome result)
         {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                     .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
+            _favouredFaction.TryAffectGoodwillWith(_pawn.Faction, result.goodwillChangeFavouredFaction);
+            _burdenedFaction.TryAffectGoodwillWith(_pawn.Faction, result.goodwillChangeBurdenedFaction);
 
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                     .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
+            if (result.setHostile)
+            {
+                _burdenedFaction.TrySetRelationKind(_pawn.Faction, FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
+            }
 
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-        }
-
-        private static void Outcome_TalksFactionsFavourBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                     .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                     .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
-
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-        }
-
-        private static void Outcome_TalksFactionsFavourFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-        }
-
-        private static void Outcome_TalksFactionsFavourSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
-        }
-
-        private static void Outcome_TalksFactionsFavourTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
-        }
-    #endregion
-
-    #region TalksSabotage
-        private static void Outcome_TalksSabotageTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-        }
-
-        private static void Outcome_TalksSabotageSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-        }
-
-        private static void Outcome_TalksSabotageFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-
-        }
-
-        private static void Outcome_TalksSabotageBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
+            if (result.startWar)
+            {
+                Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: _favouredFaction, factionInstigator: _burdenedFaction, selfResolved: _favouredFaction.leader == _pawn);
+            }
         }
 
         private static void Outcome_TalksSabotageDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn, IIncidentTarget incidentTarget)
         {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-
             favouredFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-            burdenedFaction.TrySetRelationKind(other: pawn.Faction, kind: FactionRelationKind.Hostile, canSendLetter: false, reason: null, lookTarget: null);
-
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-
             LongEventHandler.QueueLongEvent(action: delegate
             {
 
@@ -361,62 +303,16 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             }, textKey: "GeneratingMapForNewEncounter", doAsynchronously: false, exceptionHandler: null);
         }
-    #endregion
 
-    #region TalksBrokerPeace
-        private static void Outcome_TalksBrokerPeaceTriumph(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
+        private static float GetBadOutcomeWeightFactor(Pawn _pawn) => 
+            MFI_DiplomacyTunings.BadOutcomeFactorAtStatPower.Evaluate(_pawn.GetStatValue(stat: StatDefOf.NegotiationAbility));
+    }
 
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactHuge.RandomInRange);
-        }
-
-        private static void Outcome_TalksBrokerPeaceSuccess(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactBig.RandomInRange);
-        }
-
-        private static void Outcome_TalksBrokerPeaceFlounder(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactMedium.RandomInRange);
-        }
-
-        private static void Outcome_TalksBrokerPeaceBackfire(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            //"rescheduled for later"
-        }
-
-        private static void Outcome_TalksBrokerPeaceDisaster(Faction favouredFaction, Faction burdenedFaction, Pawn pawn)
-        {
-            favouredFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                 .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
-
-            burdenedFaction.TryAffectGoodwillWith(other: pawn.Faction,
-                                                  goodwillChange: -FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
-                                                                  .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange);
-
-            Find.World.GetComponent<WorldComponent_MFI_FactionWar>().StartWar(factionOne: favouredFaction, factionInstigator: burdenedFaction, selfResolved: favouredFaction.leader == pawn);
-        }
-    #endregion
-
-        private static float GetBadOutcomeWeightFactor(float diplomacyPower) =>
-            FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.BadOutcomeFactorAtStatPower.Evaluate(x: diplomacyPower);
+    public struct Outcome
+    {
+        public bool startWar;
+        public bool setHostile;
+        public int goodwillChangeFavouredFaction;
+        public int goodwillChangeBurdenedFaction;
     }
 }
