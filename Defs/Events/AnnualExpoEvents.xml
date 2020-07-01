@@ -62,7 +62,7 @@
 
     <MoreFactionInteraction.EventDef>
         <defName>MFI_ScienceFaire</defName>
-        <label>Science Faire</label>
+        <label>Science Fair</label>
         <theme>exchanging scientific discoveries</theme>
         <themeDesc>Exciting!</themeDesc>
         <learnedSkills>
