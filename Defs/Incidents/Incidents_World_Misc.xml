@@ -45,23 +45,6 @@
 	</IncidentDef>
 
 	<IncidentDef>
-		<defName>MFI_HuntersLodge</defName>
-		<label>hunters lodge</label>
-		<category>Misc</category>
-		<targetTags>
-			<li>World</li>
-		</targetTags>
-		<workerClass>MoreFactionInteraction.World_Incidents.IncidentWorker_HuntersLodge</workerClass>
-		<letterLabel>Hunter's lodge</letterLabel>
-		<letterDef>PositiveEvent</letterDef>
-		<!-- You are invited to {FACTIONNAME}'s {FACTION.DEF.LEADERTITLE} summer retreat. {SITEPARTDEF MFI_HUNTERSLODGEDESCRIPTIONDIALOGUE}. There is an outpost at the site with all the required facilities to make meals, and they've extended their hospitality to you. This offer expires in {AMOUNT} days. -->
-		<letterText>You are invited to {0}'s {1} summer retreat. {2}. There is an outpost at the site with all the required facilities to make meals, and they've extended their hospitality to you. This offer expires in {3} days.</letterText>
-		<baseChance>0.8</baseChance>
-		<earliestDay>15</earliestDay>
-		<minRefireDays>30</minRefireDays>
-	</IncidentDef>
-
-	<IncidentDef>
 		<defName>MFI_SettlementBaseAttack</defName>
 		<label>Faction base attacked</label>
 		<category>Misc</category>

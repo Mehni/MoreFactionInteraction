@@ -111,22 +111,15 @@ namespace MoreFactionInteraction
             if (thingCategoryDef == ThingCategoryDefOf.PlantFoodRaw)
                 return "MFI_ReverseTradeRequest_Blight";
 
-            switch (Rand.RangeInclusive(min: 0, max: 4))
+            return (Rand.RangeInclusive(min: 0, max: 4)) switch
             {
-                case 0:
-                    return "MFI_ReverseTradeRequest_Pyro";
-                case 1:
-                    return "MFI_ReverseTradeRequest_Mechs";
-                case 2:
-                    return "MFI_ReverseTradeRequest_Caravan";
-                case 3:
-                    return "MFI_ReverseTradeRequest_Pirates";
-                case 4:
-                    return "MFI_ReverseTradeRequest_Hardship";
-
-                default:
-                    return "MFI_ReverseTradeRequest_Pyro";
-            }
+                0 => "MFI_ReverseTradeRequest_Pyro",
+                1 => "MFI_ReverseTradeRequest_Mechs",
+                2 => "MFI_ReverseTradeRequest_Caravan",
+                3 => "MFI_ReverseTradeRequest_Pirates",
+                4 => "MFI_ReverseTradeRequest_Hardship",
+                _ => "MFI_ReverseTradeRequest_Pyro",
+            };
         }
 
         public static Settlement RandomNearbyTradeableSettlement(int originTile)
