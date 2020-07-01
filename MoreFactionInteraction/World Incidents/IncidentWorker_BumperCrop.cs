@@ -59,7 +59,8 @@ namespace MoreFactionInteraction.World_Incidents
 
         public static Settlement RandomNearbyGrowerSettlement(int originTile)
             => Find.WorldObjects.Settlements
-                .Where(settlement => settlement.Visitable
+                .Where(settlement => settlement != null
+                        && settlement.Visitable
                         && settlement.GetComponent<TradeRequestComp>() != null
                         && !settlement.GetComponent<TradeRequestComp>().ActiveRequest
                         && settlement.GetComponent<WorldObjectComp_SettlementBumperCropComp>() != null

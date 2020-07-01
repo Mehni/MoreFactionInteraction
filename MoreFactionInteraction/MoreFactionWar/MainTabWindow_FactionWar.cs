@@ -41,6 +41,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
 
         //[TweakValue("MainTabWindow_FactionWar", -100f, 150f)]
+#pragma warning disable IDE0044 // Add readonly modifier
         private static float yMaxOffset = 0;
 
         //[TweakValue("MainTabWindow_FactionWar", -50f, 50f)]
@@ -48,7 +49,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
         //[TweakValue("MainTabWindow_FactionWar", -50f, 50f)]
         private static float barHeight = 32;
-
+#pragma warning restore IDE0044 // Add readonly modifier
 
         public override void DoWindowContents(Rect fillRect)
         {

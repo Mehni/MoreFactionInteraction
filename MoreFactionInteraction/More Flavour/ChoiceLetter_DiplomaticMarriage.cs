@@ -37,7 +37,7 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                            this.goodWillGainedFromMarriage = (int)FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
+                            this.goodWillGainedFromMarriage = (int)MFI_DiplomacyTunings.PawnValueInGoodWillAmountOut.Evaluate(x: this.betrothed.MarketValue);
                             this.marriageSeeker.Faction.TrySetRelationKind(Faction.OfPlayer, (FactionRelationKind)Math.Min((int)marriageSeeker.Faction.PlayerRelationKind + 1, 2), true, "LetterLabelAcceptedProposal".Translate());
                             this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: this.goodWillGainedFromMarriage, canSendMessage: false, canSendHostilityLetter: true, reason: "LetterLabelAcceptedProposal".Translate());
                             this.betrothed.relations.AddDirectRelation(def: PawnRelationDefOf.Fiance, otherPawn: this.marriageSeeker);
@@ -60,8 +60,10 @@ namespace MoreFactionInteraction
                     {
                         action = () =>
                         {
-                            //if (Rand.Chance(0.2f))
-                            this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: DiplomacyTuning.Goodwill_PeaceTalksBackfireRange.RandomInRange, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelRejectedProposal".Translate());
+                            if (Rand.Chance(0.2f))
+                            {
+                                this.marriageSeeker.Faction.TryAffectGoodwillWith(other: Faction.OfPlayer, goodwillChange: MFI_DiplomacyTunings.GoodWill_DeclinedMarriage_Impact.RandomInRange, canSendMessage: true, canSendHostilityLetter: true, reason: "LetterLabelRejectedProposal".Translate());
+                            }
                             Find.LetterStack.RemoveLetter(this);
                         }
                     };

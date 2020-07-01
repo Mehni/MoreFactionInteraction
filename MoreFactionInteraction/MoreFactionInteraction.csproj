@@ -44,8 +44,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Fluffy_Relations">
-      <HintPath>..\..\..\..\..\workshop\content\294100\709317151\Assemblies\Fluffy_Relations.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\workshop\content\294100\709317151\1.1\Assemblies\Fluffy_Relations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -71,7 +70,6 @@
   <ItemGroup>
     <Compile Include="General\Dialog_MFIDebugActionMenu.cs" />
     <Compile Include="General\MFI_Utilities.cs" />
-    <Compile Include="General\Tuple.cs" />
     <Compile Include="More Flavour\IncidentWorker_RoadWorks.cs" />
     <Compile Include="More Flavour\WorldObject_RoadConstruction.cs" />
     <Compile Include="World Incidents\AnnualExpo.cs" />
@@ -98,7 +96,7 @@
     <Compile Include="MoreFactionWar\FactionWarDialogue.cs" />
     <Compile Include="MoreFactionWar\CustomFaction_HealthUtility.cs" />
     <Compile Include="MoreFactionWar\FactionWarPeaceTalks.cs" />
-    <Compile Include="MoreFactionWar\FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks.cs" />
+    <Compile Include="MoreFactionWar\MFI_DiplomacyTunings.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_WoundedCombatants.cs" />
     <Compile Include="MoreFactionWar\MainTabWindow_FactionWar.cs" />
     <Compile Include="MoreFactionWar\IncidentWorker_FactionPeaceTalks.cs" />

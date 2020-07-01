@@ -28,7 +28,7 @@ namespace MoreFactionInteraction.MoreFactionWar
 
             bool bamboozle = false;
             string arrivalText = string.Empty;
-            int factionGoodWillLoss = FactionInteractionDiplomacyTuningsBlatantlyCopiedFromPeaceTalks
+            int factionGoodWillLoss = MFI_DiplomacyTunings
                                         .GoodWill_FactionWarPeaceTalks_ImpactSmall.RandomInRange / 2;
 
             IncidentParms raidParms =

@@ -80,7 +80,8 @@ namespace MoreFactionInteraction
                     list.Add(roadConstruction);
                 }
                 cost2 = cost2 / 10;
-                DiaNode node = new DiaNode("MFI_RoadWorksDialogue".Translate(Settlement, path.NodesReversed.Count, cost2)); // {Settlement} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
+                DiaNode node = new DiaNode("MFI_RoadWorksDialogue".Translate(Settlement, path.NodesReversed.Count, cost2));
+                // {Settlement} wants {cost2 / 10} to build a road of {path.NodesReversed.Count}");
                 DiaOption accept = new DiaOption("OK".Translate())
                 {
                     resolveTree = true,
@@ -125,7 +126,7 @@ namespace MoreFactionInteraction
         public Settlement RandomNearbyTradeableSettlement(int originTile)
             => (from settlement in Find.WorldObjects.Settlements
                 where settlement.Visitable && settlement.Faction?.leader != null
-                                           && settlement.trader.CanTradeNow
+                                           && settlement.trader != null && settlement.trader.CanTradeNow
                                            && Find.WorldGrid.ApproxDistanceInTiles(originTile, settlement.Tile) < 36f
                                            && Find.WorldReachability.CanReach(originTile, settlement.Tile)
                 select settlement).RandomElementWithFallback(null);

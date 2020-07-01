@@ -29,7 +29,7 @@ namespace MoreFactionInteraction.MoreFactionWar
         //6? If enemy is twice as close, base in question becomes enemy base? maaaybe.
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
-            int FindTile(int root)
+            static int FindTile(int root)
             {
                 if (TileFinder.TryFindPassableTileWithTraversalDistance(rootTile: root, minDist: 7, maxDist: 66, result: out int num))
                     return num;
